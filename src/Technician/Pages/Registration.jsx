@@ -135,7 +135,7 @@ function Registration() {
 
   return (
     <div className='w-full min-h-screen'>
-      <div className="flex flex-col md:flex-row mx-4 md:mx-44 my-12 rounded-lg shadow-lg shadow-gray-400 px-8 ">
+      <div className="flex flex-col md:flex-row mx-4 md:mx-44 my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
         <div className="md:w-1/2 lg:p-8 py-8 bg-white rounded-xl">
           <h1 className="text-2xl font-bold mb-6">Technician Registration</h1>
@@ -272,7 +272,7 @@ function Registration() {
         </div>
 
         {/* Right side */}
-        <div className="hidden md:flex md:w-1/2 bg-gray-300 rounded-lg relative items-center justify-center group">
+        <div className="hidden md:flex md:w-1/2  bg-gray-300 rounded-lg relative items-center justify-center group">
           <img
             src={tech}
             alt="Guidance"
