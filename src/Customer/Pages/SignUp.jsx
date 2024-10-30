@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
+import { customerSignUpApi } from '../Api/Api';
 const SignUp = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -22,9 +23,9 @@ const SignUp = () => {
     e.preventDefault(); 
     setError(null); 
     setSuccessMessage(null); 
-
+    console.log(customerSignUpApi)
     try {
-      const response = await axios.post('#', formData, {
+      const response = await axios.post(customerSignUpApi, formData, {
         headers: {
           'Content-Type': 'application/json'
         }
