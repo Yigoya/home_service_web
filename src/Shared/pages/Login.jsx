@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
-import { customerLoginApi } from '../../Customer/Api/Api';
 import axios from 'axios';
+import { loginApi } from '../api';
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ const Login = () => {
     setError(null); 
     setSuccessMessage(null); 
     try {
-      const response = await axios.post(customerLoginApi, formData, {
+      const response = await axios.post(loginApi, formData, {
         headers: {
           'Content-Type': 'application/json'
         }
