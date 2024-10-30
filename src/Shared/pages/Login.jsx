@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import { customerLoginApi } from '../../Customer/Api/Api';
+import axios from 'axios';
 
 const Login = () => {
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -15,9 +19,22 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // login logic
+  const handleSubmit =async (e) => {
+    e.preventDefault(); 
+    setError(null); 
+    setSuccessMessage(null); 
+    try {
+      const response = await axios.post(customerLoginApi, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      setSuccessMessage('Signup successful!');
+      console.log('Response:', response);
+    } catch (err) {
+      setError('Signup failed. Please try again.');
+      console.error('Error:', err);
+    }
     console.log('Form data:', formData);
   };
 
