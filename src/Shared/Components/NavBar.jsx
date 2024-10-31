@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { logo1 } from './Images';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { FaGlobe } from 'react-icons/fa';
 
 const NavBar = () => {
+  const { i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'am' : 'en';
+    i18n.changeLanguage(newLang);
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -33,6 +41,7 @@ const NavBar = () => {
           <Link to="#">FAQ</Link>
         </div>
         <div className="hidden md:flex space-x-7">
+          <FaGlobe className='text-2xl mt-1' onClick={toggleLanguage} style={{ cursor: 'pointer' }} />
           <Link className='bg-[#006BFF] hover:bg-[#9dc6ff] px-7 py-1 rounded-lg' to="/login">Login</Link>
           <Link className='bg-[#FFF100] px-5 py-1 hover:bg-[#f7f06e] rounded-lg text-black' to="/technician-registration">Become a Technician</Link>
         </div>
