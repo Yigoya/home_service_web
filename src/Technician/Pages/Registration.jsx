@@ -144,7 +144,7 @@ function Registration() {
     try {
       const response = await axios.post(technicianSignUpApi, formDatas, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data' 
         }
       });
       
