@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import { logo1 } from '../../Shared/Components/Images';
+import  logo1  from '../../assets/home2.png';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
 
@@ -300,7 +300,7 @@ function Registration() {
           <img
             src={logo1}
             alt="Guidance"
-            className="w-full h-full object-cover opacity-100 transition-opacity duration-300 group-hover:opacity-50"
+            className="w-full h-full object-cover opacity-20 transition-opacity duration-300 group-hover:opacity-50"
           />
           <div className="absolute text-center px-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <h2 className="text-3xl font-semibold mb-2">Getting Started</h2>
