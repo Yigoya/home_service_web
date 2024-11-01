@@ -1,34 +1,47 @@
 import React from "react";
-import { logo1 } from "../Components/Images";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-const ProfileCard = () => {
+import { Link } from "react-router-dom";
+const ProfileCard = ({info}) => {
+  
+  const totalStars = 5;
+  const fullStars = Math.floor(info.rating);
+  const halfStar = info.rating % 1 >= 0.5;
+  const emptyStars = totalStars - fullStars - (halfStar ? 1 : 0);
+  const techdetail = `/technician-details/${info.id}`
+  const techBooking = `/book-technician/${info.id}`
   return (
+    <Link to={techdetail}>
     <div className="w-72 bg-white rounded-2xl shadow-lg p-5 text-center">
       <img
-        src={logo1}
+        src={info.image}
         alt="Profile"
         className="w-24 h-24 rounded-full mx-auto mb-4"
       />
-      <h2 className="text-xl font-semibold mb-2">John Joe</h2>
+      <h2 className="text-xl font-semibold mb-2">{info.name}</h2>
       
-      <div className="flex justify-center mb-2 text-yellow-500">
-        {[...Array(5)].map((_, i) => (
-          <i key={i} className="fas fa-star"></i>
+      <div className="stars">
+        {[...Array(fullStars)].map((_, i) => (
+          <i key={`full-${i}`} className="fas text-yellow-300 fa-star"></i>
+        ))}
+        {halfStar && <i key="half" className="fas text-yellow-300  fa-star-half-alt"></i>}
+        {[...Array(emptyStars)].map((_, i) => (
+          <i key={`empty-${i}`} className="far fa-star"></i>
         ))}
       </div>
 
       <p className="text-gray-600 text-sm mb-4">
-        2,341 customers &bull; 7 Services &bull; 23 Bookings
+        {info.customerNo} customers &bull; {info.serviceNo} Services &bull; {info.bookingNo} Bookings
       </p>
       
       <p className="text-gray-500 text-sm mb-6">
-        is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+        {info.bio}
       </p>
 
-      <button className="bg-blue-500 text-white rounded-full py-2 px-4 font-semibold hover:bg-blue-600 transition">
+      <Link to={techBooking} className="bg-blue-500 text-white rounded-full py-2 px-4 font-semibold hover:bg-blue-600 transition">
         Select and Continue
-      </button>
+      </Link>
     </div>
+    </Link>
   );
 };
 
