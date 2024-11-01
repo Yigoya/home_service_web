@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ProfileCard from '../../Shared/UIComponents/ProfileCard';
+import '../../i18n'
 
 const TechnicianList = () => {
+
   const { t } = useTranslation();
   return (
     <div>
