@@ -36,14 +36,14 @@ const TechnicianList = () => {
   const handleLocationSelect = (locationKey) => {
     setSelectedLocation(locationKey);
     setIsDropdownOpen(false);
-    console.log("Selected Location:", locationKey); // Debugging selected location
+    console.log("Selected Location:", locationKey);
   };
 
   useEffect(() => {
     axios.get(TechnicianListApi)
       .then((response) => {
         setItems(response.data);
-        console.log("Fetched items:", response.data); // Debugging fetched items
+        console.log("Fetched items:", response.data); 
       });
   }, []);
 
@@ -62,7 +62,6 @@ const TechnicianList = () => {
       ? item.price >= priceRanges[selectedOption][0] && item.price <= priceRanges[selectedOption][1]
       : true;
 
-    // Debugging filter conditions
     console.log("Item Location:", item.location);
     console.log("Selected Location:", selectedLocation);
     console.log("Matches Location:", matchesLocation);
@@ -70,7 +69,7 @@ const TechnicianList = () => {
     return matchesSearchTerm && matchesRating && matchesLocation && matchesPrice;
   });
 
-  console.log("Filtered items:", filteredItems); // Debugging filtered items
+  console.log("Filtered items:", filteredItems); 
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const paginatedItems = filteredItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
