@@ -7,6 +7,8 @@ import Login from './Shared/pages/Login'
 import TechnicianList from './Customer/Pages/TechnicianList'
 import ContactUs from './Customer/Pages/ContactUs'
 import Registration from './Technician/Pages/Registration'
+import TechnicianDetail from './Customer/Pages/TechnicianDetail'
+import BookTechnician from './Customer/Pages/BookTechnician'
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path='/technician-list' element={<TechnicianList/>} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/technician-registration' element={<Registration />} />
+          <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
+          <Route path ='/book-technician/:id' element={<BookTechnician />} />
         </Routes>
         <Footer />
       </Router>
