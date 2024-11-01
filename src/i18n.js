@@ -99,7 +99,7 @@ const resources = {
             "TelevisionRepair": "የቴሌቪዥን እድሳት"
           }
         },
-      },
+      
       "CleaningServices": {
         "title": "የጽዳት አገልግሎት",
         "description": "ለተለያዩ ፍላጎቶች የተዘጋጁ ሙያዊ የጽዳት አገልግሎቶች፡ ሙሉ የቤት ጽዳት፣ የቢሮ ጽዳት፣ እና ሶፋ እና ልዩ ምንጣፍ ጽዳት።.",   
@@ -160,7 +160,8 @@ const resources = {
       }
     }
   }
-};
+  }
+}
 
 
 i18n.use(initReactI18next).init({
