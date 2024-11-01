@@ -66,54 +66,50 @@ const Landing = () => {
   const services = {
     "Home Appliances Repair": {
       icon: faTools, 
-      types: ["Air Cooler Repair","AC Repair & Service", "Washing Machine Repair", "Fridge Repair","Water Purifier Repair & Service","Gas Stove Repair & Service","Television Repair"],
-      description: `An appliance repair technician's job includes: Disassembling the appliance, 
-      cleaning internal parts, replacing faulty or worn parts, reassembling, and testing.`,
+      types: Object.values(t('services.HomeAppliancesRepair.types', { returnObjects: true })),
+      description: t('services.HomeAppliancesRepair.description'),
       imagePath: home, 
       imageWidth: "900px",
       imageHeight: "300px",
     },
     "Cleaning Services": {
       icon: faBroom, 
-      types: ["Full Home Cleaning","Part-time Cleaners", "Office Cleaning", "Sofa & Carpet Cleaning","Water Tank Cleaning"],
-      description: `Professional cleaning services tailored to different needs: deep cleaning, 
-      office cleaning, and specialized carpet cleaning.`,
+      types: Object.values(t('services.CleaningServices.types', { returnObjects: true })),
+      description: t('services.CleaningServices.description'),
       imagePath: clean, 
       imageWidth: "900px",
       imageHeight: "300px",
     },
     "Home Maintenance": {
       icon: faWrench, 
-      types: ["Electrical Repair", "Plumbing", "Carpentry","Fan Installation","Wall Panels Installation","Mounting","Painting"],
-      description: `Home maintenance services including electrical repair, plumbing, and carpentry 
-      for household repairs and improvements.`,
+      types: Object.values(t('services.HomeMaintenance.types', { returnObjects: true })),
+      description: t('services.HomeMaintenance.description'),
       imagePath: maintenance, 
       imageWidth: "900px",
       imageHeight: "300px",
     },
     "Personal Services": {
       icon: faUserMd, 
-      types: ["Home Care", "Home Servant", "Security Guard Service","Hotel Servant Service"],
-      description: `Personalized services to improve well-being, including fitness, mental health, 
-      and lifestyle coaching.`,
+      types: Object.values(t('services.PersonalServices.types', { returnObjects: true })),
+      description: t('services.PersonalServices.description'),
       imagePath: personal, 
       imageWidth: "800px",
       imageHeight: "300px",
     },
     "Real Estate Services": {
       icon: faHome, 
-      types: ["Home On Rent", "House Sell", "Broker Service","Property Management"],
-      description: `Services to assist with property management, real estate consulting, and rentals.`,
-      imagePath: realstate, 
+      types: Object.values(t('services.RealEstateServices.types', { returnObjects: true })),
+      description: t('services.RealEstateServices.description'),
+       imagePath: realstate, 
       customsyle:"",
       imageWidth: "800px",
       imageHeight: "300px",
     },
     "Miscellaneous": {
       icon: faPuzzlePiece, 
-      types: ["Ambulance Service", "Talk To Expert", "Cockroach, Ant & Pest Control"],
-      description: `Services to assist with property management, real estate consulting, and rentals.`,
-      imagePath: miscellaneous, 
+      types: Object.values(t('services.Miscellaneous.types', { returnObjects: true })),
+      description: t('services.Miscellaneous.description'),
+       imagePath: miscellaneous, 
       customsyle:"",
       imageWidth: "800px",
       imageHeight: "300px",
@@ -122,6 +118,8 @@ const Landing = () => {
 
   const handleServiceSelect = (service) => {
     setSelectedService(service);
+    console.log('Service selected:', service);
+    console.log('Service Title:', t(`services.${service.replace(/\s+/g, '')}.title`));
   };
 
 
@@ -192,12 +190,13 @@ const Landing = () => {
               />
               <ServiceTypes types={services[selectedService].types} />
               <ServiceDescription
-                title={selectedService}
-                description={services[selectedService].description}
-                imagePath={services[selectedService].imagePath}
-                width={services[selectedService].imageWidth}
-                height={services[selectedService].imageHeight}
+                    title={t(`services.${selectedService.replace(/\s+/g, '')}.title`)}
+                    description={services[selectedService].description}
+                    imagePath={services[selectedService].imagePath}
+                    width={services[selectedService].imageWidth}
+                    height={services[selectedService].imageHeight}
               />
+
             </div>
       </div>
 
