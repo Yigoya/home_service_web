@@ -9,7 +9,7 @@ const Profile = () => {
       <CustomerNavBar />
       <div className="lg:flex">
         <SideBar />
-        <div className="mt-10 w-full p-4">
+        <div className="mt-20 w-full p-4">
           <ProfileContent />
         </div>
       </div>
