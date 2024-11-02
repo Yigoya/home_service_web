@@ -12,6 +12,7 @@ const SideBar = () => {
   const handleLogout = () => {
     logout();
     localStorage.removeItem('token');
+    localStorage.removeItem('user')
     navigate('/');
   };
 
@@ -34,9 +35,9 @@ const SideBar = () => {
 
       {/* Sidebar Component */}
       <aside
-        className={`fixed top-0 left-0 h-full p-6 bg-white rounded-2xl shadow-lg z-20 transform ${
+        className={`fixed top-0 left-0  h-full p-6 bg-white rounded-2xl shadow-lg z-20 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 md:static lg:mt-16 ml-5 px-16 md:h-[530px] transition-transform duration-300`}
+        } md:translate-x-0 md:static lg:mt-[107px] ml-5 px-16 md:h-[530px] transition-transform duration-300`}
       >
         <div className="flex flex-col items-center">
           <img
