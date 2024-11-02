@@ -180,8 +180,8 @@ const Landing = () => {
   
      {/* service part */}
 
-    <div className="container  py-8">
-            <div className="p-4 lg:mx-72">
+    <div className="container  py-8 ">
+            <div className="p-4 lg:mx-52">
               <ServiceSelector
                 services={services}
                 selectedService={selectedService}
@@ -203,20 +203,20 @@ const Landing = () => {
       {/* Tecnichian part */}
       <div>
       <div className="container mx-auto py-8">
-          <h2 className="text-3xl font-bold lg:ml-72 ml-6 mb-8">Our Top Technicians</h2>
+          <h2 className="text-3xl font-bold lg:ml-52 ml-6 mb-8">Our Top Technicians</h2>
         </div >
       <TechnicianCarousel />
       </div>
 
       {/* testimonial part */}
 
-      <div className="lg:mx-72">
+      <div className="lg:mx-52 mt-4">
         <Testimonials />
       </div>
 
       {/* FAQ part */}
 
-      <div className='lg:mx-72'>
+      <div className='lg:mx-52'>
           <FAQ />
       </div>
         
