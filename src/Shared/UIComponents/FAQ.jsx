@@ -28,7 +28,7 @@ const FAQ = () => {
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-6">FAQ</h2>
+      <h2 className="text-3xl font-bold mb-6">FAQ</h2>
       <div className="flex space-x-4">
         {/* Image Section */}
         <div className="lg:w-1/2 hidden lg:block">
