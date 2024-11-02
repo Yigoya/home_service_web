@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 import  logo1  from '../../assets/home2.png';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../Shared/api';
 
 function Registration() {
   const [error, setError] = useState(null);
@@ -11,12 +13,9 @@ function Registration() {
     idCard: null,
     profileImage: null,
   });
+  const [services, setService] = useState([]);
 
-  const services = [
-    { id: 1, name: "Air Cooler Repair" },
-    { id: 2, name: "AC Repair" },
-    { id: 3, name: "Heating Repair" },
-  ];
+
 
   const subCities = [
     { id: 1, name: "Bole" },
@@ -29,6 +28,8 @@ function Registration() {
     { id: 2, name: "Wereda 2" },
     { id: 3, name: "Wereda 3" },
   ];
+
+  const navigate = useNavigate();
 
   // srevice part
   const [selectedServices, setSelectedServices] = useState([]);
@@ -102,14 +103,6 @@ function Registration() {
     if (!formData.bio.trim()) {
       newErrors.bio = "Bio is required.";
     }
-
-    // if (!formData.subcity) {
-    //   newErrors.subcity = "Sub city is required.";
-    // }
-
-    // if (!formData.wereda) {
-    //   newErrors.wereda = "Wereda is required.";
-    // }
   
     if (!formData.password) {
       newErrors.password = "Password is required.";
@@ -121,6 +114,7 @@ function Registration() {
     console.log(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   
 
   const handleSubmit =async (e) => {
@@ -149,13 +143,29 @@ function Registration() {
       });
       
       console.log('Response:', response.data);
+      navigate('/tech-verification-waiting');
     } catch (err) {
-      setError('Signup failed. Please try again.');
+      setError(err.response.data.details.join('\n'));
 
       err.response != undefined ? console.error('Error:', err.response.data) : console.error('Error:', err);
     }
 
   };
+
+  const fetch = async ()=>{
+    try {
+      const res =await axios.get(`${API_URL}/services`);
+      console.log(res.data)
+      setService(res.data)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetch()
+  }
+  , []);
 
   return (
     <div className='w-full min-h-screen'>
@@ -292,6 +302,7 @@ function Registration() {
             <button type="submit" className="w-full bg-blue-500 text-white py-2 mt-6 rounded-md hover:bg-blue-600 focus:outline-none">
               Submit
             </button>
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           </form>
         </div>
 

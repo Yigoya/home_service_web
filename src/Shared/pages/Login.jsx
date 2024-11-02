@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { loginApi } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -10,6 +11,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,8 +31,16 @@ const Login = () => {
           'Content-Type': 'application/json'
         }
       });
-      setSuccessMessage('Signup successful!');
       console.log('Response:', response);
+      if (response.data.user.status === "INACTIVE") {
+        setError("Verify your email first")
+      } else {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        const next = localStorage.getItem('next')
+        setSuccessMessage('Login successful!');
+        navigate(next ? next : '/')
+      }
     } catch (err) {
       setError('Signup failed. Please try again.');
       console.error('Error:', err);
@@ -71,6 +81,9 @@ const Login = () => {
           >
             Login
           </button>
+
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
         </form>
 
         <div className="flex items-center my-4">
