@@ -19,6 +19,7 @@ function App() {
   return (
     <>
       <Router>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path='/customer-signup' element={<SignUp />} />
@@ -33,6 +34,7 @@ function App() {
           <Route path="/verify-email"  element={<VerificationPage />} />
           <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
         </Routes>
+        <Footer />
       </Router>
     
    
