@@ -53,10 +53,11 @@ const TechnicianDetail = () => {
       </div>
 
       <div className="mt-4 max-md:mx-5 lg:mx-20">
-        <h3 className="lg:text-xl max-md:text-lg font-bold">Other Services given by Rahem</h3>
+        <h3 className="lg:text-xl max-md:text-lg font-bold">Other Services given by {item.name}</h3>
         <div className="flex space-x-2 mt-2">
-          <button className="bg-gray-200 px-4 py-2 rounded-full">Air Cooler Repair</button>
-          <button className="bg-gray-200 px-4 py-2 rounded-full">Painter</button>
+        {Array.isArray(item.services) && item.services.map((service) => {
+          return <div className="bg-gray-200 px-4 py-2 rounded-full" key={service}>{service}</div>;
+        })}
         </div>
       </div>
       </div>
@@ -81,7 +82,7 @@ const TechnicianDetail = () => {
         </div>
       </div>
       <div className="lg:mx-20 max-md:mx-5 mt-8 pb-10">
-        <h3 className="text-xl font-bold">Ratings for Rahem</h3>
+        <h3 className="text-xl font-bold">Ratings for {item.name}</h3>
         <div className="mt-4 space-y-4">
           {[1, 2].map((review, index) => (
             <div key={index} className="bg-white p-4 rounded-lg shadow-lg ">
@@ -95,7 +96,7 @@ const TechnicianDetail = () => {
                   <div>
                     <p className="font-semibold">Reagan W.</p>
                     <div className="flex text-yellow-500">
-                      {[...Array(5)].map((_, i) => (
+                      {[...Array(review.rating)].map((_, i) => (
                         <FaStar key={i} />
                       ))}
                     </div>
@@ -104,11 +105,7 @@ const TechnicianDetail = () => {
                 <p className="text-sm text-gray-500">May 24, 2024</p>
               </div>
               <p className="text-gray-700">
-                Emmy and her team did a phenomenal job on my home and were able to come in a
-                reasonable time and get us a great price. They are very thorough, detailed, and
-                organized! And to make it even better, her team was able to complete the cleaning
-                in a little under two hours. I would absolutely recommend her to other people that
-                are looking for a cleaner.
+                {review.review}
               </p>
             </div>
           ))}

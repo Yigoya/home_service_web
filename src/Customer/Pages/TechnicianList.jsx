@@ -72,7 +72,6 @@ const TechnicianList = () => {
       ? item.price >= priceRanges[selectedOption][0] && item.price <= priceRanges[selectedOption][1]
       : true;
 
-    // Debugging filter conditions
     console.log("Item Location:", item.location);
     console.log("Selected Location:", selectedLocation);
     console.log("Matches Location:", matchesLocation);
