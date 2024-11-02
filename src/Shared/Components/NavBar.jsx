@@ -35,8 +35,8 @@ const NavBar = () => {
 
         {/* Menu Links (Hidden on Mobile) */}
         <div className="hidden md:flex space-x-5">
-          <Link to="#">Services</Link>
-          <Link to="/technician-list">Technicians</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/all-technician-list">Technicians</Link>
           <Link to="/contact-us">Contact</Link>
           <Link to="#">FAQ</Link>
         </div>

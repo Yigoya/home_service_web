@@ -9,6 +9,7 @@ import ContactUs from './Customer/Pages/ContactUs'
 import Registration from './Technician/Pages/Registration'
 import TechnicianDetail from './Customer/Pages/TechnicianDetail'
 import BookTechnician from './Customer/Pages/BookTechnician'
+import Services from './Customer/Pages/Services'
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path='/customer-signup' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/services' element={<Services />} />
+          <Route path='/all-technician-list' element={<TechnicianList/>} />
           <Route path='/technician-list' element={<TechnicianList/>} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/technician-registration' element={<Registration />} />
