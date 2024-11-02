@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { customerSignUpApi } from '../Api/Api';
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,6 +35,7 @@ const SignUp = () => {
         }
       });
       setSuccessMessage('Signup successful!');
+      Navigate('/verify-email');
       console.log('Response:', response.data);
       
     } catch (err) {
