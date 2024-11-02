@@ -15,6 +15,7 @@ import CustomerNavBar from './Customer/Components/CustomerNavBar'
 import CustomerLayout from './AuthLayout/CustomerLayout'
 import { AuthProvider } from './Shared/Context/AuthContext'
 
+import Services from './Customer/Pages/Services'
 
 
 function App() {
@@ -22,7 +23,20 @@ function App() {
     <>
     <AuthProvider>
       <Router>
+        <NavBar />
         <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path='/customer-signup' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/services' element={<Services />} />
+          <Route path='/all-technician-list' element={<TechnicianList/>} />
+          <Route path='/technician-list' element={<TechnicianList/>} />
+          <Route path='/contact-us' element={<ContactUs />} />
+          <Route path='/technician-registration' element={<Registration />} />
+          <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
+          <Route path ='/book-technician/:id' element={<BookTechnician />} />
+          <Route path="/verify-email"  element={<VerificationPage />} />
+          <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
           <Route element ={<CustomerLayout />}>
             <Route path="/" element={<Landing />} />
             <Route path='/customer-signup' element={<SignUp />} />
@@ -37,6 +51,7 @@ function App() {
             <Route path='/customer-profile' element={<Profile />} />
           </Route>
         </Routes>
+        <Footer />
       </Router>
      </AuthProvider>
     </>
