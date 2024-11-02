@@ -9,24 +9,27 @@ import ContactUs from './Customer/Pages/ContactUs'
 import Registration from './Technician/Pages/Registration'
 import TechnicianDetail from './Customer/Pages/TechnicianDetail'
 import BookTechnician from './Customer/Pages/BookTechnician'
+import Profile from './Customer/Pages/Profile'
+import Layout from './AuthLayout/Layout'
 
 
 function App() {
   return (
     <>
       <Router>
-        <NavBar />
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path='/customer-signup' element={<SignUp />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/technician-list' element={<TechnicianList/>} />
-          <Route path='/contact-us' element={<ContactUs />} />
-          <Route path='/technician-registration' element={<Registration />} />
-          <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
-          <Route path ='/book-technician/:id' element={<BookTechnician />} />
+          <Route  element={<Layout />}>
+            <Route path="/" element={<Landing />} />
+            <Route path='/customer-signup' element={<SignUp />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/technician-list' element={<TechnicianList/>} />
+            <Route path='/contact-us' element={<ContactUs />} />
+            <Route path='/technician-registration' element={<Registration />} />
+            <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
+            <Route path ='/book-technician/:id' element={<BookTechnician />} />
+          </Route>
+          <Route path='/customer-profile' element ={<Profile/>}/>
         </Routes>
-        <Footer />
       </Router>
     
    
