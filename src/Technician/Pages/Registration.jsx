@@ -10,7 +10,7 @@ function Registration() {
   const [error, setError] = useState(null);
   const [files, setFiles] = useState({
     documents: null,
-    idCard: null,
+    idCardImage: null,
     profileImage: null,
   });
   const [services, setService] = useState([]);
@@ -254,10 +254,10 @@ function Registration() {
             {/* File part */}
 
             <div className="flex flex-col gap-4">
-                  {['documents', 'idCard', 'profileImage'].map((type) => (
+                  {['documents', 'idCardImage', 'profileImage'].map((type) => (
                     <div key={type} className="flex flex-col items-start space-y-2">
                       <label className="block text-sm font-medium text-gray-700 capitalize">
-                        {type === 'documents' ? 'Your CV and documents' : type === 'idCard' ? 'ID Card' : 'Profile Image'}
+                        {type === 'documents' ? 'Your CV and documents' : type === 'idCardImage' ? 'ID Card' : 'Profile Image'}
                       </label>
                       <input
                         type="file"
