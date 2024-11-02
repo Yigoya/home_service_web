@@ -53,9 +53,9 @@ const TechnicianDetail = () => {
       </div>
 
       <div className="mt-4 max-md:mx-5 lg:mx-20">
-        <h3 className="lg:text-xl max-md:text-lg font-bold">Other Services given by {item.name}</h3>
+        <h3 className="lg:text-xl max-md:text-lg font-bold">Other Services given by {technician.name}</h3>
         <div className="flex space-x-2 mt-2">
-        {Array.isArray(item.services) && item.services.map((service) => {
+        {Array.isArray(technician.services) && technician.services.map((service) => {
           return <div className="bg-gray-200 px-4 py-2 rounded-full" key={service}>{service}</div>;
         })}
         </div>
@@ -82,7 +82,7 @@ const TechnicianDetail = () => {
         </div>
       </div>
       <div className="lg:mx-20 max-md:mx-5 mt-8 pb-10">
-        <h3 className="text-xl font-bold">Ratings for {item.name}</h3>
+        <h3 className="text-xl font-bold">Ratings for {technician.name}</h3>
         <div className="mt-4 space-y-4">
           {[1, 2].map((review, index) => (
             <div key={index} className="bg-white p-4 rounded-lg shadow-lg ">

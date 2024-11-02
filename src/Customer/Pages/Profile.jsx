@@ -5,11 +5,11 @@ import ProfileContent from '../Components/ProfileContent';
 
 const Profile = () => {
   return (
-    <div className='bg-[#EBEBEB] min-h-screen'>
+    <div className="bg-[#EBEBEB] min-h-screen">
       <CustomerNavBar />
-      <div className='flex'>
+      <div className="lg:flex">
         <SideBar />
-        <div className='ml-[22%] mt-16 w-full p-4'>
+        <div className="mt-10 w-full p-4">
           <ProfileContent />
         </div>
       </div>

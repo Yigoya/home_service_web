@@ -190,7 +190,7 @@ const Landing = () => {
                 
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion.name)}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base"
+                className="px-4 py-2 hover:text-gray-500 cursor-pointer text-sm sm:text-base"
               >
                 {suggestion.name}
               </Link>
