@@ -9,6 +9,7 @@ const resources = {
       "every_service": "Every Service That",
       "you_will_need": "You Will Need",
       "search_services": "Search Services",
+      "our-servises": "Our Services",
       "services": {
         "HomeAppliancesRepair": {
           "title": "Home Appliances Repair",
@@ -85,6 +86,7 @@ const resources = {
       "every_service": "የሚያስፈልጎትን አገልግሎት",
       "you_will_need": "ከ እኛ ዘንድ ያግኙ",
       "search_services": "አገልግሎት ይምረጡ",
+      "our-servises": "የምንሰጣቸው አገልግሎቶች",
       "services": {
         "HomeAppliancesRepair": {
           "title": "የቤት መሳሪያዎች እድሳት",
