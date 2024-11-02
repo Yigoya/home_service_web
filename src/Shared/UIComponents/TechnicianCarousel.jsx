@@ -25,7 +25,7 @@ const TechnicianCarousel = () => {
   }, []);
 
   return (
-    <div className="flex justify-center bg-gray-100 lg:mx-72">
+    <div className="flex justify-center bg-gray-100 lg:mx-52">
       <div className="max-w-5xl w-full overflow-x-auto flex space-x-4 py-4">
         <div className="flex w-[calc(18rem*6)]">
           {technicians.map((technician) => (
