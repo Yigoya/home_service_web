@@ -9,6 +9,9 @@ import ContactUs from './Customer/Pages/ContactUs'
 import Registration from './Technician/Pages/Registration'
 import TechnicianDetail from './Customer/Pages/TechnicianDetail'
 import BookTechnician from './Customer/Pages/BookTechnician'
+import VerificationPage from './Customer/Pages/VerificationPage'
+import TechVerificationPage from './Technician/Pages/TechVerificationPage'
+
 
 
 function App() {
@@ -20,11 +23,13 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path='/customer-signup' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/technician-list' element={<TechnicianList/>} />
+          <Route path='/technician-list/:id' element={<TechnicianList/>} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/technician-registration' element={<Registration />} />
           <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
           <Route path ='/book-technician/:id' element={<BookTechnician />} />
+          <Route path="/verify-email"  element={<VerificationPage />} />
+          <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
         </Routes>
         <Footer />
       </Router>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ServiceDescription from '../Components/ServiceDescription';
@@ -22,6 +22,9 @@ import TopTechnician from '../UIComponents/TopTechnician';
 import TechnicianCarousel from '../UIComponents/TechnicianCarousel';
 import Testimonials from '../UIComponents/Testimonials';
 import FAQ from '../UIComponents/FAQ';
+import axios from 'axios';
+import { API_URL } from '../api';
+import { Link } from 'react-router-dom';
 
 
 const Landing = () => {
@@ -30,6 +33,7 @@ const Landing = () => {
   const [searchText, setSearchText] = useState('');
 
   const suggestions = ['Home Cleaning', 'Plumbing', 'Electrician', 'Gardening', 'Car Wash'];
+  const [service, setService] = useState([]);
 
   const handleSuggestionClick = (suggestion) => {
     setSearchText(suggestion);
@@ -122,6 +126,22 @@ const Landing = () => {
     console.log('Service Title:', t(`services.${service.replace(/\s+/g, '')}.title`));
   };
 
+  const fetch = async ()=>{
+    try {
+      const res =await axios.get(`${API_URL}/services`);
+      console.log(res.data)
+      setService(res.data)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetch()
+  }
+  , [selectedService]);
+
+
 
 
   return (
@@ -149,28 +169,31 @@ const Landing = () => {
             type="text"
             placeholder={t("search_services")}
             value={searchText}
+            onFocus={() => {
+              setIsDropdownOpen(!isDropdownOpen);
+              sendSearchToBackend(searchText);
+            }}
             onChange={(e) => setSearchText(e.target.value)}
             className="w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none text-sm sm:text-base"
           />
           <FiSearch
             size={24}
             className="text-gray-600 ml-2 transform hover:scale-110 transition-transform duration-200 cursor-pointer"
-            onClick={() => {
-              setIsDropdownOpen(!isDropdownOpen);
-              sendSearchToBackend(searchText);
-            }}
+            
           />
         </div>
         {isDropdownOpen && (
           <div className="absolute top-full left-0 w-full bg-white border border-blue-500 rounded-md shadow-lg mt-2 z-10">
-            {suggestions.map((suggestion, index) => (
-              <div
+            {service.map((suggestion, index) => (
+              <Link 
+              to={`/technician-list/${suggestion.id}`}
+                
                 key={index}
-                onClick={() => handleSuggestionClick(suggestion)}
+                onClick={() => handleSuggestionClick(suggestion.name)}
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base"
               >
-                {suggestion}
-              </div>
+                {suggestion.name}
+              </Link>
             ))}
           </div>
         )}

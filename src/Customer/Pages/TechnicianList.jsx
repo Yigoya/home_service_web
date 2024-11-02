@@ -7,17 +7,20 @@ import axios from 'axios';
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { TechnicianListApi } from '../Api/Api';
-
+import { useParams } from 'react-router-dom';
+import { API_URL } from '../../Shared/api';
 const TechnicianList = () => {
   const { t, i18n } = useTranslation();
-  const [items, setItems] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const techniciansPerPage = 6;
+
+  const { id } = useParams()
 
   // Define locations with keys and translations
   const locations = [
@@ -39,12 +42,19 @@ const TechnicianList = () => {
     console.log("Selected Location:", locationKey); // Debugging selected location
   };
 
+  const fetch = async () =>{
+    try {
+      const res = await axios.get(`${API_URL}/search/service/${id}`)
+      console.log(res.data)
+      setTechnicians(res.data)
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
   useEffect(() => {
-    axios.get(TechnicianListApi)
-      .then((response) => {
-        setItems(response.data);
-        console.log("Fetched items:", response.data); // Debugging fetched items
-      });
+    fetch()
   }, []);
 
   const priceRanges = {
@@ -54,7 +64,7 @@ const TechnicianList = () => {
     "Option D": [0, 90]
   };
 
-  const filteredItems = items.filter((item) => {
+  const filteredTechnicians = technicians.filter((item) => {
     const matchesSearchTerm = searchTerm === "" || item.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRating = selectedRating === 0 || Math.round(item.rating) === selectedRating;
     const matchesLocation = selectedLocation === "" || item.location.toLowerCase() === selectedLocation.toLowerCase();
@@ -70,14 +80,17 @@ const TechnicianList = () => {
     return matchesSearchTerm && matchesRating && matchesLocation && matchesPrice;
   });
 
-  console.log("Filtered items:", filteredItems); // Debugging filtered items
+  console.log("Filtered technicians:", filteredTechnicians); // Debugging filtered technicians
 
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  const paginatedItems = filteredItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.ceil(filteredTechnicians.length / techniciansPerPage);
+  const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+
+
 
   return (
     <div className="container mx-auto px-4">
@@ -105,7 +118,7 @@ const TechnicianList = () => {
           <form>
             <div className="space-y-4">
               {Object.entries(priceRanges).map(([option, range], index) => (
-                <label key={index} className="flex items-center space-x-3">
+                <label key={index} className="flex technicians-center space-x-3">
                   <input
                     type="radio"
                     name="price"
@@ -125,7 +138,7 @@ const TechnicianList = () => {
         <div className='w-full'>
           <div className="flex flex-col md:flex-row md:space-x-2 p-4">
             {/* Search Input */}
-            <div className="flex items-center border border-gray-300 rounded-md px-4 py-2 w-full mb-4 md:mb-0">
+            <div className="flex technicians-center border border-gray-300 rounded-md px-4 py-2 w-full mb-4 md:mb-0">
               <input
                 type="text"
                 placeholder={t('search')}
@@ -140,7 +153,7 @@ const TechnicianList = () => {
             <div className="relative w-full mb-4 md:mb-0">
               <div
                 onClick={toggleDropdown}
-                className="flex items-center border border-gray-300 rounded-md px-4 py-2 cursor-pointer w-full"
+                className="flex technicians-center border border-gray-300 rounded-md px-4 py-2 cursor-pointer w-full"
               >
                 <span className="text-gray-700">{locations.find(loc => loc.key === selectedLocation)?.label}</span>
                 <IoIosArrowDown className="text-gray-500 ml-2" />
@@ -165,16 +178,16 @@ const TechnicianList = () => {
             </button>
           </div>
 
-          {/* Display paginated items */}
+          {/* Display paginated technicians */}
           <div className="grid grid-cols-1 lg:mr-10 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {paginatedItems.length > 0 ? (
-              paginatedItems.map((item) => (
+            {paginatedTechnicians.length > 0 ? (
+              paginatedTechnicians.map((item) => (
                 <div key={item.id} className="p-4">
                   <ProfileCard info={item} />
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center col-span-3">No items match your filters.</p>
+              <p className="text-gray-500 text-center col-span-3">No technicians match your filters.</p>
             )}
           </div>
 
