@@ -18,6 +18,7 @@ const ProfileCard = ({info}) => {
         className="w-24 h-24 rounded-full mx-auto mb-4"
       />
       <h2 className="text-xl font-semibold mb-2">{info.name}</h2>
+      <p>{info.title}</p>
       
       <div className="stars">
         {[...Array(fullStars)].map((_, i) => (
