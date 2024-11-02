@@ -5,6 +5,7 @@ import { customerSignUpApi } from '../Api/Api';
 const SignUp = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,6 +22,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
+    setLoading(true);
     setError(null); 
     setSuccessMessage(null); 
     console.log(customerSignUpApi)
@@ -32,10 +34,14 @@ const SignUp = () => {
       });
       setSuccessMessage('Signup successful!');
       console.log('Response:', response.data);
+      
     } catch (err) {
-      setError('Signup failed. Please try again.');
-      console.error('Error:', err);
+      console.error('Error:', err.response.data);
+
+      setError(err.response.data.details.join(', '));
+
     }
+    setLoading(false);
   };
 
   return (
@@ -87,12 +93,16 @@ const SignUp = () => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
-          >
-            Sign Up
-          </button>
+          {loading ? (
+            <button className="w-full py-2 bg-gray-500 text-white rounded-md">Loading...</button>
+          ) : (
+            <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+              Sign Up
+            </button>
+          )}
+
+          {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
 
         <div className="flex items-center my-4">
@@ -116,8 +126,7 @@ const SignUp = () => {
           Have an account? <a href="/login" className="text-blue-500 hover:underline">Log in</a>
         </p>
       </div>
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+
     </div>
   );
 };

@@ -1,3 +1,3 @@
-import { URL } from "../../Shared/api";
+import { API_URL } from "../../Shared/api";
 
-export const technicianSignUpApi = `${URL}/auth/technician/signup`
+export const technicianSignUpApi = `${API_URL}/auth/technician/signup`
