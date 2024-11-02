@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { loginApi } from '../api';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 const Login = () => {
+  const {login} = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [formData, setFormData] = useState({
@@ -38,12 +40,15 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         const next = localStorage.getItem('next')
+        localStorage.removeItem('next')
         setSuccessMessage('Login successful!');
+        login();
         navigate(next ? next : '/')
       }
     } catch (err) {
-      setError('Signup failed. Please try again.');
-      console.error('Error:', err);
+;
+      console.error('Error:', err.response.data.details.join(', '));
+      setError(err.response.data.details.join(', '));
     }
     console.log('Form data:', formData);
   };

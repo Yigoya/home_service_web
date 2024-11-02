@@ -50,7 +50,7 @@ const BookTechnician = () => {
 
   return (
     <div>
-      <div className="max-w-md mt-10 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
+      <div className="max-w-md lg:mt-24 max-md:mt-5 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"
