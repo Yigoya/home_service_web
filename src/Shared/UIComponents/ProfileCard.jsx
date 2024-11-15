@@ -6,7 +6,7 @@ const ProfileCard = ({ info }) => {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
       <div className="p-6">
         <div className="flex items-center mb-4">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-500 flex-shrink-0 mr-4">
+          <div className="w-24 h-24 rounded-full overflow-hidden  flex-shrink-0 mr-4">
             <img
               src={info.image || '/placeholder.svg?height=64&width=64'}
               alt={info.name}
@@ -36,11 +36,11 @@ const ProfileCard = ({ info }) => {
             <span className="text-sm text-gray-600">({info.rating.toFixed(1)})</span>
           </div>
           <div className="flex items-center text-sm text-gray-600 mb-2">
-            <FaTools className="mr-2 text-blue-500" />
+            <FaTools className="mr-2 text-gray-500" />
             <span>{info.specialty || 'General Technician'}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <FaPhone className="mr-2 text-blue-500" />
+            <FaPhone className="mr-2 text-gray-500" />
             <span>{info.phone || 'Contact information not available'}</span>
           </div>
         </div>
