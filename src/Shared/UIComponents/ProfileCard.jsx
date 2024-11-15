@@ -1,72 +1,58 @@
-import React, { useEffect, useState } from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Link, useNavigate } from "react-router-dom";
-import { API_URL } from "../../Shared/api";
-const ProfileCard = ({info}) => {
-  
-  const totalStars = 5;
-  const fullStars = Math.floor(info.rating);
-  const halfStar = info.rating % 1 >= 0.5;
-  const emptyStars = totalStars - fullStars - (halfStar ? 1 : 0);
-  const techdetail = `/technician-details/${info.id}`
-  const [techBooking, setTechBooking] = useState(`/book-technician/${info.id}`)
-  const navigate = useNavigate()
-  const handleClick = () => {
-    const token = localStorage.getItem('token')
-    if(!token){
-      navigate('/login')
-    }
-    else{
-      navigate(techBooking)
-    }
-  }
+import React from 'react'
+import { FaStar, FaMapMarkerAlt, FaTools, FaPhone } from 'react-icons/fa'
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(!token){
-      setTechBooking('/login')
-      localStorage.setItem('next', `/book-technician/${info.id}`)
-    }
-    else{
-      setTechBooking(`/book-technician/${info.id}`)
-    }
-  } , [])
-
-  console.log(`${API_URL}/uploads/${info.idCardImage}`)
+const ProfileCard = ({ info }) => {
   return (
-    <Link to={techdetail}>
-    <div className="w-72 bg-white rounded-2xl shadow-lg p-5 text-center">
-      <img
-        src={`${API_URL}/uploads/${info.idCardImage}`}
-        alt="Profile"
-        className="w-24 h-24 rounded-full mx-auto mb-4"
-      />
-      <h2 className="text-xl font-semibold mb-2">{info.user.name}</h2>
-      
-      <div className="stars">
-        {[...Array(fullStars)].map((_, i) => (
-          <i key={`full-${i}`} className="fas text-yellow-300 fa-star"></i>
-        ))}
-        {halfStar && <i key="half" className="fas text-yellow-300  fa-star-half-alt"></i>}
-        {[...Array(emptyStars)].map((_, i) => (
-          <i key={`empty-${i}`} className="far fa-star"></i>
-        ))}
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <div className="p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-500 flex-shrink-0 mr-4">
+            <img
+              src={info.image || '/placeholder.svg?height=64&width=64'}
+              alt={info.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-gray-800 mb-1">{info.name}</h3>
+            <div className="flex items-center text-sm text-gray-600">
+              <FaMapMarkerAlt className="mr-1 text-blue-500" />
+              <span>{info.location}</span>
+            </div>
+          </div>
+        </div>
+        <div className="mb-4">
+          <div className="flex items-center mb-2">
+            <div className="flex mr-2">
+              {[...Array(5)].map((_, index) => (
+                <FaStar
+                  key={index}
+                  className={`w-5 h-5 ${
+                    index < Math.round(info.rating) ? 'text-yellow-400' : 'text-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-sm text-gray-600">({info.rating.toFixed(1)})</span>
+          </div>
+          <div className="flex items-center text-sm text-gray-600 mb-2">
+            <FaTools className="mr-2 text-blue-500" />
+            <span>{info.specialty || 'General Technician'}</span>
+          </div>
+          <div className="flex items-center text-sm text-gray-600">
+            <FaPhone className="mr-2 text-blue-500" />
+            <span>{info.phone || 'Contact information not available'}</span>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-2xl font-bold text-gray-600">{info.price} ETB</span>
+          <button className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+            Book Now
+          </button>
+        </div>
       </div>
-
-      <p className="text-gray-600 text-sm mb-4">
-        {info.customerNo} customers &bull; {info.serviceNo} Services &bull; {info.bookingNo} Bookings
-      </p>
-      
-      <p className="text-gray-500 text-sm mb-6">
-        {info.bio}
-      </p>
-
-      <Link to={techBooking}  className="bg-blue-500 text-white rounded-full py-2 px-4 font-semibold hover:bg-blue-600 transition">
-        Select and Continue
-      </Link>
     </div>
-    </Link>
-  );
-};
+  )
+}
 
-export default ProfileCard;
+export default ProfileCard
