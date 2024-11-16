@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SingleService, SingleTech, TechnicianBooking, TechnicianListApi,  } from '../Api/Api';
 import { API_URL } from '../../Shared/api';
+import { useNavigate } from 'react-router-dom';
 
 const BookTechnician = () => {
+  const navigate = useNavigate();
   const [Technicain, setTechnicain] = useState({});
   const [service, setService] = useState('');
   const [scheduledDate, setscheduledDate] = useState('');
@@ -57,6 +59,7 @@ const BookTechnician = () => {
       .then((response) => {
         setSuccess(true);
         console.log("Booking successful:", response.data);
+        navigate(`/customer-profile/${customer?.id}`);
       })
       .catch((error) => {
         console.error("Error booking service:", error);

@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import axios from 'axios'
-import { FaSearch } from 'react-icons/fa'
-import { IoIosArrowDown } from 'react-icons/io'
-import { TechnicianListApi } from '../Api/Api'  // Assuming this is the correct path
-import ProfileCard from '../../Shared/UIComponents/ProfileCard'
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { FaSearch } from 'react-icons/fa';
+import { TechnicianListApi } from '../Api/Api';
+import ProfileCard from '../../Shared/UIComponents/ProfileCard';
 
-// Since we're not using shadcn/ui, let's create simple styled components
-const Button = ({ children, ...props }) => (
+const Button = ({ children, className = '', ...props }) => (
   <button
-    className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors"
+    className={`bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors ${className}`}
     {...props}
   >
     {children}
   </button>
-)
+);
 
 const Input = ({ ...props }) => (
   <input
     className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
     {...props}
   />
-)
+);
 
 const Select = ({ children, ...props }) => (
   <select
@@ -30,17 +28,17 @@ const Select = ({ children, ...props }) => (
   >
     {children}
   </select>
-)
+);
 
 export default function TotalTechnicianList() {
-  const { t } = useTranslation()
-  const [items, setItems] = useState([])
-  const [selectedLocation, setSelectedLocation] = useState('')
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedRating, setSelectedRating] = useState(0)
-  const [selectedOption, setSelectedOption] = useState(null)
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 6
+  const { t } = useTranslation();
+  const [items, setItems] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const locations = [
     { key: '', label: t('locations.select') },
@@ -49,43 +47,43 @@ export default function TotalTechnicianList() {
     { key: 'gullele', label: t('locations.gullele') },
     { key: 'kirkos', label: t('locations.kirkos') },
     { key: 'lideta', label: t('locations.lideta') },
-  ]
+  ];
 
   const priceRanges = {
     'Option A': [240, 350],
     'Option B': [140, 250],
     'Option C': [90, 150],
     'Option D': [0, 90],
-  }
+  };
 
   useEffect(() => {
     axios.get(TechnicianListApi).then((response) => {
-      setItems(response.data)
-    })
-  }, [])
+      setItems(response.data);
+    });
+  }, []);
 
   const filteredItems = items.filter((item) => {
     const matchesSearchTerm =
-      searchTerm === '' || item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesRating = selectedRating === 0 || Math.round(item.rating) === selectedRating
+      searchTerm === '' || item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRating = selectedRating === 0 || Math.round(item.rating) === selectedRating;
     const matchesLocation =
-      selectedLocation === '' || item.location.toLowerCase() === selectedLocation.toLowerCase()
+      selectedLocation === '' || item.location.toLowerCase() === selectedLocation.toLowerCase();
     const matchesPrice = selectedOption
       ? item.price >= priceRanges[selectedOption][0] &&
         item.price <= priceRanges[selectedOption][1]
-      : true
+      : true;
 
-    return matchesSearchTerm && matchesRating && matchesLocation && matchesPrice
-  })
+    return matchesSearchTerm && matchesRating && matchesLocation && matchesPrice;
+  });
 
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage)
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const paginatedItems = filteredItems.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  )
+  );
 
   return (
-    <div className={`container mx-auto mr-12 px-4 py-8 ${user ? 'mt-20' : ''}`}>
+    <div className="container mx-auto px-4 py-8">
       <h1 className="mb-8 text-center text-3xl font-bold">{t('choose_your_best')}</h1>
       <div className="flex flex-col gap-8 lg:flex-row">
         <div className="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-md">
@@ -200,5 +198,5 @@ export default function TotalTechnicianList() {
         </div>
       </div>
     </div>
-  )
+  );
 }

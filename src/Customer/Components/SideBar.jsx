@@ -1,14 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { logo1 } from '../../Shared/Components/Images';
-import { AuthContext } from '../../Shared/Context/AuthContext';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { AuthContext } from '../../Shared/Context/AuthContext';
 import { FilterContext } from '../../Shared/Context/FilterContext';
+import { logo1 } from '../../Shared/Components/Images';
 
-const SideBar = ({customerInfo}) => {
+export default function SideBar({ customerInfo }) {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
   const { setFilterStatus } = useContext(FilterContext);
 
   const handleLogout = () => {
@@ -20,73 +18,51 @@ const SideBar = ({customerInfo}) => {
 
   const handleFilter = (status) => {
     setFilterStatus(status);
-    setIsOpen(false);
   };
 
-  const handleResetFilter = () => {
-    setFilterStatus('All');
-    setIsOpen(false);
-  };
+  const filterButtons = [
+    { label: 'Pending', status: 'PENDING' },
+    { label: 'Confirmed', status: 'CONFIRMED' },
+    { label: 'Completed', status: 'COMPLETED' },
+  ];
 
   return (
-    <>
-      {/* Sidebar Component */}
-      <aside
-        className={`  p-6 bg-white max-md:mt-16 rounded-2xl shadow-lg md:static px-auto lg:mt-[70px] lg:ml-5 md:h-screen`}
-      >
-        <div className="flex flex-col items-center">
-          <img
-            src={logo1}
-            alt="User Profile"
-            className="w-24 h-24 rounded-full"
-          />
-          <h2 className="mt-4 text-xl font-semibold">{customerInfo.name}</h2>
-          <p className="text-gray-500 mt-1">{customerInfo.email}</p>
-          <p className="text-gray-500 mt-1">{customerInfo.phoneNumber}</p>
-        </div>
+    <aside className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+      <div className="flex flex-col items-center">
+        <img
+          src={logo1}
+          alt={`${customerInfo.name}'s profile`}
+          className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
+        />
+        <h2 className="mt-4 text-xl font-semibold text-gray-800">{customerInfo.name}</h2>
+        <p className="text-gray-600">{customerInfo.email}</p>
+        <p className="text-gray-600">{customerInfo.phoneNumber}</p>
+      </div>
 
-        <div className="mt-8 flex max-md:space-x-2 lg:flex-col justify-center items-center lg:space-y-2 text-gray-900">
+      <div className="space-y-2">
+        {filterButtons.map((button) => (
           <button
-            className="text-lg py-1  lg:block hover:text-gray-300"
-            onClick={() => handleFilter('PENDIND')}
+            key={button.status}
+            onClick={() => handleFilter(button.status)}
+            className="w-full py-2 px-4 text-left text-gray-700 hover:bg-blue-100 rounded transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Pending
+            {button.label}
           </button>
-          <button
-            className="text-lg py-1 lg:block hover:text-gray-300"
-            onClick={() => handleFilter('CONFIRMED')}
-          >
-            Confirmed
-          </button>
-          <button
-            className="text-lg py-1 hover:text-gray-300"
-            onClick={() => handleFilter('COMPLETED')}
-          >
-            Completed
-          </button>
-          <button
-            onClick={handleResetFilter}
-            className="py-2 text-sm max-md:hidden underline rounded hover:text-gray-300"
-          >
-            Reset Filter
-          </button>
-        </div>
+        ))}
         <button
-            onClick={handleResetFilter}
-            className="py-2 text-sm lg:hidden max-md:block max-md:mx-24 underline rounded hover:text-gray-300"
-          >
-            Reset Filter
-          </button>
-
-        <button
-          className="mt-10 lg:ml-12 max-md:mx-16 px-10 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-          onClick={handleLogout}
+          onClick={() => handleFilter('All')}
+          className="w-full py-2 px-4 text-left text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Log out
+          Reset Filter
         </button>
-      </aside>
-    </>
-  );
-};
+      </div>
 
-export default SideBar;
+      <button
+        className="w-full py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500"
+        onClick={handleLogout}
+      >
+        Log out
+      </button>
+    </aside>
+  );
+}
