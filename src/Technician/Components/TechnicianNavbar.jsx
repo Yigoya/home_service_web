@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell } from 'react-icons/fa';
 import { logo1 } from '../../Shared/Components/Images';
 
-const CustomerNavBar = () => {
+const TechnicianNavBar = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const Customer = JSON.parse(localStorage.getItem("customer"));
-  const profileLink = `/customer-profile/${Customer?.id}`
+  const Technician = JSON.parse(localStorage.getItem("technician"));
+  const profileLink = `/`
+  console.log('Technician:', Technician?.id);
 
 
   const toggleLanguage = () => {
@@ -37,14 +38,7 @@ const CustomerNavBar = () => {
             </button>
           </div>
 
-          {/* Menu Links (Hidden on Mobile) */}
-          <div className="hidden md:flex space-x-5">
-            <Link to="services" className="hover:text-gray-300">Services</Link>
-            <Link to="/all-technician-list" className="hover:text-gray-300">Technicians</Link>
-            <Link to="/contact-us" className="hover:text-gray-300">Contact</Link>
-            <Link to="#" className="hover:text-gray-300">FAQ</Link>
-          </div>
-
+      
           {/* Icons (Hidden on Mobile) */}
           <div className="hidden md:flex space-x-7">
             <FaGlobe className="text-2xl mt-1 cursor-pointer" onClick={toggleLanguage} />
@@ -56,10 +50,6 @@ const CustomerNavBar = () => {
         {/* Mobile Dropdown Menu */}
         {isOpen && (
           <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
-            <Link to="services" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Services</Link>
-            <Link to="/all-technician-list" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Technicians</Link>
-            <Link to="/contact-us" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Contact</Link>
-            <Link to="#" onClick={() => setIsOpen(false)} className="hover:text-gray-300">FAQ</Link>
             <Link to={profileLink} onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
               <FaUserCircle className="mr-2 text-xl" /> Profile
             </Link>
@@ -73,4 +63,4 @@ const CustomerNavBar = () => {
   );
 };
 
-export default CustomerNavBar;
+export default TechnicianNavBar;

@@ -182,7 +182,7 @@ const TechnicianList = () => {
             {paginatedTechnicians.length > 0 ? (
               paginatedTechnicians.map((item) => (
                 <div key={item.id} className="p-4">
-                  <ProfileCard info={item} />
+                  <ProfileCard info={item} Id={id} />
                 </div>
               ))
             ) : (

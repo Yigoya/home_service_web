@@ -9,23 +9,27 @@ import TechnicianDetail from './Customer/Pages/TechnicianDetail'
 import BookTechnician from './Customer/Pages/BookTechnician'
 import VerificationPage from './Customer/Pages/VerificationPage'
 import TechVerificationPage from './Technician/Pages/TechVerificationPage'
-import Layout from './AuthLayout/Layout'
 import Profile from './Customer/Pages/Profile'
-import CustomerNavBar from './Customer/Components/CustomerNavBar'
 import CustomerLayout from './AuthLayout/CustomerLayout'
 import { AuthProvider } from './Shared/Context/AuthContext'
 
 import Services from './Customer/Pages/Services'
 import TotalTechnicianList from './Customer/Pages/TotalTechnicianList'
+import TechnicianLayout from './AuthLayout/TechnicianLayout'
+import TechProfile from './Technician/Pages/TechProfile'
 
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('user'))
   return (
     <>
     <AuthProvider>
       <Router>
         <Routes>
-          <Route element ={<CustomerLayout />}>
+        {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
+          <Route path="/" element={<TechProfile />} />
+            </Route>:
+        <Route element ={<CustomerLayout />}>
             <Route path="/" element={<Landing />} />
             <Route path='/customer-signup' element={<SignUp />} />
             <Route path='/login' element={<Login />} />
@@ -35,11 +39,12 @@ function App() {
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/technician-registration' element={<Registration />} />
             <Route path ='/technician-details/:id' element={<TechnicianDetail />} />
-            <Route path ='/book-technician/:id' element={<BookTechnician />} />
+            <Route path ='/book-technician/:id/:serviceId' element={<BookTechnician />} />
             <Route path="/verify-email"  element={<VerificationPage />} />
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
-            <Route path='/customer-profile' element={<Profile />} />
+            <Route path='/customer-profile/:id' element={<Profile />} />
           </Route>
+}
         </Routes>
       </Router>
      </AuthProvider>

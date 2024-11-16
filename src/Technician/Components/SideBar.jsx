@@ -1,21 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { logo1 } from '../../Shared/Components/Images';
-import { AuthContext } from '../../Shared/Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { FilterContext } from '../../Shared/Context/FilterContext';
+import { AuthContext } from '../../Shared/Context/AuthContext';
 
 const SideBar = ({customerInfo}) => {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
   const { setFilterStatus } = useContext(FilterContext);
 
   const handleLogout = () => {
     logout();
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    navigate('/');
+    localStorage.removeItem('technician')
+    window. location. reload(false); 
   };
 
   const handleFilter = (status) => {
