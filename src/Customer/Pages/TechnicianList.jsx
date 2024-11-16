@@ -83,7 +83,7 @@ const TechnicianList = () => {
 
   const totalPages = Math.ceil(filteredTechnicians.length / techniciansPerPage);
   const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
-
+ console.log(paginatedTechnicians, "tec")
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
