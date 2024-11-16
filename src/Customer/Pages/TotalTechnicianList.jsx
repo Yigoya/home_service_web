@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { TechnicianListApi } from '../Api/Api';
 
 const TotalTechnicianList = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -18,8 +18,8 @@ const TotalTechnicianList = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  // Define locations with keys and translations
   const locations = [
     { key: "", label: t("locations.select") },
     { key: "bole", label: t("locations.bole") },
@@ -79,7 +79,7 @@ const TotalTechnicianList = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className={`container mx-auto px-4 ${user ? 'mt-20' : ''}`}>
       <h1 className='text-center text-2xl font-bold mt-10 mb-5'>{t('choose_your_best')}</h1>
       <div className='flex lg:mx-10 flex-col md:flex-row md:space-x-10'>
         <div className="w-full md:w-1/4">
@@ -178,7 +178,7 @@ const TotalTechnicianList = () => {
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex lg:mx-72 border-black  rounded-md py-1 broder border-2 justify-center mt-6 space-x-2">
+          <div className="flex lg:mx-72 border-black rounded-md py-1 border-2 justify-center mt-6 space-x-2">
             <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="text-blue-500">
               Previous
             </button>

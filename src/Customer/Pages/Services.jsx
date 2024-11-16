@@ -86,6 +86,7 @@ const serviceData = [
 
 
     const Services = () => {
+        const user = JSON.parse(localStorage.getItem('customer'));
         const { t } = useTranslation();
         const [selectedService, setSelectedService] = useState(serviceData[0]);
         const [selectedSubcategory, setSelectedSubcategory] = useState(null);
@@ -107,7 +108,7 @@ const serviceData = [
         );
     
         return (
-            <div className="p-8 max-w-4xl mx-auto">
+            <div className={`p-8 max-w-4xl mx-auto  ${user ? 'mt-20' : ''}`}>
                 <h2 className="text-3xl font-bold text-center mb-6">Our Services</h2>
                 
                 {/* Search bar */}
