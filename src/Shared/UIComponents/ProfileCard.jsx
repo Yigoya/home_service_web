@@ -69,4 +69,4 @@ const ProfileCard = ({info, Id}) => {
   );
 };
 
-export default ProfileCard;
+export default ProfileCard
