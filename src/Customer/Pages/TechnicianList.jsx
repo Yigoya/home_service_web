@@ -83,7 +83,7 @@ const TechnicianList = () => {
 
   const totalPages = Math.ceil(filteredTechnicians.length / techniciansPerPage);
   const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
-
+ console.log(paginatedTechnicians, "tec")
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -182,7 +182,7 @@ const TechnicianList = () => {
             {paginatedTechnicians.length > 0 ? (
               paginatedTechnicians.map((item) => (
                 <div key={item.id} className="p-4">
-                  <ProfileCard info={item} />
+                  <ProfileCard info={item} Id={id} />
                 </div>
               ))
             ) : (

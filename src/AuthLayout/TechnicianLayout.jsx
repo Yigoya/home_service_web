@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../Shared/Components/NavBar';
-import CustomerNavBar from '../Customer/Components/CustomerNavBar';
 import { AuthContext } from '../Shared/Context/AuthContext';
 import { FilterProvider } from '../Shared/Context/FilterContext';
+import TechnicianNavBar from '../Technician/Components/TechnicianNavbar';
 
 
-const CustomerLayout = () => {
+const TechnicianLayout = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <CustomerNavBar /> : <NavBar />}
+        {isLoggedIn ? <TechnicianNavBar /> : <NavBar />}
         <Outlet />
       </div>
     </div>
@@ -21,4 +21,4 @@ const CustomerLayout = () => {
   );
 };
 
-export default CustomerLayout;
+export default TechnicianLayout;

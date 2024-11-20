@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FaGlobe, FaUserCircle, FaBell } from 'react-icons/fa';
+import { FaGlobe, FaUserCircle, FaBell, FaBars, FaTimes } from 'react-icons/fa';
 import { logo1 } from '../../Shared/Components/Images';
 
-const CustomerNavBar = () => {
+export default function CustomerNavBar() {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const Customer = JSON.parse(localStorage.getItem("customer") || "{}");
+  const profileLink = `/customer-profile/${Customer?.id || ''}`;
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';
@@ -14,60 +16,56 @@ const CustomerNavBar = () => {
   };
 
   return (
-    <div className="fixed bg-[#222222] top-0 left-0 right-0 px-4 py-3 lg:px-10 shadow-md z-10">
-      <div className="text-white px-5 md:px-36 py-2">
-        <div className="flex justify-between items-center">
-          {/* Logo and Company Name */}
-          <div>
+    <nav className="bg-gray-900 text-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img className="inline-block w-8 h-8 md:w-10 md:h-10" src={logo1} alt="Logo" />
-              <p className="ml-3 text-sm md:text-lg">Company Name</p>
+              <img className="h-8 w-auto sm:h-10" src={logo1} alt="Company Logo" />
+              <span className="ml-3 text-xl font-bold">Company Name</span>
             </Link>
           </div>
 
-          {/* Hamburger Icon for Mobile */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
+          <div className="hidden md:flex items-center space-x-4">
+            <Link to="/services" className="hover:text-gray-300 transition duration-150 ease-in-out">Services</Link>
+            <Link to="/all-technician-list" className="hover:text-gray-300 transition duration-150 ease-in-out">Technicians</Link>
+            <Link to="/contact-us" className="hover:text-gray-300 transition duration-150 ease-in-out">Contact</Link>
+            <Link to="#" className="hover:text-gray-300 transition duration-150 ease-in-out">FAQ</Link>
+            
+            <button onClick={toggleLanguage} className="text-2xl hover:text-gray-300 transition duration-150 ease-in-out" aria-label="Toggle Language">
+              <FaGlobe />
+            </button>
+            <Link to={profileLink} className="text-2xl hover:text-gray-300 transition duration-150 ease-in-out" aria-label="User Profile">
+              <FaUserCircle />
+            </Link>
+            <Link to="#" className="text-2xl hover:text-gray-300 transition duration-150 ease-in-out" aria-label="Notifications">
+              <FaBell />
+            </Link>
+          </div>
+
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
+              {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
             </button>
           </div>
+        </div>
+      </div>
 
-          {/* Menu Links (Hidden on Mobile) */}
-          <div className="hidden md:flex space-x-5">
-            <Link to="#" className="hover:text-gray-300">Services</Link>
-            <Link to="/technician-list" className="hover:text-gray-300">Technicians</Link>
-            <Link to="/contact-us" className="hover:text-gray-300">Contact</Link>
-            <Link to="#" className="hover:text-gray-300">FAQ</Link>
-          </div>
-
-          {/* Icons (Hidden on Mobile) */}
-          <div className="hidden md:flex space-x-7">
-            <FaGlobe className="text-2xl mt-1 cursor-pointer" onClick={toggleLanguage} />
-            <Link to="/customer-profile" className="text-3xl hover:text-gray-300"><FaUserCircle /></Link>
-            <Link to="#" className="text-3xl hover:text-gray-300"><FaBell /></Link>
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <Link to="/services" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">Services</Link>
+            <Link to="/all-technician-list" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">Technicians</Link>
+            <Link to="/contact-us" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">Contact</Link>
+            <Link to="#" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">FAQ</Link>
+            <Link to={profileLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">Profile</Link>
+            <Link to="#" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">Notifications</Link>
+            <button onClick={toggleLanguage} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-150 ease-in-out">
+              Toggle Language
+            </button>
           </div>
         </div>
-
-        {/* Mobile Dropdown Menu */}
-        {isOpen && (
-          <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
-            <Link to="#" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Services</Link>
-            <Link to="/technician-list" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Technicians</Link>
-            <Link to="/contact-us" onClick={() => setIsOpen(false)} className="hover:text-gray-300">Contact</Link>
-            <Link to="#" onClick={() => setIsOpen(false)} className="hover:text-gray-300">FAQ</Link>
-            <Link to="/customer-profile" onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
-              <FaUserCircle className="mr-2 text-xl" /> Profile
-            </Link>
-            <Link to="#" onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
-              <FaBell className="mr-2 text-xl" /> Notifications
-            </Link>
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </nav>
   );
-};
-
-export default CustomerNavBar;
+}

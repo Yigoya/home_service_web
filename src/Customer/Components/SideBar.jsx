@@ -1,69 +1,68 @@
-import React, { useContext, useState } from 'react';
-import { logo1 } from '../../Shared/Components/Images';
-import { AuthContext } from '../../Shared/Context/AuthContext';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { AuthContext } from '../../Shared/Context/AuthContext';
+import { FilterContext } from '../../Shared/Context/FilterContext';
+import { logo1 } from '../../Shared/Components/Images';
 
-const SideBar = () => {
+export default function SideBar({ customerInfo }) {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
+  const { setFilterStatus } = useContext(FilterContext);
 
   const handleLogout = () => {
     logout();
     localStorage.removeItem('token');
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
     navigate('/');
   };
 
+  const handleFilter = (status) => {
+    setFilterStatus(status);
+  };
+
+  const filterButtons = [
+    { label: 'Pending', status: 'PENDING' },
+    { label: 'Confirmed', status: 'CONFIRMED' },
+    { label: 'Completed', status: 'COMPLETED' },
+  ];
+
   return (
-    <>
-      <button 
-        className="md:hidden text-white fixed top-6 left-2 z-20 text-2xl"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <FaTimes /> : <FaBars />}
-      </button>
+    <aside className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+      <div className="flex flex-col items-center">
+        <img
+          src={logo1}
+          alt={`${customerInfo.name}'s profile`}
+          className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
+        />
+        <h2 className="mt-4 text-xl font-semibold text-gray-800">{customerInfo.name}</h2>
+        <p className="text-gray-600">{customerInfo.email}</p>
+        <p className="text-gray-600">{customerInfo.phoneNumber}</p>
+      </div>
 
-      {/* Overlay to close sidebar when clicking outside */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-10 bg-black opacity-50"
-          onClick={() => setIsOpen(false)}
-        ></div>
-      )}
-
-      {/* Sidebar Component */}
-      <aside
-        className={`fixed top-0 left-0  h-full p-6 bg-white rounded-2xl shadow-lg z-20 transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 md:static lg:mt-[107px] ml-5 px-16 md:h-[530px] transition-transform duration-300`}
-      >
-        <div className="flex flex-col items-center">
-          <img
-            src={logo1}
-            alt="User Profile"
-            className="w-24 h-24 rounded-full"
-          />
-          <h2 className="mt-4 text-xl font-semibold">John Joe</h2>
-          <p className="text-gray-500">johnjoe@gmail.com</p>
-        </div>
-
-        <nav className="mt-8 flex flex-col items-center space-y-2 text-gray-600">
-          <p className="text-lg font-semibold">Pending</p>
-          <p className="text-lg">Accepted</p>
-          <p className="text-lg">Completed</p>
-        </nav>
-
+      <div className="space-y-2">
+        {filterButtons.map((button) => (
+          <button
+            key={button.status}
+            onClick={() => handleFilter(button.status)}
+            className="w-full py-2 px-4 text-left text-gray-700 hover:bg-blue-100 rounded transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {button.label}
+          </button>
+        ))}
         <button
-          className="mt-20 px-10 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-          onClick={handleLogout}
+          onClick={() => handleFilter('All')}
+          className="w-full py-2 px-4 text-left text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Log out
+          Reset Filter
         </button>
-      </aside>
-    </>
-  );
-};
+      </div>
 
-export default SideBar;
+      <button
+        className="w-full py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500"
+        onClick={handleLogout}
+      >
+        Log out
+      </button>
+    </aside>
+  );
+}
