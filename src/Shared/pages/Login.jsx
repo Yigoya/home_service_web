@@ -22,7 +22,9 @@ const Login = () => {
       [name]: value
     });
   };
-
+ const refreshPage = () =>{
+  window. location. reload(false); 
+ }
   const handleSubmit =async (e) => {
     e.preventDefault(); 
     setError(null); 
@@ -30,7 +32,8 @@ const Login = () => {
     try {
       const response = await axios.post(loginApi, formData, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          withCredentials: true
         }
       });
       console.log('Response:', response);
@@ -39,11 +42,15 @@ const Login = () => {
       } else {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('customer', JSON.stringify(response.data.customer));
+        localStorage.setItem('technician', JSON.stringify(response.data.technician));
         const next = localStorage.getItem('next')
         localStorage.removeItem('next')
         setSuccessMessage('Login successful!');
         login();
+        
         navigate(next ? next : '/')
+        refreshPage();
       }
     } catch (err) {
 ;

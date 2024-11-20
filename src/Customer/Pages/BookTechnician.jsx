@@ -1,22 +1,38 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { TechnicianListApi,  } from '../Api/Api';
+import { SingleService, SingleTech, TechnicianBooking, TechnicianListApi,  } from '../Api/Api';
+import { API_URL } from '../../Shared/api';
+import { useNavigate } from 'react-router-dom';
 
 const BookTechnician = () => {
-  const [item, setItem] = useState({});
-  const [schedule, setSchedule] = useState('');
-  const [subCity, setSubCity] = useState('');
-  const [wereda, setWereda] = useState('');
-  const [jobDescription, setJobDescription] = useState('');
+  const navigate = useNavigate();
+  const [Technicain, setTechnicain] = useState({});
+  const [service, setService] = useState('');
+  const [scheduledDate, setscheduledDate] = useState('');
+  const [subcity, setsubcity] = useState('');
+  const [wereda, setwereda] = useState('');
+  const [description, setdescription] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const { id } = useParams();
+  const { id, serviceId } = useParams();
+  const customer = JSON.parse(localStorage.getItem('customer'));
 
   useEffect(() => {
-    axios.get(`${TechnicianListApi}/${id}`)
+    axios.get(`${SingleTech}/${id}`)
       .then((response) => {
-        setItem(response.data);
+        setTechnicain(response.data);
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching technician details:", error);
+        setError("Failed to load technician details.");
+      });
+  }, [id]);
+  useEffect(() => {
+    axios.get(`${SingleService}/${serviceId}`)
+      .then((response) => {
+        setService(response.data.service.name);
       })
       .catch((error) => {
         console.error("Error fetching technician details:", error);
@@ -30,17 +46,20 @@ const BookTechnician = () => {
     setSuccess(false);
 
     const bookingData = {
+      customerId: customer?.id,
       technicianId: id,
-      schedule,
-      subCity,
+      serviceId: serviceId,
+      scheduledDate: `${scheduledDate}T00:00:00`,
+      subcity,
       wereda,
-      jobDescription,
+      description,
     };
 
-    axios.post("#", bookingData)
+    axios.post(TechnicianBooking, bookingData)
       .then((response) => {
         setSuccess(true);
         console.log("Booking successful:", response.data);
+        navigate(`/customer-profile/${customer?.id}`);
       })
       .catch((error) => {
         console.error("Error booking service:", error);
@@ -54,20 +73,20 @@ const BookTechnician = () => {
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"
-            src={item.image || 'https://via.placeholder.com/150'}
+            src={`${API_URL}/uploads/${Technicain.profileImage}` || 'https://via.placeholder.com/150'}
             alt="Profile"
           />
-          <h2 className="text-lg font-semibold">{item.name}</h2>
-          <span className="mt-2 px-3 py-1 text-gray-700 bg-gray-200 rounded-full">{item.specialty || "Service Type"}</span>
+          <h2 className="text-lg font-semibold">{Technicain.name}</h2>
+          <span className="mt-2 px-3 py-1 text-gray-700 bg-gray-200 rounded-full">{service || "Service Type"}</span>
         </div>
 
         <form onSubmit={handleBooking} className="mt-6">
-          <label className="block text-gray-700 mb-2">Schedule</label>
+          <label className="block text-gray-700 mb-2">scheduledDate</label>
           <div className="flex items-center border border-gray-300 rounded-md p-2">
             <input
               type="date"
-              value={schedule}
-              onChange={(e) => setSchedule(e.target.value)}
+              value={scheduledDate}
+              onChange={(e) => setscheduledDate(e.target.value)}
               className="flex-grow outline-none text-gray-600"
               required
             />
@@ -79,8 +98,8 @@ const BookTechnician = () => {
             <div className="flex space-x-2">
               <div className="flex items-center border border-gray-300 rounded-md p-2 flex-grow">
                 <select
-                  value={subCity}
-                  onChange={(e) => setSubCity(e.target.value)}
+                  value={subcity}
+                  onChange={(e) => setsubcity(e.target.value)}
                   className="flex-grow outline-none text-gray-600"
                   required
                 >
@@ -94,18 +113,18 @@ const BookTechnician = () => {
               <div className="flex items-center border border-gray-300 rounded-md p-2 flex-grow">
                 <select
                   value={wereda}
-                  onChange={(e) => setWereda(e.target.value)}
+                  onChange={(e) => setwereda(e.target.value)}
                   className="flex-grow outline-none text-gray-600"
                   required
                 >
                   <option value="">Select wereda</option>
-                  <option value="Wereda 1">Wereda 1</option>
-                  <option value="Wereda 2">Wereda 2</option>
-                  <option value="Wereda 3">Wereda 3</option>
-                  <option value="Wereda 4">Wereda 4</option>
-                  <option value="Wereda 5">Wereda 5</option>
-                  <option value="Wereda 6">Wereda 6</option>
-                  <option value="Wereda 7">Wereda 7</option>
+                  <option value="wereda 1">wereda 1</option>
+                  <option value="wereda 2">wereda 2</option>
+                  <option value="wereda 3">wereda 3</option>
+                  <option value="wereda 4">wereda 4</option>
+                  <option value="wereda 5">wereda 5</option>
+                  <option value="wereda 6">wereda 6</option>
+                  <option value="wereda 7">wereda 7</option>
                 </select>
                 <span className="ml-2 text-gray-500">🏠</span>
               </div>
@@ -115,8 +134,8 @@ const BookTechnician = () => {
           <div className="mt-4">
             <label className="block text-gray-700 mb-2">Describe the job</label>
             <textarea
-              value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
+              value={description}
+              onChange={(e) => setdescription(e.target.value)}
               placeholder="Explain the job task in simple language"
               className="w-full border border-gray-300 rounded-md p-3 outline-none resize-none text-gray-600"
               rows="4"

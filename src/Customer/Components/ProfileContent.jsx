@@ -1,77 +1,57 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { logo1 } from '../../Shared/Components/Images';
+import { FilterContext } from '../../Shared/Context/FilterContext';
+import { API_URL } from '../../Shared/api';
 
-const ProfileContent = () => {
-  const [statusFilter, setStatusFilter] = useState('Pending');  
+const ProfileContent = ({jobs}) => {
+  const { filterStatus } = useContext(FilterContext);
+  const jobArray = Array.isArray(jobs.content) ? jobs.content : [];
 
-  const jobs = [
-    {
-      id: 1,
-      name: "John Joe",
-      status: "Pending",
-      date: "23 April 2024",
-      service: "Air Cooler Repair",
-      location: "Akaki wereda 08",
-      description: "this text shows all the description of the job",
-    },
-    {
-      id: 2,
-      name: "John Joe",
-      status: "Accepted",
-      date: "23 April 2024",
-      service: "Air Cooler Repair",
-      location: "Akaki wereda 08",
-      description: "this text shows all the description of the job",
-    },
-    {
-      id: 3,
-      name: "John Joe",
-      status: "Completed",
-      date: "23 April 2024",
-      service: "Air Cooler Repair",
-      location: "Akaki wereda 08",
-      description: "this text shows all the description of the job",
-      review: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      rating: 5
-    },
-  ];
+  
+  const filteredJobs = jobArray.filter((job) => {
+    if (filterStatus === 'All') return true;
+    return job.status === filterStatus;
+  });
+
 
 
   return (
     <div>
-      <main className="bg-white rounded-2xl lg:mr-10 lg:mt-2 p-6 lg:p-8">
+      <main className="bg-white rounded-2xl lg:h-screen lg:mr-10 mt-3  p-6 lg:p-8">
         <h1 className="text-lg lg:text-xl font-semibold mb-6">
-          Track your activity on this platform
+         
+        {filteredJobs.length === 0 ? <p className='flex justify-center items-center '>No booking yet</p> : <p> Track your activity on this platform</p> }
         </h1>
 
         <div className="space-y-6 h-96 overflow-y-auto">
-          {jobs.map((job) => (
+          {filteredJobs.map((job) => (
             <div key={job.id} className="bg-gray-50 px-4 py-8 lg:px-10 lg:py-14 shadow-md rounded-2xl">
               <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-10">
                 <img
-                  src={logo1}
+                  src={`${API_URL}/uploads/${job.technicianProfleImage}`}
                   alt="Provider"
                   className="w-20 h-20 rounded-full mx-auto lg:mx-0"
                 />
                 <div className="flex flex-col items-center lg:items-start">
                   <div className="flex flex-col lg:flex-row lg:space-x-4 mb-3">
-                    <h2 className="text-lg lg:text-xl font-semibold">{job.name}</h2>
+                    <h2 className="text-lg lg:text-xl font-semibold">{job.technicianName}</h2>
                     <p className={`inline-block px-5 mt-1 py-1 text-xs font-semibold rounded-lg ${job.status === 'Pending' ? 'bg-[#FFF100] text-yellow-700' : job.status === 'Accepted' ? 'bg-green-200 text-green-700' : 'bg-blue-200 text-blue-700'}`}>
                       {job.status}
                     </p>
                   </div>
                   <div className="flex-col items-center lg:items-start">
                     <span className="mr-0 lg:mr-4 border border-gray-500 px-4 lg:px-10 py-1 rounded-md text-sm">
-                      <i className="far fa-calendar mr-1"></i> {job.date}
+                      <i className="far fa-calendar mr-1"></i> {job.scheduledDate}
                     </span>
                     <p className="bg-gray-200 border border-black text-center rounded-lg px-2 mt-3 w-full lg:w-[182px]">
-                      {job.service}
+                      {job.serviceName}
                     </p>
                   </div>
                 </div>
                 <div className="text-center lg:text-left">
                   <span className="mr-4 border border-gray-500 px-10 py-1 rounded-md text-sm">
-                    <i className="far fa-map-marker-alt mr-1"></i> {job.location}
+                  <i className="far fa-map-marker-alt mr-1"></i> {job.address?.city ?? "none"}
+
                   </span>
                   <p className="font-medium mt-5">Job Description</p>
                   <p className="my-1 text-sm text-gray-700">{job.description}</p>
