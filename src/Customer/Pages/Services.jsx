@@ -48,8 +48,9 @@ export default function Services() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800">
+    <div className="max-w-6xl mx-auto px-4 py-12 "> 
+    <div className="shadow-xl rounded-lg p-8 bg-gray-100">
+    <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800">
         Our Services
       </h2>
 
@@ -121,6 +122,8 @@ export default function Services() {
           </div>
         )}
       </div>
+    </div>
+    
     </div>
   );
 }
