@@ -32,7 +32,7 @@ const SideBar = ({customerInfo}) => {
     <>
       {/* Sidebar Component */}
       <aside
-        className={`  p-6 bg-white max-md:mt-16 rounded-2xl shadow-lg md:static px-auto lg:mt-[70px] lg:ml-5 md:h-screen`}
+        className={`  p-6 bg-white max-md:mt-16 rounded-2xl shadow-lg md:static px-auto lg:mt-[85px] lg:ml-5 md:h-screen`}
       >
         <div className="flex flex-col items-center">
           <img

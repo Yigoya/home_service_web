@@ -10,6 +10,7 @@ import BookTechnician from './Customer/Pages/BookTechnician'
 import VerificationPage from './Customer/Pages/VerificationPage'
 import TechVerificationPage from './Technician/Pages/TechVerificationPage'
 import Profile from './Customer/Pages/Profile'
+
 import CustomerLayout from './AuthLayout/CustomerLayout'
 import { AuthProvider } from './Shared/Context/AuthContext'
 
@@ -17,6 +18,8 @@ import Services from './Customer/Pages/Services'
 import TotalTechnicianList from './Customer/Pages/TotalTechnicianList'
 import TechnicianLayout from './AuthLayout/TechnicianLayout'
 import TechProfile from './Technician/Pages/TechProfile'
+import Notification from './Customer/Pages/Notification'
+import TechNotification from './Technician/Pages/TechNotification'
 import Footer from './Shared/Components/Footer'
 
 
@@ -31,6 +34,7 @@ function App() {
         <Routes>
         {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
           <Route path="/" element={<TechProfile />} />
+          <Route path='/tech-notification/:id' element={<TechNotification />} />
             </Route>:
         <Route element ={<CustomerLayout />}>
             <Route path="/" element={<Landing />} />
@@ -46,6 +50,7 @@ function App() {
             <Route path="/verify-email"  element={<VerificationPage />} />
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
+            <Route path='customer-notification/:id' element={<Notification />} />
             
           </Route>
 }       
