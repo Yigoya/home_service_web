@@ -33,13 +33,14 @@ const BookTechnician = () => {
     axios.get(`${SingleService}/${serviceId}`)
       .then((response) => {
         setService(response.data.service.name);
+        console.log(response.data.service.name)
       })
       .catch((error) => {
         console.error("Error fetching technician details:", error);
         setError("Failed to load technician details.");
       });
   }, [id]);
-
+console.log(`${SingleService}/${serviceId}`)
   const handleBooking = (e) => {
     e.preventDefault();
     setError(null);
@@ -69,7 +70,7 @@ const BookTechnician = () => {
 
   return (
     <div>
-      <div className="max-w-md lg:mt-24 max-md:mt-5 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
+      <div className="max-w-md lg:mt-7 max-md:mt-5 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"

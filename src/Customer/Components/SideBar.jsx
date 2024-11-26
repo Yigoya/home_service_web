@@ -27,7 +27,7 @@ export default function SideBar({ customerInfo }) {
   ];
 
   return (
-    <aside className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div className="bg-white lg:h-screen lg:ml-16 rounded-lg shadow-lg p-6 space-y-6">
       <div className="flex flex-col items-center">
         <img
           src={logo1}
@@ -63,6 +63,7 @@ export default function SideBar({ customerInfo }) {
       >
         Log out
       </button>
-    </aside>
+    </div>
   );
 }
+

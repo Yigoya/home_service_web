@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { format, isToday, isYesterday, isSameWeek } from 'date-fns'
 import { Bell, Mail, AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
-import { CustomerNotificationApi } from '../Api/Api'
+import { TechnicianNotificationApi } from '../Api/Api'
+import { notificationStatusApi } from '../../Customer/Api/Api'
 
 
-const Notification = () => {
-  const customer = JSON.parse(localStorage.getItem('customer'))
-  const id = customer?.id
+
+const TechNotification = () => {
+  const technician = JSON.parse(localStorage.getItem('user'))
+  const id = technician.id
+  console.log(id)
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -18,9 +21,10 @@ const Notification = () => {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get(`${CustomerNotificationApi}/${id}`)
+      const response = await axios.get(`${TechnicianNotificationApi}/${id}`)
       console.log('Notifications:', response.data)
       setNotifications(response.data)
+      
       setLoading(false)
     } catch (err) {
       setError('Failed to fetch notifications')
@@ -30,7 +34,7 @@ const Notification = () => {
 
   const markAsRead = async (id) => {
     try {
-      await axios.patch(`${CustomerNotificationApi}/${id}`, { readStatus: true })
+      await axios.patch(`${notificationStatusApi}/${id}`, { readStatus: true })
       setNotifications(notifications.map(n => 
         n.id === id ? { ...n, readStatus: true } : n
       ))
@@ -41,12 +45,18 @@ const Notification = () => {
 
   const getIcon = (type) => {
     switch (type) {
-      case 'message':
+      case 'BOOKING_REQUEST':
         return <Mail className="h-5 w-5 text-blue-500" />
-      case 'alert':
+      case 'ALERT':
         return <AlertCircle className="h-5 w-5 text-red-500" />
-      case 'success':
+      case 'BOOKING_START':
         return <CheckCircle className="h-5 w-5 text-green-500" />
+      case 'BOOKING_ACCEPTANCE':
+        return <CheckCircle className="h-5 w-5 text-green-500" />
+      case 'BOOKING_DENIED':
+        return <AlertCircle className="h-5 w-5 text-red-500" />
+      case ' BOOKING_CANCELLATION':
+        return <AlertCircle className="h-5 w-5 text-red-500" />
       default:
         return <Bell className="h-5 w-5 text-gray-500" />
     }
@@ -90,7 +100,7 @@ const Notification = () => {
   const groupedNotifications = groupNotifications(notifications)
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="max-w-2xl bg-gray-200 h-screen mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Notifications</h1>
       {Object.entries(groupedNotifications).map(([date, notifications]) => (
         <div key={date} className="mb-6">
@@ -132,4 +142,4 @@ const Notification = () => {
   )
 }
 
-export default Notification
+export default TechNotification

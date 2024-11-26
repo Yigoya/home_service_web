@@ -9,6 +9,7 @@ const TechnicianNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const Technician = JSON.parse(localStorage.getItem("technician"));
   const profileLink = `/`
+  const notificationLink = `/tech-notification/${Technician?.id || ''}`;
   console.log('Technician:', Technician?.id);
 
 
@@ -43,7 +44,7 @@ const TechnicianNavBar = () => {
           <div className="hidden md:flex space-x-7">
             <FaGlobe className="text-2xl mt-1 cursor-pointer" onClick={toggleLanguage} />
             <Link to={profileLink} className="text-3xl hover:text-gray-300"><FaUserCircle /></Link>
-            <Link to="#" className="text-3xl hover:text-gray-300"><FaBell /></Link>
+            <Link to={notificationLink} className="text-3xl hover:text-gray-300"><FaBell /></Link>
           </div>
         </div>
 
@@ -53,7 +54,7 @@ const TechnicianNavBar = () => {
             <Link to={profileLink} onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
               <FaUserCircle className="mr-2 text-xl" /> Profile
             </Link>
-            <Link to="#" onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
+            <Link to={notificationLink} onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
               <FaBell className="mr-2 text-xl" /> Notifications
             </Link>
           </div>
