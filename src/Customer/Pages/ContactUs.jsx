@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FiUser, FiMail, FiPhone, FiMessageSquare } from 'react-icons/fi';
-import contact from '../../assets/contact.jpg';
+import contact from '../../assets/Contact-us.svg';
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -81,7 +81,7 @@ function ContactUs() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-gray-0 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left part - Form */}
