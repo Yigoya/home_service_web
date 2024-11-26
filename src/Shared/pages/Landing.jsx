@@ -6,7 +6,6 @@ import ServiceTypes from '../Components/ServiceTypes';
 import ServiceSelector from '../Components/ServiceSelector';
 
 import { faTools, faBroom, faWrench, faUserMd, faHome} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPuzzlePiece } from '@fortawesome/free-solid-svg-icons'; 
 
 import home from '../../assets/home.png';
@@ -16,9 +15,9 @@ import personal from '../../assets/personal.png';
 import realstate from '../../assets/realstate.png';
 import miscellaneous from '../../assets/miscellaneous.jpg';
 
+import Contact from "../../Customer/Pages/ContactUs";
 import bg_img from '../../assets/home2.png';
 import { FiSearch } from 'react-icons/fi';
-import TopTechnician from '../UIComponents/TopTechnician';
 import TechnicianCarousel from '../UIComponents/TechnicianCarousel';
 import Testimonials from '../UIComponents/Testimonials';
 import FAQ from '../UIComponents/FAQ';
@@ -31,8 +30,6 @@ const Landing = () => {
   const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
-
-  const suggestions = ['Home Cleaning', 'Plumbing', 'Electrician', 'Gardening', 'Car Wash'];
   const [service, setService] = useState([]);
 
   const handleSuggestionClick = (suggestion) => {
@@ -147,58 +144,62 @@ const Landing = () => {
   return (
 
     <div>
-    <div className="relative w-full h-screen sm:h-[60vh] md:h-screen bg-gray-300  flex items-center justify-center overflow-hidden">
-      <img
-        src={bg_img}
-        alt="Guidance"
-        className="w-full h-full object-cover opacity-80"
-      />
-      
-      <div className="absolute inset-0 bg-black opacity-60"></div>
-
-      <div className="absolute text-center px-4 sm:px-8">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-inter mb-2 md:mb-4 text-white">
-        {t('every_service')}
-      </h2>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-inter mb-2 md:mb-4 p-1 sm:p-2 text-white">
-        {t('you_will_need')}
-      </h2>
-      <div className="relative w-full max-w-xs sm:max-w-md mx-auto">
-        <div className="flex items-center bg-white rounded-full border-2 border-blue-400 px-3 py-1 sm:px-4 sm:py-2 shadow-sm">
-          <input
-            type="text"
-            placeholder={t("search_services")}
-            value={searchText}
-            onFocus={() => {
-              setIsDropdownOpen(!isDropdownOpen);
-              sendSearchToBackend(searchText);
-            }}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none text-sm sm:text-base"
-          />
-          <FiSearch
-            size={24}
-            className="text-gray-600 ml-2 transform hover:scale-110 transition-transform duration-200 cursor-pointer"
-            
-          />
-        </div>
-        {isDropdownOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border border-blue-500 rounded-md shadow-lg mt-2 z-10">
-            {service.map((suggestion, index) => (
-              <Link 
-              to={`/technician-list/${suggestion.id}`}
-                
-                key={index}
-                onClick={() => handleSuggestionClick(suggestion.name)}
-                className="px-4 py-2 hover:text-gray-500 cursor-pointer text-sm sm:text-base"
-              >
-                {suggestion.name}
-              </Link>
-            ))}
-          </div>
-        )}
+     <div className="relative w-full h-screen bg-gray-300 flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
+        <img
+          src={bg_img}
+          alt="Guidance"
+          className="w-full h-full object-cover opacity-80"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
-    </div>
+
+      <div className="relative z-10 text-center px-4 sm:px-8 max-w-4xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-inter mb-2 md:mb-4 text-white">
+          {t('every_service')}
+        </h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-inter mb-6 md:mb-8 p-1 sm:p-2 text-white">
+          {t('you_will_need')}
+        </h2>
+        <div className="relative w-full max-w-xs sm:max-w-md mx-auto">
+          <div className="flex items-center bg-white rounded-full border-2 border-blue-400 px-3 py-1 sm:px-4 sm:py-2 shadow-sm">
+            <input
+              type="text"
+              placeholder={t("search_services")}
+              value={searchText}
+              onFocus={() => {
+                setIsDropdownOpen(true);
+                sendSearchToBackend(searchText);
+              }}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                sendSearchToBackend(e.target.value);
+              }}
+              className="w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none text-sm sm:text-base"
+            />
+            <FiSearch
+              size={24}
+              className="text-gray-600 ml-2 transform hover:scale-110 transition-transform duration-200 cursor-pointer"
+              onClick={() => sendSearchToBackend(searchText)}
+            />
+          </div>
+          {isDropdownOpen && service.length > 0 && (
+            <div className="absolute top-full left-0 w-full bg-white border border-blue-500 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
+              {service.map((suggestion, index) => (
+                <Link 
+                  to={`/technician-list/${suggestion.id}`}
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion.name)}
+                  className="block px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base text-left"
+                >
+                  {suggestion.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      
     </div>
   
      {/* service part */}
@@ -241,6 +242,9 @@ const Landing = () => {
 
       <div className='lg:mx-52'>
           <FAQ />
+      </div>
+      <div className='lg:mx-44'>
+        <Contact />
       </div>
         
       

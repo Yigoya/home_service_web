@@ -17,6 +17,8 @@ import Services from './Customer/Pages/Services'
 import TotalTechnicianList from './Customer/Pages/TotalTechnicianList'
 import TechnicianLayout from './AuthLayout/TechnicianLayout'
 import TechProfile from './Technician/Pages/TechProfile'
+import Footer from './Shared/Components/Footer'
+
 
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
     <>
     <AuthProvider>
       <Router>
+        
         <Routes>
         {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
           <Route path="/" element={<TechProfile />} />
@@ -43,9 +46,11 @@ function App() {
             <Route path="/verify-email"  element={<VerificationPage />} />
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
+            
           </Route>
-}
+}       
         </Routes>
+        <Footer />
       </Router>
      </AuthProvider>
     </>
