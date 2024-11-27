@@ -56,13 +56,13 @@ export default function Profile() {
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* <CustomerNavBar /> */}
-      <div className="container mx-auto px-4 py-8 lg:flex lg:space-x-8">
+      <div className="container mx-auto px-4 py-8 lg:flex lg:space-x-4">
         {customer && (
-          <div className="lg:w-1/4 mb-8 lg:mb-0">
+          <div className="lg:w-1/4 lg:fixed lg:top-24 lg:left-0 h-full mb-8 lg:mb-0">
             <SideBar customerInfo={customer} />
           </div>
         )}
-        <div className="lg:w-3/4">
+        <div className="lg:w-3/4 lg:fixed lg:left-[340px]">
           <ProfileContent jobs={services} />
         </div>
       </div>
