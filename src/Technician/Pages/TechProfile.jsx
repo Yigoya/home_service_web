@@ -44,11 +44,11 @@ const TechnicianProfile = () => {
       <TechnicianNavBar />
       <div className="lg:flex">
         {customer && (
-          <div className="flg:ixed left-0 lg:w-1/4  p-4 overflow-hidden">
+          <div className="lg:fixed left-0 lg:w-1/4  p-4 overflow-hidden">
             <SideBar customerInfo={customer} />
           </div>
         )}
-        <div className="lg:fixed top-14 right-0 lg:w-3/4 p-4 overflow-hidden">
+        <div className="lg:fixed right-0 lg:w-3/4 p-4 overflow-hidden">
          Technician <ProfileContent jobs={services} />
         </div>
       </div>

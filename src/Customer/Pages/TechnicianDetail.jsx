@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { FaStar } from 'react-icons/fa';
-import { logo1 } from '../../Shared/Components/Images';
+import { FaStar, FaClock, FaMapMarkerAlt, FaBriefcase, FaUsers, FaCalendar } from 'react-icons/fa';
+import {  techDetailApi } from '../Api/Api';
 import { API_URL } from '../../Shared/api';
+import { logo1 } from '../../Shared/Components/Images';
 
 const TechnicianDetail = () => {
-  const [technician, setTechnician] = useState({});
+  const [technician, setTechnician] = useState(null);
   const { id } = useParams();
   const techBooking = `/book-technician/${id}/`;
 
   const fetchTechnician = async () => {
     try {
-      const response = await axios.get(`${API_URL}/technicians/${id}`);
+      const response = await axios.get(`${techDetailApi}/${id}`);
       setTechnician(response.data);
-      console.log(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
@@ -22,128 +23,157 @@ const TechnicianDetail = () => {
 
   useEffect(() => {
     fetchTechnician();
-  }, []);
+  }, [id]);
 
   const formatTime = (time) => {
     if (!time) return "closed";
     const [hour, minute] = time.split(':');
-    const period = hour >= 12 ? 'pm' : 'am';
-    const formattedHour = hour % 12 || 12; // Convert to 12-hour format
+    const period = parseInt(hour) >= 12 ? 'PM' : 'AM';
+    const formattedHour = parseInt(hour) % 12 || 12;
     return `${formattedHour}:${minute} ${period}`;
   };
 
   const daysOfWeek = [
-    { day: 'sun', start: technician.schedule?.sundayStart, end: technician.schedule?.sundayEnd },
-    { day: 'mon', start: technician.schedule?.mondayStart, end: technician.schedule?.mondayEnd },
-    { day: 'tues', start: technician.schedule?.tuesdayStart, end: technician.schedule?.tuesdayEnd },
-    { day: 'wed', start: technician.schedule?.wednesdayStart, end: technician.schedule?.wednesdayEnd },
-    { day: 'thurs', start: technician.schedule?.thursdayStart, end: technician.schedule?.thursdayEnd },
-    { day: 'fri', start: technician.schedule?.fridayStart, end: technician.schedule?.fridayEnd },
-    { day: 'sat', start: technician.schedule?.saturdayStart, end: technician.schedule?.saturdayEnd },
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
   ];
 
+  if (!technician) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
+
   return (
-    <div className="bg-gray-100 lg:px-28 min-h-screen">
-      <main className="container p-6">
-        <div className="bg-white rounded-2xl pb-5">
-          <div className="px-6 pt-4 rounded-lg lg:flex max-md:text-center items-center">
-            <div className="lg:mx-16 max-md:mx-10">
+    <div className="bg-gray-100 mt-14 lg:px-14 min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/3 lg:w-1/4">
               <img
-                src={`${API_URL}/uploads/${technician.profileImage}`}
-                alt="Technician"
-                className="w-36 h-36 rounded-full mb-4"
+                className="h-64 w-full object-cover md:h-full"
+                src={technician.profileImage ? `${API_URL}/uploads/${technician.profileImage}` :  "data:image/jpeg;base64,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"}
+                alt={technician.name || "Technician"}
               />
+              
             </div>
+            
+            <div className="p-6 md:w-2/3 lg:w-3/4">
+            <div className='lg:flex justify-between max-md:hidden'>
+              <div>
+              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                Professional Technician
+              </div>
+              <h1 className="mt-2 text-2xl md:text-xl lg:text-2xl leading-8 font-extrabold tracking-tight text-gray-900">
+                {technician.name || "N/A"}
+              </h1>
+              </div>
             <div>
-              <h2 className="lg:text-2xl font-semibold">{technician.name}</h2>
-              <div className="text-gray-600 mt-2">
-                <p>{technician.rating} Rating</p>
-                <p>{technician.services ? technician.services.length : 0} Services</p>
-                <p>{technician.bookings} Bookings</p>
+                <Link
+                  to={techBooking}
+                  className="inline-flex rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Book Now
+                </Link>
               </div>
             </div>
-            <Link
-              to={techBooking}
-              className="bg-blue-500 lg:ml-44 text-white rounded-full py-2 px-4 font-semibold hover:bg-blue-600 transition"
-            >
-              Select and Continue
-            </Link>
-          </div>
-          <div className="mt-8 max-md:mx-5 lg:mx-20">
-            <h3 className="text-xl font-bold">Instruction</h3>
-            <p className="text-gray-700">{technician.bio}</p>
-          </div>
+             
+              <div className="mt-2 flex flex-wrap items-center text-gray-500">
+                <div className="flex items-center mr-4 mb-2">
+                  <FaStar className="text-yellow-400 mr-1" />
+                  <span>{technician.rating ? technician.rating.toFixed(1) : 0.0} Rating</span>
+                </div>
+                <div className="flex items-center mr-4 mb-2">
+                  <FaBriefcase className="mr-1" />
+                  <span>{technician.services ? technician.services.length : 0} Services</span>
+                </div>
+                <div className="flex items-center mb-2">
+                  <FaUsers className="mr-1" />
+                  <span>{technician.bookings || 0} Bookings</span>
+                </div>
+                <div>
+                <Link
+                  to={techBooking}
+                  className="inline-flex lg:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Book Now
+                </Link>
+              </div>
+              </div>
+              <p className="mt-4 text-sm text-gray-500">{technician.bio || "No bio available."}</p>
+              <h3 className="font-bold leading-6  text-gray-900 mt-2">Services Offered</h3>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {technician.services && technician.services.length > 0 ? (
+                  technician.services.map((service) => (
+                    <span key={service.id} className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                      {service.name}
+                    </span>
+                  ))
+                ) : (
+                  <p className="text-gray-500">No services available.</p>
+                )}
+              </div>
 
-          <div className="mt-4 max-md:mx-5 lg:mx-20">
-            <h3 className="lg:text-xl max-md:text-lg font-bold">
-              Other Services given by {technician.name}
-            </h3>
-            <div className="flex space-x-2 mt-2">
-              {Array.isArray(technician.services) &&
-                technician.services.map((service) => (
-                  <div className="bg-gray-200 px-4 py-2 rounded-full" key={service.id || service.name}>
-                    {service.name}
-                  </div>
-                ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl">
-          <div className="mt-8 py-10 max-md:mx-3 lg:mx-20">
-            <h3 className="text-xl font-bold">Business Hours</h3>
-            <div className="bg-gray-100 lg:w-96 p-4 rounded-lg shadow mt-4">
-              <table className="w-full text-left text-gray-700">
-                <tbody>
-                  {daysOfWeek.map(({ day, start, end }) => (
-                    <tr key={day}>
-                      <td className="capitalize">{day}</td>
-                      <td className="text-right">
-                        {start && end ? `${formatTime(start)} - ${formatTime(end)}` : "closed"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <div className="">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="px-4 py-5 sm:p-6">
+              <h3 className="text-lg leading-6 font-medium text-gray-900">Business Hours</h3>
+              <div className="mt-4">
+                <dl className="space-y-2">
+                  {daysOfWeek.map((day) => {
+                    const lowercaseDay = day.toLowerCase();
+                    const schedule = technician.schedule && technician.schedule[lowercaseDay];
+                    return (
+                      <div key={day} className="flex justify-between">
+                        <dt className="text-sm font-medium text-gray-500">{day}</dt>
+                        <dd className="text-sm text-gray-900">
+                          {schedule ? `${formatTime(schedule.start)} - ${formatTime(schedule.end)}` : "Closed"}
+                        </dd>
+                      </div>
+                    );
+                  })}
+                </dl>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="lg:mx-20 max-md:mx-5 mt-8 pb-10">
-            <h3 className="text-xl font-bold">Ratings for {technician.name}</h3>
-            <div className="mt-4 space-y-4">
-              {Array.isArray(technician.review) && technician.review.length > 0 ? (
+        <div className="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="px-4 py-5 sm:p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Reviews</h3>
+            <div className="mt-6 space-y-6">
+              {technician.review && technician.review.length > 0 ? (
                 technician.review.map((review) => (
-                  <div key={review.id} className="bg-white p-4 rounded-lg shadow-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <img
-                          src={logo1}
-                          alt="Reviewer"
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <div>
-                          <p className="font-semibold">{review.customer.name}</p>
-                          <div className="flex text-yellow-500">
-                            {[...Array(review.rating)].map((_, i) => (
-                              <FaStar key={i} />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-500">May 24, 2024</p>
+                  <div key={review.id} className="flex flex-col sm:flex-row sm:space-x-4">
+                    <div className="flex-shrink-0 mb-4 sm:mb-0">
+                      <img className="h-12 w-12 rounded-full" src={`${API_URL}/uploads/default-avatar.png`} alt="" />
                     </div>
-                    <p className="text-gray-700">{review.review}</p>
+                    <div className="flex-grow">
+                      <h4 className="text-sm font-bold">{review.customer.name}</h4>
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <FaStar
+                            key={i}
+                            className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                            aria-hidden="true"
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1 text-sm text-gray-700">{review.review}</p>
+                    </div>
                   </div>
                 ))
               ) : (
-                <p className="text-gray-600">No reviews available.</p>
+                <p className="text-gray-500">No reviews available.</p>
               )}
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
 
 export default TechnicianDetail;
+

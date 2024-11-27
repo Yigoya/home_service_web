@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import '../../i18n';
-import ProfileCard from '../../Shared/UIComponents/ProfileCard';
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import axios from 'axios';
-import { FaSearch } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import { TechnicianListApi } from '../Api/Api';
 import { useParams } from 'react-router-dom';
-import { API_URL } from '../../Shared/api';
+import axios from 'axios';
+import { Search, MapPin, Star, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import ProfileCard from '../../Shared/UIComponents/ProfileCard'
+import '../../i18n'; // Import the i18n configuration
+import {API_URL} from '../../Shared/api'
+
 const TechnicianList = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [technicians, setTechnicians] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -20,9 +18,8 @@ const TechnicianList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const techniciansPerPage = 6;
 
-  const { id } = useParams()
+  const { id } = useParams();
 
-  // Define locations with keys and translations
   const locations = [
     { key: "", label: t("locations.select") },
     { key: "bole", label: t("locations.bole") },
@@ -32,31 +29,6 @@ const TechnicianList = () => {
     { key: "lideta", label: t("locations.lideta") }
   ];
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleLocationSelect = (locationKey) => {
-    setSelectedLocation(locationKey);
-    setIsDropdownOpen(false);
-    console.log("Selected Location:", locationKey); // Debugging selected location
-  };
-
-  const fetch = async () =>{
-    try {
-      const res = await axios.get(`${API_URL}/search/service/${id}`)
-      console.log(res.data)
-      setTechnicians(res.data)
-    } catch (e) {
-      console.log(e)
-    }
-
-  }
-
-  useEffect(() => {
-    fetch()
-  }, []);
-
   const priceRanges = {
     "Option A": [240, 350],
     "Option B": [140, 250],
@@ -64,150 +36,158 @@ const TechnicianList = () => {
     "Option D": [0, 90]
   };
 
+  useEffect(() => {
+    const fetchTechnicians = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`);
+        setTechnicians(res.data);
+        console.log(res.data)
+      } catch (e) {
+        console.error("Error fetching technicians:", e);
+      }
+    };
+
+    fetchTechnicians();
+  }, [id, currentPage]);
+
   const filteredTechnicians = technicians.filter((item) => {
-    const matchesSearchTerm = searchTerm === "" || item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearchTerm = searchTerm === "" || (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesRating = selectedRating === 0 || Math.round(item.rating) === selectedRating;
-    const matchesLocation = selectedLocation === "" || item.location.toLowerCase() === selectedLocation.toLowerCase();
+    const matchesLocation = selectedLocation === "" || (item.subcity && item.subcity.toLowerCase() === selectedLocation.toLowerCase());
     const matchesPrice = selectedOption
       ? item.price >= priceRanges[selectedOption][0] && item.price <= priceRanges[selectedOption][1]
       : true;
 
-    console.log("Item Location:", item.location);
-    console.log("Selected Location:", selectedLocation);
-    console.log("Matches Location:", matchesLocation);
-
     return matchesSearchTerm && matchesRating && matchesLocation && matchesPrice;
   });
 
-  console.log("Filtered technicians:", filteredTechnicians); // Debugging filtered technicians
-
   const totalPages = Math.ceil(filteredTechnicians.length / techniciansPerPage);
   const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
- console.log(paginatedTechnicians, "tec")
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-
-
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className='text-center text-2xl font-bold mt-10 mb-5'>{t('choose_your_best')}</h1>
-      <div className='flex lg:mx-10 flex-col md:flex-row md:space-x-10'>
-        <div className="w-full md:w-1/4">
-          {/* Filters */}
-          <p className='font-bold lg:mt-10'>{t('filter_by')}</p>
-          <div className='bg-gray-500 mt-2 w-full mb-5 h-[1.5px]'></div>
-          <p className='font-bold mb-2'>{t('rating')}</p>
-          <div className="flex space-x-2 mb-3">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                onClick={() => setSelectedRating(star)}
-                className={`text-xl ${selectedRating >= star ? "text-yellow-500" : "text-gray-400"}`}
-              >
-                <i className="fas fa-star"></i>
-              </button>
-            ))}
-          </div>
-          <button onClick={() => setSelectedRating(0)} className="text-lg text-blue-500 mb-5 underline">Clear</button>
-          <div className='bg-gray-500 mt-2 w-full mb-5 h-[1.5px]'></div>
-          <p className='font-bold mb-5 text-lg'>{t('etb')}</p>
-          <form>
-            <div className="space-y-4">
-              {Object.entries(priceRanges).map(([option, range], index) => (
-                <label key={index} className="flex technicians-center space-x-3">
-                  <input
-                    type="radio"
-                    name="price"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => setSelectedOption(option)}
-                    className="form-radio h-5 w-5 text-blue-600"
-                  />
-                  <span className="text-gray-800">{`${range[0]} - ${range[1]} ${t('etb')}`}</span>
-                </label>
-              ))}
-            </div>
-            <button onClick={() => setSelectedOption(null)} className="text-lg mt-2 text-blue-500 underline">Clear</button>
-          </form>
-        </div>
-
-        <div className='w-full'>
-          <div className="flex flex-col md:flex-row md:space-x-2 p-4">
-            {/* Search Input */}
-            <div className="flex technicians-center border border-gray-300 rounded-md px-4 py-2 w-full mb-4 md:mb-0">
-              <input
-                type="text"
-                placeholder={t('search')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="focus:outline-none w-full"
-              />
-              <FaSearch className="text-gray-500 ml-2" />
-            </div>
-
-            {/* Location Dropdown */}
-            <div className="relative w-full mb-4 md:mb-0">
-              <div
-                onClick={toggleDropdown}
-                className="flex technicians-center border border-gray-300 rounded-md px-4 py-2 cursor-pointer w-full"
-              >
-                <span className="text-gray-700">{locations.find(loc => loc.key === selectedLocation)?.label}</span>
-                <IoIosArrowDown className="text-gray-500 ml-2" />
+    <div className="container mx-auto  px-4 py-8">
+      <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="lg:w-[250px] ml-3 lg:fixed ">
+          <div className="bg-white rounded-lg  lg:h-screen shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4">{t('filter_by')}</h2>
+            <div className="mb-6">
+              <h3 className="font-semibold mb-2">{t('rating')}</h3>
+              <div className="flex space-x-2 mb-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => setSelectedRating(star)}
+                    className={`text-2xl ${selectedRating >= star ? "text-yellow-400" : "text-gray-300"}`}
+                  >
+                    <Star className="w-6 h-6 fill-current" />
+                  </button>
+                ))}
               </div>
+              <button onClick={() => setSelectedRating(0)} className="text-sm text-blue-600 hover:underline">
+                Clear
+              </button>
+            </div>
+            <div className="mb-6">
+              <h3 className="font-semibold mb-2">{t('etb')}</h3>
+              <div className="space-y-2">
+                {Object.entries(priceRanges).map(([option, range], index) => (
+                  <label key={index} className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="price"
+                      value={option}
+                      checked={selectedOption === option}
+                      onChange={() => setSelectedOption(option)}
+                      className="form-radio h-4 w-4 text-blue-600"
+                    />
+                    <span className="text-gray-700">{`${range[0]} - ${range[1]} ${t('etb')}`}</span>
+                  </label>
+                ))}
+              </div>
+              <button onClick={() => setSelectedOption(null)} className="text-sm text-blue-600 hover:underline mt-2">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="lg:ml-[300px] lg:w-3/4">
+          <div className="flex flex-col md:flex-row gap-4 mb-6">
+            <div className="flex-grow">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder={t('search')}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </div>
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full md:w-48 px-4 py-2 text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <span className="block truncate">
+                  {locations.find(loc => loc.key === selectedLocation)?.label || t("locations.select")}
+                </span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <ChevronDown className="w-5 h-5 text-gray-400" />
+                </span>
+              </button>
               {isDropdownOpen && (
-                <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
                   {locations.map((location) => (
-                    <div
+                    <button
                       key={location.key}
-                      onClick={() => handleLocationSelect(location.key)}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        setSelectedLocation(location.key);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                     >
                       {location.label}
-                    </div>
+                    </button>
                   ))}
                 </div>
               )}
             </div>
-            {/* Around Me Button */}
-            <button className="bg-blue-600 text-white rounded-md px-6 py-2 w-full">
+            <button className="bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-700 transition-colors">
               Around me
             </button>
           </div>
-
-          {/* Display paginated technicians */}
-          <div className="grid grid-cols-1 lg:mr-10 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedTechnicians.length > 0 ? (
               paginatedTechnicians.map((item) => (
-                <div key={item.id} className="p-4">
-                  <ProfileCard info={item} Id={id} />
-                </div>
+                <ProfileCard key={item.id} info={item} Id={id} />
               ))
             ) : (
               <p className="text-gray-500 text-center col-span-3">No technicians match your filters.</p>
             )}
           </div>
-
-          {/* Pagination Controls */}
-          <div className="flex lg:mx-72 border-black  rounded-md py-1 broder border-2 justify-center mt-6 space-x-2">
-            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="text-blue-500">
-              Previous
-            </button>
-            {Array.from({ length: totalPages }, (_, index) => (
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center mt-8">
               <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                className={`px-3 py-1 ${currentPage === index + 1 ? "bg-blue-500 text-white" : "text-gray-700"}`}
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="p-2 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 disabled:opacity-50"
               >
-                {index + 1}
+                <ChevronLeft className="w-6 h-6" />
               </button>
-            ))}
-            <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="text-blue-500">
-              Next
-            </button>
-          </div>
+              <span className="mx-4 text-gray-600">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="p-2 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 disabled:opacity-50"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -215,3 +195,4 @@ const TechnicianList = () => {
 };
 
 export default TechnicianList;
+

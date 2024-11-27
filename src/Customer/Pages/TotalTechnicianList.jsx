@@ -59,6 +59,7 @@ export default function TotalTechnicianList() {
   useEffect(() => {
     axios.get(TechnicianListApi).then((response) => {
       setItems(response.data);
+      console.log(response.data);
     });
   }, []);
 
