@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import { tech } from '../../Shared/Components/Images';
+import  logo1  from '../../assets/home2.png';
+import { technicianSignUpApi } from '../Api/Api';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../Shared/api';
 
 function Registration() {
-
+  const [error, setError] = useState(null);
   const [files, setFiles] = useState({
-    cv: null,
-    idCard: null,
+    documents: null,
+    idCardImage: null,
     profileImage: null,
   });
+  const [services, setService] = useState([]);
 
-  const services = [
-    { id: 1, name: "Air Cooler Repair" },
-    { id: 2, name: "AC Repair" },
-    { id: 3, name: "Heating Repair" },
-  ];
+
 
   const subCities = [
     { id: 1, name: "Bole" },
@@ -27,6 +28,8 @@ function Registration() {
     { id: 2, name: "Wereda 2" },
     { id: 3, name: "Wereda 3" },
   ];
+
+  const navigate = useNavigate();
 
   // srevice part
   const [selectedServices, setSelectedServices] = useState([]);
@@ -66,7 +69,7 @@ function Registration() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     bio: '',
     password: '',
     confirm_password: '',
@@ -91,10 +94,10 @@ function Registration() {
       newErrors.email = "Please enter a valid email address.";
     }
   
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required.";
-    } else if (!/^\d{10}$/.test(formData.phone)) {
-      newErrors.phone = "Please enter a 10-digit phone number.";
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = "PhoneNumber number is required.";
+    } else if (!/^\d{10}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Please enter a 10-digit phoneNumber number.";
     }
   
     if (!formData.bio.trim()) {
@@ -108,30 +111,61 @@ function Registration() {
     }
   
     setErrors(newErrors);
+    console.log(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     if(!validate()){
       return;
     }
-    const formData = new FormData(e.target);
-    formData.append('services', JSON.stringify(selectedServices.map(service => service.id)));
+    const formDatas = new FormData();
+    console.log(formData);
+    console.log(files);
+    Object.keys(formData).forEach(key => {
+      formDatas.append(key, formData[key]);
+    });
+    selectedServices.forEach(service => {
+      formDatas.append('serviceIds', service.id);
+    });
     Object.keys(files).forEach(key => {
-      if (files[key]) formData.append(key, files[key]);
+      if (files[key]) formDatas.append(key, files[key]);
     });
 
-    // Fetch to the backend
-    // fetch('/api/register', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error(error));
+    try {
+      const response = await axios.post(technicianSignUpApi, formDatas, {
+        headers: {
+          'Content-Type': 'multipart/form-data' 
+        }
+      });
+      
+      console.log('Response:', response.data);
+      navigate('/tech-verification-waiting');
+    } catch (err) {
+      setError(err.response.data.details.join('\n'));
+
+      err.response != undefined ? console.error('Error:', err.response.data) : console.error('Error:', err);
+    }
+
   };
+
+  const fetch = async ()=>{
+    try {
+      const res =await axios.get(`${API_URL}/services`);
+      console.log(res.data)
+      setService(res.data)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetch()
+  }
+  , []);
 
   return (
     <div className='w-full min-h-screen'>
@@ -158,12 +192,12 @@ function Registration() {
                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
 
-               {/*  phone part */}
+               {/*  phoneNumber part */}
 
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700">Phone Number <span className='text-red-500 text-sm'>*</span></label>
-                <input type="tel" name="phone" placeholder="Enter your phone number" value={formData.phone} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
-                {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}              
+                <input type="tel" name="phoneNumber" placeholder="Enter your phone number" value={formData.phoneNumber} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+                {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}              
               </div>
             </div>
                  
@@ -199,7 +233,7 @@ function Registration() {
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700">Sub City <span className='text-red-500 text-sm'>*</span></label>
-                <select name="sub_city" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
+                <select name="subcity" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
                   <option value="">Select sub city</option>
                   {subCities.map(city => (
                     <option key={city.id} value={city.id}>{city.name}</option>
@@ -220,10 +254,10 @@ function Registration() {
             {/* File part */}
 
             <div className="flex flex-col gap-4">
-                  {['cv', 'idCard', 'profileImage'].map((type) => (
+                  {['documents', 'idCardImage', 'profileImage'].map((type) => (
                     <div key={type} className="flex flex-col items-start space-y-2">
                       <label className="block text-sm font-medium text-gray-700 capitalize">
-                        {type === 'cv' ? 'Your CV' : type === 'idCard' ? 'ID Card' : 'Profile Image'}
+                        {type === 'documents' ? 'Your CV and documents' : type === 'idCardImage' ? 'ID Card' : 'Profile Image'}
                       </label>
                       <input
                         type="file"
@@ -268,15 +302,16 @@ function Registration() {
             <button type="submit" className="w-full bg-blue-500 text-white py-2 mt-6 rounded-md hover:bg-blue-600 focus:outline-none">
               Submit
             </button>
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           </form>
         </div>
 
         {/* Right side */}
         <div className="hidden md:flex md:w-1/2  bg-gray-300 rounded-lg relative items-center justify-center group">
           <img
-            src={tech}
+            src={logo1}
             alt="Guidance"
-            className="w-full h-full object-cover opacity-100 transition-opacity duration-300 group-hover:opacity-50"
+            className="w-full h-full object-cover opacity-20 transition-opacity duration-300 group-hover:opacity-50"
           />
           <div className="absolute text-center px-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <h2 className="text-3xl font-semibold mb-2">Getting Started</h2>
