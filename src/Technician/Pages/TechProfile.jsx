@@ -90,7 +90,7 @@ const TechnicianProfile = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsSidebarOpen(true)}
-          className="fixed top-[105px] left-6 z-40 p-3 rounded-xl lg:hidden  transition-colors"
+          className="fixed top-[97px] left-6 z-40 p-3 rounded-xl lg:hidden  transition-colors"
           aria-label="Open menu"
         >
           <Menu className="h-6 w-6 text-gray-700" />

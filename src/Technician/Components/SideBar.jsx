@@ -43,7 +43,7 @@ const SideBar = ({ customerInfo, onClose }) => {
   ];
 
   return (
-    <aside className="flex lg:ml-24 flex-col mt-20 rounded-xl h- bg-white border-r border-gray-200 w-64 fixed left-0 top-0">
+    <aside className="flex lg:ml-24 flex-col max-md:h-screen lg:mt-20 rounded-xl h- bg-white border-r border-gray-200 w-64 fixed left-0 top-0">
       {/* Profile Section */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex flex-col items-center">
