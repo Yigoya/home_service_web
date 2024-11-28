@@ -5,8 +5,10 @@ import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../Shared/api';
+import { useTranslation } from 'react-i18next';
 
 function Registration() {
+  const { t } = useTranslation();
   const [error, setError] = useState(null);
   const [files, setFiles] = useState({
     documents: null,
@@ -172,14 +174,14 @@ function Registration() {
       <div className="flex flex-col md:flex-row mx-4 md:mx-44 my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
         <div className="md:w-1/2 lg:p-8 py-8 bg-white rounded-xl">
-          <h1 className="text-2xl font-bold mb-6">Technician Registration</h1>
+          <h1 className="text-2xl font-bold mb-6">{t('tech_regi')}</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
 
             {/*  name part */}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name<span className='text-red-500 text-sm'>*</span></label>
-              <input type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+              <label className="block text-sm font-medium text-gray-700">{t('name')}<span className='text-red-500 text-sm'>*</span></label>
+              <input type="text" name="name" placeholder={t('enter_name')} value={formData.name} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}         
             </div>
 
@@ -187,24 +189,24 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Email <span className='text-red-500 text-sm'>*</span></label>
-                <input type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+                <label className="block text-sm font-medium text-gray-700">{t('email')} <span className='text-red-500 text-sm'>*</span></label>
+                <input type="email" name="email" placeholder={t('enter_email')} value={formData.email} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
 
                {/*  phoneNumber part */}
 
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Phone Number <span className='text-red-500 text-sm'>*</span></label>
-                <input type="tel" name="phoneNumber" placeholder="Enter your phone number" value={formData.phoneNumber} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+                <label className="block text-sm font-medium text-gray-700">{t('phone')} <span className='text-red-500 text-sm'>*</span></label>
+                <input type="tel" name="phoneNumber" placeholder={t('enter_phone')} value={formData.phoneNumber} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}              
               </div>
             </div>
                  
                   {/*  bio part */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Bio <span className='text-red-500 text-sm'>*</span></label>
-              <textarea name="bio" placeholder="Tell us about yourself" value={formData.bio} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none h-20" required></textarea>
+              <label className="block text-sm font-medium text-gray-700">{t('bio')} <span className='text-red-500 text-sm'>*</span></label>
+              <textarea name="bio" placeholder={t('bio')} value={formData.bio} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none h-20" required></textarea>
               {errors.bio && <p className="text-red-500 text-sm">{errors.bio}</p>}
             </div>
 
@@ -232,18 +234,18 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Sub City <span className='text-red-500 text-sm'>*</span></label>
+                <label className="block text-sm font-medium text-gray-700">{t('subcity')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="subcity" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
-                  <option value="">Select sub city</option>
+                  <option value="">{t('select_subcity')}</option>
                   {subCities.map(city => (
                     <option key={city.id} value={city.id}>{city.name}</option>
                   ))}
                 </select>
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Wereda <span className='text-red-500 text-sm'>*</span></label>
+                <label className="block text-sm font-medium text-gray-700">{t('woreda')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="wereda" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
-                  <option value="">Select wereda</option>
+                  <option value="">{t('select_woreda')}</option>
                   {weredas.map(wereda => (
                     <option key={wereda.id} value={wereda.id}>{wereda.name}</option>
                   ))}
@@ -257,7 +259,7 @@ function Registration() {
                   {['documents', 'idCardImage', 'profileImage'].map((type) => (
                     <div key={type} className="flex flex-col items-start space-y-2">
                       <label className="block text-sm font-medium text-gray-700 capitalize">
-                        {type === 'documents' ? 'Your CV and documents' : type === 'idCardImage' ? 'ID Card' : 'Profile Image'}
+                        {type === 'documents' ? t('cv') : type === 'idCardImage' ? t('id_card') : t('profile')}
                       </label>
                       <input
                         type="file"
@@ -270,7 +272,7 @@ function Registration() {
                         className="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-100 cursor-pointer"
                       >
                         <FaUpload className="mr-2 text-gray-600" />
-                        <span>Upload File</span>
+                        <span>{t('upload')}</span>
                       </label>
                       {files[type] && (
                         <span className="text-gray-600 text-sm">
@@ -285,22 +287,22 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Password <span className='text-red-500 text-sm'>*</span></label>
-                <input type="password" name="password" placeholder="Enter your password" value={formData.password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+                <label className="block text-sm font-medium text-gray-700">{t('password')} <span className='text-red-500 text-sm'>*</span></label>
+                <input type="password" name="password" placeholder={t('enter_password')} value={formData.password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               </div>
 
                {/*  confirm part */}
 
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">Confirm Password <span className='text-red-500 text-sm'>*</span></label>
-                <input type="password" name="confirm_password" placeholder="Confirm your password" value={formData.confirm_password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
+                <label className="block text-sm font-medium text-gray-700">{t('confirm_password')} <span className='text-red-500 text-sm'>*</span></label>
+                <input type="password" name="confirm_password" placeholder={t('confirm_password')} value={formData.confirm_password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.confirm_password && <p className="text-red-500 text-sm">{errors.confirm_password}</p>}
                 </div>
             </div>
 
             {/* Submit Button part */}
             <button type="submit" className="w-full bg-blue-500 text-white py-2 mt-6 rounded-md hover:bg-blue-600 focus:outline-none">
-              Submit
+            {t('regis')}
             </button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           </form>
