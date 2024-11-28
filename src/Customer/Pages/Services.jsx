@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as FaIcons from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
+import TechnicianCarousel from "../../Shared/UIComponents/TechnicianCarousel";
+import ContactUs from "./ContactUs";
+
 
 export default function Services() {
+  const { t } = useTranslation();
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -123,6 +128,17 @@ export default function Services() {
         )}
       </div>
     </div>
+     {/* Tecnichian part */}
+     <div>
+      <div className="container mx-auto py-8">
+          <h2 className="text-3xl font-bold lg:ml-52 ml-6 mb-8">Our Top Technicians</h2>
+        </div >
+      <TechnicianCarousel />
+      </div>
+
+      <div className=''>
+        <ContactUs />
+      </div>
     
     </div>
   );
