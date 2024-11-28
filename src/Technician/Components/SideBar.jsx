@@ -9,8 +9,9 @@ import {
 } from 'lucide-react';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { AuthContext } from '../../Shared/Context/AuthContext';
+import { logo1 } from '../../Shared/Components/Images';
 
-const SideBar = ({ customerInfo }) => {
+const SideBar = ({ customerInfo, onClose }) => {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { setFilterStatus } = useContext(FilterContext);
@@ -27,6 +28,7 @@ const SideBar = ({ customerInfo }) => {
   const handleFilter = (status) => {
     setFilterStatus(status);
     setActiveFilter(status);
+    onclose?.()
   };
 
   const handleResetFilter = () => {
@@ -41,13 +43,13 @@ const SideBar = ({ customerInfo }) => {
   ];
 
   return (
-    <aside className="flex flex-col h-screen bg-white border-r border-gray-200 w-64 fixed left-0 top-0">
+    <aside className="flex lg:ml-24 flex-col lg:mt-20 rounded-xl h- bg-white border-r border-gray-200 w-64 fixed left-0 top-0">
       {/* Profile Section */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex flex-col items-center">
           <div className="relative">
             <img
-              src={customerInfo.logo1}
+              src={logo1}
               alt="User Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
             />
