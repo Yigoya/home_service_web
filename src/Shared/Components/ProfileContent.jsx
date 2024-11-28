@@ -6,6 +6,9 @@ import axios from 'axios';
 export default function ProfileContent({ jobs }) {
   const technician = JSON.parse(localStorage.getItem('technician'));
   const customer = JSON.parse(localStorage.getItem('customer'));
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+  console.log(technician)
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewRating, setReviewRating] = useState('');
   const [reviewMessage, setReviewMessage] = useState('');
@@ -82,11 +85,13 @@ export default function ProfileContent({ jobs }) {
   };
 
   return (
-    <div className="bg-white lg:mr-16 max-md:mt-2  lg:h-screen  rounded-lg shadow-lg p-6">
-      <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
-        {filteredJobs.length === 0 ? 'No bookings yet' : 'Track your activity on this platform'}
+    <div className= {`bg-white h-screen lg:mr-16   lg:h-screen  rounded-lg shadow-lg p-6 ${customer ? 'mt-16' : ''}`}>
+     
+     <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
+        {/* {filteredJobs.length === 0 ? 'No bookings yet' : 'Track your activity on this platform'}
+       */}
+       wellcome  {user.name}👋
       </h1>
-
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredJobs.map((job) => (
           <div key={job.id} className="bg-gray-100  px-6 py-4 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
