@@ -97,14 +97,15 @@ export default function ProfileContent({ jobs }) {
           <div key={job.id} className="bg-gray-100  px-6 py-4 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
             {/* <div className="transition-transform transform hover:-translate-y-1"> */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center mb-4 md:mb-0">
+              <div className="lg:flex items-center mb-4 md:mb-0">
+                <div className='flex'>
                 <img
                   src={customer ? `${API_URL}/uploads/${job.technicianProfleImage}`: `${API_URL}/uploads/${job.ProfleImage}`}
                   alt={customer ? `${job.technicianName}'s profile` : `${job.customerName}'s profile`}
-                  className="w-16 h-16 rounded-full object-cover mr-4"
+                  className="w-16 h-16 rounded-full max-md:mr-8 object-cover mr-4"
                 />
-                <div>
-                <h2 className="text-xl font-semibold text-gray-800">
+                  <div>
+                  <h2 className="text-xl font-semibold text-gray-800">
                     {customer ? job.technicianName : job.customerName}
                   </h2>
                   <p className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
@@ -114,26 +115,31 @@ export default function ProfileContent({ jobs }) {
                   }`}>
                     {job.status}
                   </p>
-                  <span className="mb-2  lg:ml-60 border border-gray-300 px-4 py-1 rounded-md text-sm text-gray-600">
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <span className=" lg:ml-60 lg:mr-10 border border-gray-300 px-4 py-1 rounded-md text-sm text-gray-600">
                   <i className="far fa-calendar mr-1"></i> {new Date(job.scheduledDate).toISOString().split('T')[0]}
                 </span>
-                </div>
-              </div>
-              <div className="flex flex-col items-end">
+                <div className="">
                 <span className="bg-gray-200 px-3 py-1 rounded-full text-sm text-gray-700">
                   {job.serviceName}
                 </span>
               </div>
+                </div>
+              </div>
             </div>
-            <div className='flex justify-between'>
-            <div className="mt-4">
+            <div className='lg:flex justify-between'>
+            <div className="mt-4 lg:mr-20">
               <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
-              <p className="font-bold mt-2 text-gray-800">Job Description</p>
-              <p className="text-gray-600">{job.description}</p>
+              <div className='bg-gray-200 p-4 rounded-xl'>
+                <p className="font-bold mt-2 text-gray-800">Job Description</p>
+                <p className="text-gray-600">{job.description}</p>
+              </div>
             </div>
             {job.status === 'COMPLETED' && job.review && (
-              <div className="mt-4  p-4 rounded-lg">
-                <div className="flex items-center mb-2">
+              <div className="mt-4 bg-gray-200 p-2 lg:p-4 rounded-lg">
+                <div className="flex  items-center mb-2">
                   <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
