@@ -82,7 +82,7 @@ export default function ProfileContent({ jobs }) {
   };
 
   return (
-    <div className="bg-white lg:mr-20 lg:mt-16 lg:h-screen  rounded-lg shadow-lg p-6">
+    <div className="bg-white lg:mr-16  lg:h-screen  rounded-lg shadow-lg p-6">
       <h1 className="text-2xl font-semibold mb-6 text-gray-800">
         {filteredJobs.length === 0 ? 'No bookings yet' : 'Track your activity on this platform'}
       </h1>
