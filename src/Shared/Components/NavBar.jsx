@@ -6,6 +6,7 @@ import { FaGlobe } from 'react-icons/fa';
 
 const NavBar = () => {
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';
@@ -35,15 +36,15 @@ const NavBar = () => {
 
         {/* Menu Links (Hidden on Mobile) */}
         <div className="hidden md:flex space-x-5">
-          <Link to="/services">Services</Link>
-          <Link to="/all-technician-list">Technicians</Link>
-          <Link to="/contact-us">Contact</Link>
+          <Link to="/services">{t('serv')}</Link>
+          <Link to="/all-technician-list">{t('technicians')}</Link>
+          <Link to="/contact-us">{t('contact')}</Link>
           <Link to="#">FAQ</Link>
         </div>
         <div className="hidden md:flex space-x-7">
           <FaGlobe className='text-2xl mt-1' onClick={toggleLanguage} style={{ cursor: 'pointer' }} />
-          <Link className='bg-[#006BFF] hover:bg-[#9dc6ff] px-7 py-1 rounded-lg' to="/login">Login</Link>
-          <Link className='bg-[#FFF100] px-5 py-1 hover:bg-[#f7f06e] rounded-lg text-black' to="/technician-registration">Become a Technician</Link>
+          <Link className='bg-[#006BFF] hover:bg-[#9dc6ff] px-7 py-1 rounded-lg' to="/login">{t('login')}</Link>
+          <Link className='bg-[#FFF100] px-5 py-1 hover:bg-[#f7f06e] rounded-lg text-black' to="/technician-registration">{t('become_tech')}</Link>
         </div>
       </div>
 

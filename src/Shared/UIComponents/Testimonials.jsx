@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { HomeApi } from "../api";
+import { useTranslation } from 'react-i18next';
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const Testimonials = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-8">What the Customer Says</h2>
+      <h2 className="text-3xl font-bold mb-8">{t('testmony')}</h2>
       <div className="lg:grid lg:grid-cols-2 lg:gap-4">
         {testimonials.map((testimonial) => (
           <div

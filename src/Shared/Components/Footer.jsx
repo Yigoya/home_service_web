@@ -1,27 +1,29 @@
 import React from 'react';
 import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6';
 import { SiApple, SiGoogleplay } from 'react-icons/si';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-black py-8 text-white">
       <div className="container mx-auto px-4">
         <div className=" flex justify-evenly ">
           
           <div>
-            <h3 className="text-sm font-semibold uppercase mb-4">Information</h3>
+            <h3 className="text-sm font-semibold uppercase mb-4">{t('info')}</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Terms of Service</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
+              <li><a href="/contact-us" className="text-gray-400 hover:text-white">{t('contact')}</a></li>
+              <li><a href="/faq" className="text-gray-400 hover:text-white">FAQ</a></li>
+              <li><a href="/services" className="text-gray-400 hover:text-white">{t('our_service')}</a></li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase mb-4">Contact</h3>
+            <h3 className="text-sm font-semibold uppercase mb-4">{t('contact')}</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">Email: info@example.com</li>
-              <li className="text-gray-400">Phone: +1 234 567 8900</li>
-              <li className="text-gray-400">Address: Addis Ababa, Ethiopia</li>
+              <li className="text-gray-400">{t('email')}: info@example.com</li>
+              <li className="text-gray-400">{t('phone')}: +1 234 567 8900</li>
+              <li className="text-gray-400">{t('address')}: Addis Ababa, Ethiopia</li>
             </ul>
           </div>
          

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FiUser, FiMail, FiPhone, FiMessageSquare } from 'react-icons/fi';
 import contact from '../../assets/Contact-us.svg';
+import { useTranslation } from 'react-i18next';
 
 function ContactUs() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -86,11 +88,11 @@ function ContactUs() {
         <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left part - Form */}
           <div className="md:w-1/2 p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('contact')}</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Name<span className="text-red-500">*</span>
+                {t('name')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -103,7 +105,7 @@ function ContactUs() {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={`block w-full pl-10 pr-3 py-2 border ${errors.name ? 'border-red-300' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                    placeholder="Enter your name"
+                    placeholder= {t('enter_name')}
                   />
                 </div>
                 {errors.name && <p className="mt-2 text-sm text-red-600">{errors.name}</p>}
@@ -111,7 +113,7 @@ function ContactUs() {
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email<span className="text-red-500">*</span>
+                {t('email')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -124,7 +126,7 @@ function ContactUs() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`block w-full pl-10 pr-3 py-2 border ${errors.email ? 'border-red-300' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                    placeholder="Enter your email"
+                    placeholder= {t('enter_email')}
                   />
                 </div>
                 {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
@@ -132,7 +134,7 @@ function ContactUs() {
 
               <div>
                 <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                  Phone Number<span className="text-red-500">*</span>
+                {t('phone')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -145,7 +147,7 @@ function ContactUs() {
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     className={`block w-full pl-10 pr-3 py-2 border ${errors.phoneNumber ? 'border-red-300' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                    placeholder="Enter your phone number"
+                    placeholder= {t('enter_phone')}
                   />
                 </div>
                 {errors.phoneNumber && <p className="mt-2 text-sm text-red-600">{errors.phoneNumber}</p>}
@@ -153,7 +155,7 @@ function ContactUs() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                  Message<span className="text-red-500">*</span>
+                {t('message')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
@@ -166,7 +168,7 @@ function ContactUs() {
                     value={formData.message}
                     onChange={handleInputChange}
                     className={`block w-full pl-10 pr-3 py-2 border ${errors.message ? 'border-red-300' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                    placeholder="Your message"
+                    placeholder={t('message')}
                   ></textarea>
                 </div>
                 {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
@@ -178,7 +180,7 @@ function ContactUs() {
                   disabled={isSubmitting}
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                  {isSubmitting ? 'Submitting...' : 'Submit'} 
                 </button>
               </div>
             </form>
@@ -191,7 +193,7 @@ function ContactUs() {
 
             {submitSuccess && (
               <div className="mt-4 text-sm text-green-600">
-                Your message has been sent successfully!
+                {t('sent')}
               </div>
             )}
           </div>
