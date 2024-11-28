@@ -90,7 +90,163 @@ const resources = {
             "PestControl": "Cockroach, Ant & Pest Control"
           }
         }
-      }
+      },
+      "service": [
+        {
+          "id": "1",
+          "name": "Home Appliances Repair",
+          "icon": "FaTools",
+          "items": [
+            {
+              "name": "Air Cooler Repair",
+              "description": "Repair and maintenance for all types of air coolers."
+            },
+            {
+              "name": "AC Repair & Service",
+              "description": "Comprehensive AC repair and servicing by experts."
+            },
+            {
+              "name": "Washing Machine Repair",
+              "description": "Fix and maintain washing machines of all brands."
+            },
+            {
+              "name": "Refrigerator Repair",
+              "description": "Ensure your refrigerator is running efficiently."
+            },
+            {
+              "name": "Water Purifier Repair & Service",
+              "description": "Professional water purifier repair and maintenance."
+            },
+            {
+              "name": "Gas Stove Repair & Service",
+              "description": "Reliable gas stove repair and servicing solutions."
+            },
+            {
+              "name": "Television Repair",
+              "description": "Expert TV repair for LED, LCD, and more."
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Home Maintenance",
+          "icon": "FaHome",
+          "items": [
+            {
+              "name": "Electrician",
+              "description": "Professional electrical services for homes and offices."
+            },
+            {
+              "name": "Fan Installation",
+              "description": "Fast and efficient fan installation services."
+            },
+            {
+              "name": "Plumber",
+              "description": "Reliable plumbing solutions for all types of issues."
+            },
+            {
+              "name": "Furniture Assembly",
+              "description": "Quick and precise furniture assembly services."
+            },
+            {
+              "name": "Wall Panels Installation",
+              "description": "High-quality wall panel installation for homes."
+            },
+            {
+              "name": "Mounting",
+              "description": "Mount TVs, shelves, and more securely and safely."
+            },
+            {
+              "name": "Painting",
+              "description": "Professional painting services for vibrant interiors."
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Cleaning Services",
+          "icon": "FaBroom",
+          "items": [
+            {
+              "name": "Full Home Cleaning",
+              "description": "Comprehensive cleaning solutions for your entire home."
+            },
+            {
+              "name": "Part-time Cleaners",
+              "description": "Hire part-time cleaners for flexible cleaning needs."
+            },
+            {
+              "name": "Sofa & Carpet Cleaning",
+              "description": "Deep cleaning for your sofas and carpets."
+            },
+            {
+              "name": "Water Tank Cleaning",
+              "description": "Thorough cleaning for water storage tanks."
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "name": "Real Estate Services",
+          "icon": "FaBuilding",
+          "items": [
+            {
+              "name": "Home On Rent",
+              "description": "Find rental properties suited to your needs."
+            },
+            {
+              "name": "House Sell Service",
+              "description": "Sell your house with professional assistance."
+            },
+            {
+              "name": "Broker Service",
+              "description": "Get expert help with buying or selling properties."
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "name": "Personal Services",
+          "icon": "FaUserFriends",
+          "items": [
+            {
+              "name": "Home Care",
+              "description": "Assistance with home care needs for your family."
+            },
+            {
+              "name": "Home Servant",
+              "description": "Hire reliable and experienced home servants."
+            },
+            {
+              "name": "Security Guard Service",
+              "description": "Professional security guard services for your safety."
+            },
+            {
+              "name": "Hotel Servant Service",
+              "description": "Well-trained hotel servant services for your needs."
+            }
+          ]
+        },
+        {
+          "id": "6",
+          "name": "Miscellaneous",
+          "icon": "FaWrench",
+          "items": [
+            {
+              "name": "Ambulance Service",
+              "description": "Emergency ambulance services available 24/7."
+            },
+            {
+              "name": "Talk To Expert",
+              "description": "Consult with experts for your specific needs."
+            },
+            {
+              "name": "Cockroach, Ant & Pest Control",
+              "description": "Effective pest control solutions for your home."
+            }
+          ]
+        }
+      ]
     }
   },
   am: {
@@ -187,10 +343,106 @@ const resources = {
         }
       
       }
-    }
+    },
+    "services": [
+      {
+        "id": "1",
+        "name": "የቤት አብራሽ ዕቃዎች እድሳት",
+        "icon": "FaTools",
+        "items": [
+          {
+            "name": "የአየር ማቀዝበር እድሳት",
+            "description": "ለሁሉም አይነት አየር አቀዝቃዞች እድሳትና ጥገና።"
+          },
+          {
+            "name": "የኤሲ እድሳትና አገልግሎት",
+            "description": "የበለጠ ባለሙያ ኤሲ እድሳትና አገልግሎት።"
+          },
+          {
+            "name": "የማጠቢያ ማሽን እድሳት",
+            "description": "ለሁሉም አይነት የማጠቢያ ማሽን ጥገና እና እድሳት።"
+          },
+          {
+            "name": "የማቀዝቃዣ እድሳት",
+            "description": "እርስዎን ማቀዝቃዣዎች በማስተሻለት እንዲስሩ ያስተዳድሩ።"
+          },
+          {
+            "name": "የውሃ አንፃር እና አገልግሎት",
+            "description": "ሙያዊ የውሃ አንፃር እድሳት እና ጥገና።"
+          },
+          {
+            "name": "የጋዝ ምድጃ እና አገልግሎት",
+            "description": "ዘላቂና የማስመረቻ የጋዝ ምድጃ እና አገልግሎት።"
+          },
+          {
+            "name": "የቴሌቪዥን እድሳት",
+            "description": "ለኤልኤዲ፣ ኤልሲዲ እና ሌሎች ባለሙያ የቴሌቪዥን እድሳት።"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "የቤት ጥገና",
+        "icon": "FaHome",
+        "items": [
+          {
+            "name": "ኤሌክትሪክከን",
+            "description": "ለቤቶችና ቢሮዎች ሙያዊ ኤሌክትሪክከን አገልግሎቶች።"
+          },
+          {
+            "name": "የእበት መጫኛ",
+            "description": "ፈጣንና በትክክል የእበት መጫኛ አገልግሎት።"
+          },
+          {
+            "name": "ፕላምበር",
+            "description": "ለሁሉም አይነት ችግሮች የታመነ የፕላምበር ቅንብሮች።"
+          },
+          {
+            "name": "የተሸከርኩር ማስቀመጥ",
+            "description": "ፈጣንና ትክክለኛ የተሸከርኩር ማስቀመጥ አገልግሎት።"
+          },
+          {
+            "name": "የግድግዳ ፓነል አስተካክል",
+            "description": "ለቤቶች ከፍተኛ ጥራት ያለው የግድግዳ ፓነል አስተካክል።"
+          },
+          {
+            "name": "ተርኪን እና ጣቢያ",
+            "description": "የቲቪዎችን፣ መደላለፊያዎችን እና ሌሎችን በደህና በጥንቃቄ ማስቀመጥ።"
+          },
+          {
+            "name": "ቀለም ማስተካክል",
+            "description": "ለእርቃን ውስጥ የታምነና ደስ ያሰኘ ቀለም ማስተካክል።"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "የጽዳት አገልግሎቶች",
+        "icon": "FaBroom",
+        "items": [
+          {
+            "name": "ሙሉ የቤት ጽዳት",
+            "description": "ለእርስዎ ሁሉንም ቤት አልኮል የሚሆን ጽዳት።"
+          },
+          {
+            "name": "ክፍል የጊዜ አሳሳቢዎች",
+            "description": "የጊዜውን ዘላቂ ማሳሳቢያዎች ለስርዓተ አስተካክል።"
+          },
+          {
+            "name": "ሶፋና የመኝታ ልብስ ጽዳት",
+            "description": "ሶፋዎችንና መኝታ ልብስን በጥሩ ጽዳት አስተካክል።"
+          },
+          {
+            "name": "የውሃ ታንክ ጽዳት",
+            "description": "የውሃ ታንኮችን በአንፃር ጽዳት።"
+          }
+        ]
+      }
+    ]
   }
   }
-}
+  }
+
 
 
 i18n.use(initReactI18next).init({
