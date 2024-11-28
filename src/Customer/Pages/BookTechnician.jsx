@@ -70,11 +70,11 @@ console.log(`${SingleService}/${serviceId}`)
 
   return (
     <div>
-      <div className="max-w-md lg:mt-7 max-md:mt-5 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
+      <div className="max-w-md lg:mt-24 max-md:mt-24 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"
-            src={`${API_URL}/uploads/${Technicain.profileImage}` || 'https://via.placeholder.com/150'}
+            src={`${API_URL}/uploads/${Technicain.technicianProfleImage}` || 'https://via.placeholder.com/150'}
             alt="Profile"
           />
           <h2 className="text-lg font-semibold">{Technicain.name}</h2>

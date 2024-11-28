@@ -65,7 +65,7 @@ const TechnicianList = () => {
   const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
 
   return (
-    <div className="container mx-auto  px-4 py-8">
+    <div className="container mx-auto mt-10 px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-[250px] ml-3 lg:fixed ">

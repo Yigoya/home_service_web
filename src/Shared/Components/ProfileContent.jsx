@@ -89,12 +89,13 @@ export default function ProfileContent({ jobs }) {
 
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredJobs.map((job) => (
-          <div key={job.id} className="bg-gray-50 px-6 py-4 rounded-lg shadow-md">
+          <div key={job.id} className="bg-gray-100  px-6 py-4 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
+            {/* <div className="transition-transform transform hover:-translate-y-1"> */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="flex items-center mb-4 md:mb-0">
                 <img
-                  src={`${API_URL}/uploads/${job.technicianProfleImage}`}
-                  alt={`${job.technicianName}'s profile`}
+                  src={customer ? `${API_URL}/uploads/${job.technicianProfleImage}`: `${API_URL}/uploads/${job.ProfleImage}`}
+                  alt={customer ? `${job.technicianName}'s profile` : `${job.customerName}'s profile`}
                   className="w-16 h-16 rounded-full object-cover mr-4"
                 />
                 <div>
@@ -108,7 +109,7 @@ export default function ProfileContent({ jobs }) {
                   }`}>
                     {job.status}
                   </p>
-                  <span className="mb-2 lg:ml-10 border border-gray-300 px-4 py-1 rounded-md text-sm text-gray-600">
+                  <span className="mb-2  lg:ml-60 border border-gray-300 px-4 py-1 rounded-md text-sm text-gray-600">
                   <i className="far fa-calendar mr-1"></i> {new Date(job.scheduledDate).toISOString().split('T')[0]}
                 </span>
                 </div>
@@ -122,9 +123,25 @@ export default function ProfileContent({ jobs }) {
             <div className='flex justify-between'>
             <div className="mt-4">
               <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
-              <p className="font-medium mt-2 text-gray-800">Job Description</p>
+              <p className="font-bold mt-2 text-gray-800">Job Description</p>
               <p className="text-gray-600">{job.description}</p>
             </div>
+            {job.status === 'COMPLETED' && job.review && (
+              <div className="mt-4  p-4 rounded-lg">
+                <div className="flex items-center mb-2">
+                  <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <i
+                        key={i}
+                        className={`fas fa-star ${i < job.review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                      ></i>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-600">{job.review.review}</p>
+              </div>
+            )}
             {customer && job.status === 'PENDING' && (
               <div className="mt-10">
                 <button 
@@ -229,28 +246,13 @@ export default function ProfileContent({ jobs }) {
               </div>
             )}
 
-            {job.status === 'COMPLETED' && job.review && (
-              <div className="mt-4 bg-gray-100 p-4 rounded-lg">
-                <div className="flex items-center mb-2">
-                  <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <i
-                        key={i}
-                        className={`fas fa-star ${i < job.review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                      ></i>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-gray-600">{job.review.review}</p>
-              </div>
-            )}
+         
            
 
             {/* {(job.status === 'PENDING' || job.status === 'ACCEPTED') && (
               <p className="mt-4 text-red-500 underline cursor-pointer hover:text-red-600">Dispute</p>
             )} */}
-          {(job.status !== 'COMPLETE' ) && (
+          {(job.status !== 'COMPLETED' ) && (
             <>
             { <p
                 className="mt-4 text-red-500 underline cursor-pointer hover:text-red-600"
