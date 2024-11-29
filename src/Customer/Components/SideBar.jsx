@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Shared/Context/AuthContext';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { logo1 } from '../../Shared/Components/Images';
+import { useTranslation } from 'react-i18next';
+
 
 export default function SideBar({ customerInfo }) {
+  const { t} = useTranslation();
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { setFilterStatus } = useContext(FilterContext);
@@ -21,9 +24,9 @@ export default function SideBar({ customerInfo }) {
   };
 
   const filterButtons = [
-    { label: 'Pending', status: 'PENDING' },
-    { label: 'Confirmed', status: 'CONFIRMED' },
-    { label: 'Completed', status: 'COMPLETED' },
+    { label: t('pending'), status: 'PENDING' },
+    { label: t('confirmed'), status:'CONFIRMED'  },
+    { label: t('completed') ,status:'COMPLETED'  },
   ];
 
   return (
@@ -53,7 +56,7 @@ export default function SideBar({ customerInfo }) {
           onClick={() => handleFilter('All')}
           className="w-full py-2 px-4 text-left text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Reset Filter
+          {t('reset')}
         </button>
       </div>
 
@@ -61,7 +64,7 @@ export default function SideBar({ customerInfo }) {
         className="w-full py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500"
         onClick={handleLogout}
       >
-        Log out
+        {t('logout')}
       </button>
     </div>
   );

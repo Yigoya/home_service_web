@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Star, StarHalf, MapPin, Users, Briefcase, Calendar } from 'lucide-react';
 import { logo1 } from '../Components/Images';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from '../api';
 
 
 const ProfileCard = ({ info, Id }) => {

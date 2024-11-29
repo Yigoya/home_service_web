@@ -56,13 +56,13 @@ const NavBar = () => {
               className="px-7 py-1 rounded-lg font-bold animate-pulse"
               to="/login"
             >
-              Login/SignUp
+              {t('login')}/{t('signup')}
             </Link>
             <Link
               className="text-white underline"
               to="/technician-registration"
             >
-              Become a Technician
+             {t('become_tech')}
             </Link>
           </div>
               </div>

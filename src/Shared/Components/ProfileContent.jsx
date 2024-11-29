@@ -92,7 +92,7 @@ export default function ProfileContent({ jobs }) {
      <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
         {/* {filteredJobs.length === 0 ? 'No bookings yet' : 'Track your activity on this platform'}
        */}
-       wellcome  {user.name}👋
+       {t('welcome')} {user.name}👋
       </h1>
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredJobs.map((job) => (
@@ -140,7 +140,7 @@ export default function ProfileContent({ jobs }) {
             {job.status === 'COMPLETED' && job.review && (
               <div className="mt-4 bg-gray-200 p-2 lg:p-4 rounded-lg">
                 <div className="flex  items-center mb-2">
-                  <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
+                  <p className="text-lg font-semibold text-gray-800 mr-2">{t('review')}</p>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <i
@@ -217,7 +217,7 @@ export default function ProfileContent({ jobs }) {
               {showReviewModal && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                   <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                    <h2 className="text-xl font-semibold mb-4">Add Review</h2>
+                    <h2 className="text-xl font-semibold mb-4">{t('add_review')}</h2>
                     <div className="flex items-center mb-4">
                       <label className="block text-gray-700 font-semibold mb-2 mr-2">{t('rating')}:</label>
                       <div className="flex">
