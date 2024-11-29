@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="bg-black py-8 text-white">
+    <footer className=" bg-black py-8 text-white">
       <div className="container mx-auto px-4">
         <div className=" flex justify-evenly ">
           
