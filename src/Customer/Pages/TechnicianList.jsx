@@ -68,7 +68,7 @@ const TechnicianList = () => {
     <div className="container mx-auto mt-10 px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
       <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-[250px] ml-3 lg:fixed ">
+        <div className="lg:w-[250px] ml-3 lg:fixed over ">
           <div className="bg-white rounded-lg  lg:h-screen shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">{t('filter_by')}</h2>
             <div className="mb-6">
