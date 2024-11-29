@@ -165,7 +165,7 @@ const resources = {
       "book":"ይዘዙ",
       "sign_google":"በ ጉግል ይግቡ ",
       "sign_facebook":"በፌስቡክ ይግቡ",
-      "account":"Dአካውንት የሎትም? ",
+      "account":"አካውንት የሎትም? ",
       "signup":"ይመዝገቡ",
       "job":"የስራው አይነት",
       "accept":" ይቀበሉ",
