@@ -313,7 +313,7 @@ function Registration() {
           <img
             src={logo1}
             alt="Guidance"
-            className="w-full h-full object-cover opacity-3I0 transition-opacity duration-300"
+            className="w-full h-full object-cover opacity-30 transition-opacity duration-300"
           />
           <div className="absolute top-0 mt-32 text-center px-8 text-white">
             <h2 className="text-6xl font-semibold mb-8">{t('get_start')}</h2>
