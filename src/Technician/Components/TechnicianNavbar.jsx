@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell } from 'react-icons/fa';
 import { logo1 } from '../../Shared/Components/Images';
-import { useTranslation } from 'react-i18next';
+
 
 const TechnicianNavBar = () => {
   const { t } = useTranslation();
