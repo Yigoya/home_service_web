@@ -68,8 +68,8 @@ const TechnicianList = () => {
     <div className="container mx-auto mt-10 px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
       <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-[250px] ml-3 lg:fixed over ">
-          <div className="bg-white rounded-lg  lg:h-screen shadow-md p-6">
+        <div className="lg:w-[250px] ml-3  ">
+          <div className="bg-white lg:h-screen rounded-lg  shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">{t('filter_by')}</h2>
             <div className="mb-6">
               <h3 className="font-semibold mb-2">{t('rating')}</h3>
@@ -111,7 +111,7 @@ const TechnicianList = () => {
             </div>
           </div>
         </div>
-        <div className="lg:ml-[300px] lg:w-3/4">
+        <div className="lg: lg:w-3/4">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-grow">
               <div className="relative">
@@ -158,7 +158,7 @@ const TechnicianList = () => {
               Around me
             </button>
           </div>
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedTechnicians.length > 0 ? (
               paginatedTechnicians.map((item) => (
                 <ProfileCard key={item.id} info={item} Id={id} />
@@ -168,7 +168,7 @@ const TechnicianList = () => {
             )}
           </div>
           {totalPages > 1 && (
-            <div className="flex justify-center items-center mt-8">
+            <div className="flex justify-center items-center mt-8 mb-8">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
