@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { AuthContext } from '../../Shared/Context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const SideBar = ({customerInfo}) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { setFilterStatus } = useContext(FilterContext);
@@ -50,39 +52,39 @@ const SideBar = ({customerInfo}) => {
             className="text-lg py-1  lg:block hover:text-gray-300"
             onClick={() => handleFilter('PENDIND')}
           >
-            Pending
+           {t('pending')}
           </button>
           <button
             className="text-lg py-1 lg:block hover:text-gray-300"
             onClick={() => handleFilter('CONFIRMED')}
           >
-            Confirmed
+            {t('confirmed')}
           </button>
           <button
             className="text-lg py-1 hover:text-gray-300"
             onClick={() => handleFilter('COMPLETED')}
           >
-            Completed
+           {t('completed')}
           </button>
           <button
             onClick={handleResetFilter}
             className="py-2 text-sm max-md:hidden underline rounded hover:text-gray-300"
           >
-            Reset Filter
+           {t('reset')}
           </button>
         </div>
         <button
             onClick={handleResetFilter}
             className="py-2 text-sm lg:hidden max-md:block max-md:mx-24 underline rounded hover:text-gray-300"
           >
-            Reset Filter
+            {t('reset')}
           </button>
 
         <button
           className="mt-10 lg:ml-12 max-md:mx-16 px-10 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
           onClick={handleLogout}
         >
-          Log out
+          {t('logout')}
         </button>
       </aside>
     </>

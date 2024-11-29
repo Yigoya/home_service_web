@@ -2,11 +2,13 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Star, StarHalf, MapPin, Users, Briefcase, Calendar } from 'lucide-react';
 import { logo1 } from '../Components/Images';
+import { useTranslation } from 'react-i18next';
 
 // Use an environment variable from your .env file
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 const ProfileCard = ({ info, Id }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const totalStars = 5;
   const fullStars = Math.floor(info.rating);
@@ -53,13 +55,13 @@ const ProfileCard = ({ info, Id }) => {
         </div>
         <div className="flex justify-between text-sm text-gray-600 mb-4">
           <div className="flex items-center">
-            <span>{info?.customerNo || 0} customers</span>
+            <span>{info?.customerNo || 0} {t('customer')}</span>
           </div>
           <div className="flex items-center">
-            <span>{info?.serviceNo || 0} services</span>
+            <span>{info?.serviceNo || 0} {t('service')}</span>
           </div>
           <div className="flex items-center">
-            <span>{info?.bookingNo || 0} bookings</span>
+            <span>{info?.bookingNo || 0} {t('booking')}</span>
           </div>
         </div>
         <p className="text-gray-700 text-sm mb-4 line-clamp-2">{info?.bio || 'No bio available'}</p>
@@ -68,13 +70,13 @@ const ProfileCard = ({ info, Id }) => {
             to={`/technician-details/${info?.id || '#'}`}
             className="text-blue-600 hover:text-blue-800 text-sm font-medium"
           >
-            View Profile
+           {t('view')}
           </Link>
           <button
             onClick={handleBooking}
             className="bg-blue-600 text-white rounded-full py-2 px-4 text-sm font-medium hover:bg-blue-700 transition-colors"
           >
-            Book Now
+            {t('book')}
           </button>
         </div>
       </div>

@@ -4,8 +4,10 @@ import axios from 'axios';
 import { loginApi } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+  const { t } = useTranslation();
   const { login } = React.useContext(AuthContext);
   const [error, setError] = React.useState(null);
   const [successMessage, setSuccessMessage] = React.useState(null);
@@ -68,30 +70,30 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">L{t(login)}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')}</label>
             <input
               id="email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email to login"
+              placeholder={t('enter_email')}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('password')}</label>
             <input
               id="password"
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your password to login"
+              placeholder={t('enter_password')}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -110,7 +112,7 @@ const Login = () => {
                 Logging in...
               </>
             ) : (
-              'Login'
+              t('login')
             )}
           </button>
 
@@ -127,16 +129,16 @@ const Login = () => {
         <div className="lg:flex justify-between lg:space-x-2">
           <button className="w-full mb-2 lg:mb-0 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             <FaGoogle className="inline-block mr-2 text-red-500" />
-            Sign in with Google
+            {t('sign_google')}
           </button>
           <button className="w-full py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             <FaFacebook className="inline-block mr-2 text-blue-500" />
-            Sign in with Facebook
+            {t('sign_facebook')}
           </button>
         </div>
 
         <p className="mt-4 text-center text-gray-600">
-          Don't have an account? <a href="/customer-signup" className="text-blue-500 hover:underline">Sign Up</a>
+         {t('account')} <a href="/customer-signup" className="text-blue-500 hover:underline">{t('signup')}</a>
         </p>
       </div>
     </div>
