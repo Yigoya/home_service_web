@@ -20,6 +20,8 @@ import TechnicianLayout from './AuthLayout/TechnicianLayout'
 import TechProfile from './Technician/Pages/TechProfile'
 import Notification from './Customer/Pages/Notification'
 import TechNotification from './Technician/Pages/TechNotification'
+import Footer from './Shared/Components/Footer'
+
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
     <>
     <AuthProvider>
       <Router>
+        
         <Routes>
         {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
           <Route path="/" element={<TechProfile />} />
@@ -48,9 +51,11 @@ function App() {
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
             <Route path='customer-notification/:id' element={<Notification />} />
+            
           </Route>
-}
+}       
         </Routes>
+        <Footer />
       </Router>
      </AuthProvider>
     </>
