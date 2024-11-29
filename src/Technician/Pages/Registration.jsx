@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import  logo1  from '../../assets/home2.png';
+import  logo1  from '../../assets/tech.jpg';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -309,19 +309,20 @@ function Registration() {
         </div>
 
         {/* Right side */}
-        <div className="hidden md:flex md:w-1/2  bg-gray-300 rounded-lg relative items-center justify-center group">
+        <div className="hidden md:flex md:w-1/2 bg-black rounded-lg relative items-center justify-center">
           <img
             src={logo1}
             alt="Guidance"
-            className="w-full h-full object-cover opacity-20 transition-opacity duration-300 group-hover:opacity-50"
+            className="w-full h-full object-cover opacity-3I0 transition-opacity duration-300"
           />
-          <div className="absolute text-center px-8 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <h2 className="text-3xl font-semibold mb-2">Getting Started</h2>
-            <h2 className="text-xl font-semibold mb-2">Register</h2>
-            <h2 className="text-xl font-semibold mb-2">Verify your registration</h2>
-            <h2 className="text-xl font-semibold">Start your Job</h2>
+          <div className="absolute top-0 mt-32 text-center px-8 text-white">
+            <h2 className="text-6xl font-semibold mb-8">{t('get_start')}</h2>
+            <h2 className="text-xl font-semibold mb-2">{t('reg')}</h2>
+            <h2 className="text-xl font-semibold mb-2">{t('verfy_reg')}</h2>
+            <h2 className="text-xl font-semibold">{t('Start_now')}</h2>
           </div>
         </div>
+
 
       </div>
     </div>
