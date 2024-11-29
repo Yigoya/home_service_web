@@ -9,9 +9,10 @@ import {
 } from 'lucide-react';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { AuthContext } from '../../Shared/Context/AuthContext';
-import { logo1 } from '../../Shared/Components/Images';
+import { useTranslation } from 'react-i18next';
 
-const SideBar = ({ customerInfo, onClose }) => {
+const SideBar = ({customerInfo}) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { setFilterStatus } = useContext(FilterContext);
@@ -79,19 +80,33 @@ const SideBar = ({ customerInfo, onClose }) => {
               }
             `}
           >
-            {icon}
-            <span className="ml-3">{label}</span>
+           {t('pending')}
           </button>
-        ))}
-        
+          <button
+            className="text-lg py-1 lg:block hover:text-gray-300"
+            onClick={() => handleFilter('CONFIRMED')}
+          >
+            {t('confirmed')}
+          </button>
+          <button
+            className="text-lg py-1 hover:text-gray-300"
+            onClick={() => handleFilter('COMPLETED')}
+          >
+           {t('completed')}
+          </button>
+          <button
+            onClick={handleResetFilter}
+            className="py-2 text-sm max-md:hidden underline rounded hover:text-gray-300"
+          >
+           {t('reset')}
+          </button>
+        </div>
         <button
-          onClick={handleResetFilter}
-          className="flex items-center w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors duration-150 ease-in-out"
-        >
-          <RefreshCcwIcon className="w-4 h-4" />
-          <span className="ml-3">Reset Filter</span>
-        </button>
-      </nav>
+            onClick={handleResetFilter}
+            className="py-2 text-sm lg:hidden max-md:block max-md:mx-24 underline rounded hover:text-gray-300"
+          >
+            {t('reset')}
+          </button>
 
       {/* Logout Button */}
       <div className="p-4 border-t border-gray-200">

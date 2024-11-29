@@ -4,10 +4,11 @@ import { format, isToday, isYesterday, isSameWeek } from 'date-fns'
 import { Bell, Mail, AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
 import { TechnicianNotificationApi } from '../Api/Api'
 import { notificationStatusApi } from '../../Customer/Api/Api'
-
+import { useTranslation } from 'react-i18next';
 
 
 const TechNotification = () => {
+  const { t } = useTranslation();
   const technician = JSON.parse(localStorage.getItem('user'))
   const id = technician.id
   console.log(id)
@@ -101,7 +102,7 @@ const TechNotification = () => {
 
   return (
     <div className="max-w-2xl bg-gray-200 h-screen mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Notifications</h1>
+      <h1 className="text-2xl font-bold mb-4">{t('notification')}</h1>
       {Object.entries(groupedNotifications).map(([date, notifications]) => (
         <div key={date} className="mb-6">
           <h2 className="text-lg font-semibold mb-2 text-gray-600">{date}</h2>
@@ -129,7 +130,7 @@ const TechNotification = () => {
                       onClick={() => markAsRead(notification.id)}
                       className="ml-2 text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out"
                     >
-                      Mark as read
+                      {t('mark')}
                     </button>
                   )}
                 </div>

@@ -30,11 +30,11 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
               ></i>
             ))}
           </div>
-          <p className="text-sm text-gray-600">Rating: {rating || "N/A"}</p>
+          <p className="text-sm text-gray-600">{t('rating')}: {rating || "N/A"}</p>
         </div>
       </div>
       <p className="text-gray-600 mt-3 mb-4 text-sm">
-        {serviceCount} Services Available
+        {serviceCount} {t('service')}
       </p>
       <p className="text-gray-500 text-sm mb-6 leading-relaxed">
         {showFullBio ? bio : truncatedBio}

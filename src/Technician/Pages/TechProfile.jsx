@@ -5,8 +5,10 @@ import ProfileContent from '../../Shared/Components/ProfileContent';
 import axios from 'axios';
 import { TechnicianIdentity, TechnicianJobsApi } from '../Api/Api';
 import TechnicianNavBar from '../Components/TechnicianNavbar';
+import { useTranslation } from 'react-i18next';
 
 const TechnicianProfile = () => {
+  const { t } = useTranslation();
   const technician = JSON.parse(localStorage.getItem("technician"));
   const id = technician?.id;
   const [customer, setCustomer] = useState(null);
@@ -103,6 +105,7 @@ const TechnicianProfile = () => {
             onClick={() => setIsSidebarOpen(false)}
           />
         )}
+<<<<<<< HEAD
 
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-6 pt-20">
@@ -131,6 +134,9 @@ const TechnicianProfile = () => {
              
             </main>
           </div>
+        )}
+        <div className="lg:fixed right-0 lg:w-3/4 p-4 overflow-hidden">
+         Technician <ProfileContent jobs={services} />
         </div>
       </div>
     </div>
