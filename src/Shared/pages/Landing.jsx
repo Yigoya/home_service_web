@@ -25,11 +25,14 @@ const Landing = () => {
 
  
   useEffect(() => {
+  
     const welcome1 = t('welcome1');
     const welcome2 = t('welcome2');
   
     if (welcome1 && welcome2) {
       setSequence([welcome1, 2000, welcome2, 2000]);
+      // window.location.reload();
+
     } else {
       console.error("Translation keys 'welcome1' and 'welcome2' are not defined.");
       // Fallback to default messages
@@ -44,7 +47,7 @@ const Landing = () => {
   // Fetch services from the backend
   const fetchServices = async () => {
     try {
-      const response = await axios.get(`${API_URL}/services`);
+      const response = await axios.get(`${API_URL}/admin/services`);
       if (response.data) {
         setServices(response.data);
         console.log(response.data)
@@ -176,10 +179,10 @@ const Landing = () => {
                   onSelect={handleServiceSelect}
                 />
                 <ServiceTypes
-                  types={[selectedService.name]} 
+                  types={[selectedService.services]} 
                 />
                 <ServiceDescription
-                  title={selectedService.name} 
+                  title={selectedService.categoryName} 
                   description={selectedService.description} 
                   imagePath={home} 
                   width="900px"

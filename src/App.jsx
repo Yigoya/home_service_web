@@ -22,6 +22,8 @@ import Notification from './Customer/Pages/Notification'
 import TechNotification from './Technician/Pages/TechNotification'
 import Footer from './Shared/Components/Footer'
 
+import 'antd/dist/reset.css';
+
 
 
 function App() {

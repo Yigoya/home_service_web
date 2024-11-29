@@ -5,7 +5,7 @@ import { loginApi } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
-
+import { message } from 'antd';
 const Login = () => {
   const { t } = useTranslation();
   const { login } = React.useContext(AuthContext);
@@ -56,7 +56,7 @@ const Login = () => {
         localStorage.setItem('technician', JSON.stringify(response.data.technician));
         const next = localStorage.getItem('next')
         localStorage.removeItem('next')
-        setSuccessMessage('Login successful!');
+        message.success('Login successful!');
         login();
         
         navigate(next ? next : '/')
@@ -64,7 +64,7 @@ const Login = () => {
       }
     } catch (err) {
       console.error('Error:', err.response.data.details.join(', '));
-      setError(err.response.data.details.join(', '));
+      message.error(err.response.data.details.join(', '));
     } finally {
       setIsLoading(false);
     }
