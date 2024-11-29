@@ -29,10 +29,6 @@ export default function CustomerNavBar() {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/services" className="hover:text-blue-200 transition duration-150 ease-in-out">Services</Link>
-            <Link to="/all-technician-list" className="hover:text-blue-200 transition duration-150 ease-in-out">Technicians</Link>
-            <Link to="/contact-us" className="hover:text-blue-200 transition duration-150 ease-in-out">Contact</Link>
-            <Link to="#" className="hover:text-blue-200 transition duration-150 ease-in-out">FAQ</Link>
             
             <button onClick={toggleLanguage} className="text-2xl hover:text-blue-200 transition duration-150 ease-in-out" aria-label="Toggle Language">
               <FaGlobe />
@@ -56,10 +52,6 @@ export default function CustomerNavBar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/services" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Services</Link>
-            <Link to="/all-technician-list" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Technicians</Link>
-            <Link to="/contact-us" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Contact</Link>
-            <Link to="#" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">FAQ</Link>
             <Link to={profileLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Profile</Link>
             <Link to={notificationLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Notifications</Link>
             <button onClick={toggleLanguage} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">

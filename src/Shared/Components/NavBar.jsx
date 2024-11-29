@@ -47,14 +47,6 @@ const NavBar = () => {
           </button>
         </div>
 
-        {/* Menu Links (Desktop View) */}
-        <div className="hidden md:flex space-x-5">
-          <Link to="/services">Services</Link>
-          <Link to="/all-technician-list">Technicians</Link>
-          <Link to="/contact-us">Contact</Link>
-          <Link to="#">FAQ</Link>
-        </div>
-
         {/* Language and Buttons (Desktop View) */}
         <div className="hidden md:flex space-x-7 items-center">
           <FaGlobe
@@ -80,10 +72,6 @@ const NavBar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
-          <Link to="/services" onClick={() => setIsOpen(false)}>Services</Link>
-          <Link to="/all-technician-list" onClick={() => setIsOpen(false)}>Technicians</Link>
-          <Link to="/contact-us" onClick={() => setIsOpen(false)}>Contact</Link>
-          <Link to="#" onClick={() => setIsOpen(false)}>FAQ</Link>
           <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
           <Link to="/technician-registration" onClick={() => setIsOpen(false)}>
             Become a Technician
