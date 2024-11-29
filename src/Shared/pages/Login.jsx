@@ -74,7 +74,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6">L{t(login)}</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">{t('login')}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')}</label>
