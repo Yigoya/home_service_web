@@ -7,6 +7,7 @@ import { FaGlobe } from 'react-icons/fa';
 const NavBar = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';

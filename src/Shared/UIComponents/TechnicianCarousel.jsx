@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TopTechnician from "./TopTechnician";
 import axios from "axios";
+import TopTechnician from "./TopTechnician";
+import { HomeApi } from "../api";
 
 const TechnicianCarousel = () => {
   const [technicians, setTechnicians] = useState([]);
@@ -8,11 +9,31 @@ const TechnicianCarousel = () => {
   useEffect(() => {
     const fetchTechnicians = async () => {
       try {
-        const response = await axios.get("https://6724624b493fac3cf24e0ff0.mockapi.io/technicians");
-        const fetchedTechnicians = response.data;
+        const response = await axios.get( HomeApi);
+        const techniciansData = response.data?.topFiveTechnicians || [];
+        const reviewsData = response.data?.topFiveReviews || [];
 
-        const filteredTechnicians = fetchedTechnicians.filter(
-          (technician) => technician.rating >= 4.0
+        // Calculate ratings for each technician
+        const techniciansWithRatings = techniciansData.map((technician) => {
+          const technicianReviews = reviewsData.filter(
+            (review) => review.technicianId === technician.id
+          );
+
+          // Calculate average rating
+          const averageRating =
+            technicianReviews.length > 0
+              ? (
+                  technicianReviews.reduce((sum, review) => sum + review.rating, 0) /
+                  technicianReviews.length
+                ).toFixed(1)
+              : null;
+
+          return { ...technician, rating: parseFloat(averageRating) };
+        });
+
+        // Filter technicians with a rating of 4 or higher
+        const filteredTechnicians = techniciansWithRatings.filter(
+          (technician) => technician.rating && technician.rating >= 4.0
         );
 
         setTechnicians(filteredTechnicians);
@@ -25,13 +46,11 @@ const TechnicianCarousel = () => {
   }, []);
 
   return (
-    <div className="flex justify-center bg-gray-100 lg:mx-52">
-      <div className="max-w-5xl w-full overflow-x-auto flex space-x-4 py-4">
-        <div className="flex w-[calc(18rem*6)]">
-          {technicians.map((technician) => (
-            <TopTechnician key={technician.id} {...technician} />
-          ))}
-        </div>
+    <div className="flex justify-center bg-gray-50 py-2">
+      <div className="max-w-5xl w-full overflow-x-auto flex space-x-4 py-4 scrollbar-hide">
+        {technicians.map((technician) => (
+          <TopTechnician key={technician.id} {...technician} />
+        ))}
       </div>
     </div>
   );

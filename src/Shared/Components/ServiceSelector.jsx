@@ -16,8 +16,8 @@ const ServiceSelector = ({ services, selectedService, onSelect }) => {
           hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300`}
           aria-label={t(`services.${service.replace(/\s+/g, '')}.title`)} // Accessibility
         >
-          <FontAwesomeIcon icon={services[service].icon} className="text-2xl" />
-          <span className="mt-1 text-sm font-medium">{t(`services.${service.replace(/\s+/g, '')}.title`)}</span>
+          {/* <FontAwesomeIcon icon={services[service].icon} className="text-2xl" /> */}
+          <span className="mt-1 text-sm font-medium">{t(`services.${service.replace(/\s+/g, '')}.name`)}</span>
         </button>
       ))}
     </div>
