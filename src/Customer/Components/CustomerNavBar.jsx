@@ -18,7 +18,7 @@ export default function CustomerNavBar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-gray-600 to-gray-800 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-gradient-to-l from-gray-900 to-gray-500 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
