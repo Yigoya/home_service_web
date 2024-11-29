@@ -56,231 +56,40 @@ const resources = {
       "every_service": "Every Service That",
       "you_will_need": "You Will Need",
       "search_services": "Search Services",
-      "our-servises": "Our Services",
-      "services": {
-        "HomeAppliancesRepair": {
-          "title": "Home Appliances Repair",
-          "description": "An appliance repair technician's job includes: Disassembling the appliance, cleaning internal parts, replacing faulty or worn parts, reassembling, and testing.",
-          "types": {
-            "AirCoolerRepair": "Air Cooler Repair",
-            "ACRepair": "AC Repair & Service",
-            "WashingMachineRepair": "Washing Machine Repair",
-            "FridgeRepair": "Fridge Repair",
-            "WaterPurifierRepair": "Water Purifier Repair & Service",
-            "GasStoveRepair": "Gas Stove Repair & Service",
-            "TelevisionRepair": "Television Repair"
-          }
-        },
-        "CleaningServices": {
-          "title": "Cleaning Services",
-          "description": "Professional cleaning services tailored to different needs: deep cleaning, office cleaning, and specialized carpet cleaning.",
-          "types": {
-            "FullHomeCleaning": "Full Home Cleaning",
-            "PartTimeCleaners": "Part-time Cleaners",
-            "OfficeCleaning": "Office Cleaning",
-            "SofaCarpetCleaning": "Sofa & Carpet Cleaning",
-            "WaterTankCleaning": "Water Tank Cleaning"
-          }
-        },
-        "HomeMaintenance": {
-          "title": "Home Maintenance",
-          "description": "Home maintenance services including electrical repair, plumbing, and carpentry for household repairs and improvements.",
-          "types": {
-            "ElectricalRepair": "Electrical Repair",
-            "Plumbing": "Plumbing",
-            "Carpentry": "Carpentry",
-            "FanInstallation": "Fan Installation",
-            "WallPanelsInstallation": "Wall Panels Installation",
-            "Mounting": "Mounting",
-            "Painting": "Painting"
-          }
-        },
-        "PersonalServices": {
-          "title": "Personal Services",
-          "description": "Personalized services to improve well-being, including fitness, mental health, and lifestyle coaching.",
-          "types": {
-            "HomeCare": "Home Care",
-            "HomeServant": "Home Servant",
-            "SecurityGuardService": "Security Guard Service",
-            "HotelServantService": "Hotel Servant Service"
-          }
-        },
-        "RealEstateServices": {
-          "title": "Real Estate Services",
-          "description": "Services to assist with property management, real estate consulting, and rentals.",
-          "types": {
-            "HomeOnRent": "Home On Rent",
-            "HouseSell": "House Sell",
-            "BrokerService": "Broker Service",
-            "PropertyManagement": "Property Management"
-          }
-        },
-        "Miscellaneous": {
-          "title": "Miscellaneous",
-          "description": "Other additional services that we give",
-          "types": {
-            "AmbulanceService": "Ambulance Service",
-            "TalkToExpert": "Talk To Expert",
-            "PestControl": "Cockroach, Ant & Pest Control"
-          }
-        }
-      },
-      "service": [
-        {
-          "id": "1",
-          "name": "Home Appliances Repair",
-          "icon": "FaTools",
-          "items": [
-            {
-              "name": "Air Cooler Repair",
-              "description": "Repair and maintenance for all types of air coolers."
-            },
-            {
-              "name": "AC Repair & Service",
-              "description": "Comprehensive AC repair and servicing by experts."
-            },
-            {
-              "name": "Washing Machine Repair",
-              "description": "Fix and maintain washing machines of all brands."
-            },
-            {
-              "name": "Refrigerator Repair",
-              "description": "Ensure your refrigerator is running efficiently."
-            },
-            {
-              "name": "Water Purifier Repair & Service",
-              "description": "Professional water purifier repair and maintenance."
-            },
-            {
-              "name": "Gas Stove Repair & Service",
-              "description": "Reliable gas stove repair and servicing solutions."
-            },
-            {
-              "name": "Television Repair",
-              "description": "Expert TV repair for LED, LCD, and more."
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "name": "Home Maintenance",
-          "icon": "FaHome",
-          "items": [
-            {
-              "name": "Electrician",
-              "description": "Professional electrical services for homes and offices."
-            },
-            {
-              "name": "Fan Installation",
-              "description": "Fast and efficient fan installation services."
-            },
-            {
-              "name": "Plumber",
-              "description": "Reliable plumbing solutions for all types of issues."
-            },
-            {
-              "name": "Furniture Assembly",
-              "description": "Quick and precise furniture assembly services."
-            },
-            {
-              "name": "Wall Panels Installation",
-              "description": "High-quality wall panel installation for homes."
-            },
-            {
-              "name": "Mounting",
-              "description": "Mount TVs, shelves, and more securely and safely."
-            },
-            {
-              "name": "Painting",
-              "description": "Professional painting services for vibrant interiors."
-            }
-          ]
-        },
-        {
-          "id": "3",
-          "name": "Cleaning Services",
-          "icon": "FaBroom",
-          "items": [
-            {
-              "name": "Full Home Cleaning",
-              "description": "Comprehensive cleaning solutions for your entire home."
-            },
-            {
-              "name": "Part-time Cleaners",
-              "description": "Hire part-time cleaners for flexible cleaning needs."
-            },
-            {
-              "name": "Sofa & Carpet Cleaning",
-              "description": "Deep cleaning for your sofas and carpets."
-            },
-            {
-              "name": "Water Tank Cleaning",
-              "description": "Thorough cleaning for water storage tanks."
-            }
-          ]
-        },
-        {
-          "id": "4",
-          "name": "Real Estate Services",
-          "icon": "FaBuilding",
-          "items": [
-            {
-              "name": "Home On Rent",
-              "description": "Find rental properties suited to your needs."
-            },
-            {
-              "name": "House Sell Service",
-              "description": "Sell your house with professional assistance."
-            },
-            {
-              "name": "Broker Service",
-              "description": "Get expert help with buying or selling properties."
-            }
-          ]
-        },
-        {
-          "id": "5",
-          "name": "Personal Services",
-          "icon": "FaUserFriends",
-          "items": [
-            {
-              "name": "Home Care",
-              "description": "Assistance with home care needs for your family."
-            },
-            {
-              "name": "Home Servant",
-              "description": "Hire reliable and experienced home servants."
-            },
-            {
-              "name": "Security Guard Service",
-              "description": "Professional security guard services for your safety."
-            },
-            {
-              "name": "Hotel Servant Service",
-              "description": "Well-trained hotel servant services for your needs."
-            }
-          ]
-        },
-        {
-          "id": "6",
-          "name": "Miscellaneous",
-          "icon": "FaWrench",
-          "items": [
-            {
-              "name": "Ambulance Service",
-              "description": "Emergency ambulance services available 24/7."
-            },
-            {
-              "name": "Talk To Expert",
-              "description": "Consult with experts for your specific needs."
-            },
-            {
-              "name": "Cockroach, Ant & Pest Control",
-              "description": "Effective pest control solutions for your home."
-            }
-          ]
-        }
-      ]
+      "our-servises": "Our Services",  
+      "pending":"Pending",
+      "completed":"Completed",
+      "confirmed":"Confirmed",
+      "reset":"Reset Filter",
+      "logout":"Log Out",
+      "prof":"Profile",
+      "notification":"Notification",
+      "tech":"Technician",
+      "mark":"Mark as Read",
+      "soon":"We will contact you soon!",
+      "text":"Thanks for registering our team is reviewing your resume, we will be in touch in a few days!",
+      "back":"Back",
+      "customer":"Customers",
+      "booking":"Bookings",
+      "service":"Services",
+      "view":"View Profile",
+      "book":"Book Now",
+      "sign_google":"Sign in with Google",
+      "sign_facebook":"Sign in with Facebook",
+      "account":"Don't have an account?",
+      "signup":"Sign Up",
+      "job":"Job Description",
+      "accept":"Accept",
+      "decline":"Decline",
+      "start":"Start",
+      "complete":"Complete",
+      "submit":"Submit",
+      "review":"Review",
+      "dispute":"Dispute",
+      "title":"Title",
+      "enter_title":"Enter Dispute Title",
+     
+      
     }
   },
   am: {
@@ -338,175 +147,38 @@ const resources = {
       "you_will_need": "ከ እኛ ዘንድ ያግኙ",
       "search_services": "አገልግሎት ይምረጡ",
       "our-servises": "የምንሰጣቸው አገልግሎቶች",
-      "services": {
-        "HomeAppliancesRepair": {
-          "title": "የቤት መሳሪያዎች እድሳት",
-          "description": "የመሳሪያ እድሳት ባለሙያ ሥራ የሚያካትተው: መሳሪያውን መክፈት, ውስጣዊ ክፍሎችን ማጽዳት, የተበላሸ ወይም የጠፋ ክፍሎችን መተካት",
-          "types": {
-            "AirCoolerRepair": "የኤር ልር እድሳት",
-            "ACRepair": "የኤር ኮንዲሽነር እድሳትና አገልግሎት",
-            "WashingMachineRepair": "የማጠቢያ ማሽን እድሳት",
-            "FridgeRepair": "የፍሪጅ እድሳት",
-            "WaterPurifierRepair": "የውሃ ማጣሪያ እድሳትና አገልግሎት",
-            "GasStoveRepair": "የጋዝ ምድጃ እድሳትና አገልግሎት",
-            "TelevisionRepair": "የቴሌቪዥን እድሳት"
-          }
-        },
-      
-      "CleaningServices": {
-        "title": "የጽዳት አገልግሎት",
-        "description": "ለተለያዩ ፍላጎቶች የተዘጋጁ ሙያዊ የጽዳት አገልግሎቶች፡ ሙሉ የቤት ጽዳት፣ የቢሮ ጽዳት፣ እና ሶፋ እና ልዩ ምንጣፍ ጽዳት።.",   
-        "types": {    
-              "FullHomeCleaning": " ሙሉ የቤት ጽዳት",
-              "PartTimeCleaners": "የአንድ ጊዜ ጽዳት",
-              "OfficeCleaning": "የቢሮ ጽዳት",
-              "SofaCarpetCleaning": "የሶፋ እና የምንጣፍ ጽዳት",
-              "WaterTankCleaning": "የውሃ ማጠራቀሚያ ጽዳት"
-            }
-      },
-
-      "HomeMaintenance": {
-        "title": "የቤት ውስጥ ጥገና",
-        "description": "የቤት ውስጥ ጥገና አገልግሎቶች የኤሌክትሪክ ጥገና፣ የቧንቧ እና የእንጨት ሥራ ጥገና እና ማሻሻያዎች ያካትታል።",  
-        "types": {
-          "ElectricalRepair": "የኤሌክትሪክ ጥገና",
-          "Plumbing": "የቧንቧ ጥገና",
-          "Carpentry": "የእንጨት ሥራ",
-          "FanInstallation": "የደጋፊ ፓነል ጥገና",
-          "WallPanelsInstallation":  "የግድግዳ ፓነሎች መትከል",
-          "Mounting": "Mounting",
-          "Painting": "የቀለም አገልግሎቶች"
-        }
-      },
-      "PersonalServices": {
-        "title":"የግል አገልግሎቶች",
-        "description": "የአካል ብቃት፣ የአእምሮ ጤና እና የአኗኗር ዘይቤን ማሰልጠንን ጨምሮ ደህንነትን ለማሻሻል የተዘጋጁ አገልግሎቶች።",
-        "types": {
-          "HomeCare": "የቤት ውስጥ እንክብካቤ",
-          "HomeServant": "የቤት ሰራተኛ",
-          "SecurityGuardService": "የጥበቃ አገልግሎት",
-          "HotelServantService": "የሆቴል ሰራተኛ አገልግሎት"
-        }
-      },
-      
+      "pending":"በሂደት ላይ ያለ  ",
+      "completed":" ያለቀ ",
+      "confirmed":"የተረጋገጠ",
+      "reset":"ያጥፉ",
+      "logout":"ይውጡ",
+       "prof":"ፕሮፋይል ",
+      "notification":"መልዕክቶች",
+      "tech":"ምልክት ያድርጉ",
+      "soon":"በቅርቡ ከኛ ዘንድ መልዕክት ይደርሶታል::  ",
+      "text":"ስለተመዘገቡ እናመሰግናለን፤ በባለሞያዎቻችን ማስረጃዎን ካረጋገጥን በሁዋላ ከኛ ዘንድ መልዕክት ይደርሶታል::",
+      "back":"ተመለስ",
+      "customer":"ደንበኞች ",
+      "booking":"ስራዎች",
+      "service":"አገልግሎቶች",
+      "view":"ፕሮፋይል ይመልከቱ",
+      "book":"ይዘዙ",
+      "sign_google":"በ ጉግል ይግቡ ",
+      "sign_facebook":"በፌስቡክ ይግቡ",
+      "account":"Dአካውንት የሎትም? ",
+      "signup":"ይመዝገቡ",
+      "job":"የስራው አይነት",
+      "accept":" ይቀበሉ",
+      "decline":"ያግዱ",
+      "start":"ይጀምሩ",
+      "complete":"ይጨርሱ",
+      "submit":"ይላኩ",
+      "review":"አስተያየት ካሎት",
+      "dispute":"ቅሬታ ካሎት",
+      "title":"ርዕስ",
+      "enter_title":"የቅረታዎን ርዕስ ያስገቡ",
           
-      "RealEstateServices": {
-        "title":"የሪል እስቴት አገልግሎቶች",
-        "description": "ለንብረት አስተዳደር፣ ለሪል እስቴት ማማከር እና ለኪራይ የሚረዱ አገልግሎቶች።",
-        "types": {
-          "HomeOnRent": "የቤት ኪራይ",
-          "HouseSell": "የቤት ሽያጭ",
-          "BrokerService": "የደላላ አገልግሎት",
-          "PropertyManagement": "የንብረት አስተዳደር"
-        }
-      },
-         
-      "Miscellaneous": {
-        "title":"የተለያዩ",
-        "description": "የምንሰጣቸው ሌሎች ተጨማሪ አገልግሎቶች",
-        "types": {
-          "AmbulanceService": "የአምቡላንስ አገልግሎት",
-          "TalkToExpert": "ከባለሙያ ጋር ይነጋገሩ",
-          "PestControl": "በረሮ፣ ጉንዳን እና ተባይ ማጥፊያ"
-        }
-      
-      }
-    },
-    "services": [
-      {
-        "id": "1",
-        "name": "የቤት አብራሽ ዕቃዎች እድሳት",
-        "icon": "FaTools",
-        "items": [
-          {
-            "name": "የአየር ማቀዝበር እድሳት",
-            "description": "ለሁሉም አይነት አየር አቀዝቃዞች እድሳትና ጥገና።"
-          },
-          {
-            "name": "የኤሲ እድሳትና አገልግሎት",
-            "description": "የበለጠ ባለሙያ ኤሲ እድሳትና አገልግሎት።"
-          },
-          {
-            "name": "የማጠቢያ ማሽን እድሳት",
-            "description": "ለሁሉም አይነት የማጠቢያ ማሽን ጥገና እና እድሳት።"
-          },
-          {
-            "name": "የማቀዝቃዣ እድሳት",
-            "description": "እርስዎን ማቀዝቃዣዎች በማስተሻለት እንዲስሩ ያስተዳድሩ።"
-          },
-          {
-            "name": "የውሃ አንፃር እና አገልግሎት",
-            "description": "ሙያዊ የውሃ አንፃር እድሳት እና ጥገና።"
-          },
-          {
-            "name": "የጋዝ ምድጃ እና አገልግሎት",
-            "description": "ዘላቂና የማስመረቻ የጋዝ ምድጃ እና አገልግሎት።"
-          },
-          {
-            "name": "የቴሌቪዥን እድሳት",
-            "description": "ለኤልኤዲ፣ ኤልሲዲ እና ሌሎች ባለሙያ የቴሌቪዥን እድሳት።"
-          }
-        ]
-      },
-      {
-        "id": "2",
-        "name": "የቤት ጥገና",
-        "icon": "FaHome",
-        "items": [
-          {
-            "name": "ኤሌክትሪክከን",
-            "description": "ለቤቶችና ቢሮዎች ሙያዊ ኤሌክትሪክከን አገልግሎቶች።"
-          },
-          {
-            "name": "የእበት መጫኛ",
-            "description": "ፈጣንና በትክክል የእበት መጫኛ አገልግሎት።"
-          },
-          {
-            "name": "ፕላምበር",
-            "description": "ለሁሉም አይነት ችግሮች የታመነ የፕላምበር ቅንብሮች።"
-          },
-          {
-            "name": "የተሸከርኩር ማስቀመጥ",
-            "description": "ፈጣንና ትክክለኛ የተሸከርኩር ማስቀመጥ አገልግሎት።"
-          },
-          {
-            "name": "የግድግዳ ፓነል አስተካክል",
-            "description": "ለቤቶች ከፍተኛ ጥራት ያለው የግድግዳ ፓነል አስተካክል።"
-          },
-          {
-            "name": "ተርኪን እና ጣቢያ",
-            "description": "የቲቪዎችን፣ መደላለፊያዎችን እና ሌሎችን በደህና በጥንቃቄ ማስቀመጥ።"
-          },
-          {
-            "name": "ቀለም ማስተካክል",
-            "description": "ለእርቃን ውስጥ የታምነና ደስ ያሰኘ ቀለም ማስተካክል።"
-          }
-        ]
-      },
-      {
-        "id": "3",
-        "name": "የጽዳት አገልግሎቶች",
-        "icon": "FaBroom",
-        "items": [
-          {
-            "name": "ሙሉ የቤት ጽዳት",
-            "description": "ለእርስዎ ሁሉንም ቤት አልኮል የሚሆን ጽዳት።"
-          },
-          {
-            "name": "ክፍል የጊዜ አሳሳቢዎች",
-            "description": "የጊዜውን ዘላቂ ማሳሳቢያዎች ለስርዓተ አስተካክል።"
-          },
-          {
-            "name": "ሶፋና የመኝታ ልብስ ጽዳት",
-            "description": "ሶፋዎችንና መኝታ ልብስን በጥሩ ጽዳት አስተካክል።"
-          },
-          {
-            "name": "የውሃ ታንክ ጽዳት",
-            "description": "የውሃ ታንኮችን በአንፃር ጽዳት።"
-          }
-        ]
-      }
-    ]
+    
   }
   }
   }

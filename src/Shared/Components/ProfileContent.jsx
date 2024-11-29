@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { FilterContext } from '../Context/FilterContext';
 import { API_URL } from '../api';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileContent({ jobs }) {
+  const { t } = useTranslation();
   const technician = JSON.parse(localStorage.getItem('technician'));
   const customer = JSON.parse(localStorage.getItem('customer'));
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -122,7 +124,7 @@ export default function ProfileContent({ jobs }) {
             <div className='flex justify-between'>
             <div className="mt-4">
               <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
-              <p className="font-medium mt-2 text-gray-800">Job Description</p>
+              <p className="font-medium mt-2 text-gray-800">{t('job')}</p>
               <p className="text-gray-600">{job.description}</p>
             </div>
             {customer && job.status === 'PENDING' && (
@@ -131,7 +133,7 @@ export default function ProfileContent({ jobs }) {
                   className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('CANCELED', job.id)}
                 >
-                  Cancel
+                  {t('cancel')}
                 </button>
               </div>
             )}
@@ -145,13 +147,13 @@ export default function ProfileContent({ jobs }) {
                   className="bg-green-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-green-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('ACCEPTED', job.id)}
                 >
-                  Accept
+                  {t('accept')}
                 </button>
                 <button 
                   className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('DENIED', job.id)}
                 >
-                  Decline
+                  {t('decline')}
                 </button>
               </div>
             )}
@@ -162,13 +164,13 @@ export default function ProfileContent({ jobs }) {
                   className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('STARTED', job.id)}
                 >
-                  Start
+                  {t('start')}
                 </button>
                 <button 
                   className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('CANCELLED', job.id)}
                 >
-                  Cancel
+                 {t('cancel')}
                 </button>
               </div>
             )}
@@ -182,7 +184,7 @@ export default function ProfileContent({ jobs }) {
                   className="bg-green-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
                   onClick={() => { setShowReviewModal(true); updateStatus('COMPLETED', job.id); }}
                 >
-                  Complete
+                  {t('complete')}
                 </button>
               )}
 
@@ -191,7 +193,7 @@ export default function ProfileContent({ jobs }) {
                   <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
                     <h2 className="text-xl font-semibold mb-4">Add Review</h2>
                     <div className="flex items-center mb-4">
-                      <label className="block text-gray-700 font-semibold mb-2 mr-2">Rating:</label>
+                      <label className="block text-gray-700 font-semibold mb-2 mr-2">{t('rating')}:</label>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <i
@@ -214,13 +216,13 @@ export default function ProfileContent({ jobs }) {
                         className="bg-gray-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-gray-600 transition duration-150 ease-in-out"
                         onClick={() => setShowReviewModal(false)}
                       >
-                        Cancel
+                       {t('cancel')}
                       </button>
                       <button
                         className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
                         onClick={() => handleReviewSubmit(job.id)}
                       >
-                        Submit
+                        {t('submit')}
                       </button>
                     </div>
                   </div>
@@ -232,7 +234,7 @@ export default function ProfileContent({ jobs }) {
             {job.status === 'COMPLETED' && job.review && (
               <div className="mt-4 bg-gray-100 p-4 rounded-lg">
                 <div className="flex items-center mb-2">
-                  <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
+                  <p className="text-lg font-semibold text-gray-800 mr-2">{t('review')}</p>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <i
@@ -256,22 +258,22 @@ export default function ProfileContent({ jobs }) {
                 className="mt-4 text-red-500 underline cursor-pointer hover:text-red-600"
                 onClick={() => setShowDisputeModal(true)}
               >
-                Dispute
+               {t('dispute')}
               </p>}
               {showDisputeModal && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                   <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                    <h2 className="text-xl font-semibold mb-4">Dispute</h2>
+                    <h2 className="text-xl font-semibold mb-4">{t('dispute')}</h2>
                     <div className="mt-4"></div>
                     <div>
                       <label className="block text-gray-700 font-semibold mb-2" htmlFor="disputeTitle">
-                        Title
+                      {t('title')}
                       </label>
                       <input
                         type="text"
                         id="disputeTitle"
                         className="w-full p-2 border border-gray-300 rounded-lg mb-4"
-                        placeholder="Enter the title"
+                        placeholder={t('enter_title')}
                         value={disputeTitle}
                         onChange={(e) => setDisputeTitle(e.target.value)}
                       />
@@ -279,7 +281,7 @@ export default function ProfileContent({ jobs }) {
                     <textarea
                       className="w-full p-2 border border-gray-300 rounded-lg mb-4"
                       rows="4"
-                      placeholder="Enter your message"
+                      placeholder={t('message')}
                       value={disputeMessage}
                       onChange={(e) => setDisputeMessage(e.target.value)}
                     ></textarea>
@@ -288,13 +290,13 @@ export default function ProfileContent({ jobs }) {
                         className="bg-gray-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-gray-600 transition duration-150 ease-in-out"
                         onClick={() => setShowDisputeModal(false)}
                       >
-                        Cancel
+                       {t('cancel')}
                       </button>
                       <button
                         className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
                         onClick={() => handleDisputeSubmit(job.id)}
                       >
-                        Submit
+                        {t('submit')}
                       </button>
                     </div>
                   </div>

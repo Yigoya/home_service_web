@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell } from 'react-icons/fa';
 import { logo1 } from '../../Shared/Components/Images';
+import { useTranslation } from 'react-i18next';
 
 const TechnicianNavBar = () => {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const Technician = JSON.parse(localStorage.getItem("technician"));
   const profileLink = `/`
@@ -52,10 +53,10 @@ const TechnicianNavBar = () => {
         {isOpen && (
           <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
             <Link to={profileLink} onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
-              <FaUserCircle className="mr-2 text-xl" /> Profile
+              <FaUserCircle className="mr-2 text-xl" /> {t('prof')}
             </Link>
             <Link to={notificationLink} onClick={() => setIsOpen(false)} className="flex items-center hover:text-gray-300">
-              <FaBell className="mr-2 text-xl" /> Notifications
+              <FaBell className="mr-2 text-xl" /> {t('notification')}
             </Link>
           </div>
         )}
