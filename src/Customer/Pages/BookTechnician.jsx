@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { SingleService, SingleTech, TechnicianBooking, TechnicianListApi,  } from '../Api/Api';
+import { SingleService, SingleTech, TechnicianBooking  } from '../Api/Api';
 import { API_URL } from '../../Shared/api';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BookTechnician = () => {
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const BookTechnician = () => {
       })
       .catch((error) => {
         console.error("Error fetching technician details:", error);
-        setError("Failed to load technician details.");
+        setError(error.response.data.details);
       });
   }, [id]);
 console.log(`${SingleService}/${serviceId}`)
@@ -58,13 +60,14 @@ console.log(`${SingleService}/${serviceId}`)
 
     axios.post(TechnicianBooking, bookingData)
       .then((response) => {
-        setSuccess(true);
+        toast("Booking successful!");
         console.log("Booking successful:", response.data);
         navigate(`/customer-profile/${customer?.id}`);
       })
       .catch((error) => {
         console.error("Error booking service:", error);
-        setError("Failed to book the service. Please try again.");
+        toast(String(error.response.data.details || "An error occurred"));
+
       });
   };
 
@@ -74,7 +77,7 @@ console.log(`${SingleService}/${serviceId}`)
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"
-            src={`${API_URL}/uploads/${Technicain.technicianProfleImage}` || 'https://via.placeholder.com/150'}
+            src={`${API_URL}/uploads/${Technicain.profileImage}` || 'https://via.placeholder.com/150'}
             alt="Profile"
           />
           <h2 className="text-lg font-semibold">{Technicain.name}</h2>
@@ -144,12 +147,10 @@ console.log(`${SingleService}/${serviceId}`)
             />
           </div>
 
-          {error && <p className="text-red-500 mt-4">{error}</p>}
-          {success && <p className="text-green-500 mt-4">Booking successful!</p>}
-
           <button type="submit" className="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600">
             Book the service
           </button>
+          <ToastContainer />
         </form>
       </div>
     </div>
