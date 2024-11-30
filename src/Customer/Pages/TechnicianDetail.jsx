@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaStar, FaClock, FaMapMarkerAlt, FaBriefcase, FaUsers, FaCalendar } from 'react-icons/fa';
-import {  techDetailApi } from '../Api/Api';
+import {  SingleTech, techDetailApi } from '../Api/Api';
 import { API_URL } from '../../Shared/api';
 import { logo1 } from '../../Shared/Components/Images';
 
@@ -13,7 +13,7 @@ const TechnicianDetail = () => {
 
   const fetchTechnician = async () => {
     try {
-      const response = await axios.get(`${techDetailApi}/${id}`);
+      const response = await axios.get(`${SingleTech}/${id}`);
       setTechnician(response.data);
       console.log(response.data)
     } catch (error) {
