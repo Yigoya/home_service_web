@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+
 
 const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
-  const [showFullBio, setShowFullBio] = useState(false); 
   const { t } = useTranslation();
+  const [showFullBio, setShowFullBio] = useState(false); // State to toggle bio display
   const serviceCount = services?.length || 0;
 
   // Truncate the bio if necessary

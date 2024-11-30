@@ -55,7 +55,7 @@ const resources = {
       },
       "every_service": "Every Service That",
       "you_will_need": "You Will Need",
-      "search_services": "Search Services",
+      "search_services": "search services . . . .",
       "our-servises": "Our Services",  
       "pending":"Pending",
       "completed":"Completed",
@@ -88,13 +88,27 @@ const resources = {
       "dispute":"Dispute",
       "title":"Title",
       "enter_title":"Enter Dispute Title",
+      "welcome1":"Welcome to Company Name",
+      "welcome2":"Quality Service, on demand",
+      "header":"Experienced, hand-picked Proffessionals to serve you at your doorstep",
+      "which":"Which Service Do You Need?",
+      "cancel":"Cancel",
+      "add_review":"Add Rivew",
+      "welcome":"Welcome",
+      "try":"Try Again",
+      "get_start":"Getting Started",
+      "reg":"Register",
+      "verfy_reg":"Verfy Your Registration",
+      "Start_now":"Start Your Job",
+
+
      
       
     }
   },
   am: {
     translation: {
-      "login":"ይመዝገቡ",
+      "login":"ይግቡ",
       "become_tech":"ለባለሞያነት ይመዝገቡ",
       "choose_your_best": "ባለሙያ ይምረጡ",
       "our_service":"የምንሰጣቸው አገልግሎቶች",
@@ -177,8 +191,18 @@ const resources = {
       "dispute":"ቅሬታ ካሎት",
       "title":"ርዕስ",
       "enter_title":"የቅረታዎን ርዕስ ያስገቡ",
-          
-    
+      "welcome1":"እንኳን ወደ  . . . መጡ ",
+      "welcome2":"ጥራት ያለው አገልግሎት ከእኛ ዘንድ",
+      "header":"ልምድ ያካበቱ፣ የተመረጡ ፕሮፌሽናል ባለሞያዎች እርስዎን ለማገልገል ይተጋሉ",
+      "which":"  የትኛውን አገልግሎት መጠቀም ይፈልጋሉ",
+      "cancel":"ተመለስ" ,
+      "add_review":"አስተያየቶን ያስገቡ" ,
+      "welcome":"ሰላም",
+      "try":"እንደገና ይሞክሩ",
+      "get_start":"ዛሬውኑ ይወስኑ",
+      "reg":"ማስረጃዎን ይሟሉ",
+      "verfy_reg":"ይመዝገቡ ",
+      "Start_now":"ዛሬውኑ ስራዎን ይጀምሩ",
   }
   }
   }

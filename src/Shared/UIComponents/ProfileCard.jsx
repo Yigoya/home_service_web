@@ -4,6 +4,7 @@ import { Star, StarHalf, MapPin, Users, Briefcase, Calendar } from 'lucide-react
 import { useTranslation } from 'react-i18next';
 import { API_URL } from '../api';
 
+
 const ProfileCard = ({ info, Id }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
