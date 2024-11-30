@@ -96,9 +96,12 @@ export default function ProfileContent({ jobs }) {
   };
 
   return (
-    <div className={`bg-white h-screen lg:mr-16 lg:h-screen rounded-lg shadow-lg p-6 ${customer ? 'mt-16' : ''}`}>
-      <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
-        Welcome {user.name}👋
+    <div className= {`bg-white h-screen lg:mr-16   lg:h-screen  rounded-lg shadow-lg p-6 ${customer ? 'mt-16' : ''}`}>
+     
+     <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
+        {/* {filteredJobs.length === 0 ? 'No bookings yet' : 'Track your activity on this platform'}
+       */}
+       {t('welcome')} {user.name}👋
       </h1>
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredJobs.map((job) => (
@@ -137,39 +140,38 @@ export default function ProfileContent({ jobs }) {
               </div>
             </div>
             <div className='lg:flex justify-between'>
-              <div className="mt-4 lg:mr-20">
-                <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
-                <div className='bg-gray-200 p-4 rounded-xl'>
-                  <p className="font-bold mt-2 text-gray-800">Job Description</p>
-                  <p className="text-gray-600">{job.description}</p>
-                </div>
-              </div>
-              {job.status === 'COMPLETED' && job.review && (
-                <div className="mt-4 bg-gray-200 p-2 lg:p-4 rounded-lg">
-                  <div className="flex items-center mb-2">
-                    <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <i
-                          key={i}
-                          className={`fas fa-star ${i < job.review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                        ></i>
-                      ))}
-                    </div>
+            <div className="mt-4 lg:mr-20">
+              <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
+              <p className="font-medium mt-2 text-gray-800">{t('job')}</p>
+              <p className="text-gray-600">{job.description}</p>
+            </div>
+            {job.status === 'COMPLETED' && job.review && (
+              <div className="mt-4 bg-gray-200 p-2 lg:p-4 rounded-lg">
+                <div className="flex  items-center mb-2">
+                  <p className="text-lg font-semibold text-gray-800 mr-2">{t('review')}</p>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <i
+                        key={i}
+                        className={`fas fa-star ${i < job.review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                      ></i>
+                    ))}
                   </div>
-                  <p className="text-gray-600">{job.review.review}</p>
                 </div>
-              )}
-              {customer && job.status === 'PENDING' && (
-                <div className="mt-10">
-                  <button
-                    className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
-                    onClick={() => updateStatus('CANCELED', job.id)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              )}
+                <p className="text-gray-600">{job.review.review}</p>
+              </div>
+            )}
+            {customer && job.status === 'PENDING' && (
+              <div className="mt-10">
+                <button 
+                  className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
+                  onClick={() => updateStatus('CANCELED', job.id)}
+                >
+                  {t('cancel')}
+                </button>
+              </div>
+            )}
+
             </div>
             {technician && job.status === 'PENDING' && (
               <div className="mt-4 flex justify-end space-x-2">
@@ -211,6 +213,48 @@ export default function ProfileContent({ jobs }) {
                 >
                   Complete
                 </button>
+              )}
+
+              {showReviewModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                  <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+                    <h2 className="text-xl font-semibold mb-4">{t('add_review')}</h2>
+                    <div className="flex items-center mb-4">
+                      <label className="block text-gray-700 font-semibold mb-2 mr-2">{t('rating')}:</label>
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <i
+                            key={i}
+                            className={`fas fa-star cursor-pointer ${i < reviewRating ? 'text-yellow-400' : 'text-gray-300'}`}
+                            onClick={() => setReviewRating(i + 1)}
+                          ></i>
+                        ))}
+                      </div>
+                    </div>
+                    <textarea
+                      className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+                      rows="4"
+                      placeholder="Enter your review"
+                      value={reviewMessage}
+                      onChange={(e) => setReviewMessage(e.target.value)}
+                    ></textarea>
+                    <div className="flex justify-end space-x-2">
+                      <button
+                        className="bg-gray-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-gray-600 transition duration-150 ease-in-out"
+                        onClick={() => setShowReviewModal(false)}
+                      >
+                       {t('cancel')}
+                      </button>
+                      <button
+                        className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
+                        onClick={() => handleReviewSubmit(job.id)}
+                      >
+                        {t('submit')}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
               </div>
             )}
             <div className="mt-4 flex justify-end space-x-2">
