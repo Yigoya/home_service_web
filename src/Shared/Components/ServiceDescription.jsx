@@ -30,7 +30,7 @@ const ServiceDescription = ({ title, description }) => {
   }, [title, description]);
 
   return (
-    <div className="flex flex-col md:flex-row items-center mx-8 bg-blue-100 py-6 mt-12 rounded-lg shadow-md">
+    <div className="flex flex-col md:flex-row items-center bg-blue-100 py-6 mt-6 rounded-lg shadow-md">
       {/* Image Section */}
       <div className="w-full md:w-1/2 mb-4 md:mb-0 lg:ml-80 ml-0 px-8 lg:px-0  ">
         <img
