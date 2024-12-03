@@ -15,13 +15,12 @@ const NavBar = () => {
   };
 
   return (
-    <div className="bg-gradient-to-l from-gray-900 to-gray-500 text-white px-5 md:px-36 py-2 fixed top-0 left-0 w-full z-50">
+    <div className="bg-white text-black px-5 md:px-36 pt-6 fixed  top-0 left-0 w-full z-50 shadow-sm">
       <div className="flex justify-between items-center">
         {/* Logo and Company Name */}
         <div>
-          <Link to="/" className="flex items-center">
-            <img className="w-8 h-8 md:w-10 md:h-10" src={logo1} alt="Logo" />
-            <p className="ml-3">Company Name</p>
+          <Link to="/" className="flex items-center mt-4">
+            <p className="ml-3">Moyategna</p>
           </Link>
         </div>
           <div className="md:hidden">
@@ -71,9 +70,7 @@ const NavBar = () => {
       {isOpen && (
         <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
           <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
-          <Link to="/technician-registration" onClick={() => setIsOpen(false)}>
-            Become a Technician
-          </Link>
+         
         </div>
       )}
     </div>
