@@ -30,12 +30,21 @@ const Landing = () => {
       const response = await axios.get(`${API_URL}/admin/services`);
       if (response.data) {
         setServices(response.data);
+        console.log(response.data);
         setSelectedService(response.data[0]);
       }
     } catch (error) {
       console.error("Error fetching services:", error);
     }
   };
+  // Extracting service names and IDs from each service object to display in the dropdown
+const servicesArray = services.map(service => {
+  return service.services.map(subService => ({
+    id: subService.serviceId,
+    name: subService.name,
+  }));
+}).flat(); // Flattening the nested arrays into a single array
+console.log(servicesArray, "servicesArray");
 
   useEffect(() => {
     fetchServices();
@@ -66,16 +75,18 @@ const Landing = () => {
       setIsDropdownOpen(false);
     }
   };
-  const filteredServices = services.filter((service) => {
+  const filteredServices = servicesArray.filter(service => {
     const serviceName = service.name || ""; // Use an empty string if name is undefined
     return serviceName.toLowerCase().includes(searchText.toLowerCase());
   });
+  
   
 
   // Select service handler
   const handleServiceSelect = (service) => {
     setSelectedService(service);
   };
+  console.log(services, "services"); ;
 
   return (
     <div className="font-sans">
@@ -91,9 +102,9 @@ const Landing = () => {
           {/* <p className="text-sm text-gray-500 mb-6 text-center">{t("which")}</p> */}
 
           {/* Search Dropdown */}
-          <div className="lg:w-1/2 w-96">
+          <div className="lg:w-1/2  w-96">
           <div className="relative">
-            <div className="flex items-center bg-white text-gray-700 rounded-full border border-gray-300 shadow-md p-6">
+            <div className="flex items-center bg-gray-100 text-gray-700 rounded-2xl border border-gray-300 shadow-md px-6 py-4">
               <input
                 type="text"
                 placeholder={t("search_services")}
@@ -101,47 +112,50 @@ const Landing = () => {
                 onChange={handleSearchChange} // updated to use handleSearchChange
                 onFocus={() => setIsDropdownOpen(true)}
                 onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-                className="flex-grow outline-none bg-transparent text-sm placeholder-gray-500"
+                className="flex-grow inline-block outline-none bg-transparent text-sm placeholder-gray-500"
               />
               <FiSearch
                 size={20}
                 className="cursor-pointer  hover:text-blue-500"
                 onClick={() => sendSearchToBackend(searchText)}
               />
+            
             </div>
-
+           
             {/* Dropdown Suggestions */}
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
-                {filteredServices.length > 0 ? (
-                  filteredServices.map((service) => (
-                    <Link
-                      key={service.id}
-                      to={`/technician-list/${service.id}`}
-                      onClick={() => setIsDropdownOpen(false)}
-                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
-                    >
-                      {service.name}
-                    </Link>
-                  ))
-                ) : (
-                  <div className="px-4 py-2 text-sm text-gray-500">
-                    {t("no_results_found")}
-                  </div>
-                )}
-              </div>
-            )}
+        <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
+          {filteredServices.length > 0 ? (
+            filteredServices.map((service) => (
+              <Link
+                key={service.id}
+                to={`/technician-list/${service.id}`}
+                onClick={() => setIsDropdownOpen(false)}
+                className="block px-4 py-2 hover:bg-gray-100 text-sm"
+              >
+                {service.name}
+              </Link>
+            ))
+          ) : (
+            <div className="px-4 py-2 text-sm text-gray-500">
+              {t("no_results_found")}
+            </div>
+          )}
+        </div>
+        
+      )}
+      
           </div>
         </div>
       </div>
             <div className="flex justify-center mb-8">
               Are you a Worker?
-            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-gray-500 px-3 hover:text-black hover:underline">
+            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-blue-500 px-3 hover:text-blue-600 hover:underline">
                Apply Now
           </Link>
             </div>
         {/* Service Section */}
-        <div className=" py-8 lg:mx-52">
+        <div className=" pb-8 lg:mx-52">
           <div className="container ">
             {selectedService && (
               <>

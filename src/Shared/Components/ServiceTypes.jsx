@@ -2,7 +2,7 @@
 import React from "react";
 
 const ServiceTypes = ({ types }) => {
-  const typees = types[0]
+  const typees = types[0];
   return (
     <div className="flex flex-wrap gap-4 py-4">
       {typees.map((type, index) => (
