@@ -27,7 +27,7 @@ const ServiceSelector = ({ services, selectedService, onSelect }) => {
   ];
 
   return (
-    <div className="flex overflow-x-auto space-x-4 py-4 ">
+    <div className="flex overflow-x-auto space-x-4 py-4 max-md:px-8 ">
       {services.map((service, index) => (
         <button
           key={service.id}
