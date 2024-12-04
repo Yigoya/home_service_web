@@ -38,7 +38,7 @@ const Testimonials = () => {
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}
-            className={`border p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 ${
+            className={`border border-gray-500 p-4 rounded-lg  transform transition-transform duration-300 hover:scale-105 ${
               testimonial.id % 2 === 0 ? "w-84" : "w-80"
             }`}
           >
