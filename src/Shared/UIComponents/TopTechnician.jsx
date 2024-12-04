@@ -14,7 +14,7 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
   const toggleBio = () => setShowFullBio(!showFullBio); // Toggle bio state
 
   return (
-    <div className="w-80 bg-white rounded-lg shadow-lg p-2 py-4 text-center mx-4 flex flex-col justify-between">
+    <div className="w-80 bg-white rounded-lg shadow-lg p-2 py-4 text-center mx-4 my-4 flex flex-col justify-between">
       <div className="flex flex-col items-center mb-4">
         <img
            src="https://static.vecteezy.com/system/resources/previews/038/974/578/non_2x/ai-generated-professional-portrait-of-a-competent-woman-free-photo.jpg"//{profileImage}
