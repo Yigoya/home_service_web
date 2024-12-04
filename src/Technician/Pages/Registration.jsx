@@ -170,7 +170,7 @@ function Registration() {
   , []);
 
   return (
-    <div className='w-full min-h-screen'>
+    <div className='w-full mt-24 min-h-screen'>
       <div className="flex flex-col md:flex-row mx-4 md:mx-44 my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
         <div className="md:w-1/2 lg:p-8 py-8 bg-white rounded-xl">

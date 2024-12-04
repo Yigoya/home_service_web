@@ -88,7 +88,7 @@ const TechnicianProfile = () => {
 
   return (
     <div className="bg-[#EBEBEB] min-h-screen">
-      <TechnicianNavBar className="sticky top-0 z-50" />
+      <TechnicianNavBar />
       <div className="relative">
         {/* Mobile Menu Button */}
         <button
@@ -108,11 +108,11 @@ const TechnicianProfile = () => {
         )}
 
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-6 pt-20">
+          <div className="flex flex-col lg:flex-row pt-20">
             {/* Sidebar */}
             {customer && (
               <aside
-                className={`fixed inset-y-0 left-0 z-40 w-[300px] transition-transform duration-300 lg:relative lg:w-1/4 ${
+                className={`max-md:fixed inset-y-0 max-md:left-0 max-md:z-40  transition-transform duration-300 lg:relative lg:mr-7 ${
                   isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                 }`}
               >
@@ -126,7 +126,7 @@ const TechnicianProfile = () => {
             )}
 
             {/* Main Content */}
-            <main className="flex-1 lg:w-3/4">
+            <main className="flex-1">
               <ProfileContent jobs={services} />
             </main>
           </div>

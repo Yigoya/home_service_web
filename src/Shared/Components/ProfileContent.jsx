@@ -85,7 +85,7 @@ export default function ProfileContent({ jobs }) {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status === 200 && status !== "COMPLETED") {
+      if (response.status === 200) {
         window.location.reload();
       } else {
         console.error('Failed to update job status');
@@ -96,13 +96,13 @@ export default function ProfileContent({ jobs }) {
   };
 
   return (
-    <div className={`bg-white h-screen lg:mr-16 lg:h-screen rounded-lg shadow-lg p-6 ${customer ? 'mt-16' : ''}`}>
+    <div className={`bg-white h-screen lg:mr-3  rounded-lg shadow-lg p-6 ${customer ? 'mt-16' : ''}`}>
       <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
         Welcome {user.name}👋
       </h1>
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {filteredJobs.map((job) => (
-          <div key={job.id} className="bg-gray-100 px-6 py-4 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
+          <div key={job.id} className="bg-gray-100 px-6 py-2 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="lg:flex items-center mb-4 md:mb-0">
                 <div className='flex'>
@@ -139,14 +139,14 @@ export default function ProfileContent({ jobs }) {
             <div className='lg:flex justify-between'>
               <div className="mt-4 lg:mr-20">
                 <p className="text-gray-600"><i className="far fa-map-marker-alt mr-1"></i> {`${job.address?.city ?? ""} ${job.address?.subcity ?? ""} ${job.address.wereda}`}</p>
-                <div className='bg-gray-200 p-4 rounded-xl'>
+                <div className='bg-gray-200 px-4 py-2 rounded-xl'>
                   <p className="font-bold mt-2 text-gray-800">Job Description</p>
                   <p className="text-gray-600">{job.description}</p>
                 </div>
               </div>
               {job.status === 'COMPLETED' && job.review && (
-                <div className="mt-4 bg-gray-200 p-2 lg:p-4 rounded-lg">
-                  <div className="flex items-center mb-2">
+                <div className="mt-4 bg-gray-200 p-2  rounded-lg">
+                  <div className="flex items-center">
                     <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
@@ -214,7 +214,7 @@ export default function ProfileContent({ jobs }) {
               </div>
             )}
             <div className="mt-4 flex justify-end space-x-2">
-            {job.status === 'COMPLETED' && (
+            {job.status === 'COMPLETED' && !job.review && (
               <div className="mt-4">
                 <button
                   className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
