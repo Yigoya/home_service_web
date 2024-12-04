@@ -30,7 +30,7 @@ export default function SideBar({ customerInfo }) {
   ];
 
   return (
-    <div className="bg-white lg:h-screen lg:ml-16 rounded-lg shadow-lg p-6 space-y-6">
+    <div className="bg-white lg:h-screen lg:ml-1 rounded-lg shadow-lg p-6 space-y-6">
       <div className="flex flex-col items-center">
         <img
           src={logo1}
