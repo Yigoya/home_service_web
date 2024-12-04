@@ -26,7 +26,7 @@ const NavBar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white focus:outline-none"
+              className="text-black focus:outline-none"
               aria-label="Toggle Menu"
             >
               <svg

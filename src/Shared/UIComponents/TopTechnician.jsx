@@ -14,16 +14,35 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
   const toggleBio = () => setShowFullBio(!showFullBio); // Toggle bio state
 
   return (
-    <div className="w-80 bg-white rounded-lg shadow-lg p-6 py-20 text-center mx-4 flex flex-col justify-between">
-      <div className="flex items-center mb-4">
+    <div className="w-80 bg-white rounded-lg shadow-lg p-2 py-4 text-center mx-4 flex flex-col justify-between">
+      <div className="flex flex-col items-center mb-4">
         <img
-          src={profileImage}
+           src="https://static.vecteezy.com/system/resources/previews/038/974/578/non_2x/ai-generated-professional-portrait-of-a-competent-woman-free-photo.jpg"//{profileImage}
           alt={name}
-          className="w-20 h-20 rounded-full mr-1"
+          className=" rounded-2xl px-2 mr-1"
         />
-        <div className="text-left p-4 px-8">
-          <h2 className="text-lg font-semibold mb-1">{name}</h2>
-          <div className="flex mb-1 text-yellow-500">
+        <div className="">
+        <div className="text-left  px-8  items-senter ">
+          <h2 className="text-lg font-semibold mt-4 flex  ">{name}</h2>
+          <div className="mt-2  mb-4">
+            {services && services.length > 0 ? (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {services.map((service, index) => (
+                  <span
+                    key={index}
+                    className=" py-1 text-sm font-normal rounded-xl"
+                  >
+                    {service.name}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-sm">{t('No services available')}</p>
+            )}
+          </div>
+        </div>
+        
+          <div className="  text-yellow-500">
             {[...Array(5)].map((_, i) => (
               <i
                 key={i}
@@ -33,12 +52,13 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
               ></i>
             ))}
           </div>
-          <p className="text-sm text-gray-600">{t('rating')}: {rating || "N/A"}</p>
+          {/* <p className="text-sm text-gray-600 mt-6">{t('rating')}: {rating || "N/A"}</p> */}
         </div>
       </div>
-      <p className="text-gray-600 mt-3 mb-4 text-sm">
+      {/* <p className="text-gray-600   text-sm">
         {serviceCount} {t('service')}
-      </p>
+      </p> */}
+      
       <p className="text-gray-500 text-sm mb-6 leading-relaxed">
         {showFullBio ? bio : truncatedBio}
         <span

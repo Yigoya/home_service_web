@@ -33,20 +33,24 @@ const Testimonials = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-8">{t('testmony')}</h2>
-      <div className="lg:grid lg:grid-cols-2 lg:gap-4">
+      <h2 className="text-3xl font-bold mb-6">{t('testmony')}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}
-            className="border p-4 rounded-lg mb-4 shadow-md transform transition-transform duration-300 hover:scale-105"
+            className={`border p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 ${
+              testimonial.id % 2 === 0 ? "w-84" : "w-80"
+            }`}
           >
-            <h3 className="text-lg font-bold mb-2">{testimonial.name}</h3>
-            <div className="flex items-center mb-2">
-              {[...Array(testimonial.rating)].map((_, index) => (
-                <span key={index} className="text-yellow-500">★</span>
-              ))}
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-bold">{testimonial.name}</h3>
+              <div className="flex">
+                {[...Array(testimonial.rating)].map((_, index) => (
+                  <span key={index} className="text-yellow-500">★</span>
+                ))}
+              </div>
             </div>
-            <p className="text-gray-600">{testimonial.review}</p>
+            <p className="text-gray-600 overflow-hidden">{testimonial.review}</p>
           </div>
         ))}
       </div>

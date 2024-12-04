@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import faq from "../../assets/FAQ.jpg";
+import { useTranslation } from 'react-i18next';
 const FAQ = () => {
+  const { t } = useTranslation();
   const [openFAQ, setOpenFAQ] = useState(null);
 
   // Define FAQ items directly in the component
@@ -28,7 +30,7 @@ const FAQ = () => {
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6">FAQ</h2>
+      <h2 className="text-3xl font-bold mb-6">{t('faq')}</h2>
       <div className="flex space-x-4">
         {/* Image Section */}
         <div className="lg:w-1/2 hidden lg:block">
