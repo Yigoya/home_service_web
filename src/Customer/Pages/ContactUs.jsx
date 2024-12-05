@@ -87,7 +87,7 @@ function ContactUs() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left part - Form */}
-          <div className="md:w-1/2 p-8">
+          <div className="md:w-1/2  p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('contact')}</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
