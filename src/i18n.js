@@ -6,7 +6,8 @@ const resources = {
   en: {
     translation: {
       "login":"Login",
-      "become_tech":"Become a Technician",
+      "become_tech":"Are you a Worker",
+      "applay_now":"Apply Now",
       "choose_your_best": "Choose Your Best",
       "our_service":"Our Services",
       "our_top_technicians":"Our Top Technicians",
@@ -53,8 +54,7 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "Every Service That",
-      "you_will_need": "You Will Need",
+      "every_service": "All in One Home Services, On Demand!",
       "search_services": "search services . . . .",
       "our-servises": "Our Services",  
       "pending":"Pending",
@@ -100,8 +100,12 @@ const resources = {
       "reg":"Register",
       "verfy_reg":"Verfy Your Registration",
       "Start_now":"Start Your Job",
-
-
+      "why":"Why choose Us",
+      "one_year":"1 month quality guarantee",
+      "time_sche":"Flexible scheduling & punctuality",
+      "trust":"Trusted & certified technicians ",
+      "faq":"FAQ"
+      
      
       
     }
@@ -109,7 +113,8 @@ const resources = {
   am: {
     translation: {
       "login":"ይግቡ",
-      "become_tech":"ለባለሞያነት ይመዝገቡ",
+      "become_tech":"ባለሞያ ኖት",
+      "applay_now":"ዛሬውኑ ይመዝገቡ",
       "choose_your_best": "ባለሙያ ይምረጡ",
       "our_service":"የምንሰጣቸው አገልግሎቶች",
       "our_top_technicians":"ተመራጭ ባለሙያዎቻችን",
@@ -157,8 +162,7 @@ const resources = {
         "kirkos": "ቂርቆስ",
         "lideta": "ልደታ"
       },
-      "every_service": "የሚያስፈልጎትን አገልግሎት",
-      "you_will_need": "ከ እኛ ዘንድ ያግኙ",
+      "every_service": "የሚያስፈልጎትን አገልግሎት ሁሉ ከአንድ  ስፍራ",
       "search_services": "አገልግሎት ይምረጡ",
       "our-servises": "የምንሰጣቸው አገልግሎቶች",
       "pending":"በሂደት ላይ ያለ  ",
@@ -203,6 +207,11 @@ const resources = {
       "reg":"ማስረጃዎን ይሟሉ",
       "verfy_reg":"ይመዝገቡ ",
       "Start_now":"ዛሬውኑ ስራዎን ይጀምሩ",
+      "why":"ለምን ይመርጡናል",
+      "one_year":"ጥራትን ከዋስትና",
+      "time_sche":"ቀላል ቀጠሮ ከቅልጥፍና ጋር",
+      "trust":"ታማኝ እና ብቁ አገልጋዮች ",
+      "faq":"የደንበኞች ጥያቄ"
   }
   }
   }

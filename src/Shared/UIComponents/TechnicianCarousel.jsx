@@ -47,7 +47,7 @@ const TechnicianCarousel = () => {
 
   return (
     <div className="flex justify-center bg-gray-50 py-2">
-      <div className="max-w-5xl w-full overflow-x-auto flex space-x-4 py-4 scrollbar-hide">
+      <div className="max-w-5xl w-full overflow-x-auto lg:flex   space-x-4 py-4 scrollbar-hi">
         {technicians.map((technician) => (
           <TopTechnician key={technician.id} {...technician} />
         ))}
