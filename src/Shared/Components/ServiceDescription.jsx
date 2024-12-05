@@ -41,7 +41,7 @@ const ServiceDescription = ({ title, description }) => {
       </div>
 
       {/* Text Section */}
-      <div className="absolute w-full md:w-96  bg-white p-12 lg:ml-4  rounded-md shadow-md ">
+      <div className="lg:absolute  md:w-96   lg:bg-white p-12 lg:ml-4 rounded-md lg:shadow-md ">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">{title}</h2>
         <ul className="list-disc list-inside text-gray-600 space-y-2">
           {description.split(".").map((item, index) =>

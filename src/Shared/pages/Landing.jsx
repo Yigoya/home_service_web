@@ -92,8 +92,8 @@ console.log(servicesArray, "servicesArray");
     <div className="font-sans">
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
-        <div className="flex flex-col justify-center items-center pt-44 pb-8">
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-16 text-center">
+        <div className="flex flex-col justify-center items-center px-8 lg:px-0 pt-44 pb-8">
+          <h1 className="max-md:text-3xl lg:text-5xl font-extrabold leading-tight mb-16 text-center">
             {t('every_service')}
           </h1>
           {/* <p className="text-lg text-gray-600 mb-4 text-center">
@@ -102,9 +102,9 @@ console.log(servicesArray, "servicesArray");
           {/* <p className="text-sm text-gray-500 mb-6 text-center">{t("which")}</p> */}
 
           {/* Search Dropdown */}
-          <div className="lg:w-1/2  w-96">
+          <div className="lg:w-1/2  w-72">
           <div className="relative">
-            <div className="flex items-center bg-gray-100 text-gray-700 rounded-2xl border border-gray-300 shadow-md px-6 py-4">
+            <div className="flex items-center bg-gray-100 text-gray-700 rounded-2xl border border-gray-300 shadow-md px-6 py-3">
               <input
                 type="text"
                 placeholder={t("search_services")}
@@ -181,7 +181,7 @@ console.log(servicesArray, "servicesArray");
 
       {/* Why We Section */}
       <section className="py-12 bg-white">
-        <div className="container mx-auto px-6 lg:px-32">
+        <div className="container lg:mx-auto  lg:px-32">
           <WhyWe />
         </div>
       </section>
@@ -212,7 +212,7 @@ console.log(servicesArray, "servicesArray");
 
       {/* Contact Section */}
       <section className="py-12">
-        <div className="container mx-auto px-6 lg:px-32">
+        <div className="container mx-auto  lg:px-32">
           <Contact />
         </div>
       </section>
