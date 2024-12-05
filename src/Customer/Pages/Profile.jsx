@@ -55,12 +55,12 @@ export default function Profile() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className=" bg-gray-100 min-h-screen">
       {/* <CustomerNavBar /> */}
       
       <div className="container mx-auto px-4 py-8 lg:flex lg:space-x-4">
         {customer && (
-          <div className="lg:w-1/4 lg:mt-16 h-full mb-8 lg:mb-0">
+          <div className="lg:w-1/4 mt-16 h-full mb-8 lg:mb-0">
             <SideBar customerInfo={customer} />
           </div>
         )}
