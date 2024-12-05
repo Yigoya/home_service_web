@@ -94,7 +94,7 @@ console.log(servicesArray, "servicesArray");
       <section className="w-full bg-white text-black">
         <div className="flex flex-col justify-center items-center pt-44 pb-8">
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-16 text-center">
-            All in One Home Services, On Demand!
+            {t('every_service')}
           </h1>
           {/* <p className="text-lg text-gray-600 mb-4 text-center">
             {t("header")}
@@ -149,9 +149,9 @@ console.log(servicesArray, "servicesArray");
         </div>
       </div>
             <div className="flex justify-center mb-8">
-              Are you a Worker?
+              {t('become_tech')}?
             <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-blue-500 px-3 hover:text-blue-600 hover:underline">
-               Apply Now
+              {t('applay_now')}
           </Link>
             </div>
         {/* Service Section */}

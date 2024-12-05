@@ -9,7 +9,7 @@ const ServiceTypes = ({ types }) => {
         <button
           key={index}
           className="px-4 py-2 rounded-full border border-gray-700 text-gray-700 
-          hover:bg-blue-500 hover:text-white transition"
+          hover:bg-blue-400 hover:text-white transition"
         >
           {type.name}
         </button>
