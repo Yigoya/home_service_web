@@ -60,11 +60,11 @@ export default function Profile() {
       
       <div className="container mx-auto px-4 py-8 lg:flex lg:space-x-4">
         {customer && (
-          <div className="lg:w-1/4 lg:fixed lg:top-24 lg:left-0 h-full mb-8 lg:mb-0">
+          <div className="lg:w-1/4 lg:mt-16 h-full mb-8 lg:mb-0">
             <SideBar customerInfo={customer} />
           </div>
         )}
-        <div className="lg:w-3/4 lg:fixed lg:left-[340px]">
+        <div className="lg:w-3/4 lg:left-[340px]">
           <ProfileContent jobs={services} />
           <ToastContainer 
           className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"

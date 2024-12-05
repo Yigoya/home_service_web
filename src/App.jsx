@@ -23,6 +23,7 @@ import TechNotification from './Technician/Pages/TechNotification'
 import Footer from './Shared/Components/Footer'
 
 import 'antd/dist/reset.css';
+import UploadPaymentImage from './Technician/Pages/UploadPaymentImage'
 
 
 
@@ -34,9 +35,11 @@ function App() {
       <Router>
         
         <Routes>
+        <Route path='/tech-upload-payment' element={<UploadPaymentImage />} />
         {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
           <Route path="/" element={<TechProfile />} />
           <Route path='/tech-notification/:id' element={<TechNotification />} />
+          
             </Route>:
         <Route element ={<CustomerLayout />}>
             <Route path="/" element={<Landing />} />
