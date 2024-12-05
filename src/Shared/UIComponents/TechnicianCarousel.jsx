@@ -12,6 +12,8 @@ const TechnicianCarousel = () => {
         const response = await axios.get( HomeApi);
         const techniciansData = response.data?.topFiveTechnicians || [];
         const reviewsData = response.data?.topFiveReviews || [];
+        console.log(techniciansData, "techniciansData");
+        console.log(reviewsData, "reviewsData");
 
         // Calculate ratings for each technician
         const techniciansWithRatings = techniciansData.map((technician) => {

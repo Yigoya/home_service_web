@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useTranslation } from 'react-i18next';
+import { API_URL } from "../api";
 
 
 const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
@@ -17,7 +18,7 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
     <div className="w-80 bg-white rounded-lg shadow-lg p-2 py-4 text-center mx-4 my-4 flex flex-col justify-between">
       <div className="flex flex-col items-center mb-4">
         <img
-           src="https://static.vecteezy.com/system/resources/previews/038/974/578/non_2x/ai-generated-professional-portrait-of-a-competent-woman-free-photo.jpg"//{profileImage}
+           src={`${API_URL}/uploads/${profileImage}`} 
           alt={name}
           className=" rounded-2xl px-2 mr-1"
         />

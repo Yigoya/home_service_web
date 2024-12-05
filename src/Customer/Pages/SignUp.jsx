@@ -3,6 +3,7 @@ import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { customerSignUpApi } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
+import {message} from 'antd';
 
 const SignUp = () => {
   const [error, setError] = useState(null);
@@ -37,21 +38,22 @@ const SignUp = () => {
           'Content-Type': 'application/json'
         }
       });
-      setSuccessMessage('Signup successful! Please check your email to verify your account.');
+      message.success('Signup successful! Please check your email to verify your account.');
       setTimeout(() => {
         navigate('/verify-email');
-      }, 3000);
+      }, 1000);
       console.log('Response:', response.data);
     } catch (err) {
       console.error('Error:', err.response?.data || err.message);
-      setError(err.response?.data?.details?.join(', ') || 'An unexpected error occurred. Please try again.');
+      // setError(err.response?.data?.details?.join(', ') || 'An unexpected error occurred. Please try again.');
+      message.error(err.response?.data?.details?.join(', ') || 'An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center lg:pt-10 justify-center min-h-screen bg-gray-100">
+    <div className="flex mt-12 items-center lg:pt-10 justify-center min-h-screen bg-gray-100">
       <div className="bg-white max-md:mx-5 shadow-md rounded-lg p-5 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
