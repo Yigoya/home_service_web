@@ -34,65 +34,65 @@ const SideBar = ({ customerInfo }) => {
   };
 
   const filterButtons = [
-    { status: 'PENDING', label: t('pending'), icon: <ClockIcon className="w-4 h-4" /> },
-    { status: 'CONFIRMED', label: t('confirmed'), icon: <BellIcon className="w-4 h-4" /> },
-    { status: 'COMPLETED', label: t('completed'), icon: <CheckCircleIcon className="w-4 h-4" /> },
+    { status: 'PENDING', label: t('pending'), icon: <ClockIcon className="w-5 h-5" /> },
+    { status: 'CONFIRMED', label: t('confirmed'), icon: <BellIcon className="w-5 h-5" /> },
+    { status: 'COMPLETED', label: t('completed'), icon: <CheckCircleIcon className="w-5 h-5" /> },
   ];
 
   return (
-    <aside className="fixed top-0 bottom-0 left-0 w-64 bg-white border-r border-gray-200 flex flex-col">
+    <aside className="w-[300px]  bg-gray-50 rounded-lg border-gray-200 flex flex-col ">
       {/* Profile Section */}
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex flex-col items-center">
+      <div className="p-6 rounded-lg border-gray-200 bg-white">
+        <div className="flex flex-col items-center text-center">
           <div className="relative">
             <img
-              src={customerInfo?.profilePicture || 'https://via.placeholder.com/150'} // Fallback image
+              src={customerInfo?.profilePicture || 'https://via.placeholder.com/150'}
               alt="User Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
             />
-            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+            <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
           </div>
-          <h2 className="mt-4 text-xl font-semibold text-gray-900">{customerInfo?.name || 'N/A'}</h2>
-          <p className="text-sm text-gray-500 mt-1">{customerInfo?.email || 'N/A'}</p>
-          <p className="text-sm text-gray-500 mt-1">{customerInfo?.phoneNumber || 'N/A'}</p>
+          <h2 className="mt-4 text-lg font-semibold text-gray-900">{customerInfo?.name || 'User Name'}</h2>
+          <p className="text-sm text-gray-500">{customerInfo?.email || 'Email not available'}</p>
+          <p className="text-sm text-gray-500">{customerInfo?.phoneNumber || 'Phone not available'}</p>
         </div>
       </div>
 
       {/* Filter Buttons */}
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-        <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-          {t('filters')}
+      <nav className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+        <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+          {t('filters', 'Filters')}
         </h3>
         {filterButtons.map(({ status, label, icon }) => (
           <button
             key={status}
             onClick={() => handleFilter(status)}
-            className={`flex items-center w-full px-4 py-2 text-sm rounded-lg transition-colors duration-150 ease-in-out ${
+            className={`flex items-center w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
               activeFilter === status
                 ? 'bg-blue-500 text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`}
           >
             {icon}
-            <span className="ml-2">{label}</span>
+            <span className="ml-3">{label}</span>
           </button>
         ))}
         <button
           onClick={handleResetFilter}
-          className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-150 ease-in-out"
+          className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
         >
-          {t('reset')}
+          {t('reset', 'Reset Filters')}
         </button>
       </nav>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4 border-t border-gray-200 bg-white">
         <button
           onClick={handleLogout}
-          className="flex items-center justify-center w-full px-4 py-2 text-sm text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors duration-150 ease-in-out"
+          className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
         >
-          <LogOutIcon className="w-4 h-4 mr-2" />
-          {t('log_out')}
+          <LogOutIcon className="w-5 h-5 mr-2" />
+          {t('log_out', 'Log Out')}
         </button>
       </div>
     </aside>
