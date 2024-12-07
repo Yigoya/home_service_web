@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const BookTechnician = () => {
   const navigate = useNavigate();
+  const [loading, setloading] = useState(false);
   const [Technicain, setTechnicain] = useState({});
   const [service, setService] = useState('');
   const [scheduledDate, setscheduledDate] = useState('');
@@ -45,6 +46,7 @@ const BookTechnician = () => {
 console.log(`${SingleService}/${serviceId}`)
   const handleBooking = (e) => {
     e.preventDefault();
+    setloading(true);
     setError(null);
     setSuccess(false);
 
@@ -60,6 +62,7 @@ console.log(`${SingleService}/${serviceId}`)
 
     axios.post(TechnicianBooking, bookingData)
       .then((response) => {
+        setloading(false);
         toast("Booking successful!");
         console.log("Booking successful:", response.data);
         navigate(`/customer-profile/${customer?.id}`);
@@ -69,6 +72,7 @@ console.log(`${SingleService}/${serviceId}`)
         toast(String(error.response.data.details || "An error occurred"));
 
       });
+   
   };
 
   return (
@@ -147,8 +151,11 @@ console.log(`${SingleService}/${serviceId}`)
             />
           </div>
 
-          <button type="submit" className="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600">
-            Book the service
+          <button type="submit" 
+          className="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600"
+          disabled={loading}
+          >
+            {loading ? "Booking..." : "Book Technician"}
           </button>
           <ToastContainer />
         </form>

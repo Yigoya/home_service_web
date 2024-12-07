@@ -3,6 +3,7 @@ import axios from 'axios'
 import { format, isToday, isYesterday, isSameWeek } from 'date-fns'
 import { Bell, Mail, AlertCircle, CheckCircle, Loader2, Trash2, PieChart } from 'lucide-react'
 import { CustomerNotificationApi } from '../Api/Api'
+import LoadingPage from '../../Shared/Components/LoadingPage'
 
 const Notification = () => {
   const customer = JSON.parse(localStorage.getItem('customer'))
@@ -125,7 +126,7 @@ const Notification = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        <LoadingPage className="h-8 w-8 animate-spin text-blue-500" />
       </div>
     )
   }
