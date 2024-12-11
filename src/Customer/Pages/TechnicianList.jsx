@@ -6,6 +6,7 @@ import { Search, MapPin, Star, ChevronDown, ChevronLeft, ChevronRight } from 'lu
 import ProfileCard from '../../Shared/UIComponents/ProfileCard'
 import '../../i18n'; // Import the i18n configuration
 import {API_URL} from '../../Shared/api'
+import LoadingPage from '../../Shared/Components/LoadingPage';
 
 const TechnicianList = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const TechnicianList = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const techniciansPerPage = 6;
-
+  const [loading, setLoading] = useState(false); 
   const { id } = useParams();
 
   const locations = [
@@ -38,9 +39,11 @@ const TechnicianList = () => {
 
   useEffect(() => {
     const fetchTechnicians = async () => {
+      setLoading(true)
       try {
         const res = await axios.get(`${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`);
         setTechnicians(res.data);
+        setLoading(false);
         console.log(res.data)
       } catch (e) {
         console.error("Error fetching technicians:", e);
@@ -63,7 +66,9 @@ const TechnicianList = () => {
 
   const totalPages = Math.ceil(filteredTechnicians.length / techniciansPerPage);
   const paginatedTechnicians = filteredTechnicians.slice((currentPage - 1) * techniciansPerPage, currentPage * techniciansPerPage);
-
+  if(loading){
+    return <LoadingPage />
+  }
   return (
     <div className="container mx-auto mt-10 px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>

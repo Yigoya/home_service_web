@@ -16,9 +16,11 @@ import Contact from "../../Customer/Pages/ContactUs";
 import home from "../../assets/home.png";
 import WhyWe from "../Components/WhyWe";
 import { API_URL } from "../api";
+import LoadingPage from "../Components/LoadingPage";
 
 const Landing = () => {
   const { t} = useTranslation();
+  const [loading , setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
@@ -27,9 +29,11 @@ const Landing = () => {
   // Fetch services from the backend
   const fetchServices = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${API_URL}/admin/services`);
       if (response.data) {
         setServices(response.data);
+        setLoading(false);
         console.log(response.data);
         setSelectedService(response.data[0]);
       }
@@ -87,6 +91,9 @@ console.log(servicesArray, "servicesArray");
     setSelectedService(service);
   };
   console.log(services, "services"); ;
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="font-sans">
