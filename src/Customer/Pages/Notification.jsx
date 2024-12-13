@@ -6,8 +6,8 @@ import { CustomerNotificationApi } from '../Api/Api'
 import LoadingPage from '../../Shared/Components/LoadingPage'
 
 const Notification = () => {
-  const customer = JSON.parse(localStorage.getItem('customer'))
-  const id = customer?.id
+  const user = JSON.parse(localStorage.getItem('user'))
+  const id = user?.id
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')

@@ -24,11 +24,28 @@ import Footer from './Shared/Components/Footer'
 
 import 'antd/dist/reset.css';
 import UploadPaymentImage from './Technician/Pages/UploadPaymentImage'
+import { requestNotificationPermission } from './NotificationPermission'
+import { useEffect } from 'react'
+import { onMessage } from 'firebase/messaging'
 
 
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user'))
+  
+  useEffect(() => {
+
+
+      requestNotificationPermission();
+      // const unsubscribe = onMessage(messaging, (payload) => {
+      // console.log("Message received. ", payload);
+      // });
+
+
+    // initializeMessaging();
+  
+    // return () => unsubscribe();
+  }, []);
   return (
     <>
     <AuthProvider>
@@ -38,7 +55,7 @@ function App() {
         <Route path='/tech-upload-payment' element={<UploadPaymentImage />} />
         {user && user.role === "TECHNICIAN" ? <Route element ={<TechnicianLayout />}>
           <Route path="/" element={<TechProfile />} />
-          <Route path='/tech-notification/:id' element={<TechNotification />} />
+          <Route path='notification/:id' element={<Notification />} />
           
             </Route>:
         <Route element ={<CustomerLayout />}>
@@ -55,7 +72,7 @@ function App() {
             <Route path="/verify-email"  element={<VerificationPage />} />
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
-            <Route path='customer-notification/:id' element={<Notification />} />
+            <Route path='notification/:id' element={<Notification />} />
             
           </Route>
 }       
