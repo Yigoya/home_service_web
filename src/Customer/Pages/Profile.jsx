@@ -6,6 +6,7 @@ import ProfileContent from '../../Shared/Components/ProfileContent';
 import { CustomerIdentity, CustomerJobs } from '../Api/Api';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingPage from '../../Shared/Components/LoadingPage';
 export default function Profile() {
   
   const { id } = useParams();
@@ -37,9 +38,7 @@ export default function Profile() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
+     <LoadingPage />
     );
   }
 
@@ -55,12 +54,12 @@ export default function Profile() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className=" bg-gray-100 min-h-screen">
       {/* <CustomerNavBar /> */}
       
       <div className="container mx-auto px-4 py-8 lg:flex lg:space-x-4">
         {customer && (
-          <div className="lg:w-1/4 lg:mt-16 h-full mb-8 lg:mb-0">
+          <div className="lg:w-1/4 mt-16 h-full mb-8 lg:mb-0">
             <SideBar customerInfo={customer} />
           </div>
         )}
