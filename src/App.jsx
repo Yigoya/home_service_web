@@ -24,6 +24,8 @@ import Footer from './Shared/Components/Footer'
 
 import 'antd/dist/reset.css';
 import UploadPaymentImage from './Technician/Pages/UploadPaymentImage'
+import ForgotPassword from './Shared/pages/ForgotPassword'
+import ResetPassword from './Shared/pages/ResetPassword'
 
 
 
@@ -56,6 +58,8 @@ function App() {
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
             <Route path='customer-notification/:id' element={<Notification />} />
+            <Route path='forgot-password' element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             
           </Route>
 }       
