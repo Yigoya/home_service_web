@@ -55,6 +55,10 @@ console.log(servicesArray, "servicesArray");
   }, []);
 
   // Handle search submission
+
+
+
+  
   const sendSearchToBackend = async (query) => {
     if (!query) return;
     try {
