@@ -6,8 +6,10 @@ import { API_URL } from '../../Shared/api';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 const BookTechnician = () => {
+   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [Technicain, setTechnicain] = useState({});
@@ -89,7 +91,7 @@ console.log(`${SingleService}/${serviceId}`)
         </div>
 
         <form onSubmit={handleBooking} className="mt-6">
-          <label className="block text-gray-700 mb-2">scheduledDate</label>
+          <label className="block text-gray-700 mb-2">{t('scheduled_date')}</label>
           <div className="flex items-center border border-gray-300 rounded-md p-2">
             <input
               type="date"
@@ -102,7 +104,7 @@ console.log(`${SingleService}/${serviceId}`)
           </div>
 
           <div className="mt-4">
-            <label className="block text-gray-700 mb-2">Address</label>
+            <label className="block text-gray-700 mb-2">{t('address')}</label>
             <div className="flex space-x-2">
               <div className="flex items-center border border-gray-300 rounded-md p-2 flex-grow">
                 <select
@@ -111,7 +113,7 @@ console.log(`${SingleService}/${serviceId}`)
                   className="flex-grow outline-none text-gray-600"
                   required
                 >
-                  <option value="">Select sub city</option>
+                  <option value="">{t('select_subcity')}</option>
                   <option value="Akaki Kality">Akaki Kality</option>
                   <option value="Bole">Bole</option>
                   <option value="Lideta">Lideta</option>
@@ -125,7 +127,7 @@ console.log(`${SingleService}/${serviceId}`)
                   className="flex-grow outline-none text-gray-600"
                   required
                 >
-                  <option value="">Select wereda</option>
+                  <option value="">{t('select_wereda')}</option>
                   <option value="wereda 1">wereda 1</option>
                   <option value="wereda 2">wereda 2</option>
                   <option value="wereda 3">wereda 3</option>
@@ -140,7 +142,7 @@ console.log(`${SingleService}/${serviceId}`)
           </div>
 
           <div className="mt-4">
-            <label className="block text-gray-700 mb-2">Describe the job</label>
+            <label className="block text-gray-700 mb-2">{t('des_job')}</label>
             <textarea
               value={description}
               onChange={(e) => setdescription(e.target.value)}

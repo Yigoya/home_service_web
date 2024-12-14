@@ -6,8 +6,10 @@ import {  SingleTech, techDetailApi } from '../Api/Api';
 import { API_URL } from '../../Shared/api';
 import { logo1 } from '../../Shared/Components/Images';
 import LoadingPage from '../../Shared/Components/LoadingPage';
+import { useTranslation } from 'react-i18next';
 
 const TechnicianDetail = () => {
+  const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const [technician, setTechnician] = useState({});
   const { id } = useParams();
@@ -81,11 +83,11 @@ const TechnicianDetail = () => {
                 </Link>
               </div>
             </div>
-             
+            
               <div className="mt-2 flex flex-wrap items-center text-gray-500">
                 <div className="flex items-center mr-4 mb-2">
                   <FaStar className="text-yellow-400 mr-1" />
-                  <span>{technician.rating ? technician.rating.toFixed(1) : 0.0} Rating</span>
+                  <span>{technician.rating ? technician.rating.toFixed(1) : 0.0} {t('rating')}</span>
                 </div>
                 <div className="flex items-center mr-4 mb-2">
                   <FaBriefcase className="mr-1" />

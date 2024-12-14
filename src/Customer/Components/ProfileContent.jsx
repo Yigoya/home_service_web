@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { logo1 } from '../../Shared/Components/Images';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { API_URL } from '../../Shared/api';
+import { useTranslation } from 'react-i18next';
 
 const ProfileContent = ({jobs}) => {
+    const { t} = useTranslation();
   const { filterStatus } = useContext(FilterContext);
   const jobArray = Array.isArray(jobs.content) ? jobs.content : [];
 
@@ -20,7 +22,7 @@ const ProfileContent = ({jobs}) => {
       <main className="bg-white rounded-2xl lg:h-screen lg:mr-10 mt-3  p-6 lg:p-8">
         <h1 className="text-lg lg:text-xl font-semibold mb-6">
          
-        {filteredJobs.length === 0 ? <p className='flex justify-center items-center '>No booking yet</p> : <p> Track your activity on this platform</p> }
+        {filteredJobs.length === 0 ? <p className='flex justify-center items-center '>{t('no_booking')}</p> : <p> {t('track')}</p> }
         </h1>
 
         <div className="space-y-6 h-96 overflow-y-auto">
@@ -53,12 +55,12 @@ const ProfileContent = ({jobs}) => {
                   <i className="far fa-map-marker-alt mr-1"></i> {job.address?.city ?? "none"}
 
                   </span>
-                  <p className="font-medium mt-5">Job Description</p>
+                  <p className="font-medium mt-5">{t('job_des')}</p>
                   <p className="my-1 text-sm text-gray-700">{job.description}</p>
                 </div>
                 <div className=" justify-center lg:justify-start">
                   {(job.status === 'Pending' || job.status === 'Accepted') && (
-                    <button className="bg-blue-500 px-4 lg:px-[10px] mt-2 rounded-lg text-white font-bold">Edit</button>
+                    <button className="bg-blue-500 px-4 lg:px-[10px] mt-2 rounded-lg text-white font-bold">{t('edit')}</button>
                   )}
                   {(job.status === 'Accepted') && (
                     <select
@@ -71,9 +73,9 @@ const ProfileContent = ({jobs}) => {
                       }}
                       className="mt-2 text-md rounded-lg py-1 px-4 lg:px-10 underline cursor-pointer"
                     >
-                      <option value="started">Started</option>
+                      <option value="started">{t('started')}</option>
                       <option value="halted">Halted</option>
-                      <option value="Completed">Completed</option>
+                      <option value="Completed">{t('completed')}</option>
                     </select>
                   )}
                 </div>
@@ -81,7 +83,7 @@ const ProfileContent = ({jobs}) => {
               {job.status === 'Completed' && (
                 <div className="mt-10">
                   <div className="flex flex-col items-center lg:flex-row lg:items-center">
-                    <p className="text-lg font-semibold">Review</p>
+                    <p className="text-lg font-semibold">{t('review')}</p>
                     <div className="mt-2 lg:ml-4">
                       {[...Array(5)].map((_, i) => (
                         <i
@@ -95,7 +97,7 @@ const ProfileContent = ({jobs}) => {
                 </div>
               )}
               {(job.status === 'Pending' || job.status === 'Accepted') && (
-                <p className="mt-2 text-md text-red-500 underline cursor-pointer">Dispute</p>
+                <p className="mt-2 text-md text-red-500 underline cursor-pointer">{t('despute')}</p>
               )}
             </div>
           ))}

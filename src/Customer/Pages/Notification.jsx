@@ -4,8 +4,10 @@ import { format, isToday, isYesterday, isSameWeek } from 'date-fns'
 import { Bell, Mail, AlertCircle, CheckCircle, Loader2, Trash2, PieChart } from 'lucide-react'
 import { CustomerNotificationApi } from '../Api/Api'
 import LoadingPage from '../../Shared/Components/LoadingPage'
+import { useTranslation } from 'react-i18next';
 
 const Notification = () => {
+    const { t } = useTranslation();
   const customer = JSON.parse(localStorage.getItem('customer'))
   const id = customer?.id
   const [notifications, setNotifications] = useState([])
@@ -148,21 +150,21 @@ const Notification = () => {
       <div className="hidden lg:block lg:mt-16 lg:w-1/4">
         <div className="fixed w-1/4 max-w-xs space-y-6">
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold mb-4">Notification Stats</h2>
+            <h2 className="text-xl font-bold mb-4">{t('notification_status')}</h2>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Total Notifications</span>
+                <span className="text-gray-600">{t('total_notification')}</span>
                 <span className="font-semibold">{stats.total}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Unread Notifications</span>
+                <span className="text-gray-600">{t('unread_notification')}</span>
                 <span className="font-semibold text-blue-500">{stats.unread}</span>
               </div>
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold mb-4">Notification Types</h2>
+            <h2 className="text-xl font-bold mb-4">{t('notification_type')}</h2>
             <div className="space-y-2">
               {Object.entries(stats.types).map(([type, count]) => (
                 <div key={type} className="flex items-center">
@@ -185,18 +187,18 @@ const Notification = () => {
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
+            <h2 className="text-xl font-bold mb-4">{t('quick_action')}</h2>
             <button 
               onClick={markAllAsRead}
               className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300 mb-2"
             >
-              Mark All as Read
+              {t('mark_all')}
             </button>
             <button 
               onClick={clearAllNotifications}
               className="w-full bg-red-500 text-white rounded-md py-2 px-4 hover:bg-red-600 transition duration-300"
             >
-              Clear All Notifications
+             {t('clear_all')}
             </button>
           </div>
         </div>
@@ -204,7 +206,7 @@ const Notification = () => {
 
       {/* Notifications Section */}
       <div className="lg:w-3/4">
-        <h1 className="text-2xl font-bold mb-6">Notifications</h1>
+        <h1 className="text-2xl font-bold mb-6">{t('notification')}</h1>
         {Object.entries(groupedNotifications).map(([date, notifications]) => (
           <div key={date} className="mb-8">
             <h2 className="text-lg font-semibold mb-4 text-gray-600">{date}</h2>
@@ -234,7 +236,7 @@ const Notification = () => {
                           className="text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out mb-2"
                           aria-label="Mark as read"
                         >
-                          Mark as read
+                          {t('mark')}
                         </button>
                       )}
                       <button
