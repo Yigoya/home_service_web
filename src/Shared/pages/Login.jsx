@@ -1,12 +1,14 @@
 import React from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
-import { loginApi } from '../api';
-import { Link, useNavigate } from 'react-router-dom';
+import { loginApi, socialLoginApi } from '../api';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
+import { auth, GoogleAuthProvider, signInWithPopup } from '../../firebase';
 const Login = () => {
+  const FCMToken = localStorage.getItem('FCMToken')
   const { t } = useTranslation();
   const { login } = React.useContext(AuthContext);
   const [error, setError] = React.useState(null);
@@ -14,7 +16,7 @@ const Login = () => {
   const [formData, setFormData] = React.useState({
     email: '',
     password: '',
-    FCMToken :"dKB-Qr1oRlKZmcpB5bM7Ng:APA91bEDkEgF_hC8y6NgIFWBQ-Tq6w5dSp3ALhleFaPRQ2MDV_cwmP-YVQU2NHZ5y38H76kZrXfhVBRuquK7JLK8XgViuhQvaSpb3UkalYLo-TzsvceQpvg",
+    FCMToken : FCMToken,
     deviceType : "Samsung",
     deviceModel : "M12",
     operatingSystem : "ANDROID"
@@ -33,6 +35,55 @@ const Login = () => {
   const refreshPage = () => {
     window.location.reload(false);
   }
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+
+      // Get user info
+      const user = result.user;
+      console.log('User Info:', user);
+
+      // Get access token (optional)
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const email = user.email;
+      const token = await user.getIdToken(true);
+      console.log('Access Token:', token);
+      // Perform backend token verification or additional logic if needed
+      try {
+        formData.idToken = token;
+        formData.email = email;
+        formData.provider = 'GOOGLE';
+        const response = await axios.post(socialLoginApi, formData);
+        console.log('Response:', response);
+        if (response.data.user.status === "INACTIVE") {
+          setError("Verify your email first")
+        } else {
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          localStorage.setItem('customer', JSON.stringify(response.data.customer));
+          localStorage.setItem('technician', JSON.stringify(response.data.technician));
+          const next = localStorage.getItem('next')
+          localStorage.removeItem('next')
+          message.success('Login successful!');
+          login();
+          
+          navigate(next ? next : '/')
+          refreshPage();
+        }
+      } catch (err) {
+        console.error('Error:', err.response.data.details.join(', '));
+        message.error(err.response.data.details.join(', '));
+      } finally {
+        setIsLoading(false);
+      }
+      
+    } catch (error) {
+      console.error('Error during sign-in:', error.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,7 +187,7 @@ const Login = () => {
         </div>
 
         <div className="lg:flex justify-between lg:space-x-2">
-          <button className="w-full mb-2 lg:mb-0 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <button onClick={handleGoogleSignIn} className="w-full mb-2 lg:mb-0 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             <FaGoogle className="inline-block mr-2 text-red-500" />
             {t('sign_google')}
           </button>

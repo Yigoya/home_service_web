@@ -9,8 +9,9 @@ export default function CustomerNavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const Customer = JSON.parse(localStorage.getItem("customer") || "{}");
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
   const profileLink = `/customer-profile/${Customer?.id || ''}`;
-  const notificationLink = `/customer-notification/${Customer?.id || ''}`;
+  const notificationLink = `/notification/${user?.id || ''}`;
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';
