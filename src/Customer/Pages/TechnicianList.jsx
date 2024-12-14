@@ -30,12 +30,7 @@ const TechnicianList = () => {
     { key: "lideta", label: t("locations.lideta") }
   ];
 
-  const priceRanges = {
-    "Option A": [240, 350],
-    "Option B": [140, 250],
-    "Option C": [90, 150],
-    "Option D": [0, 90]
-  };
+ 
 
   useEffect(() => {
     const fetchTechnicians = async () => {
@@ -90,27 +85,6 @@ const TechnicianList = () => {
                 ))}
               </div>
               <button onClick={() => setSelectedRating(0)} className="text-sm text-blue-600 hover:underline">
-                Clear
-              </button>
-            </div>
-            <div className="mb-6">
-              <h3 className="font-semibold mb-2">{t('etb')}</h3>
-              <div className="space-y-2">
-                {Object.entries(priceRanges).map(([option, range], index) => (
-                  <label key={index} className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="price"
-                      value={option}
-                      checked={selectedOption === option}
-                      onChange={() => setSelectedOption(option)}
-                      className="form-radio h-4 w-4 text-blue-600"
-                    />
-                    <span className="text-gray-700">{`${range[0]} - ${range[1]} ${t('etb')}`}</span>
-                  </label>
-                ))}
-              </div>
-              <button onClick={() => setSelectedOption(null)} className="text-sm text-blue-600 hover:underline mt-2">
                 Clear
               </button>
             </div>

@@ -4,8 +4,10 @@ import axios from 'axios';
 import { customerSignUpApi } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
 import {message} from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
+  const {t} = useTranslation();
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,52 +57,52 @@ const SignUp = () => {
   return (
     <div className="flex mt-12 items-center lg:pt-10 justify-center min-h-screen bg-gray-100">
       <div className="bg-white max-md:mx-5 shadow-md rounded-lg p-5 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">{t('signup')}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700">Name</label>
+            <label className="block text-gray-700">{t('name')}</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your name"
+              placeholder={t('enter_email')}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700">Email</label>
+            <label className="block text-gray-700">{t('email')}</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder={t('enter_email')}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700">Phone Number</label>
+            <label className="block text-gray-700">{t('phone')}</label>
             <input
               type="tel"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              placeholder="Enter your phone number"
+              placeholder={t('enter_phone')}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700">Password</label>
+            <label className="block text-gray-700">{t('password')}</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your password"
+              placeholder={t('enter_password')}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               required
             />
@@ -142,18 +144,18 @@ const SignUp = () => {
         <div className="lg:flex justify-between lg:space-x-2">
           <button className="flex max-md:mb-3 items-center justify-center w-full py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-300 ease-in-out">
             <FaGoogle className="mr-2 text-red-500" />
-            Sign up with Google
+            {t('sign_google')}
           </button>
           <button className="flex items-center justify-center w-full py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-300 ease-in-out">
             <FaFacebook className="mr-2 text-blue-500" />
-            Sign up with Facebook
+            {t('sign_facebook')}
           </button>
         </div>
 
         <p className="mt-4 text-center text-gray-600">
-          Already have an account?{' '}
+          {t('yes_account')}{' '}
           <a href="/login" className="text-blue-500 hover:underline">
-            Log in
+          {t('login')}
           </a>
         </p>
       </div>

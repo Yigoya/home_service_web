@@ -104,8 +104,31 @@ const resources = {
       "one_year":"1 month quality guarantee",
       "time_sche":"Flexible scheduling & punctuality",
       "trust":"Trusted & certified technicians ",
-      "faq":"FAQ"
-      
+      "faq":"FAQ",
+      "lang":"Toggle Language",
+      "halted":"Halted",
+      "started":"Started",
+      "edit":"Edit",
+      "job_des":"Job Description",
+      "no_booking":"No Booking Yet.",
+      "track":"Track your Activity on this platform",
+      "scheduled_date":"scheduled Date",
+      "des_job":"Describe the Job",
+      "notification_status":"Notification Status",
+      "total_notification":"Total Notification",
+      "unread_notification":"Unread Notification",
+      "notification_type":"Notification Type",
+      "quick_action":"Quick Actions",
+      "mark_all":" Mark all as Read",
+      "clear_all":"clear all notifications ",
+      "notification":"Notifications",
+      "mark":"Mark as read",
+      "yr_desput":"Your Despute",
+      "reason":"Reason",
+      "sec_despute":" Your dispute has been submitted successfully!",
+      "yes_account":"Already have an acconut?",
+      "pro_tech": "Professional Technician",
+      "":""
      
       
     }
@@ -211,7 +234,31 @@ const resources = {
       "one_year":"ጥራትን ከዋስትና",
       "time_sche":"ቀላል ቀጠሮ ከቅልጥፍና ጋር",
       "trust":"ታማኝ እና ብቁ አገልጋዮች ",
-      "faq":"የደንበኞች ጥያቄ"
+      "faq":"የደንበኞች ጥያቄ",
+       "lang":"ቋንቋ ይቀይሩ",
+       "halted":"የተቋረጡ",
+       "started":"የተጀመሩ",
+       "edit":"ያስተካክሉ ",
+       "job_des":"የስራ መግለጫ",
+       "no_booking":"እስካሁን ምንም የስራ ክንውን የሎትም::",
+       "track":"የስራዎን ሂደት ከኛ ጋር ይከታተሉ::",
+       "scheduled_date":"የቀጠሮው ሰአት ",
+      "des_job":"ስለሚፈልጉት አገልግሎት ጥቂት ይንገሩን",
+      "notification_status":"የመልዕክቶ ሁኔታ ",
+      "total_notification":"አጠቃላይ መልዕክቶች",
+      "unread_notification":"ያልተነበቡ መልዕክቶች",
+      "notification_type":"  የመልዕክት አይነቶች",
+      "quick_action":"ፈጣን እርምጃዎች",
+      "mark_all":" ሁሉንም እይ",
+      "clear_all":"ሁሉንም አጥፋ ",
+      "notification":"መልዕክቶች",
+      "mark":"ምልክት አድርግ",
+      "yr_desput":"ቅሬታዎ  ",
+      "reason":"ምክንያት",
+      "sec_despute":"ቅሬታዎ በትክክል ተልኳል።",
+      "yes_account":"ከዚህ በፊት አካውንት አሎት?"
+       
+       
   }
   }
   }
