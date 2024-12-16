@@ -103,7 +103,7 @@ console.log(servicesArray, "servicesArray");
     <div className="font-sans">
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
-        <div className="flex flex-col justify-center items-center px-8 lg:px-0 pt-44 pb-8">
+        <div className="flex flex-col justify-center items-center px-8 lg:px-0 lg:pt-56 pt-36 pb-8">
           <h1 className="max-md:text-3xl lg:text-5xl font-extrabold leading-tight mb-16 text-center">
             {t('every_service')}
           </h1>
@@ -115,7 +115,7 @@ console.log(servicesArray, "servicesArray");
           {/* Search Dropdown */}
           <div className="lg:w-1/2  w-72">
           <div className="relative">
-            <div className="flex items-center bg-gray-100 text-gray-700 rounded-2xl border border-gray-300 shadow-md px-6 py-3">
+          <div className="flex items-center bg-white text-gray-700 rounded-full border border-green-700 shadow-md  ">
               <input
                 type="text"
                 placeholder={t("search_services")}
@@ -123,15 +123,19 @@ console.log(servicesArray, "servicesArray");
                 onChange={handleSearchChange} // updated to use handleSearchChange
                 onFocus={() => setIsDropdownOpen(true)}
                 onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-                className="flex-grow inline-block outline-none bg-transparent text-sm placeholder-gray-500"
+                className="flex-grow outline-none bg-transparent text-gray-500 placeholder-gray-400 text-sm py-5 px-5"
               />
+              <div className="bg-green-800 hover:bg-green-700 rounded-r-full p-5 px-8 cursor-pointer flex items-center justify-center">
               <FiSearch
                 size={20}
-                className="cursor-pointer  hover:text-blue-500"
+                className="cursor-pointer  text-white  "
                 onClick={() => sendSearchToBackend(searchText)}
               />
             
+              </div>
+             
             </div>
+
            
             {/* Dropdown Suggestions */}
             {isDropdownOpen && (
@@ -161,7 +165,7 @@ console.log(servicesArray, "servicesArray");
       </div>
             <div className="flex justify-center mb-8">
               {t('become_tech')}?
-            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-blue-500 px-3 hover:text-blue-600 hover:underline">
+            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-green-800 px-3 hover:text-green-800 hover:underline">
               {t('applay_now')}
           </Link>
             </div>

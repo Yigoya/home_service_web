@@ -110,7 +110,7 @@ const SignUp = () => {
           <button
             type="submit"
             className={`w-full py-2 ${
-              isLoading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
+              isLoading ? 'bg-gray-500' : 'bg-green-800 hover:bg-green-700'
             } text-white rounded-md transition duration-300 ease-in-out`}
             disabled={isLoading}
           >
@@ -123,7 +123,7 @@ const SignUp = () => {
                 Signing Up...
               </span>
             ) : (
-              'Sign Up'
+              t('signup')
             )}
           </button>
 
@@ -154,7 +154,7 @@ const SignUp = () => {
 
         <p className="mt-4 text-center text-gray-600">
           {t('yes_account')}{' '}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <a href="/login" className="text-green-800 hover:underline">
           {t('login')}
           </a>
         </p>

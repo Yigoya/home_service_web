@@ -54,7 +54,7 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "All in One Home Services, On Demand!",
+      "every_service": "All in One Services, On Demand!",
       "search_services": "search services . . . .",
       "our-servises": "Our Services",  
       "pending":"Pending",
@@ -128,7 +128,9 @@ const resources = {
       "sec_despute":" Your dispute has been submitted successfully!",
       "yes_account":"Already have an acconut?",
       "pro_tech": "Professional Technician",
-      "":""
+      "submit":"Submit",
+      "forgot_pass":"Forgot Password?",
+      "reset_pass":"Reset Password"
      
       
     }
@@ -256,7 +258,10 @@ const resources = {
       "yr_desput":"ቅሬታዎ  ",
       "reason":"ምክንያት",
       "sec_despute":"ቅሬታዎ በትክክል ተልኳል።",
-      "yes_account":"ከዚህ በፊት አካውንት አሎት?"
+      "yes_account":"ከዚህ በፊት አካውንት አሎት?",
+      "submit":"ላክ",
+      "forgot_pass":"ምስጢር ቁጥር ከረሱ?",
+      "reset_pass":"ምስጢር ቁጥር ይቀይሩ"
        
        
   }

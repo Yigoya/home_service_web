@@ -27,6 +27,7 @@ import UploadPaymentImage from './Technician/Pages/UploadPaymentImage'
 import { requestNotificationPermission } from './NotificationPermission'
 import { useEffect } from 'react'
 import { onMessage } from 'firebase/messaging'
+import ForgotPassword from './Shared/pages/ForgotPassword'
 
 
 
@@ -73,6 +74,8 @@ function App() {
             <Route path='/tech-verification-waiting' element={<TechVerificationPage />} />
             <Route path='/customer-profile/:id' element={<Profile />} />
             <Route path='notification/:id' element={<Notification />} />
+            <Route path='/forgot-password' element= {<ForgotPassword />} />
+            
             
           </Route>
 }       

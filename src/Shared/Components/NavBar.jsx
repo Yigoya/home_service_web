@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { logo1 } from './Images';
+import  logo1  from '../../assets/logo1.png';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe } from 'react-icons/fa';
@@ -15,12 +15,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className="bg-white text-black px-5 md:px-36 pt-6 fixed  top-0 left-0 w-full z-50 shadow-sm">
+    <div className="bg-white text-black px-5 md:px-36 pt-6 fixed  top-0 left-0 w-full z-50 shadow-">
       <div className="flex justify-between items-center">
         {/* Logo and Company Name */}
         <div>
-          <Link to="/" className="flex items-center mt-4">
-            <p className="ml-3">Moyategna</p>
+          <Link to="/" className="lg:block flex items-center mt-4 hidden">
+            <img src={logo1} className='h-24' ></img>
+            
           </Link>
         </div>
           <div className="md:hidden">
@@ -45,14 +46,14 @@ const NavBar = () => {
             </button>
           </div>
 
-          <div className="hidden md:flex space-x-7 items-center">
+          <div className="hidden md:flex space-x-7 items-center text-green-900">
             <FaGlobe
-              className="text-2xl cursor-pointer "
+              className="text-2xl cursor-pointer hover:text-green-700 "
               onClick={toggleLanguage}
               title="Toggle Language"
             />
             <Link
-              className="px-7 py-1 rounded-lg font-bold animate-pulse"
+              className="px-6 py-3 hover:bg-green-800 hover:text-white font-bold animate-pulse border border-green-700 rounded-full"
               to="/login"
             >
               {t('login')}/{t('signup')}
@@ -68,8 +69,13 @@ const NavBar = () => {
 
               {/* Mobile Menu */}
       {isOpen && (
-        <div className="flex flex-col items-start mt-4 space-y-3 md:hidden">
-          <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
+        <div className="flex flex-col items-start mt-4 space-y-3 md:hidden text-green-800">
+          <Link to="/login" onClick={() => setIsOpen(false)} className='mb-1'>{t('login')}/{t('signup')}</Link>
+          <FaGlobe
+              className="text-2xl cursor-pointer hover:text-green-700  "
+              onClick={toggleLanguage}
+              title="Toggle Language"
+            />
          
         </div>
       )}

@@ -24,20 +24,25 @@ export default function CustomerNavBar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img className="h-8 w-auto sm:h-10" src={logo1} alt="Company Logo" />
-              <span className="ml-3 text-xl font-bold">HuluMoya</span>
+               <div>
+                        <Link to="/" className="lg:block flex items-center mt-4 hidden">
+                          <img src={logo1} className='h-24' ></img>
+                          
+                        </Link>
+                </div>
+              
             </Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
             
-            <button onClick={toggleLanguage} className="text-2xl hover:text-blue-200 transition duration-150 ease-in-out" aria-label="Toggle Language">
+            <button onClick={toggleLanguage} className="text-2xl hover:text-green-800 transition duration-150 ease-in-out" aria-label="Toggle Language">
               <FaGlobe />
             </button>
 
-            <Link to={profileLink} className="text-2xl hover:text-blue-200 transition duration-150 ease-in-out"><FaUserCircle /></Link>
+            <Link to={profileLink} className="text-2xl hover:text-green-800 transition duration-150 ease-in-out"><FaUserCircle /></Link>
 
-            <Link to={notificationLink} className="text-2xl hover:text-blue-200 transition duration-150 ease-in-out" aria-label="Notifications">
+            <Link to={notificationLink} className="text-2xl hover:text-green-800 transition duration-150 ease-in-out" aria-label="Notifications">
               <FaBell />
             </Link>
           </div>
@@ -53,9 +58,9 @@ export default function CustomerNavBar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to={profileLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Profile</Link>
-            <Link to={notificationLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Notifications</Link>
-            <button onClick={toggleLanguage} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
+            <Link to={profileLink} className="block px-3 py-2 rounded-md text-base font-medium hover:hover:text-green-800 transition duration-150 ease-in-out">Profile</Link>
+            <Link to={notificationLink} className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out">Notifications</Link>
+            <button onClick={toggleLanguage} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out">
               {t('lang')}
             </button>
           </div>

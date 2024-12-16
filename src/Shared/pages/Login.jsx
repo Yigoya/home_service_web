@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { loginApi, socialLoginApi } from '../api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
@@ -153,14 +153,14 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className='text-sm lg:ml-64 text-blue-400 hover:text-blue-700  '>
+          <div className='text-sm lg:ml-64 text-green-800 hover:text-green-700  '>
           <Link to="/forgot-password">Forgot password?</Link>
           </div>
          
           
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -198,7 +198,7 @@ const Login = () => {
         </div>
 
         <p className="mt-4 text-center text-gray-600">
-         {t('account')} <a href="/customer-signup" className="text-blue-500 hover:underline">{t('signup')}</a>
+         {t('account')} <a href="/customer-signup" className="text-green-800 hover:underline">{t('signup')}</a>
         </p>
       </div>
     </div>
