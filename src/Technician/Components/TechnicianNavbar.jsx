@@ -8,16 +8,17 @@ const TechnicianNavBar = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [technician, setTechnician] = useState(null);
-
+  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     const storedTechnician = localStorage.getItem("technician");
+
     if (storedTechnician) {
       setTechnician(JSON.parse(storedTechnician));
     }
   }, []);
-
+  console.log('Technician:', technician, user);
   const profileLink = "/";
-  const notificationLink = `/tech-notification/${technician?.id || ''}`;
+  const notificationLink = `/notification/${user?.id || ''}`;
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';

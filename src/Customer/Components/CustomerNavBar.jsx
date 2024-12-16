@@ -9,8 +9,9 @@ export default function CustomerNavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const Customer = JSON.parse(localStorage.getItem("customer") || "{}");
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
   const profileLink = `/customer-profile/${Customer?.id || ''}`;
-  const notificationLink = `/customer-notification/${Customer?.id || ''}`;
+  const notificationLink = `/notification/${user?.id || ''}`;
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'am' : 'en';
@@ -24,7 +25,7 @@ export default function CustomerNavBar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img className="h-8 w-auto sm:h-10" src={logo1} alt="Company Logo" />
-              <span className="ml-3 text-xl font-bold">Company Name</span>
+              <span className="ml-3 text-xl font-bold">HuluMoya</span>
             </Link>
           </div>
 
@@ -55,7 +56,7 @@ export default function CustomerNavBar() {
             <Link to={profileLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Profile</Link>
             <Link to={notificationLink} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">Notifications</Link>
             <button onClick={toggleLanguage} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition duration-150 ease-in-out">
-              Toggle Language
+              {t('lang')}
             </button>
           </div>
         </div>

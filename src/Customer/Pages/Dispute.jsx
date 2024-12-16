@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FiAlertCircle, FiMessageSquare } from 'react-icons/fi';
 import dispute from '../../assets/dispute.jpg';
+import { useTranslation } from 'react-i18next';
 
 function Dispute() {
+   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     reason: '',
     state: '',
@@ -76,11 +78,11 @@ function Dispute() {
         <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Left part - Form */}
           <div className="md:w-1/2 p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">Your Dispute</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">{t('yr_despute')}</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
-                  Reason<span className="text-red-500">*</span>
+                {t('reason')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -101,7 +103,7 @@ function Dispute() {
 
               <div>
                 <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                  State your Dispute<span className="text-red-500">*</span>
+                {t('yr_despute')}<span className="text-red-500">*</span>
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
@@ -139,7 +141,7 @@ function Dispute() {
 
             {submitSuccess && (
               <div className="mt-4 text-sm text-green-600">
-                Your dispute has been submitted successfully!
+                {t('sec_despute')}
               </div>
             )}
           </div>
