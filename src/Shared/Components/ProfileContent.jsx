@@ -2,45 +2,63 @@ import React, { useContext, useState } from 'react';
 import { FilterContext } from '../Context/FilterContext';
 import { API_URL } from '../api';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { message, Modal, Input, Rate } from 'antd';
+import { message, Modal, Input, Rate, Pagination } from 'antd';
+
 export default function ProfileContent({ jobs }) {
   const technician = JSON.parse(localStorage.getItem('technician'));
   const customer = JSON.parse(localStorage.getItem('customer'));
   const user = JSON.parse(localStorage.getItem('user'));
   console.log(user);
   console.log(technician);
+
+  const [loading, setLoading] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewRating, setReviewRating] = useState('');
   const [reviewMessage, setReviewMessage] = useState('');
   const [currentJobId, setCurrentJobId] = useState(null);
   const [disputeTitle, setDisputeTitle] = useState('');
   const [disputeMessage, setDisputeMessage] = useState('');
-
-  // State for handling dispute modals per job
   const [showDisputeModal, setShowDisputeModal] = useState({});
-
   const { filterStatus } = useContext(FilterContext);
+
   const jobArray = Array.isArray(jobs.content) ? jobs.content : [];
-  console.log("jobArray", jobArray);
+  console.log('jobArray', jobArray);
 
   const filteredJobs = jobArray.filter((job) => {
     if (filterStatus === 'All') return true;
     return job.status === filterStatus;
   });
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  // Calculate paginated jobs
+  const totalJobs = filteredJobs.length;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedJobs = filteredJobs.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const handleReviewSubmit = async () => {
     try {
-      await axios.post(`${API_URL}/review`, {
-        bookingId: currentJobId,
-        rating: reviewRating,
-        review: reviewMessage,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      await axios.post(
+        `${API_URL}/review`,
+        {
+          bookingId: currentJobId,
+          rating: reviewRating,
+          review: reviewMessage,
         },
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       message.success('Review submitted successfully');
       setShowReviewModal(false);
@@ -52,20 +70,22 @@ export default function ProfileContent({ jobs }) {
     }
   };
 
-
   const handleDisputeSubmit = async (id) => {
     try {
-      const response = await axios.post(`${API_URL}/dispute`, {
-        bookingId: id,
-        description: disputeMessage,
-        title: disputeTitle,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      await axios.post(
+        `${API_URL}/dispute`,
+        {
+          bookingId: id,
+          description: disputeMessage,
+          title: disputeTitle,
         },
-      });
-      message.success('dispute sent succesfully successful!');
-      // Close modal after submission
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      message.success('Dispute submitted successfully!');
       setShowDisputeModal((prevState) => ({
         ...prevState,
         [id]: false,
@@ -77,14 +97,17 @@ export default function ProfileContent({ jobs }) {
 
   const updateStatus = async (status, bookingId) => {
     try {
-      const response = await axios.put(`${API_URL}/booking/update-status`, {
-        status,
-        bookingId,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      setLoading(true);
+      const response = await axios.put(
+        `${API_URL}/booking/update-status`,
+        { status, bookingId },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setLoading(false);
       if (response.status === 200) {
         window.location.reload();
       } else {
@@ -94,14 +117,13 @@ export default function ProfileContent({ jobs }) {
       console.error('Error:', error);
     }
   };
-
   return (
     <div className={`bg-white h-screen lg:mr-3  rounded-lg shadow-lg p-6 ${customer ? 'lg:mt-16' : ''}`}>
       <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
         Welcome {user.name}👋
       </h1>
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
-        {filteredJobs.map((job) => (
+        {paginatedJobs.map((job) => (
           <div key={job.id} className="bg-gray-100 px-6 py-2 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="lg:flex items-center mb-4 md:mb-0">
@@ -166,7 +188,7 @@ export default function ProfileContent({ jobs }) {
                     className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                     onClick={() => updateStatus('CANCELED', job.id)}
                   >
-                    Cancel
+                    {loading ? 'loading...' : 'cancel' }
                   </button>
                 </div>
               )}
@@ -177,13 +199,13 @@ export default function ProfileContent({ jobs }) {
                   className="bg-green-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-green-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('ACCEPTED', job.id)}
                 >
-                  Accept
+                  {loading? 'loading...' : 'Accept' }
                 </button>
                 <button
                   className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('DENIED', job.id)}
                 >
-                  Decline
+                  {loading ? 'loading...' : 'Deny' }
                 </button>
               </div>
             )}
@@ -193,13 +215,13 @@ export default function ProfileContent({ jobs }) {
                   className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('STARTED', job.id)}
                 >
-                  Start
+                  {loading ? 'loading...' : 'Start' }
                 </button>
                 <button
                   className="bg-red-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('CANCELED', job.id)}
                 >
-                  Cancel
+                  {loading ? 'loading...' : 'Cancel' }
                 </button>
               </div>
             )}
@@ -209,12 +231,12 @@ export default function ProfileContent({ jobs }) {
                   className="bg-yellow-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-yellow-600 transition duration-150 ease-in-out"
                   onClick={() => updateStatus('COMPLETED', job.id)}
                 >
-                  Complete
+                  {loading ? 'loading...' : 'Complete' }
                 </button>
               </div>
             )}
             <div className="mt-4 flex justify-end space-x-2">
-            {job.status === 'COMPLETED' && !job.review && (
+            {customer  && job.status === 'COMPLETED' && !job.review && (
               <div className="mt-4">
                 <button
                   className="bg-blue-500 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-600 transition duration-150 ease-in-out"
@@ -228,6 +250,7 @@ export default function ProfileContent({ jobs }) {
               </div>
               
             )}
+            
             <Modal
         title="Submit Your Review"
         visible={showReviewModal}
@@ -301,6 +324,16 @@ export default function ProfileContent({ jobs }) {
             )}
           </div>
         ))}
+          {/* Pagination Component */}
+      <div className="mt-6 flex justify-center">
+        <Pagination
+          current={currentPage}
+          pageSize={itemsPerPage}
+          total={totalJobs}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
+      </div>
       </div>
     </div>
   );

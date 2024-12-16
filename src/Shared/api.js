@@ -1,4 +1,4 @@
-export const API_URL = "http://188.245.43.110:5000" 
+export const API_URL = "http://10.2.79.109:5000" 
 export const loginApi = `${API_URL}/auth/login`
 export const HomeApi = `${API_URL}/home`
 export const serviceApi = `${API_URL}/services`
