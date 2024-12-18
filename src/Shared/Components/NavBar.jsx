@@ -20,7 +20,7 @@ const NavBar = () => {
         {/* Logo and Company Name */}
         <div>
           <Link to="/" className="lg:block flex items-center mt-4 hidden">
-            <img src={logo1} className='h-24' ></img>
+            <img src={logo1} className='h-14' ></img>
             
           </Link>
         </div>

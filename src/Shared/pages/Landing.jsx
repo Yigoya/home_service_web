@@ -13,7 +13,7 @@ import Testimonials from "../UIComponents/Testimonials";
 import FAQ from "../UIComponents/FAQ";
 import Contact from "../../Customer/Pages/ContactUs";
 
-import home from "../../assets/home.png";
+// import home from "../../assets/home.png";
 import WhyWe from "../Components/WhyWe";
 import { API_URL } from "../api";
 import LoadingPage from "../Components/LoadingPage";
@@ -184,9 +184,7 @@ console.log(servicesArray, "servicesArray");
                 <ServiceDescription
                   title={selectedService.categoryName}
                   description={selectedService.description}
-                  imagePath={home}
-                  width="600px"
-                  height="300px"
+                  
                 />
               </>
             )}

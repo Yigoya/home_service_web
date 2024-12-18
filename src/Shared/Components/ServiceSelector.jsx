@@ -15,11 +15,11 @@ const ServiceSelector = ({ services, selectedService, onSelect }) => {
 
   // Array of images
   const images = [
-    clean,
+    // clean,
     homerepair,
+    wash,
     house,
     move,
-    wash,
     renovation,
     security,
     vehicle,
@@ -34,13 +34,13 @@ const ServiceSelector = ({ services, selectedService, onSelect }) => {
           onClick={() => onSelect(service)}
           className={`flex flex-col items-center p-2 rounded-lg 
           ${selectedService?.id === service.id ? "text-gray-500" : "text-gray-500"} 
-          hover:text-blue-500 `}
+          hover:text-green-700 `}
           aria-label={t(`services.${service.categoryName.replace(/\s+/g, "")}.title`)}
         >
           <img
-            src={images[index % images.length]} 
+            src={images[index]} 
             alt={service.categoryName}
-            className="w-12 h-12 object-contain mb-2 "
+            className="w-10 h-10 object-contain mb-2 "
           />
           <span className="mt-1 text-sm font-medium">
             {service.categoryName}
