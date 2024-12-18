@@ -5,6 +5,7 @@ import { Bell, Mail, AlertCircle, CheckCircle, Loader2, Trash2, PieChart } from 
 import { CustomerNotificationApi } from '../Api/Api'
 import LoadingPage from '../../Shared/Components/LoadingPage'
 import { useTranslation } from 'react-i18next';
+import  FileSearch  from '../../assets/Filesearching.gif'
 
 const Notification = () => {
     const { t } = useTranslation();
@@ -145,10 +146,10 @@ const Notification = () => {
   const groupedNotifications = groupNotifications(notifications)
 
   return (
-    <div className="max-w-7xl mx-auto p-4 lg:flex lg:space-x-8">
+    <div className="max-w-7xl mt-5 mx-auto p-4 lg:flex lg:space-x-8">
       {/* Statistics Section - Fixed on large screens */}
       <div className="hidden lg:block lg:mt-16 lg:w-1/4">
-        <div className="fixed w-1/4 max-w-xs space-y-6">
+        <div className="lg:ml-8 max-w-xs space-y-6">
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-bold mb-4">{t('notification_status')}</h2>
             <div className="space-y-4">
@@ -205,8 +206,14 @@ const Notification = () => {
       </div>
 
       {/* Notifications Section */}
-      <div className="lg:w-3/4">
-        <h1 className="text-2xl font-bold mb-6">{t('notification')}</h1>
+      <div className="lg:w-3/4 max-md:mt-10 bg-white shadow-xl p-5 lg:mt-16 rounded-xl">
+        <h1 className="text-2xl lg:ml-10 pt-4 font-bold mb-6">{t('notification')}</h1>
+        {Object.keys(groupedNotifications).length === 0 && (
+          <div className=" text-center lg:mt-20 text-gray-400 p-4">
+            <img src={FileSearch} className='h-80 flex lg:ml-52' />
+             <p className='lg:mb-44'>No notification for now</p>
+          </div>
+        )}
         {Object.entries(groupedNotifications).map(([date, notifications]) => (
           <div key={date} className="mb-8">
             <h2 className="text-lg font-semibold mb-4 text-gray-600">{date}</h2>
