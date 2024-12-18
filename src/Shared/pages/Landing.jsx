@@ -125,7 +125,7 @@ console.log(servicesArray, "servicesArray");
                 onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
                 className="flex-grow outline-none bg-transparent text-gray-500 placeholder-gray-400 text-sm py-5 px-5"
               />
-              <div className="bg-green-800 hover:bg-green-700 rounded-r-full p-5 px-8 cursor-pointer flex items-center justify-center">
+              <div className="bg-green-800 hover:bg-green-700 rounded-r-full p-5  px-8 cursor-pointer flex items-center justify-center">
               <FiSearch
                 size={20}
                 className="cursor-pointer  text-white  "

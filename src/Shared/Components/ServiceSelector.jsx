@@ -13,11 +13,10 @@ import windoww from "../../assets/mop.png";
 const ServiceSelector = ({ services, selectedService, onSelect }) => {
   const { t } = useTranslation();
 
-  // Array of images
+  
   const images = [
-    // clean,
+   
     homerepair,
-    wash,
     house,
     move,
     renovation,
