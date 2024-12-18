@@ -103,7 +103,7 @@ console.log(servicesArray, "servicesArray");
     <div className="font-sans">
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
-        <div className="flex flex-col justify-center items-center px-8 lg:px-0 lg:pt-56 pt-36 pb-8">
+        <div className="flex flex-col justify-center items-center px-8 lg:px-0 lg:pt-44 pt-36 pb-8">
           <h1 className="max-md:text-3xl lg:text-5xl font-extrabold leading-tight mb-16 text-center">
             {t('every_service')}
           </h1>
