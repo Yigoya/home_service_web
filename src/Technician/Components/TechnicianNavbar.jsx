@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell, FaBars } from 'react-icons/fa';
-import { logo1 } from '../../Shared/Components/Images';
+import  logo1  from '../../assets/logo1.png';
 
 const TechnicianNavBar = () => {
   const { t, i18n } = useTranslation();
@@ -30,12 +30,12 @@ const TechnicianNavBar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-900 text-white shadow-md z-10">
-      <div className="container mx-auto px-4 py-3 md:px-6">
+    <nav className="fixed top-0 left-0 right-0 bg-white text-black shadow-md z-10">
+      <div className="container mx-auto px-4 py-2 md:px-6">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img className="w-8 h-8 md:w-10 md:h-10" src={logo1} alt="Company Logo" />
-            <span className="ml-2 text-sm md:text-lg font-semibold">Company Name</span>
+            <img className=" h-14" src={logo1} alt="Company Logo" />
+            
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">

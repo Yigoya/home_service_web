@@ -432,7 +432,7 @@ export default function ProfileContent({ jobs }) {
       </h1>
       {paginatedJobs.length === 0 && (
           <div className="text-center  text-gray-600">
-            <img src={Filesearching} className='h-96 lg:ml-44 ' alt="" /> <br />
+            <img src={Filesearching} className='h-96 md:ml-32 ' alt=""/> <br />
             <p>NO JOBS YET</p>
           </div>
         )}

@@ -15,7 +15,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="bg-white text-black px-5 md:px-36 pt-6 fixed  top-0 left-0 w-full z-50 shadow-">
+    <div className="bg-white  text-black px-5 md:px-36  fixed  top-0 left-0 w-full z-50 shadow-">
       <div className="flex justify-between items-center">
         {/* Logo and Company Name */}
         <div>

@@ -65,9 +65,9 @@ const TechnicianDetail = () => {
             </div>
             
             <div className="p-6 md:w-2/3 lg:w-3/4">
-            <div className='lg:flex justify-between max-md:hidden'>
+            <div className='lg:flex justify-between '>
               <div>
-              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+              <div className="uppercase max-md:hidden tracking-wide text-sm text-indigo-500 font-semibold">
                 Professional Technician
               </div>
               <h1 className="mt-2 text-2xl md:text-xl lg:text-2xl leading-8 font-extrabold tracking-tight text-gray-900">
@@ -77,7 +77,7 @@ const TechnicianDetail = () => {
             <div>
                 <Link
                   to={techBooking}
-                  className="inline-flex rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex max-md:hidden rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Book Now
                 </Link>
@@ -100,7 +100,7 @@ const TechnicianDetail = () => {
                 <div>
                 <Link
                   to={techBooking}
-                  className="inline-flex lg:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Book Now
                 </Link>

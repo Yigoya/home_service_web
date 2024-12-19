@@ -87,7 +87,7 @@ const TechnicianProfile = () => {
   }
 
   return (
-    <div className="bg-[#EBEBEB] min-h-screen">
+    <div className="bg-[#EBEBEB] pb-10 min-h-screen">
       <TechnicianNavBar />
       <div className="relative">
         {/* Mobile Menu Button */}
@@ -107,7 +107,7 @@ const TechnicianProfile = () => {
           />
         )}
 
-        <div className="container mx-auto px-4">
+        <div className="container lg:mt-3 mx-auto px-4">
           <div className="flex flex-col lg:flex-row pt-20">
             {/* Sidebar */}
             {customer && (
@@ -116,7 +116,7 @@ const TechnicianProfile = () => {
                   isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                 }`}
               >
-                <div className="h-full overflow-y-auto pt-16 lg:pt-0">
+                <div className="h-full lg:ml-5 overflow-y-auto pt-16 lg:pt-0">
                   <SideBar
                     customerInfo={customer}
                     onClose={() => setIsSidebarOpen(false)}

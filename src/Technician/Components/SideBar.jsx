@@ -19,7 +19,9 @@ const SideBar = ({ customerInfo }) => {
 
   const handleLogout = () => {
     logout();
-    localStorage.clear(); // Clears all localStorage items
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('customer');
     window.location.reload(false); // Refreshes the page
   };
 
@@ -40,7 +42,7 @@ const SideBar = ({ customerInfo }) => {
   ];
 
   return (
-    <aside className="w-[300px]  bg-gray-50 rounded-lg border-gray-200 flex flex-col ">
+    <aside className="w-[300px] h-screen  bg-gray-50 rounded-lg border-gray-200 flex flex-col ">
       {/* Profile Section */}
       <div className="p-6 rounded-lg border-gray-200 bg-white">
         <div className="flex flex-col items-center text-center">

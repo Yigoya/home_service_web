@@ -16,6 +16,7 @@ export default function SideBar({ customerInfo }) {
     logout();
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('customer');
     navigate('/');
   };
 
