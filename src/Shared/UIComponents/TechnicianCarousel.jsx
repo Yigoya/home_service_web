@@ -53,7 +53,7 @@ const TechnicianCarousel = () => {
     <div className="flex justify-center bg-gray-50 py-2">
       <div className="max-w-5xl w-full overflow-x-auto lg:flex space-x-4 py-4 scrollbar-hi">
         {technicians.length === 0 ? (
-          <p className="text-gray-500 text-center font-bold text-xl p-8">
+          <p className="text-gray-500 text-center lg:ml-96 font-bold text-xl p-8">
             {t('noReviews', { defaultValue: "No Top Technicians Yet" })}
           </p>
         ) : (

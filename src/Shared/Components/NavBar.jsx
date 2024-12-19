@@ -19,7 +19,7 @@ const NavBar = () => {
       <div className="flex justify-between items-center">
         {/* Logo and Company Name */}
         <div>
-          <Link to="/" className="lg:block flex items-center mt-4 hidden">
+          <Link to="/" className="lg:block  items-center mt-4 hidden">
             <img src={logo1} className='h-14' ></img>
             
           </Link>
