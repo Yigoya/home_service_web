@@ -311,6 +311,7 @@ import { API_URL } from '../api';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { message, Modal, Input, Rate, Pagination } from 'antd';
+import Filesearching from '../../assets/Filesearching.gif'
 
 export default function ProfileContent({ jobs }) {
   const technician = JSON.parse(localStorage.getItem('technician'));
@@ -429,6 +430,12 @@ export default function ProfileContent({ jobs }) {
       <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
         Welcome {user.name}👋
       </h1>
+      {paginatedJobs.length === 0 && (
+          <div className="text-center  text-gray-600">
+            <img src={Filesearching} className='h-96 lg:ml-44 ' alt="" /> <br />
+            <p>NO JOBS YET</p>
+          </div>
+        )}
       <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
         {paginatedJobs.map((job) => (
           <div key={job.id} className="bg-gray-100 px-6 py-2 transition-transform transform hover:-translate-y-1 rounded-lg shadow-md">

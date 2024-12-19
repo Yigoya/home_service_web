@@ -11,7 +11,7 @@ export default function SideBar({ customerInfo }) {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { setFilterStatus } = useContext(FilterContext);
-
+  console.log(customerInfo);
   const handleLogout = () => {
     logout();
     localStorage.removeItem('token');
