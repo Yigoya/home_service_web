@@ -1,4 +1,4 @@
-export const API_URL = "https://78.46.240.222:5000" 
+export const API_URL = "https://hulumoya.zapto.org:5000" 
 export const loginApi = `${API_URL}/auth/login`
 export const socialLoginApi = `${API_URL}/auth/social-login`
 export const HomeApi = `${API_URL}/home`
