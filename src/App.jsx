@@ -34,19 +34,19 @@ import ForgotPassword from './Shared/pages/ForgotPassword'
 function App() {
   const user = JSON.parse(localStorage.getItem('user'))
   
-  useEffect(() => {
+  // useEffect(() => {
 
 
-      requestNotificationPermission();
-      // const unsubscribe = onMessage(messaging, (payload) => {
-      // console.log("Message received. ", payload);
-      // });
+  //     requestNotificationPermission();
+  //     // const unsubscribe = onMessage(messaging, (payload) => {
+  //     // console.log("Message received. ", payload);
+  //     // });
 
 
-    // initializeMessaging();
+  //   // initializeMessaging();
   
-    // return () => unsubscribe();
-  }, []);
+  //   // return () => unsubscribe();
+  // }, []);
   return (
     <>
     <AuthProvider>
