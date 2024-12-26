@@ -41,7 +41,7 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
             services.map((service, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
+                className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full"
               >
                 {service.name}
               </span>
@@ -55,7 +55,7 @@ const TopTechnician = ({ name, profileImage, rating, bio, services }) => {
         </p>
         <button
           onClick={toggleBio}
-          className="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          className="flex items-center text-green-600 hover:text-green-800 transition-colors duration-200"
         >
           {showFullBio ? (
             <>

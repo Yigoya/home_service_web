@@ -48,7 +48,7 @@ const ProfileCard = ({ info, Id }) => {
       </div>
       <div className="p-4">
         <div className="flex items-center text-gray-600 mb-2">
-          <MapPin className="w-4 text-blue-700 h-4 mr-2" />
+          <MapPin className="w-4 text-green-700 h-4 mr-2" />
           <span className="text-sm">{info?.subcity || 'Unknown'}</span>
         </div>
         <div className="flex justify-between text-sm text-gray-600 mb-4">
@@ -66,13 +66,13 @@ const ProfileCard = ({ info, Id }) => {
         <div className="flex justify-between items-center">
           <Link 
             to={`/technician-details/${info?.id || '#'}`}
-            className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+            className="text-green-600 hover:text-green-800 text-sm font-medium"
           >
            {t('view')}
           </Link>
           <button
             onClick={handleBooking}
-            className="bg-blue-600 text-white rounded-full py-2 px-4 text-sm font-medium hover:bg-blue-700 transition-colors"
+            className="bg-green-600 text-white rounded-full py-2 px-4 text-sm font-medium hover:bg-green-700 transition-colors"
           >
             {t('book')}
           </button>

@@ -16,8 +16,7 @@ const TechnicianList = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1); // Start with page 1
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null); // New state for error handling
   const techniciansPerPage = 6;
@@ -39,14 +38,24 @@ const TechnicianList = () => {
         const res = await axios.get(
           `${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`
         );
-        if (Array.isArray(res.data) && res.data.length > 0) {
+
+        if (res.data && Array.isArray(res.data)) {
           setTechnicians(res.data);
         } else {
           setTechnicians([]);
         }
-      } catch (e) {
-        console.error("Error fetching technicians:", e);
-        setError(t("error.fetching_technicians")); // Translation key for error message
+      } catch (error) {
+        console.error("Error fetching technicians:", error);
+        if (error.response) {
+          // Handle backend errors
+          setError(error.response.data.message || t("error.unexpected"));
+        } else if (error.request) {
+          // Handle network errors
+          setError(t("error.no_response"));
+        } else {
+          // Handle other errors
+          setError(t("error.unexpected"));
+        }
       } finally {
         setLoading(false);
       }
@@ -97,7 +106,7 @@ const TechnicianList = () => {
               </div>
               <button
                 onClick={() => setSelectedRating(0)}
-                className="text-sm text-blue-600 hover:underline"
+                className="text-sm text-green-600 hover:underline"
               >
                 {t('clear')}
               </button>
@@ -113,7 +122,7 @@ const TechnicianList = () => {
                   placeholder={t('search')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
@@ -121,7 +130,7 @@ const TechnicianList = () => {
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full md:w-48 px-4 py-2 text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full md:w-48 px-4 py-2 text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <span className="block truncate">
                   {locations.find((loc) => loc.key === selectedLocation)?.label || t("locations.select")}
@@ -145,7 +154,7 @@ const TechnicianList = () => {
                 </div>
               )}
             </div>
-            <button className="bg-blue-600 text-white rounded-lg px-6 py-2 hover:bg-blue-700 transition-colors">
+            <button className="bg-green-600 text-white rounded-lg px-6 py-2 hover:bg-green-700 transition-colors">
               {t('around_me')}
             </button>
           </div>
