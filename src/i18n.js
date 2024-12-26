@@ -187,7 +187,7 @@ const resources = {
         "kirkos": "ቂርቆስ",
         "lideta": "ልደታ"
       },
-      "every_service": "የሚያስፈልጎትን አገልግሎት ሁሉ ከአንድ  ስፍራ",
+      "every_service": "የፈለጉት ሙያ በፈለጉት ቦታ እና ሰዓት",
       "search_services": "አገልግሎት ይምረጡ",
       "our-servises": "የምንሰጣቸው አገልግሎቶች",
       "pending":"በሂደት ላይ ያለ  ",

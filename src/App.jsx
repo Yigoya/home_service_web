@@ -28,6 +28,7 @@ import { requestNotificationPermission } from './NotificationPermission'
 import { useEffect } from 'react'
 import { onMessage } from 'firebase/messaging'
 import ForgotPassword from './Shared/pages/ForgotPassword'
+import PreSignup from './Shared/Components/PreSignup'
 
 
 
@@ -75,6 +76,7 @@ function App() {
             <Route path='/customer-profile/:id' element={<Profile />} />
             <Route path='notification/:id' element={<Notification />} />
             <Route path='/forgot-password' element= {<ForgotPassword />} />
+            <Route path ='/pre-signup' element={<PreSignup />} />
             
             
           </Route>

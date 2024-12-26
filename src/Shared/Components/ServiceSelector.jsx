@@ -26,25 +26,25 @@ const ServiceSelector = ({ services, selectedService, onSelect }) => {
   ];
 
   return (
-    <div className="flex overflow-x-auto space-x-4 py-4 max-md:px-8 ">
+    <div className="flex overflow-x-auto lg:space-x-6 max-mg:space-x-3 lg:ml-16 py-4 max-md:px-8 ">
       {services.map((service, index) => (
-        <button
-          key={service.id}
-          onClick={() => onSelect(service)}
-          className={`flex flex-col items-center p-2 rounded-lg 
-          ${selectedService?.id === service.id ? "text-gray-500" : "text-gray-500"} 
-          hover:text-green-700 `}
-          aria-label={t(`services.${service.categoryName.replace(/\s+/g, "")}.title`)}
-        >
-          <img
-            src={images[index]} 
-            alt={service.categoryName}
-            className="w-10 h-10 object-contain mb-2 "
-          />
-          <span className="mt-1 text-sm font-medium">
-            {service.categoryName}
-          </span>
-        </button>
+    <button
+      key={service.id}
+      onClick={() => onSelect(service)}
+      className={`flex flex-col items-center p-2 rounded-lg 
+      ${selectedService?.id === service.id ? "text-gray-700" : "text-gray-100"} 
+      hover:text-gray-400 transform transition-transform duration-200 hover:-translate-y-1`}
+      aria-label={t(`services.${service.categoryName.replace(/\s+/g, "")}.title`)}
+    >
+      <img
+        src={images[index]} 
+        alt={service.categoryName}
+        className="w-10 h-10 object-contain mb-2 "
+      />
+      <span className="mt-1 text-md">
+        {service.categoryName}
+      </span>
+    </button>
       ))}
     </div>
   );

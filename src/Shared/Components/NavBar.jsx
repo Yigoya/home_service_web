@@ -1,86 +1,105 @@
 import React, { useState } from 'react';
-import  logo1  from '../../assets/logo1.png';
+import logo1 from '../../assets/logo1.png';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FaGlobe } from 'react-icons/fa';
+import { Menu, X } from 'lucide-react';
 
 const NavBar = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
-
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'am' : 'en';
-    i18n.changeLanguage(newLang);
-  };
 
   return (
-    <div className="bg-white  text-black px-5 md:px-36  fixed  top-0 left-0 w-full z-50 shadow-">
-      <div className="flex justify-between items-center">
-        {/* Logo and Company Name */}
-        <div>
-          <Link to="/" className="lg:block  items-center mt-4 hidden">
-            <img src={logo1} className='h-14' ></img>
-            
+    <nav className="bg-white fixed top-0 left-0 w-full z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0">
+            <img src={logo1} className="md:h-14 max-md:h-10 w-auto" alt="Logo" />
           </Link>
-        </div>
-          <div className="md:hidden">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            {/* Language Selector */}
+            <select
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg 
+                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
+                       focus:border-transparent transition-colors duration-200"
+            >
+              <option value="en">English</option>
+              <option value="am">አማርኛ</option>
+            </select>
+
+            {/* Auth Buttons */}
+            <Link
+              to="/login"
+              className="px-6 py-2 text-sm font-medium text-green-800 bg-white border-2 border-green-600 
+                       rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-200"
+            >
+              {t('login')}
+            </Link>
+            <Link
+              to="/pre-signup"
+              className="px-6 py-2 text-sm font-medium text-white bg-green-700 border-2 border-green-700 
+                       rounded-lg hover:bg-green-500 hover:border-green-500 transition-colors duration-200"
+            >
+              {t('signup')}
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center md:hidden space-x-4">
+            <select
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg 
+                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              <option value="en">English</option>
+              <option value="am">አማርኛ</option>
+            </select>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-black focus:outline-none"
-              aria-label="Toggle Menu"
+              className="p-2 rounded-md text-gray-700 hover:text-green-600 focus:outline-none"
+              aria-label="Toggle menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
+        </div>
 
-          <div className="hidden md:flex space-x-7 items-center text-green-900">
-            <FaGlobe
-              className="text-2xl cursor-pointer hover:text-green-700 "
-              onClick={toggleLanguage}
-              title="Toggle Language"
-            />
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden py-4 space-y-3">
             <Link
-              className="px-6 py-3 hover:bg-green-800 hover:text-white font-bold animate-pulse border border-green-700 rounded-full"
               to="/login"
+              onClick={() => setIsOpen(false)}
+              className="block w-full px-4 py-2 text-center text-green-700 bg-white border-2 
+                       border-green-600 rounded-lg hover:bg-green-600 hover:text-white 
+                       transition-colors duration-200"
             >
-              {t('login')}/{t('signup')}
+              {t('login')}
             </Link>
             <Link
-              className="text-white underline"
-              to="/technician-registration"
+              to="/pre-signup"
+              onClick={() => setIsOpen(false)}
+              className="block w-full px-4 py-2 text-center text-white bg-green-600 border-2 
+                       border-green-600 rounded-lg hover:bg-green-700 hover:border-green-700 
+                       transition-colors duration-200"
             >
-             {t('become_tech')}
+              {t('signup')}
             </Link>
           </div>
-              </div>
-
-              {/* Mobile Menu */}
-      {isOpen && (
-        <div className="flex flex-col items-start mt-4 space-y-3 md:hidden text-green-800">
-          <Link to="/login" onClick={() => setIsOpen(false)} className='mb-1'>{t('login')}/{t('signup')}</Link>
-          <FaGlobe
-              className="text-2xl cursor-pointer hover:text-green-700  "
-              onClick={toggleLanguage}
-              title="Toggle Language"
-            />
-         
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </nav>
   );
 };
 
 export default NavBar;
+

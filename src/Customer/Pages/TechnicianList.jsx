@@ -39,7 +39,11 @@ const TechnicianList = () => {
         const res = await axios.get(
           `${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`
         );
-        setTechnicians(res.data);
+        if (Array.isArray(res.data) && res.data.length > 0) {
+          setTechnicians(res.data);
+        } else {
+          setTechnicians([]);
+        }
       } catch (e) {
         console.error("Error fetching technicians:", e);
         setError(t("error.fetching_technicians")); // Translation key for error message
@@ -146,8 +150,6 @@ const TechnicianList = () => {
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-              
             {error ? (
               <p className="text-red-500 text-center col-span-3">{error}</p>
             ) : paginatedTechnicians.length > 0 ? (
