@@ -167,7 +167,7 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className=" pb-8 lg:mx-52">
+        <div className=" pb-8 container lg:mx-auto  lg:px-32 ">
           <div className="container ">
             {selectedService && (
               <>

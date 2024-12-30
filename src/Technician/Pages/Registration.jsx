@@ -171,9 +171,9 @@ function Registration() {
 
   return (
     <div className='w-full mt-24 min-h-screen'>
-      <div className="flex flex-col md:flex-row mx-4 md:mx-44 my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
+      <div className="flex flex-col md:flex-row mx-4 md:mx-44  max-md:my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
-        <div className="md:w-1/2 lg:p-8 py-8 bg-white rounded-xl">
+        <div className="md:w-1/2 w-full lg:p-8 py-8 bg-white rounded-xl">
           <h1 className="text-2xl font-bold mb-6">{t('tech_regi')}</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -309,7 +309,8 @@ function Registration() {
         </div>
 
         {/* Right side */}
-        <div className="hidden md:flex md:w-1/2 bg-black rounded-lg relative items-center justify-center">
+       
+        <div className="hidden md:block md:w-1/2 bg-black rounded-lg relative items-center justify-center">
           <img
             src={logo1}
             alt="Guidance"
@@ -322,9 +323,8 @@ function Registration() {
             <h2 className="text-xl font-semibold">{t('Start_now')}</h2>
           </div>
         </div>
-
-
-      </div>
+        
+   </div>
     </div>
   );
 }

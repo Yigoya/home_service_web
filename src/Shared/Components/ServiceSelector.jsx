@@ -1,50 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import clean from "../../assets/consultation.png";
-import homerepair from "../../assets/house-maintenance.png";
-import house from "../../assets/house.png";
-import move from "../../assets/moving-truck.png";
-import wash from "../../assets/machine.png";
-import renovation from "../../assets/software.png";
-import security from "../../assets/policeman.png";
-import vehicle from "../../assets/construction.png";
-import windoww from "../../assets/mop.png";
+import {
+  FaTools,
+  FaPaintRoller,
+  FaTruckMoving,
+  FaTasks,
+  FaFire,
+  FaWrench,
+} from "react-icons/fa";
+import { GiBroom } from "react-icons/gi";
 
-const ServiceSelector = ({ services, selectedService, onSelect }) => {
+const ServiceSelector = ({ services, onSelect }) => {
   const { t } = useTranslation();
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
 
-  
-  const images = [
-   
-    homerepair,
-    house,
-    move,
-    renovation,
-    security,
-    vehicle,
-    windoww,
+  // Define icons
+  const icons = [
+    <GiBroom className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />,
+    <FaTasks className="w-8 h-8  stroke-gray-800 stroke-3 fill-gray-500" />, // Maintenance
+    <FaFire className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />, // Painting
+    <FaWrench className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />, // Real Estate & Moving
+    <FaPaintRoller className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />, // Other Demands
+    <FaTools className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />, // Emergency
+    <FaTruckMoving className="w-8 h-8 stroke-gray-800 stroke-3 fill-gray-500" />, // Appliance Repair
   ];
 
   return (
-    <div className="flex overflow-x-auto lg:space-x-6 max-mg:space-x-3 lg:ml-16 py-4 max-md:px-8 ">
+    <div className="flex overflow-x-auto lg:space-x-6 max-mg:space-x-3 max-md:ml-16 py-4 max-md:px-8">
       {services.map((service, index) => (
-    <button
-      key={service.id}
-      onClick={() => onSelect(service)}
-      className={`flex flex-col items-center p-2 rounded-lg 
-      ${selectedService?.id === service.id ? "text-gray-700" : "text-gray-100"} 
-      hover:text-gray-400 transform transition-transform duration-200 hover:-translate-y-1`}
-      aria-label={t(`services.${service.categoryName.replace(/\s+/g, "")}.title`)}
-    >
-      <img
-        src={images[index]} 
-        alt={service.categoryName}
-        className="w-10 h-10 object-contain mb-2 "
-      />
-      <span className="mt-1 text-md">
-        {service.categoryName}
-      </span>
-    </button>
+        <div
+          key={service.id}
+          onClick={() => {
+            setSelectedServiceId(service.id);
+            onSelect(service);
+          }}
+          className={`flex flex-col items-center p-4 rounded-lg transition-all duration-200 transform hover:-translate-y-1 cursor-pointer
+          ${
+            selectedServiceId === service.id
+              ? ""
+              : ""
+          }`}
+          aria-label={t(
+            `services.${service.categoryName.replace(/\s+/g, "")}.title`
+          )}
+        >
+          <div className="mb-2">{icons[index]}</div>
+          <span className="mt-1 text-md">{service.categoryName}</span>
+        </div>
       ))}
     </div>
   );
