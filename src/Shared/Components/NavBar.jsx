@@ -9,7 +9,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white fixed top-0 left-0 w-full z-50 shadow-sm">
+    <nav className="bg-white fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -19,33 +19,33 @@ const NavBar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Language Selector */}
-            <select
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-              value={i18n.language}
-              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg 
-                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
-                       focus:border-transparent transition-colors duration-200"
-            >
-              <option value="en">English</option>
-              <option value="am">አማርኛ</option>
-            </select>
 
             {/* Auth Buttons */}
             <Link
               to="/login"
               className="px-6 py-2 text-sm font-medium text-green-800 bg-white border-2 border-green-600 
-                       rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-200"
+                       rounded-full hover:bg-green-600 hover:text-white transition-colors duration-200"
             >
               {t('login')}
             </Link>
             <Link
               to="/pre-signup"
               className="px-6 py-2 text-sm font-medium text-white bg-green-700 border-2 border-green-700 
-                       rounded-lg hover:bg-green-500 hover:border-green-500 transition-colors duration-200"
+                       rounded-full hover:bg-green-500 hover:border-green-500 transition-colors duration-200"
             >
               {t('signup')}
             </Link>
+              {/* Language Selector */}
+              <select
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-full 
+                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
+                       focus:border-transparent transition-colors duration-200"
+            >
+              <option value="en">English</option>
+              <option value="am">አማርኛ</option>
+            </select>
           </div>
 
           {/* Mobile Menu Button */}

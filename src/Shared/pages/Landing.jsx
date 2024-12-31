@@ -113,56 +113,53 @@ console.log(servicesArray, "servicesArray");
           {/* <p className="text-sm text-gray-500 mb-6 text-center">{t("which")}</p> */}
 
           {/* Search Dropdown */}
-          <div className="lg:w-1/2  w-72">
-          <div className="relative">
-          <div className="flex items-center bg-white text-gray-700 rounded-full border border-green-700 shadow-md  ">
-              <input
-                type="text"
-                placeholder={t("search_services")}
-                value={searchText}
-                onChange={handleSearchChange} // updated to use handleSearchChange
-                onFocus={() => setIsDropdownOpen(true)}
-                onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-                className="flex-grow outline-none bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
-              />
-              <div className="bg-green-800 hover:bg-green-700 rounded-r-full md:p-6 max-md:py-3  md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center">
-              <FiSearch
-                size={20}
-                className="cursor-pointer  text-white  "
-                onClick={() => sendSearchToBackend(searchText)}
-              />
-            
-              </div>
-             
-            </div>
-
-           
-            {/* Dropdown Suggestions */}
-            {isDropdownOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
-          {filteredServices.length > 0 ? (
-            filteredServices.map((service) => (
-              <Link
-                key={service.id}
-                to={`/technician-list/${service.id}`}
-                onClick={() => setIsDropdownOpen(false)}
-                className="block px-4 py-2 hover:bg-gray-100 text-sm"
-              >
-                {service.name}
-              </Link>
-            ))
-          ) : (
-            <div className="px-4 py-2 text-sm text-gray-500">
-              {t("no_results_found")}
-            </div>
-          )}
-        </div>
-        
-      )}
-      
+          <div className="lg:w-1/2 w-72">
+      <div className="relative">
+        <div className="flex items-center bg-gray-100 text-gray-700 rounded-full shadow-md">
+          <input
+            type="text"
+            placeholder="What do you need help with?"
+            value={searchText}
+            onChange={handleSearchChange}
+            onFocus={() => setIsDropdownOpen(true)}
+            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
+            className="flex-grow outline-none bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
+          />
+          <div 
+            className="bg-green-800 hover:bg-green-700 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
+            onClick={() => sendSearchToBackend(searchText)}
+          >
+            <FiSearch
+              size={20}
+              className="cursor-pointer text-white"
+            />
           </div>
         </div>
+
+        {/* Dropdown Suggestions */}
+        {isDropdownOpen && (
+          <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
+            {filteredServices.length > 0 ? (
+              filteredServices.map((service) => (
+                <Link
+                  key={service.id}
+                  to={`/technician-list/${service.id}`}
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                >
+                  {service.name}
+                </Link>
+              ))
+            ) : (
+              <div className="px-4 py-2 text-sm text-gray-500">
+                No results found
+              </div>
+            )}
+          </div>
+        )}
       </div>
+    </div>
+    </div>
             <div className="flex justify-center mb-8">
               {t('become_tech')}?
             <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-green-800 px-3 hover:text-green-800 hover:underline">

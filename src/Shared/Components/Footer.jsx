@@ -1,29 +1,29 @@
-import React from 'react';
-import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6';
-import { SiApple, SiGoogleplay } from 'react-icons/si';
-import { useTranslation } from 'react-i18next';
+import React from 'react'
+import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6'
+import { SiApple, SiGoogleplay } from 'react-icons/si'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
-    <footer className="bg-gradient-to-br from-green-950 to-green-900 py-16 text-white">
+    <footer className="bg-gradient-to-br from-green-950 to-green-900 py-8 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Logo and Description */}
-          <div className="space-y-4">
-            <h2 className="font-bold text-4xl font-mono bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+          <div className="space-y-2">
+            <h2 className="font-bold text-3xl font-mono bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               huluMoya
             </h2>
-            <p className="text-gray-300 text-sm max-w-xs">
+            <p className="text-gray-300 text-xs max-w-xs">
               Connecting people with innovative solutions for a sustainable future.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-green-400 mb-4">Quick Links</h3>
-            <ul className="space-y-3 text-gray-300">
+          <div>
+            <h3 className="text-sm font-semibold text-green-400 mb-2">Quick Links</h3>
+            <ul className="space-y-1 text-gray-300 text-sm">
               <li>
                 <a href="#" className="hover:text-green-400 transition-colors duration-200 flex items-center">
                   <span className="hover:translate-x-1 transition-transform duration-200">{t('contact')}</span>
@@ -43,9 +43,9 @@ const Footer = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-green-400 mb-4">Contact Us</h3>
-            <ul className="space-y-3 text-gray-300">
+          <div>
+            <h3 className="text-sm font-semibold text-green-400 mb-2">Contact Us</h3>
+            <ul className="space-y-1 text-gray-300 text-sm">
               <li className="flex items-center space-x-2">
                 <span className="text-green-400">Email:</span>
                 <a href="mailto:info@example.com" className="hover:text-green-400 transition-colors duration-200">
@@ -65,47 +65,49 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Download Apps */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-green-400 mb-4">Download Our App</h3>
-            <div className="space-y-4">
-              <a
-                href="#"
-                className="flex items-center border border-gray-700 rounded-xl px-4 py-2 hover:border-green-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group"
-              >
-                <SiGoogleplay className="w-8 h-8 mr-3 text-gray-300 group-hover:text-green-400 transition-colors duration-200" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-400">GET IT ON</span>
-                  <span className="text-sm font-semibold">Google Play</span>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="flex items-center border border-gray-700 rounded-xl px-4 py-2 hover:border-green-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group"
-              >
-                <SiApple className="w-8 h-8 mr-3 text-gray-300 group-hover:text-green-400 transition-colors duration-200" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-400">Download on the</span>
-                  <span className="text-sm font-semibold">App Store</span>
-                </div>
-              </a>
+          {/* Download Apps and Social Media */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-sm font-semibold text-green-400 mb-2">Download Our App</h3>
+              <div className="flex gap-2">
+                <a
+                  href="#"
+                  className="flex items-center border border-gray-700 rounded-lg px-2 py-1 hover:border-green-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group flex-1"
+                >
+                  <SiGoogleplay className="w-6 h-6 mr-2 text-gray-300 group-hover:text-green-400 transition-colors duration-200" />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-gray-400">GET IT ON</span>
+                    <span className="text-xs font-semibold">Google Play</span>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  className="flex items-center border border-gray-700 rounded-lg px-2 py-1 hover:border-green-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group flex-1"
+                >
+                  <SiApple className="w-6 h-6 mr-2 text-gray-300 group-hover:text-green-400 transition-colors duration-200" />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-gray-400">Download on the</span>
+                    <span className="text-xs font-semibold">App Store</span>
+                  </div>
+                </a>
+              </div>
             </div>
 
             {/* Social Media Icons */}
-            <div className="pt-4">
-              <h3 className="text-lg font-semibold text-green-400 mb-4">Follow Us</h3>
+            <div>
+              <h3 className="text-sm font-semibold text-green-400 mb-2">Follow Us</h3>
               <div className="flex space-x-4">
                 <a href="#" className="hover:text-green-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaFacebookF className="w-6 h-6" />
+                  <FaFacebookF className="w-5 h-5" />
                 </a>
                 <a href="#" className="hover:text-green-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaInstagram className="w-6 h-6" />
+                  <FaInstagram className="w-5 h-5" />
                 </a>
                 <a href="#" className="hover:text-green-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaYoutube className="w-6 h-6" />
+                  <FaYoutube className="w-5 h-5" />
                 </a>
                 <a href="#" className="hover:text-green-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaXTwitter className="w-6 h-6" />
+                  <FaXTwitter className="w-5 h-5" />
                 </a>
               </div>
             </div>
@@ -113,14 +115,15 @@ const Footer = () => {
         </div>
 
         {/* Copyright Section */}
-        <div className="pt-8 border-t border-gray-800">
-          <p className="text-center text-sm text-gray-400">
+        <div className="pt-4 border-t border-gray-800">
+          <p className="text-center text-xs text-gray-400">
             ©2024 huluMoya. All rights reserved. Built with 💚 in Ethiopia
           </p>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
+
