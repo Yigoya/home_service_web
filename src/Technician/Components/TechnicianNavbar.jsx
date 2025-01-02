@@ -39,27 +39,30 @@ const TechnicianNavBar = () => {
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
-            <button
-              onClick={toggleLanguage}
-              className="text-2xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
-              aria-label={t('toggleLanguage')}
-            >
-              <FaGlobe />
-            </button>
             <Link
               to={profileLink}
-              className="text-2xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl text-green-800 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('profile')}
             >
-              <FaUserCircle />
+              <FaUserCircle/>
             </Link>
             <Link
               to={notificationLink}
-              className="text-2xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl hover:text-gray-300 text-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('notifications')}
             >
               <FaBell />
             </Link>
+            <select
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-full 
+                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
+                       focus:border-transparent transition-colors duration-200"
+            >
+              <option value="en">English</option>
+              <option value="am">አማርኛ</option>
+            </select>
           </div>
 
           <button
