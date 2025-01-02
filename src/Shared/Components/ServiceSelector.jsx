@@ -8,22 +8,20 @@ const ServiceSelector = ({ services, onSelect }) => {
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
-  // Define icons with their base styles
   const iconComponents = [
-    GiBroom, // Cleaning
-    Wrench, // Assembly
-    Flame,// Mounting
-    Drill, // Moving
-    PaintRoller, // Cleaning 
+    GiBroom,
+    Wrench,
+    Flame,
+    Drill,
+    PaintRoller,
     Hammer,
-    Truck, // Home Repairs
+    Truck,
     TreeDeciduous,
-    // Trending
   ];
 
   const renderIcon = (IconComponent, isSelected, isHovered) => (
     <IconComponent
-      className={`w-6 h-6 transition-all duration-300 ease-in-out
+      className={`w-8 h-8 transition-all duration-300 ease-in-out
         ${
           isSelected
             ? "text-green-800 stroke-[2.5]"
@@ -37,7 +35,7 @@ const ServiceSelector = ({ services, onSelect }) => {
   return (
     <div className="w-full bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center overflow-x-auto no-scrollbar py-4 px-4 lg:px-0 space-x-8">
+        <div className="flex justify-between items-center overflow-x-auto no-scrollbar py-6 px-4 lg:px-0 space-x-10">
           {services.map((service, index) => {
             const isSelected = selectedServiceId === service.categoryId;
             const isHovered = hoveredId === service.categoryId;
@@ -53,7 +51,7 @@ const ServiceSelector = ({ services, onSelect }) => {
                 onMouseLeave={() => setHoveredId(null)}
                 className={`
                   flex flex-col items-center justify-center
-                  min-w-[80px] py-2 px-3
+                  min-w-[90px] py-3 px-4
                   transition-all duration-300 ease-in-out
                   cursor-pointer relative
                   ${isSelected ? "text-green-800" : "text-gray-600"}
@@ -71,16 +69,16 @@ const ServiceSelector = ({ services, onSelect }) => {
                   }
                 }}
               >
-                <div className="mb-2">
+                <div className="mb-3">
                   {renderIcon(iconComponents[index], isSelected, isHovered)}
                 </div>
                 <span
                   className={`
-                    text-sm font-medium whitespace-nowrap
+                     text-sm font-medium whitespace-nowrap
                     transition-all duration-300 ease-in-out
                     relative after:content-[''] after:absolute
                     after:w-full after:h-0.5 after:bg-green-800
-                    after:left-0 after:-bottom-2
+                    after:left-0 after:-bottom-3
                     after:transition-all after:duration-300
                     ${
                       isSelected
@@ -99,7 +97,7 @@ const ServiceSelector = ({ services, onSelect }) => {
         </div>
       </div>
       
-      <style jsx global>{`
+      <style jsx>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -111,4 +109,6 @@ const ServiceSelector = ({ services, onSelect }) => {
     </div>
   );
 };
+
 export default ServiceSelector;
+
