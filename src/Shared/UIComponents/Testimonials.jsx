@@ -58,15 +58,10 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-20">
+    <section className="bg-gradient-to-b from-white to-gray-50 md:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('testmony')}
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            {t('testimonialSubtitle', "Discover what our customers are saying about their experiences")}
-          </p>
+         
         </div>
 
         {testimonials.length === 0 ? (

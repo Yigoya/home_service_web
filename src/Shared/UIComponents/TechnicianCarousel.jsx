@@ -70,10 +70,6 @@ const TechnicianCarousel = () => {
   return (
     <section className="bg-gray-50 py-8 px-4 md:py-12">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-          {t('topTechnicians', { defaultValue: "Our Top-Rated Technicians" })}
-        </h2>
-        
         {technicians.length === 0 ? (
           <div className="bg-white rounded-xl shadow-md p-8 text-center">
             <p className="text-gray-500 font-medium text-lg">

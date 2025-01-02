@@ -209,6 +209,12 @@ console.log(servicesArray, "servicesArray");
       {/* Testimonials Section */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6 lg:px-32">
+           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t('testmony')}
+            </h2>
+            <p className="text-gray-600 mx-auto">
+              {t('testimonialSubtitle', "Discover what our customers are saying about their experiences")}
+            </p>
           <Testimonials />
         </div>
       </section>
