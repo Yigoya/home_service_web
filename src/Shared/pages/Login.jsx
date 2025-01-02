@@ -128,14 +128,14 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-center mb-6">{t('login')}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')}/ Phone Number</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')} / {t('phone')}</label>
             <input
               id="email"
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder={t('enter_email')}
+              placeholder={t('email_phone')} 
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -154,7 +154,7 @@ const Login = () => {
             />
           </div>
           <div className='text-sm lg:ml-64 text-green-800 hover:text-green-700  '>
-          <Link to="/forgot-password">Forgot password?</Link>
+          <Link to="/forgot-password">{t('forgot_pass')}</Link>
           </div>
          
           
@@ -198,7 +198,7 @@ const Login = () => {
         </div>
 
         <p className="mt-4 text-center text-gray-600">
-         {t('account')} <a href="/customer-signup" className="text-green-800 hover:underline">{t('signup')}</a>
+         {t('account')} <a href="/pre-signup" className="text-green-800 hover:underline">{t('signup')}</a>
         </p>
       </div>
     </div>

@@ -1,16 +1,19 @@
 import React from 'react'
 import { Wrench, User } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
+
 
 const PreSignup = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate()
 
   return (
     <div className="min-h-screen lg:mt-5 flex items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-2xl p-8 bg-white rounded-xl shadow-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Our Platform</h1>
-          <p className="text-gray-500">Choose how you want to sign up</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('join_us')}</h1>
+          <p className="text-gray-500">{t('Choose_option')}</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -25,10 +28,10 @@ const PreSignup = () => {
             </div>
             <div className="text-center">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                Sign up as a Technician
+              {t('signup_tech')}
               </h2>
               <p className="text-gray-500 text-sm">
-                Offer your services and grow your business
+              {t('offer')}
               </p>
             </div>
           </button>
@@ -44,22 +47,22 @@ const PreSignup = () => {
             </div>
             <div className="text-center">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                Sign up as a Customer
+              {t('signup_cust')}
               </h2>
               <p className="text-gray-500 text-sm">
-                Find reliable technicians for your needs
+              {t('find_tech')}
               </p>
             </div>
           </button>
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
-          Already have an account?{' '}
+        {t('yes_account')}{' '}
           <button
             onClick={() => navigate('/login')}
             className="text-green-600 hover:text-green-700 font-medium"
           >
-            Log in
+            {t('login')}
           </button>
         </div>
       </div>
