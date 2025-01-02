@@ -3,27 +3,27 @@ import axios from "axios";
 import TopTechnician from "./TopTechnician";
 import { HomeApi } from "../api";
 import { useTranslation } from "react-i18next";
+import { Loader2 } from 'lucide-react';
 
 const TechnicianCarousel = () => {
   const { t } = useTranslation();
   const [technicians, setTechnicians] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTechnicians = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(HomeApi);
         const techniciansData = response.data?.topFiveTechnicians || [];
         const reviewsData = response.data?.topFiveReviews || [];
-        console.log(techniciansData, "techniciansData");
-        console.log(reviewsData, "reviewsData");
 
-        // Calculate ratings for each technician
         const techniciansWithRatings = techniciansData.map((technician) => {
           const technicianReviews = reviewsData.filter(
             (review) => review.technicianId === technician.id
           );
 
-          // Calculate average rating
           const averageRating =
             technicianReviews.length > 0
               ? (
@@ -35,7 +35,6 @@ const TechnicianCarousel = () => {
           return { ...technician, rating: parseFloat(averageRating) };
         });
 
-        // Filter technicians with a rating of 4 or higher
         const filteredTechnicians = techniciansWithRatings.filter(
           (technician) => technician.rating && technician.rating >= 4.0
         );
@@ -43,26 +42,53 @@ const TechnicianCarousel = () => {
         setTechnicians(filteredTechnicians);
       } catch (error) {
         console.error("Error fetching technicians:", error);
+        setError(t('errorFetching', { defaultValue: "Error loading technicians. Please try again later." }));
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchTechnicians();
-  }, []);
+  }, [t]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[300px] bg-gray-50">
+        <Loader2 className="w-8 h-8 animate-spin text-green-600" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px] bg-gray-50">
+        <p className="text-red-500 text-center font-medium">{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex justify-center bg-gray-50 py-2">
-      <div className="max-w-5xl w-full overflow-x-auto lg:flex space-x-4 py-4 scrollbar-hi">
+    <section className="bg-gray-50 py-8 px-4 md:py-12">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+          {t('topTechnicians', { defaultValue: "Our Top-Rated Technicians" })}
+        </h2>
+        
         {technicians.length === 0 ? (
-          <p className="text-gray-500 text-center lg:ml-96 font-bold text-xl p-8">
-            {t('noReviews', { defaultValue: "No Top Technicians Yet" })}
-          </p>
+          <div className="bg-white rounded-xl shadow-md p-8 text-center">
+            <p className="text-gray-500 font-medium text-lg">
+              {t('noReviews', { defaultValue: "No Top Technicians Yet" })}
+            </p>
+          </div>
         ) : (
-          technicians.map((technician) => (
-            <TopTechnician key={technician.id} {...technician} />
-          ))
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+            {technicians.map((technician) => (
+              <TopTechnician key={technician.id} {...technician} />
+            ))}
+          </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
