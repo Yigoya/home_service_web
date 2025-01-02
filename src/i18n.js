@@ -130,8 +130,14 @@ const resources = {
       "pro_tech": "Professional Technician",
       "submit":"Submit",
       "forgot_pass":"Forgot Password?",
-      "reset_pass":"Reset Password"
-     
+      "reset_pass":"Reset Password",
+      "email_phone":" Please enter Email or Phone Number",
+      "join_us":"Join Our Platform",
+      "Choose_option":"Choose how you want to sign up ",
+      "signup_tech":"Sign Up as a Technician",
+      "signup_cust":"Sign Up as a Customer",
+      "offer":"Offer Your services and grow your business",
+      "find_tech":"Find reliable technicians for your needs",
       
     }
   },
@@ -261,7 +267,14 @@ const resources = {
       "yes_account":"ከዚህ በፊት አካውንት አሎት?",
       "submit":"ላክ",
       "forgot_pass":"ምስጢር ቁጥር ከረሱ?",
-      "reset_pass":"ምስጢር ቁጥር ይቀይሩ"
+      "reset_pass":"ምስጢር ቁጥር ይቀይሩ",
+      "email_phone":"ኢሜይል ወይም ስልክ ቁጥር ያስገቡ",
+      "join_us":"ቤተሰብ ይሁኑ",
+      "Choose_option":"እንዴት መመዝገብ እንደሚፈልጉ ይምረጡ",
+      "signup_tech":"ለባለሞያነት ይመዝገቡ ",
+      "signup_cust":"አገልግሎት ለማግኘት ይመዝገቡ",
+      "offer":"አገልግሎትዎን ያቅርቡ እና ገቢዎን ያሳድጉ ",
+      "find_tech":"ብቁ የሆኑ ባለሞያዎች ለሚያስፍልጎ አገልግሎት",
        
        
   }
