@@ -118,7 +118,7 @@ console.log(servicesArray, "servicesArray");
         <div className="flex items-center bg-gray-100 text-gray-700 rounded-full shadow-md">
           <input
             type="text"
-            placeholder="What do you need help with?"
+            placeholder={t("search_services")}
             value={searchText}
             onChange={handleSearchChange}
             onFocus={() => setIsDropdownOpen(true)}
