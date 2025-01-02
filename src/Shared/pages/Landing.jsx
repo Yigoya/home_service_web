@@ -123,7 +123,7 @@ console.log(servicesArray, "servicesArray");
             onChange={handleSearchChange}
             onFocus={() => setIsDropdownOpen(true)}
             onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="flex-grow outline-none bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
+            className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
           />
           <div 
             className="bg-green-800 hover:bg-green-700 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
