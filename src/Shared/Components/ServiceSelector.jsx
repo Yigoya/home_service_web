@@ -10,14 +10,15 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   // Define icons with their base styles
   const iconComponents = [
-    Wrench, // Assembly
-    Drill, // Mounting
-    Truck, // Moving
     GiBroom, // Cleaning
-    TreeDeciduous, // Outdoor Help
-    Hammer, // Home Repairs
-    PaintRoller, // Painting
-    Flame, // Trending
+    Wrench, // Assembly
+    Flame,// Mounting
+    Drill, // Moving
+    PaintRoller, // Cleaning 
+    Hammer,
+    Truck, // Home Repairs
+    TreeDeciduous,
+    // Trending
   ];
 
   const renderIcon = (IconComponent, isSelected, isHovered) => (
