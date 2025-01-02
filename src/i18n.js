@@ -55,7 +55,7 @@ const resources = {
         "lideta": "Lideta"
       },
       "every_service": "All in One Services, On Demand!",
-      "search_services": "search services . . . .",
+      "search_services": "What do you need help with?",
       "our-servises": "Our Services",  
       "pending":"Pending",
       "completed":"Completed",
