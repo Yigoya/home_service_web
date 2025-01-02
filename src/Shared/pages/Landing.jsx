@@ -213,7 +213,7 @@ console.log(servicesArray, "servicesArray");
               {t('testmony')}
             </h2>
             <p className="text-gray-600 mx-auto">
-              {t('testimonialSubtitle', "Discover what our customers are saying about their experiences")}
+              {t('testimonialSubtitle')}
             </p>
           <Testimonials />
         </div>
