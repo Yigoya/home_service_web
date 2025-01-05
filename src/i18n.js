@@ -8,7 +8,7 @@ const resources = {
       "login":"Login",
       "become_tech":"Are you a Worker",
       "applay_now":"Apply Now",
-      "choose_your_best": "Choose Your Best",
+      "choose_your_best": "Choose an Offer",
       "our_service":"Our Services",
       "our_top_technicians":"Our Top Technicians",
       "testmony":"What the Customer Says",

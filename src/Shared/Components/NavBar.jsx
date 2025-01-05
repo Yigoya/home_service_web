@@ -23,14 +23,14 @@ const NavBar = () => {
             {/* Auth Buttons */}
             <Link
               to="/login"
-              className="px-6 py-2 text-sm font-medium text-green-800 bg-white border-2 border-green-600 
+              className="px-14 py-2 text-md font-medium text-green-800 bg-white border-2 border-green-600 
                        rounded-full hover:bg-green-600 hover:text-white transition-colors duration-200"
             >
               {t('login')}
             </Link>
             <Link
               to="/pre-signup"
-              className="px-6 py-2 text-sm font-medium text-white bg-green-700 border-2 border-green-700 
+              className="px-14 py-2 text-md font-medium text-white bg-green-700 border-2 border-green-700 
                        rounded-full hover:bg-green-500 hover:border-green-500 transition-colors duration-200"
             >
               {t('signup')}
@@ -39,8 +39,8 @@ const NavBar = () => {
               <select
               onChange={(e) => i18n.changeLanguage(e.target.value)}
               value={i18n.language}
-              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-full 
-                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
+              className="px-12 py-2 text-sm text-gray-700 bg-white border border-green-800 rounded-full 
+                       hover:border-green-500  focus:outline-none focus:ring-2 focus:ring-green-500 
                        focus:border-transparent transition-colors duration-200"
             >
               <option value="en">English</option>

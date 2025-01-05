@@ -67,7 +67,7 @@ const TechnicianDetail = () => {
             <div className="p-6 md:w-2/3 lg:w-3/4">
             <div className='lg:flex justify-between '>
               <div>
-              <div className="uppercase max-md:hidden tracking-wide text-sm text-indigo-500 font-semibold">
+              <div className="uppercase max-md:hidden tracking-wide text-sm text-green-500 font-semibold">
                 Professional Technician
               </div>
               <h1 className="mt-2 text-2xl md:text-xl lg:text-2xl leading-8 font-extrabold tracking-tight text-gray-900">
@@ -77,7 +77,7 @@ const TechnicianDetail = () => {
             <div>
                 <Link
                   to={techBooking}
-                  className="inline-flex max-md:hidden rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex max-md:hidden rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Book Now
                 </Link>
@@ -100,7 +100,7 @@ const TechnicianDetail = () => {
                 <div>
                 <Link
                   to={techBooking}
-                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Book Now
                 </Link>
@@ -111,7 +111,7 @@ const TechnicianDetail = () => {
               <div className="mt-2 flex flex-wrap gap-2">
                 {technician.services && technician.services.length > 0 ? (
                   technician.services.map((service) => (
-                    <span key={service.id} className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                    <span key={service.id} className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
                       {service.name}
                     </span>
                   ))
