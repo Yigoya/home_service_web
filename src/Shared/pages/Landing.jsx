@@ -100,7 +100,7 @@ console.log(servicesArray, "servicesArray");
   }
 
   return (
-    <div className="font-sans">
+    <div className="font-sans ">
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
         <div className="flex flex-col justify-center items-center px-8 lg:px-0 lg:pt-44 pt-36 pb-8">
@@ -115,7 +115,7 @@ console.log(servicesArray, "servicesArray");
           {/* Search Dropdown */}
           <div className="lg:w-1/2 w-72">
       <div className="relative">
-        <div className="flex items-center bg-gray-100 text-gray-700 rounded-full shadow-md">
+        <div className="flex items-center bg-gray-300 text-gray-700 rounded-full shadow-md">
           <input
             type="text"
             placeholder={t("search_services")}
@@ -123,7 +123,7 @@ console.log(servicesArray, "servicesArray");
             onChange={handleSearchChange}
             onFocus={() => setIsDropdownOpen(true)}
             onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="flex-grow outline-none font-bold bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
+            className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
           />
           <div 
             className="bg-green-800 hover:bg-green-700 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
@@ -167,26 +167,28 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className=" pb-8 container lg:mx-auto  lg:px-24 ">
-          <div className="container ">
-            {selectedService && (
-              <>
-                <ServiceSelector
-                  services={services}
-                  selectedService={selectedService}
-                  onSelect={handleServiceSelect}
-                />
-                <hr className="border border-b-gray-400 mb-6 " />
-                <ServiceTypes types={[selectedService.services]} />
-                <ServiceDescription
-                  title={selectedService.categoryName}
-                  description={selectedService.description}
-                  
-                />
-              </>
-            )}
-          </div>
-        </div>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-28">
+      <div className="w-full">
+        {selectedService && (
+          <>
+            <ServiceSelector
+              services={services}
+              selectedService={selectedService}
+              onSelect={handleServiceSelect}
+            />
+            <div className="mt-3">
+              <ServiceTypes types={[selectedService.services]} />
+            </div>
+            <div>
+              <ServiceDescription
+                title={selectedService.categoryName}
+                description={selectedService.description}
+              />
+            </div>
+          </>
+        )}
+      </div>
+    </div>
       </section>
 
       {/* Why We Section */}

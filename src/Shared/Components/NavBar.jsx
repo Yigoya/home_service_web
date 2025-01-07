@@ -23,15 +23,15 @@ const NavBar = () => {
             {/* Auth Buttons */}
             <Link
               to="/login"
-              className="px-14 py-2 text-md font-medium text-green-800 bg-white border-2 border-green-600 
+              className="px-16 py-2 text-md font-medium text-green-800 bg-white border-2 border-green-600 
                        rounded-full hover:bg-green-600 hover:text-white transition-colors duration-200"
             >
               {t('login')}
             </Link>
             <Link
               to="/pre-signup"
-              className="px-14 py-2 text-md font-medium text-white bg-green-700 border-2 border-green-700 
-                       rounded-full hover:bg-green-500 hover:border-green-500 transition-colors duration-200"
+              className="px-16 py-2 text-md font-medium text-green-800 hover:bg-green-600 hover:text-white bg-white border-2 border-green-700 
+                       rounded-full  transition-colors duration-200"
             >
               {t('signup')}
             </Link>

@@ -55,7 +55,7 @@ const ServiceTypes = ({ types }) => {
                     ? "border-green-600 text-white bg-green-600 shadow-lg shadow-green-600/20"
                     : isHovered
                     ? "border-green-600 text-green-600 bg-green-50 shadow-md"
-                    : "border-gray-200 text-gray-600 bg-white hover:border-green-600 hover:text-green-600 hover:bg-green-50/50 hover:shadow-md"
+                    : "border-gray-200 text-gray-900 bg-white hover:border-green-600 hover:text-green-900 hover:bg-green-50/50 hover:shadow-md"
                 }
               `}
             >
