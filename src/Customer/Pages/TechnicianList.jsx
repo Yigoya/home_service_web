@@ -116,27 +116,29 @@ const TechnicianList = () => {
         <div className="lg: lg:w-3/4">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-grow">
-              <div className="relative">
+              <div className="relative flex items-center py-3 lg:py-0 bg-gray-300 text-gray-700 rounded-full shadow-md ">
                 <input
                   type="text"
                   placeholder={t('search')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <div className='absolute right-0.5 top-1/2 transform -translate-y-1/2 bg-green-800 hover:bg-green-700 rounded-r-full md:p-3 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center'>
+                <Search className=" text-white cursor-pointer " />
+                </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative flex space-x-4 ">
+              <div className=''>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full md:w-48 px-4 py-2 text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full md:w-48 px-4 py-2  text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <span className="block truncate">
                   {locations.find((loc) => loc.key === selectedLocation)?.label || t("locations.select")}
                 </span>
-                <ChevronDown className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none" />
-              </button>
+                <ChevronDown className="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none" />              </button>
               {isDropdownOpen && (
                 <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
                   {locations.map((location) => (
@@ -157,6 +159,8 @@ const TechnicianList = () => {
             <button className="bg-green-600 text-white rounded-lg px-6 py-2 hover:bg-green-700 transition-colors">
               {t('around_me')}
             </button>
+              </div>
+             
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {error ? (
