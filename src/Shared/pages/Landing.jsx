@@ -145,7 +145,7 @@ console.log(servicesArray, "servicesArray");
                   key={service.id}
                   to={`/technician-list/${service.id}`}
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                  className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold"
                 >
                   {service.name}
                 </Link>
