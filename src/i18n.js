@@ -139,6 +139,7 @@ const resources = {
       "offer":"Offer Your services and grow your business",
       "find_tech":"Find reliable technicians for your needs",
       "testimonialSubtitle":"Discover what our customers are saying about their experiences",
+      "search":"Search Technicians by Name",
       
     }
   },
@@ -277,6 +278,7 @@ const resources = {
       "offer":"አገልግሎትዎን ያቅርቡ እና ገቢዎን ያሳድጉ ",
       "find_tech":"ብቁ የሆኑ ባለሞያዎች ለሚያስፍልጎ አገልግሎት",
       "testimonialSubtitle":"ደንበኞቻችን ስለ ተሞክሯቸው ምን ይላሉ",
+      "search":"ባለሞያዎችን በስም ይፈልጉ",
        
        
   }
