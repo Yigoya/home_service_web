@@ -30,8 +30,8 @@ const ServiceSelector = ({ services, onSelect }) => {
           isSelected
             ? `w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-green-800`
             : isHovered
-            ? "w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-400 stroke-[2]"
-            : "w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
+            ? "w-6 h-6 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-400 stroke-[2]"
+            : "w-6 h-6  sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
         }`}
     />
   );
@@ -75,12 +75,12 @@ const ServiceSelector = ({ services, onSelect }) => {
                   }
                 }}
               >
-                <div className="mb-1 sm:mb-2">
+                <div className="mb-1 max-md:ml-10 sm:mb-2">
                   {renderIcon(iconComponents[index], isSelected, isHovered)}
                 </div>
                 <span
                   className={`
-                    text-2xs sm:text-xs md:text-sm text-center
+                    text-2xs max-md:text-xs max-md:ml-8 sm:text-xs md:text-sm text-center
                     transition-all duration-300 ease-in-out
                     relative after:content-[''] after:absolute
                     after:w-full after:h-0.5 after:bg-current
