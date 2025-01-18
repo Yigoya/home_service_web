@@ -7,7 +7,7 @@ import ProfileCard from '../../Shared/UIComponents/ProfileCard';
 
 const Button = ({ children, className = '', ...props }) => (
   <button
-    className={`bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition-colors ${className}`}
+    className={`bg-gren-600 text-white rounded-md px-4 py-2 hover:bg-green-700 transition-colors ${className}`}
     {...props}
   >
     {children}
@@ -16,14 +16,14 @@ const Button = ({ children, className = '', ...props }) => (
 
 const Input = ({ ...props }) => (
   <input
-    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
     {...props}
   />
 );
 
 const Select = ({ children, ...props }) => (
   <select
-    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
     {...props}
   >
     {children}
@@ -106,7 +106,7 @@ export default function TotalTechnicianList() {
                 ))}
               </div>
               <button
-                className="mt-2 text-blue-600 underline"
+                className="mt-2 text-green-600 underline"
                 onClick={() => setSelectedRating(0)}
               >
                 Clear
@@ -123,14 +123,14 @@ export default function TotalTechnicianList() {
                       value={option}
                       checked={selectedOption === option}
                       onChange={() => setSelectedOption(option)}
-                      className="h-4 w-4 text-blue-600"
+                      className="h-4 w-4 text-green-600"
                     />
                     <span>{`${range[0]} - ${range[1]} ${t('etb')}`}</span>
                   </label>
                 ))}
               </div>
               <button
-                className="mt-2 text-blue-600 underline"
+                className="mt-2 text-green-600 underline"
                 onClick={() => setSelectedOption(null)}
               >
                 Clear

@@ -122,7 +122,7 @@ const TechnicianList = () => {
                   placeholder={t('search')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
+                  className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-md md:py-4 px-5"
                 />
                 <div className='absolute right-0.5 top-1/2 transform -translate-y-1/2 bg-green-800 hover:bg-green-700 rounded-r-full md:p-3 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center'>
                 <Search className=" text-white cursor-pointer " />

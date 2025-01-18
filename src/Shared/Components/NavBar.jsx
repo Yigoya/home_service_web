@@ -50,7 +50,7 @@ const NavBar = () => {
             <Link
               to="/login"
               className="group relative px-16 py-2.5 text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white 
+                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mx-4
                        transition-all duration-300 ease-in-out overflow-hidden"
             >
               <span className="relative z-10">{t('login')}</span>
@@ -60,7 +60,7 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               className="group relative px-16 py-2.5 text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white 
+                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mr-4
                        transition-all duration-300 ease-in-out overflow-hidden"
             >
               <span className="relative z-10">{t('signup')}</span>
@@ -71,7 +71,7 @@ const NavBar = () => {
             {/* Language Selector */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-800 
+              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
                        bg-white rounded-ful
                        transition-colors duration-200"
               aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
@@ -86,7 +86,7 @@ const NavBar = () => {
             <button
               onClick={toggleLanguage}
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
-                       border-2 border-green-600 transition-colors duration-200"
+                        transition-colors duration-200"
               aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
             >
               <Globe className="w-5 h-5" />
@@ -94,7 +94,7 @@ const NavBar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
-                       border-2 border-green-600 transition-colors duration-200"
+                       transition-colors duration-200"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
             >

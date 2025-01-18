@@ -3,6 +3,7 @@ import transparency from "../../assets/guarantee.png";
 import equpment from "../../assets/on-time.png";
 import expert from "../../assets/diploma.png";
 import { useTranslation } from "react-i18next";
+import CommonServiceDescription from "./CommonServiceDescription";
 
 const WhyWe = () => {
   const { t} = useTranslation();
@@ -32,6 +33,7 @@ const WhyWe = () => {
           <p className="text-gray-700 font-medium">{t('trust')}</p>
         </div>
       </div>
+      <CommonServiceDescription />
     </div>
   );
 };
