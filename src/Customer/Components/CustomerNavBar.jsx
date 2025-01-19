@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaGlobe, FaUserCircle, FaBell, FaBars, FaTimes } from "react-icons/fa";
 import logo1 from "../../assets/logo1.png";
+import { Menu, X, Globe } from 'lucide-react';
+
 
 export default function CustomerNavBar() {
   const { i18n,t } = useTranslation();
@@ -47,22 +49,23 @@ export default function CustomerNavBar() {
             </Link>
           
                 {/* Language Selector */}
-              <select
-                 onChange={(e) => i18n.changeLanguage(e.target.value)}
-                 value={i18n.language}
-                 className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-full 
-                   hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
-                 focus:border-transparent transition-colors duration-200">
-                  <option value="en">English</option>
-                  <option value="am">አማርኛ</option>
-              </select>
+                <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
+                       bg-white rounded-ful
+                       transition-colors duration-200"
+              aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
+            >
+              <Globe className="w-4 h-4" />
+              <span>{i18n.language === "en" ? "አማርኛ" : "English"}</span>
+            </button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-black focus:outline-none"
+              className="text-green-600 focus:outline-none"
             >
               {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
             </button>
@@ -76,21 +79,21 @@ export default function CustomerNavBar() {
           <div className="px-4 pt-4 pb-4 space-y-2">
             <Link
               to={profileLink}
-              className="block text-black px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
+              className="block text-green-700 px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
             >
-              Profile
+              {t('yrprofike')}
             </Link>
             <Link
               to={notificationLink}
-              className="block text-black px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
+              className="block text-green-700 px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
             >
-              Notifications
+              {t('notification')}
             </Link>
             <button
               onClick={toggleLanguage}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
             >
-              {i18n.language === "en" ? "Switch to Amharic" : "Switch to English"}
+              {i18n.language === "en" ? "አማርኛ" : "English"}
             </button>
           </div>
         </div>

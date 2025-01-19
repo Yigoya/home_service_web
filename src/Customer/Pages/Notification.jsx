@@ -90,17 +90,17 @@ const Notification = () => {
   const getIcon = (type) => {
     switch (type) {
       case 'BOOKING_REQUEST':
-        return <Mail className="h-5 w-5 text-blue-500" />
+        return <Mail className="h-5 w-5 text-green-600" />
       case 'BOOKING_CANCELLATION':
-        return <AlertCircle className="h-5 w-5 text-red-500" />
+        return <AlertCircle className="h-5 w-5 text-red-600" />
       case 'BOOKING_COMPLETE':
-          return <CheckCircle className="h-5 w-5 text-green-500" />
+          return <CheckCircle className="h-5 w-5 text-green-600" />
       case 'BOOKING_START':
-            return <CheckCircle className="h-5 w-5 text-green-500" />
+            return <CheckCircle className="h-5 w-5 text-green-600" />
       case 'BOOKING_ACCEPTANCE':
-            return <CheckCircle className="h-5 w-5 text-green-500" />  
+            return <CheckCircle className="h-5 w-5 text-green-600" />  
       default:
-        return <Bell className="h-5 w-5 text-gray-500" />
+        return <Bell className="h-5 w-5 text-gray-600" />
     }
   }
 
@@ -129,14 +129,14 @@ const Notification = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <LoadingPage className="h-8 w-8 animate-spin text-blue-500" />
+        <LoadingPage className="h-8 w-8 animate-spin text-green-600" />
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="text-center text-red-500 p-4">
+      <div className="text-center text-red-600 p-4">
         <AlertCircle className="h-8 w-8 mx-auto mb-2" />
         {error}
       </div>
@@ -159,7 +159,7 @@ const Notification = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">{t('unread_notification')}</span>
-                <span className="font-semibold text-blue-500">{stats.unread}</span>
+                <span className="font-semibold text-green-600">{stats.unread}</span>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ const Notification = () => {
                     </div>
                   <div className="flex-grow bg-gray-200 rounded-full h-2">
                     <div
-                      className={`bg-blue-500 rounded-full h-2`}
+                      className={`bg-green-600 rounded-full h-2`}
                       style={{ width: `${getPercentage(count)}%` }}
                     ></div>
                   </div>
@@ -191,13 +191,13 @@ const Notification = () => {
             <h2 className="text-xl font-bold mb-4">{t('quick_action')}</h2>
             <button 
               onClick={markAllAsRead}
-              className="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition duration-300 mb-2"
+              className="w-full bg-green-600 text-white rounded-md py-2 px-4 hover:bg-green-600 transition duration-300 mb-2"
             >
               {t('mark_all')}
             </button>
             <button 
               onClick={clearAllNotifications}
-              className="w-full bg-red-500 text-white rounded-md py-2 px-4 hover:bg-red-600 transition duration-300"
+              className="w-full bg-red-600 text-white rounded-md py-2 px-4 hover:bg-red-600 transition duration-300"
             >
              {t('clear_all')}
             </button>
@@ -232,7 +232,7 @@ const Notification = () => {
                     <div className="flex-grow">
                       <h3 className="font-semibold">{notification.title}</h3>
                       <p className="text-gray-600">{notification.message}</p>
-                      <div className="mt-2 text-sm text-gray-500">
+                      <div className="mt-2 text-sm text-gray-600">
                         {format(new Date(notification.deliveryDate), 'PPp')}
                       </div>
                     </div>
@@ -240,7 +240,7 @@ const Notification = () => {
                       {!notification.readStatus && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className="text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out mb-2"
+                          className="text-green-600 hover:text-green-600 transition duration-300 ease-in-out mb-2"
                           aria-label="Mark as read"
                         >
                           {t('mark')}
@@ -248,7 +248,7 @@ const Notification = () => {
                       )}
                       <button
                         onClick={() => clearAllNotifications()}
-                        className="text-red-500 hover:text-red-600 transition duration-300 ease-in-out"
+                        className="text-red-600 hover:text-red-600 transition duration-300 ease-in-out"
                         aria-label="Delete notification"
                       >
                         <Trash2 className="h-5 w-5" />

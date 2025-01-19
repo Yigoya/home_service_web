@@ -109,7 +109,7 @@ export default function TotalTechnicianList() {
                 className="mt-2 text-green-600 underline"
                 onClick={() => setSelectedRating(0)}
               >
-                Clear
+                {t('clear')}
               </button>
             </div>
             <div>
@@ -133,7 +133,7 @@ export default function TotalTechnicianList() {
                 className="mt-2 text-green-600 underline"
                 onClick={() => setSelectedOption(null)}
               >
-                Clear
+               {t('clear')}
               </button>
             </div>
           </div>
@@ -160,7 +160,7 @@ export default function TotalTechnicianList() {
                 </option>
               ))}
             </Select>
-            <Button className="w-full md:w-auto">Around me</Button>
+            <Button className="w-full md:w-auto">{t('around')}</Button>
           </div>
           {paginatedItems.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -177,7 +177,7 @@ export default function TotalTechnicianList() {
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                Previous
+                {t('prev')}
               </Button>
               {Array.from({ length: totalPages }, (_, index) => (
                 <Button
@@ -192,7 +192,7 @@ export default function TotalTechnicianList() {
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
-                Next
+               {t('next')}
               </Button>
             </div>
           </div>

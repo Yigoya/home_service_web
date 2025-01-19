@@ -87,7 +87,7 @@ console.log(`${SingleService}/${serviceId}`)
             alt="Profile"
           />
           <h2 className="text-lg font-semibold">{Technicain.name}</h2>
-          <span className="mt-2 px-3 py-1 text-gray-700 bg-gray-200 rounded-full">{service || "Service Type"}</span>
+          <span className="mt-2 px-3 py-1 text-gray-700 bg-gray-200 rounded-full">{service || t('service')}</span>
         </div>
 
         <form onSubmit={handleBooking} className="mt-6">
@@ -100,7 +100,7 @@ console.log(`${SingleService}/${serviceId}`)
               className="flex-grow outline-none text-gray-600"
               required
             />
-            <span className="ml-2 text-gray-500">📅</span>
+            {/* <span className="ml-2 text-gray-500">📅</span> */}
           </div>
 
           <div className="mt-4">
@@ -118,7 +118,7 @@ console.log(`${SingleService}/${serviceId}`)
                   <option value="Bole">Bole</option>
                   <option value="Lideta">Lideta</option>
                 </select>
-                <span className="ml-2 text-gray-500">🏠</span>
+                {/* <span className="ml-2 text-gray-500">🏠</span> */}
               </div>
               <div className="flex items-center border border-gray-300 rounded-md p-2 flex-grow">
                 <select
@@ -127,7 +127,7 @@ console.log(`${SingleService}/${serviceId}`)
                   className="flex-grow outline-none text-gray-600"
                   required
                 >
-                  <option value="">{t('select_wereda')}</option>
+                  <option value="">{t('select_woreda')}</option>
                   <option value="wereda 1">wereda 1</option>
                   <option value="wereda 2">wereda 2</option>
                   <option value="wereda 3">wereda 3</option>
@@ -136,7 +136,7 @@ console.log(`${SingleService}/${serviceId}`)
                   <option value="wereda 6">wereda 6</option>
                   <option value="wereda 7">wereda 7</option>
                 </select>
-                <span className="ml-2 text-gray-500">🏠</span>
+                {/* <span className="ml-2 text-gray-500">🏠</span> */}
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ console.log(`${SingleService}/${serviceId}`)
             <textarea
               value={description}
               onChange={(e) => setdescription(e.target.value)}
-              placeholder="Explain the job task in simple language"
+              placeholder={t('des_job')}
               className="w-full border border-gray-300 rounded-md p-3 outline-none resize-none text-gray-600"
               rows="4"
               required
@@ -154,10 +154,10 @@ console.log(`${SingleService}/${serviceId}`)
           </div>
 
           <button type="submit" 
-          className="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600"
+          className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-800"
           disabled={loading}
           >
-            {loading ? "Booking..." : "Book Technician"}
+            {loading ? t('boooking') : t('book-technician')}
           </button>
           <ToastContainer />
         </form>

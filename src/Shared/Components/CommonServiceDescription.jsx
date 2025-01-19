@@ -26,7 +26,7 @@ const CommonServiceDescription = ({ title, description = [] }) => {
      
   return (
     <div className="flex flex-col md:flex-row items-center  py-6 mt-6 ">
-      Image Section
+      
       
       {/* Text Section */}
       <div className="lg:absolute md:w-96 lg:bg-white p-12 lg:ml-4 rounded-md lg:shadow-md">

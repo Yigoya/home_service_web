@@ -33,7 +33,7 @@ const WhyWe = () => {
           <p className="text-gray-700 font-medium">{t('trust')}</p>
         </div>
       </div>
-      <CommonServiceDescription />
+     
     </div>
   );
 };

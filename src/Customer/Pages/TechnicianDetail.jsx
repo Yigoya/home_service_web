@@ -43,7 +43,7 @@ const TechnicianDetail = () => {
   };
 
   const daysOfWeek = [
-    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+    t('sunday'), t('monday'), t('tuesday'), t('wednesday'), t('thursday'),t('friday'), t('saturday')
   ];
 
   if (loading) {
@@ -68,7 +68,7 @@ const TechnicianDetail = () => {
             <div className='lg:flex justify-between '>
               <div>
               <div className="uppercase max-md:hidden tracking-wide text-sm text-green-500 font-semibold">
-                Professional Technician
+                {t('protech')}
               </div>
               <h1 className="mt-2 text-2xl md:text-xl lg:text-2xl leading-8 font-extrabold tracking-tight text-gray-900">
                 {technician.name || "N/A"}
@@ -79,7 +79,7 @@ const TechnicianDetail = () => {
                   to={techBooking}
                   className="inline-flex max-md:hidden rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
-                  Book Now
+                  {t('book')}
                 </Link>
               </div>
             </div>
@@ -91,23 +91,23 @@ const TechnicianDetail = () => {
                 </div>
                 <div className="flex items-center mr-4 mb-2">
                   <FaBriefcase className="mr-1" />
-                  <span>{technician.services ? technician.services.length : 0} Services</span>
+                  <span>{technician.services ? technician.services.length : 0} {t('service')}</span>
                 </div>
                 <div className="flex items-center mb-2">
                   <FaUsers className="mr-1" />
-                  <span>{technician.bookings || 0} Bookings</span>
+                  <span>{technician.bookings || 0}{t('booking')}</span>
                 </div>
                 <div>
                 <Link
                   to={techBooking}
                   className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
-                  Book Now
+                  {t('book')}
                 </Link>
               </div>
               </div>
               <p className="mt-4 text-sm text-gray-500">{technician.bio || "No bio available."}</p>
-              <h3 className="font-bold leading-6  text-gray-900 mt-2">Services Offered</h3>
+              <h3 className="font-bold leading-6  text-gray-900 mt-2">{t('service')}</h3>
               <div className="mt-2 flex flex-wrap gap-2">
                 {technician.services && technician.services.length > 0 ? (
                   technician.services.map((service) => (
@@ -127,7 +127,7 @@ const TechnicianDetail = () => {
         <div className="">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">Business Hours</h3>
+              <h3 className="text-lg leading-6 font-medium text-gray-900">{t('business')}</h3>
               <div className="mt-4">
                 <dl className="space-y-2">
                   {daysOfWeek.map((day) => {
@@ -137,7 +137,7 @@ const TechnicianDetail = () => {
                       <div key={day} className="flex justify-between">
                         <dt className="text-sm font-medium text-gray-500">{day}</dt>
                         <dd className="text-sm text-gray-900">
-                          {schedule ? `${formatTime(schedule.start)} - ${formatTime(schedule.end)}` : "Closed"}
+                          {schedule ? `${formatTime(schedule.start)} - ${formatTime(schedule.end)}` : t('closed')}
                         </dd>
                       </div>
                     );
@@ -150,7 +150,7 @@ const TechnicianDetail = () => {
 
         <div className="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Reviews</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900">{t('testmony')}</h3>
             <div className="mt-6 space-y-6">
               {technician.review && technician.review.length > 0 ? (
                 technician.review.map((review) => (
@@ -174,7 +174,7 @@ const TechnicianDetail = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500">No reviews available.</p>
+                <p className="text-gray-500">{t('noreviw')}</p>
               )}
             </div>
           </div>

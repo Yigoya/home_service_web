@@ -63,7 +63,7 @@ const SideBar = ({ customerInfo }) => {
       {/* Filter Buttons */}
       <nav className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
         <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-          {t('filters', 'Filters')}
+          {t('filter')}
         </h3>
         {filterButtons.map(({ status, label, icon }) => (
           <button
@@ -83,7 +83,7 @@ const SideBar = ({ customerInfo }) => {
           onClick={handleResetFilter}
           className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
         >
-          {t('reset', 'Reset Filters')}
+          {t('reset')}
         </button>
       </nav>
 
@@ -94,7 +94,7 @@ const SideBar = ({ customerInfo }) => {
           className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
         >
           <LogOutIcon className="w-5 h-5 mr-2" />
-          {t('log_out', 'Log Out')}
+          {t('logout')}
         </button>
       </div>
     </aside>

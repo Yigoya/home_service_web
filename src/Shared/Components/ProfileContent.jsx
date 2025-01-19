@@ -311,9 +311,11 @@ import { API_URL } from '../api';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { message, Modal, Input, Rate, Pagination } from 'antd';
-import Filesearching from '../../assets/Filesearching.gif'
+import Filesearching from '../../assets/Filesearching.gif';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileContent({ jobs }) {
+  const { t } = useTranslation();
   const technician = JSON.parse(localStorage.getItem('technician'));
   const customer = JSON.parse(localStorage.getItem('customer'));
   const user = JSON.parse(localStorage.getItem('user'));
@@ -428,7 +430,7 @@ export default function ProfileContent({ jobs }) {
   return (
     <div className={`bg-white h-screen lg:mr-3  rounded-lg shadow-lg p-6 ${customer ? 'lg:mt-16' : ''}`}>
       <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
-        Welcome {user.name}👋
+        t('welcome') {user.name}👋
       </h1>
       {paginatedJobs.length === 0 && (
           <div className="text-center  text-gray-600">
@@ -483,7 +485,7 @@ export default function ProfileContent({ jobs }) {
               {job.status === 'COMPLETED' && job.review && (
                 <div className="mt-4 bg-gray-200 p-2  rounded-lg">
                   <div className="flex items-center">
-                    <p className="text-lg font-semibold text-gray-800 mr-2">Review</p>
+                    <p className="text-lg font-semibold text-gray-800 mr-2">{t('review')}</p>
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
                         <i

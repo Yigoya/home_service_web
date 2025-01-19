@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell, FaBars } from 'react-icons/fa';
 import  logo1  from '../../assets/logo1.png';
+import { Menu, X, Globe } from 'lucide-react';
+
 
 const TechnicianNavBar = () => {
   const { t, i18n } = useTranslation();
@@ -41,28 +43,28 @@ const TechnicianNavBar = () => {
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to={profileLink}
-              className="text-2xl text-green-800 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl text-green-800 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('profile')}
             >
               <FaUserCircle/>
             </Link>
             <Link
               to={notificationLink}
-              className="text-2xl hover:text-gray-300 text-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl hover:text-green-600 text-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('notifications')}
             >
               <FaBell />
             </Link>
-            <select
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-              value={i18n.language}
-              className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-full 
-                       hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 
-                       focus:border-transparent transition-colors duration-200"
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
+                       bg-white rounded-ful
+                       transition-colors duration-200"
+              aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
             >
-              <option value="en">English</option>
-              <option value="am">አማርኛ</option>
-            </select>
+              <Globe className="w-4 h-4" />
+              <span>{i18n.language === "en" ? "አማርኛ" : "English"}</span>
+            </button>
           </div>
 
           <button
