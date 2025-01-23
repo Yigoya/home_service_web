@@ -48,7 +48,7 @@ const NavBar = () => {
             </Link>
             {userAddress.city && userAddress.subcity && (
               <div className="flex items-center">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-green-800" />
+                <MapPin className="w-5 h-5 max-md:w-7 max-md:h-7 sm:w-6 sm:h-6 text-green-800" />
                 <p className="text-xs font-medium text-green-800 ml-2">
                   
                   {userAddress.city}, {userAddress.subcity}
