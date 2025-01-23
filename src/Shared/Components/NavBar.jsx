@@ -42,14 +42,14 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="h-12 sm:h-14  max-md:h-6 w-auto"
+                className="h-12 sm:h-14  max-md:h-10 w-auto"
                 alt="Logo"
               />
             </Link>
             {userAddress.city && userAddress.subcity && (
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 max-md:w-7 max-md:h-7 sm:w-6 sm:h-6 text-green-800" />
-                <p className="text-xs font-medium text-green-800 ml-2">
+                <p className="text-sm font-medium text-green-800 ml-2">
                   
                   {userAddress.city}, {userAddress.subcity}
                 </p>
