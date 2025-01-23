@@ -29,6 +29,7 @@ import { useEffect } from 'react'
 import { onMessage } from 'firebase/messaging'
 import ForgotPassword from './Shared/pages/ForgotPassword'
 import PreSignup from './Shared/Components/PreSignup'
+import { LocationProvider } from './Shared/Context/LocationContext'
 
 
 
@@ -50,6 +51,7 @@ function App() {
   // }, []);
   return (
     <>
+    <LocationProvider>
     <AuthProvider>
       <Router>
         
@@ -85,6 +87,7 @@ function App() {
         <Footer />
       </Router>
      </AuthProvider>
+     </LocationProvider>
     </>
   )
 }

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaGlobe, FaUserCircle, FaBell, FaBars } from 'react-icons/fa';
 import  logo1  from '../../assets/logo1.png';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, MapPin } from 'lucide-react';
+import { LocationContext } from '../../Shared/Context/LocationContext';
 
 
 const TechnicianNavBar = () => {
@@ -11,6 +12,7 @@ const TechnicianNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [technician, setTechnician] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
+  const { userAddress } = useContext(LocationContext);
   useEffect(() => {
     const storedTechnician = localStorage.getItem("technician");
 
@@ -35,11 +37,21 @@ const TechnicianNavBar = () => {
     <nav className="fixed top-0 left-0 right-0 bg-white text-black shadow-md z-10">
       <div className="container mx-auto px-4 py-2 md:px-6">
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center">
+          <div className='flex gap-4'>
+          <Link to="/" className="flex">
             <img className=" h-14" src={logo1} alt="Company Logo" />
-            
           </Link>
-
+            {/* Display user's location */}
+            {userAddress.city && userAddress.subcity && (
+              <div className=" flex items-center md:gap-2  px-4 py-2 md:bg-green-50 rounded-full">
+                <MapPin className="md:w-6 md:h-6 max-md:w-8 max-md:h-8 text-green-800" />
+                <p className="text-sm mt-3 font-medium text-green-800">
+                  {userAddress.city}, {userAddress.subcity}
+                </p>
+              </div>
+            )}
+            
+          </div>
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to={profileLink}

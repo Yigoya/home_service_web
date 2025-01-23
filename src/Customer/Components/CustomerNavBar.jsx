@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaGlobe, FaUserCircle, FaBell, FaBars, FaTimes } from "react-icons/fa";
 import logo1 from "../../assets/logo1.png";
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, MapPin } from 'lucide-react';
+import { LocationContext } from "../../Shared/Context/LocationContext";
+
 
 
 export default function CustomerNavBar() {
@@ -13,7 +15,7 @@ export default function CustomerNavBar() {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const profileLink = `/customer-profile/${Customer?.id || ""}`;
   const notificationLink = `/notification/${user?.id || ""}`;
-
+  const { userAddress } = useContext(LocationContext);
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "am" : "en";
     i18n.changeLanguage(newLang);
@@ -28,6 +30,15 @@ export default function CustomerNavBar() {
             <Link to="/" className="flex items-center">
               <img src={logo1} alt="Logo" className="h-14" />
             </Link>
+              {/* Display user's location */}
+              {userAddress.city && userAddress.subcity && (
+              <div className="hidden md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
+                <MapPin className="w-6 h-6 text-green-800" />
+                <p className="text-sm mt-3 font-medium text-green-800">
+                  {userAddress.city}, {userAddress.subcity}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Desktop Navigation */}
@@ -63,6 +74,15 @@ export default function CustomerNavBar() {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
+          {/* Display user's location in mobile view */}
+          {userAddress.city && userAddress.subcity && (
+          <div className="flex items-center  px-3 py-1.5 mt-5 ml-9 rounded-full">
+            <MapPin className="w-10 h-10 text-green-800" />
+            <p className="text-sm font-medium text-green-800">
+              {userAddress.city}, {userAddress.subcity}
+                </p>
+              </div>
+            )}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-green-600 focus:outline-none"

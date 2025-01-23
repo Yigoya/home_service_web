@@ -428,9 +428,9 @@ export default function ProfileContent({ jobs }) {
     }
   };
   return (
-    <div className={`bg-white h-screen lg:mr-3  rounded-lg shadow-lg p-6 ${customer ? 'lg:mt-16' : ''}`}>
+    <div className={`bg-white h-screen lg:mr-3 max-md:mt-10 rounded-lg shadow-lg p-6 ${customer ? 'lg:mt-16' : ''}`}>
       <h1 className="text-2xl max-md:ml-6 max-md:text-xl font-semibold mb-6 text-gray-800">
-        t('welcome') {user.name}👋
+        {t('welcome')} {user.name}👋
       </h1>
       {paginatedJobs.length === 0 && (
           <div className="text-center  text-gray-600">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import ProfileCard from '../../Shared/UIComponents/ProfileCard';
 import '../../i18n'; // Import the i18n configuration
 import { API_URL } from '../../Shared/api';
 import LoadingPage from '../../Shared/Components/LoadingPage';
+import Filesearching from '../../assets/Filesearching.gif';
+import { LocationContext } from '../../Shared/Context/LocationContext';
 
 const TechnicianList = () => {
   const { t } = useTranslation();
@@ -16,9 +18,10 @@ const TechnicianList = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1); // Start with page 1
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // New state for error handling
+  const [error, setError] = useState(null);
+  const { userAddress, setUserAddress } = useContext(LocationContext); // Access userAddress and setUserAddress from context
   const techniciansPerPage = 6;
 
   const locations = [
@@ -30,39 +33,123 @@ const TechnicianList = () => {
     { key: "lideta", label: t("locations.lideta") },
   ];
 
-  useEffect(() => {
-    const fetchTechnicians = async () => {
-      setLoading(true);
-      setError(null); // Reset error state
-      try {
-        const res = await axios.get(
-          `${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`
-        );
+  // Fetch technicians based on user's location
+  const fetchTechniciansNearby = async (lat, lng) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await axios.get(
+        `${API_URL}/search/service/${id}?lat=${lat}&lng=${lng}&page=${currentPage}&size=${techniciansPerPage}`
+      );
 
-        if (res.data && Array.isArray(res.data)) {
-          setTechnicians(res.data);
-        } else {
-          setTechnicians([]);
-        }
-      } catch (error) {
-        console.error("Error fetching technicians:", error);
-        if (error.response) {
-          // Handle backend errors
-          setError(error.response.data.message || t("error.unexpected"));
-        } else if (error.request) {
-          // Handle network errors
-          setError(t("error.no_response"));
-        } else {
-          // Handle other errors
-          setError(t("error.unexpected"));
-        }
-      } finally {
-        setLoading(false);
+      if (res.data && Array.isArray(res.data)) {
+        setTechnicians(res.data);
+      } else {
+        setTechnicians([]);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching nearby technicians:", error);
+      if (error.response) {
+        setError(error.response.data.message || t("error.unexpected"));
+      } else if (error.request) {
+        setError(t("error.no_response"));
+      } else {
+        setError(t("error.unexpected"));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  // Fetch technicians based on service ID (default behavior)
+  const fetchTechnicians = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await axios.get(
+        `${API_URL}/search/service/${id}?page=${currentPage}&size=${techniciansPerPage}`
+      );
+
+      if (res.data && Array.isArray(res.data)) {
+        setTechnicians(res.data);
+      } else {
+        setTechnicians([]);
+      }
+    } catch (error) {
+      console.error("Error fetching technicians:", error);
+      if (error.response) {
+        setError(error.response.data.message || t("error.unexpected"));
+      } else if (error.request) {
+        setError(t("error.no_response"));
+      } else {
+        setError(t("error.unexpected"));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Reverse geocode coordinates to get city and subcity using Nominatim
+  const reverseGeocode = async (lat, lng) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      );
+      const data = await response.json();
+
+      if (data.address) {
+        const { city, town, village, suburb, state_district } = data.address;
+        const cityName = city || town || village; // Use city, town, or village as city
+        const subcity = suburb || state_district; // Use suburb or state_district as subcity
+
+        return { city: cityName, subcity };
+      } else {
+        setError("No address found for this location.");
+        return { city: null, subcity: null };
+      }
+    } catch (error) {
+      console.error("Error reverse geocoding:", error);
+      setError("Failed to fetch address.");
+      return { city: null, subcity: null };
+    }
+  };
+
+  // Get user's location using Geolocation API
+  const handleAroundMeClick = () => {
+    if (!navigator.geolocation) {
+      setError(t("error.geolocation_not_supported"));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        // Reverse geocode to get city and subcity
+        const address = await reverseGeocode(latitude, longitude);
+        setUserAddress(address); // Update the location in context
+        setSelectedLocation(address.subcity.toLowerCase()); // Update selectedLocation to match the subcity
+
+        // Fetch technicians near the user's location
+        fetchTechniciansNearby(latitude, longitude);
+      },
+      (err) => {
+        setError(t("error.geolocation_permission_denied"));
+      }
+    );
+  };
+
+  // Fetch technicians on mount
+  useEffect(() => {
     fetchTechnicians();
   }, [id, currentPage, t]);
+
+  // Display user's location if available
+  useEffect(() => {
+    if (userAddress.city && userAddress.subcity) {
+      console.log("User Location:", userAddress.city, userAddress.subcity);
+    }
+  }, [userAddress]);
 
   const filteredTechnicians = technicians.filter((item) => {
     const matchesSearchTerm =
@@ -85,7 +172,7 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="container mx-auto lg:mt-20 max-md:mt-10 px-4 py-8">
+    <div className="container mx-auto lg:mt-20 max-md:mt-16 px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-[250px] ml-3">
@@ -125,42 +212,45 @@ const TechnicianList = () => {
                   className="flex-grow outline-none font-light bg-transparent placeholder-gray-700 max-md:text-sm lg:text-md md:py-4 px-5"
                 />
                 <div className='absolute right-0.5 top-1/2 transform -translate-y-1/2 bg-green-800 hover:bg-green-700 rounded-r-full md:p-3 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center'>
-                <Search className=" text-white cursor-pointer " />
+                  <Search className=" text-white cursor-pointer " />
                 </div>
               </div>
             </div>
             <div className="relative flex space-x-4 ">
               <div className=''>
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full md:w-48 px-4 py-2  text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <span className="block truncate">
-                  {locations.find((loc) => loc.key === selectedLocation)?.label || t("locations.select")}
-                </span>
-                <ChevronDown className="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none" />              </button>
-              {isDropdownOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-                  {locations.map((location) => (
-                    <button
-                      key={location.key}
-                      onClick={() => {
-                        setSelectedLocation(location.key);
-                        setIsDropdownOpen(false);
-                      }}
-                      className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                    >
-                      {location.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-            <button className="bg-green-600 text-white rounded-lg px-6 py-2 hover:bg-green-700 transition-colors">
-              {t('around')}
-            </button>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full md:w-44 px-4 py-4  text-left bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <span className="block truncate">
+                    {locations.find((loc) => loc.key === selectedLocation)?.label || t("locations.select")}
+                  </span>
+                  <ChevronDown className="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none" />
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute  z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    {locations.map((location) => (
+                      <button
+                        key={location.key}
+                        onClick={() => {
+                          setSelectedLocation(location.key);
+                          setIsDropdownOpen(false);
+                        }}
+                        className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                      >
+                        {location.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-             
+              <button
+                onClick={handleAroundMeClick}
+                className="bg-green-600 text-white rounded-lg px-6 py-2 hover:bg-green-700 transition-colors"
+              >
+                {t('around')}
+              </button>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {error ? (
@@ -170,7 +260,10 @@ const TechnicianList = () => {
                 <ProfileCard key={item.id} info={item} Id={id} />
               ))
             ) : (
-              <p className="text-gray-500 text-center col-span-3">{t('no_technicians_found')}</p>
+              <div className="col-span-3 flex flex-col items-center justify-center text-gray-600">
+                <p className="text-lg mb-4">No Technicians Available</p>
+                <img src={Filesearching} className="h-[300px] w-auto" alt="No technicians found" />
+              </div>
             )}
           </div>
           {totalPages > 1 && (
