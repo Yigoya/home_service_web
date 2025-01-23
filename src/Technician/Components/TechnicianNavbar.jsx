@@ -39,7 +39,7 @@ const TechnicianNavBar = () => {
         <div className="flex justify-between items-center">
           <div className='flex gap-4'>
           <Link to="/" className="flex">
-            <img className=" h-14" src={logo1} alt="Company Logo" />
+            <img className=" h-10 mt-5" src={logo1} alt="Company Logo" />
           </Link>
             {/* Display user's location */}
             {userAddress.city && userAddress.subcity && (

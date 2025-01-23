@@ -132,7 +132,7 @@ const NavBar = () => {
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-green-800 bg-white 
+              className=" mx-16 block px-4 py-2 text-center text-green-800 bg-white 
                        border-2 border-green-600 rounded-lg hover:bg-green-600 
                        hover:text-white transition-all duration-200"
             >
@@ -141,7 +141,7 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-white bg-green-600 
+              className="block mx-16 px-4 py-2 text-center text-white bg-green-600 
                        border-2 border-green-600 rounded-lg hover:bg-green-700 
                        transition-all duration-200"
             >

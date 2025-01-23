@@ -23,12 +23,12 @@ export default function CustomerNavBar() {
 
   return (
     <nav className="text-black bg-white shadow-lg fixed top-0 left-0 right-0 z-50 py-2">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+      <div className="max-w-7xl mx-4 px-4 sm:px-6  lg:px-8">
+        <div className="flex h-16">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img src={logo1} alt="Logo" className="h-14" />
+              <img src={logo1} alt="Logo" className="h-10" />
             </Link>
               {/* Display user's location */}
               {userAddress.city && userAddress.subcity && (
