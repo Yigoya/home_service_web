@@ -42,14 +42,14 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="md:h-14 max-md:h-10 w-auto"
+                className="md:h-14 max-md:h-6 w-auto"
                 alt="Logo"
               />
             </Link>
 
             {/* Display user's location */}
             {userAddress.city && userAddress.subcity && (
-              <div className="hidden md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
+              <div className="hidden  md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
                 <MapPin className="w-6 h-6 text-green-800" />
                 <p className="text-sm mt-3 font-medium text-green-800">
                   {userAddress.city}, {userAddress.subcity}
@@ -96,13 +96,13 @@ const NavBar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden gap-2">
+          <div className="flex items-center md:hidden">
             {/* Display user's location in mobile view */}
             {userAddress.city && userAddress.subcity && (
-              <div className="flex items-center  px-3 py-1.5 mt-5 ml- rounded-full">
+              <div className="flex ml-4 items-center  px-3 py-1.5 mt-5 ml- rounded-full">
                 <MapPin className="w-10 h-10 text-green-800" />
                 <p className="text-sm font-medium text-green-800">
-                 <span>{userAddress.city},</span> <br /><span>{userAddress.subcity}</span> 
+                 <span>{userAddress.city},</span> <span>{userAddress.subcity}</span> 
                 </p>
               </div>
             )}
