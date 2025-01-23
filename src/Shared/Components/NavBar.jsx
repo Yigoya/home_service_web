@@ -33,7 +33,7 @@ const NavBar = () => {
           : 'bg-white shadow-md'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex lg:justify-between items-center h-20">
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
@@ -99,10 +99,10 @@ const NavBar = () => {
           <div className="flex items-center md:hidden gap-2">
             {/* Display user's location in mobile view */}
             {userAddress.city && userAddress.subcity && (
-              <div className="flex items-center  px-3 py-1.5 mt-5 ml-9 rounded-full">
+              <div className="flex items-center  px-3 py-1.5 mt-5 ml- rounded-full">
                 <MapPin className="w-10 h-10 text-green-800" />
                 <p className="text-sm font-medium text-green-800">
-                  {userAddress.city}, {userAddress.subcity}
+                 <span>{userAddress.city},</span> <br /><span>{userAddress.subcity}</span> 
                 </p>
               </div>
             )}
