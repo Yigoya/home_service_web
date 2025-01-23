@@ -33,7 +33,7 @@ const NavBar = () => {
           : 'bg-white shadow-md'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex md:justify-between max-md:gap-5 items-center h-20">
+        <div className="flex md:justify-between max-md:gap-2 items-center h-20">
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
