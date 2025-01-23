@@ -34,7 +34,7 @@ const NavBar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex md:justify-between max-md:gap-5 items-center h-20">
-          <div className="md:flex items-center gap-4">
+          <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
               to="/"
@@ -42,13 +42,15 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="h-12 sm:h-14 max-md:mt-3 max-md:h-6 w-auto"
+                className="h-12 sm:h-14  max-md:h-6 w-auto"
                 alt="Logo"
               />
             </Link>
             {userAddress.city && userAddress.subcity && (
               <div className="flex items-center">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-green-800" />
                 <p className="text-xs font-medium text-green-800 ml-2">
+                  
                   {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
@@ -104,7 +106,7 @@ const NavBar = () => {
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
                         transition-colors duration-200"
             >
-              <Globe className="w-6 h-6" />
+              <Globe className="w-7 h-7" />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -114,7 +116,7 @@ const NavBar = () => {
               {isOpen ? (
                 <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-7 w-7" />
               )}
             </button>
           </div>
@@ -130,7 +132,7 @@ const NavBar = () => {
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 mx-16 text-center text-green-800 bg-white 
+              className="block px-4 py-2 text-center text-green-800 bg-white 
                        border-2 border-green-600 rounded-lg hover:bg-green-600 
                        hover:text-white transition-all duration-200"
             >
@@ -139,7 +141,7 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 mx-16 text-center text-white bg-green-600 
+              className="block px-4 py-2 text-center text-white bg-green-600 
                        border-2 border-green-600 rounded-lg hover:bg-green-700 
                        transition-all duration-200"
             >
