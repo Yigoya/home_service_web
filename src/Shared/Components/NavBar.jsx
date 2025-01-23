@@ -33,8 +33,8 @@ const NavBar = () => {
           : 'bg-white shadow-md'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex lg:justify-between items-center h-20">
-          <div className="flex items-center gap-4">
+        <div className="flex md:justify-between max-md:gap-5 items-center h-20">
+          <div className="md:flex items-center gap-4">
             {/* Logo */}
             <Link
               to="/"
@@ -42,16 +42,22 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="md:h-14 max-md:h-6 w-auto"
+                className="h-12 sm:h-14 max-md:mt-3 max-md:h-6 w-auto"
                 alt="Logo"
               />
             </Link>
-
+            {userAddress.city && userAddress.subcity && (
+              <div className="flex items-center">
+                <p className="text-xs font-medium text-green-800 ml-2">
+                  {userAddress.city}, {userAddress.subcity}
+                </p>
+              </div>
+            )}
             {/* Display user's location */}
             {userAddress.city && userAddress.subcity && (
-              <div className="hidden  md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
-                <MapPin className="w-6 h-6 text-green-800" />
-                <p className="text-sm mt-3 font-medium text-green-800">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1 md:bg-green-50 rounded-full">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-green-800" />
+                <p className="text-xs sm:text-sm font-medium text-green-800">
                   {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
@@ -63,69 +69,52 @@ const NavBar = () => {
             {/* Auth Buttons */}
             <Link
               to="/login"
-              className="group relative px-16 py-2.5 text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mx-4
-                       transition-all duration-300 ease-in-out overflow-hidden"
+              className="px-4 sm:px-8 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
+                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mx-2
+                       transition-all duration-300 ease-in-out"
             >
-              <span className="relative z-10">{t('login')}</span>
-              <div className="absolute inset-0 bg-green-600 transform scale-x-0 group-hover:scale-x-100 
-                           transition-transform duration-300 origin-left"></div>
+              {t('login')}
             </Link>
             <Link
               to="/pre-signup"
-              className="group relative px-16 py-2.5 text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mr-4
-                       transition-all duration-300 ease-in-out overflow-hidden"
+              className="px-4 sm:px-8 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
+                       border-green-600 rounded-full hover:bg-green-600 hover:text-white
+                       transition-all duration-300 ease-in-out"
             >
-              <span className="relative z-10">{t('signup')}</span>
-              <div className="absolute inset-0 bg-green-600 transform scale-x-0 group-hover:scale-x-100 
-                           transition-transform duration-300 origin-left"></div>
+              {t('signup')}
             </Link>
 
             {/* Language Selector */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
-                       bg-white rounded-full
+              className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-600 
+                       bg-white rounded-full hover:bg-green-50
                        transition-colors duration-200"
-              aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
             >
-              <Globe className="w-4 h-4" />
+              <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{i18n.language === "en" ? "አማርኛ" : "English"}</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden">
-            {/* Display user's location in mobile view */}
-            {userAddress.city && userAddress.subcity && (
-              <div className="flex ml-4 items-center  px-3 py-1.5 mt-5 ml- rounded-full">
-                <MapPin className="w-10 h-10 text-green-800" />
-                <p className="text-sm font-medium text-green-800">
-                 <span>{userAddress.city},</span> <span>{userAddress.subcity}</span> 
-                </p>
-              </div>
-            )}
-
+           
             <button
               onClick={toggleLanguage}
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
                         transition-colors duration-200"
-              aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
             >
-              <Globe className="w-5 h-5" />
+              <Globe className="w-6 h-6" />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
-                       transition-colors duration-200"
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
+                        transition-colors duration-200"
             >
               {isOpen ? (
                 <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -133,15 +122,15 @@ const NavBar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden transition-all duration-300 ease-in-out ${
             isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="py-4 space-y-3">
+          <div className="py-4 space-y-2">
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="block w-full px-4 py-2.5 text-center text-green-800 bg-white 
+              className="block px-4 py-2 mx-16 text-center text-green-800 bg-white 
                        border-2 border-green-600 rounded-lg hover:bg-green-600 
                        hover:text-white transition-all duration-200"
             >
@@ -150,7 +139,7 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block w-full px-4 py-2.5 text-center text-white bg-green-600 
+              className="block px-4 py-2 mx-16 text-center text-white bg-green-600 
                        border-2 border-green-600 rounded-lg hover:bg-green-700 
                        transition-all duration-200"
             >

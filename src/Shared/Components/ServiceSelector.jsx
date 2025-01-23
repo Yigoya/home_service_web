@@ -38,7 +38,7 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   return (
     <div className="relative w-full bg-background">
-        <div className="absolute bottom-0 left-4   w-[1000px] border- border-border"></div>
+        <div className="absolute bottom-0 left-4   w-[1000px] md:border-b border-border"></div>
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex justify-start items-center overflow-x-auto scrollbar-hide py-3 sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
           {services.map((service, index) => {
