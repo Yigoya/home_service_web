@@ -33,7 +33,7 @@ const NavBar = () => {
           : 'bg-white shadow-md'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex md:justify-between max-md:gap-2 items-center h-20">
+        <div className="flex md:justify-between max-md:gap items-center h-20">
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
@@ -42,14 +42,14 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="h-12 sm:h-14  max-md:h-7 w-auto"
+                className="h-12 sm:h-14  max-md:h-8 w-auto"
                 alt="Logo"
               />
             </Link>
             {userAddress.city && userAddress.subcity && (
-              <div className="flex items-center">
-                <MapPin className="w-5 h-5 max-md:w-7 max-md:h-7 sm:w-6 sm:h-6 text-green-800" />
-                <p className="text-sm font-medium text-green-800 ml-2">
+              <div className="flex md:hidden items-center">
+                <MapPin className=" w-8 h-8  text-green-800" />
+                <p className="text-xs mt-2 font-medium text-green-800 ml-2">
                   
                   {userAddress.city}, {userAddress.subcity}
                 </p>
@@ -106,7 +106,7 @@ const NavBar = () => {
               className="p-2 rounded-full text-green-800 hover:bg-green-50 
                         transition-colors duration-200"
             >
-              <Globe className="w-7 h-7" />
+              <Globe className="w-5 h-5" />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -116,7 +116,7 @@ const NavBar = () => {
               {isOpen ? (
                 <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-7 w-7" />
+                <Menu className="h-5 w-5" />
               )}
             </button>
           </div>
