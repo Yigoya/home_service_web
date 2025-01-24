@@ -9,6 +9,9 @@ import { API_URL } from '../../Shared/api';
 import LoadingPage from '../../Shared/Components/LoadingPage';
 import Filesearching from '../../assets/Filesearching.gif';
 import { LocationContext } from '../../Shared/Context/LocationContext';
+import ServiceDescriptionBar from '../../Shared/Components/ServiceDescriptionBar';
+import { useSelectedService } from "../../Shared/Context/SelectedServiceContext";
+import { SingleService } from '../Api/Api';
 
 const TechnicianList = () => {
   const { t } = useTranslation();
@@ -22,7 +25,10 @@ const TechnicianList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { userAddress, setUserAddress } = useContext(LocationContext); // Access userAddress and setUserAddress from context
+  const { selectedService } = useSelectedService();
+  const [service, setService] = useState([]);
   const techniciansPerPage = 6;
+ console.log(selectedService);
 
   const locations = [
     { key: "", label: t("locations.select") },
@@ -32,7 +38,18 @@ const TechnicianList = () => {
     { key: "kirkos", label: t("locations.kirkos") },
     { key: "lideta", label: t("locations.lideta") },
   ];
-
+  useEffect(() => {
+    axios.get(`${SingleService}/${id}`)
+      .then((response) => {
+        setService(response.data.service);
+        console.log(response.data.service  , "services")
+      })
+      .catch((error) => {
+        console.error("Error fetching technician details:", error);
+        setError(error.response.data.details);
+      });
+  }, [id]);
+  console.log(service)
   // Fetch technicians based on user's location
   const fetchTechniciansNearby = async (lat, lng) => {
     setLoading(true);
@@ -172,8 +189,18 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="container mx-auto lg:mt-20 max-md:mt-16 px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">{t('choose_your_best')}</h1>
+    <div className="container mx-auto  max-md:mt-16 px-4 py-8">
+      {/* Add the ServiceDescriptionBar here */}
+      <div className="lg:mt-24 bg-gradient-to-br  from-green-50 to-green-100 rounded-lg shadow-lg hover:shadow-md transition-all duration-300 mx-4 my-4 lg:mx-auto lg:max-w-7xl border border-green-200">
+      <div className="p-5 sm:p-6">
+        <div className="flex items-center mb-3">
+          <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+          <h3 className="text-base sm:text-lg font-medium text-green-800">{service.name}</h3>
+        </div>
+        <p className="text-sm text-green-700 leading-relaxed">{service.description}</p>
+      </div>
+    </div>
+      <h1 className="text-3xl font-bold lg:mt-10 text-center mb-8">{t('choose_your_best')}</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-[250px] ml-3">
           <div className="bg-white lg:h-screen rounded-lg shadow-md p-6">

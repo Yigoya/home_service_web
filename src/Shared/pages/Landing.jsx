@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,7 @@ import Contact from "../../Customer/Pages/ContactUs";
 import WhyWe from "../Components/WhyWe";
 import { API_URL } from "../api";
 import LoadingPage from "../Components/LoadingPage";
+import { useSelectedService } from "../Context/SelectedServiceContext"; // Import the context hook
 
 const Landing = () => {
   const { t} = useTranslation();
@@ -25,6 +26,8 @@ const Landing = () => {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { setSelectedService: setSelectedServiceContext } = useSelectedService(); // Use the context
+  
 
   // Fetch services from the backend
   const fetchServices = async () => {
@@ -36,6 +39,7 @@ const Landing = () => {
         setLoading(false);
         console.log(response.data);
         setSelectedService(response.data[0]);
+        //  setSelectedServiceContext(response.data[0]);
       }
     } catch (error) {
       console.error("Error fetching services:", error);
@@ -90,7 +94,12 @@ console.log(servicesArray, "servicesArray");
   // Select service handler
   const handleServiceSelect = (service) => {
     setSelectedService(service);
+    setSelectedServiceContext(service); // Update the context
   };
+  const handleService = (service) => {
+    setSelectedService(service);
+  }
+
   console.log(services, "services"); ;
   if (loading) {
     return <LoadingPage />;
@@ -171,10 +180,13 @@ console.log(servicesArray, "servicesArray");
             <ServiceSelector
               services={services}
               selectedService={selectedService}
-              onSelect={handleServiceSelect}
+              onSelect={handleService}
             />
             <div className="mt-3">
-              <ServiceTypes types={[selectedService.services]} />
+                 <ServiceTypes
+                    types={[selectedService.services]}
+                    onSelect={handleServiceSelect} // Pass the onSelect prop
+                  />
             </div>
             <div>
               <ServiceDescription
