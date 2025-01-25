@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
-import cleanImage from '../../assets/cockroach.jpg';
+import cleanImage from '../../assets//house_clean.png';
 import { auth, GoogleAuthProvider, signInWithPopup } from '../../firebase';
 const Login = () => {
   const FCMToken = localStorage.getItem('FCMToken')

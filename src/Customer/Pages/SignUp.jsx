@@ -5,8 +5,7 @@ import { customerSignUpApi } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
 import {message} from 'antd';
 import { useTranslation } from 'react-i18next';
-import cleanImage from '../../assets/cockroach.jpg';
-
+import cleanImage from '../../assets//house_clean.png';
 
 const SignUp = () => {
   const {t} = useTranslation();

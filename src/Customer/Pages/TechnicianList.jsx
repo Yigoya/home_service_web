@@ -11,6 +11,8 @@ import Filesearching from "../../assets/Filesearching.gif"
 import { LocationContext } from "../../Shared/Context/LocationContext"
 import { useSelectedService } from "../../Shared/Context/SelectedServiceContext"
 import { SingleService } from "../Api/Api"
+import { GiBroom } from "react-icons/gi";
+
 
 const TechnicianList = () => {
   const { t } = useTranslation()
@@ -82,8 +84,22 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="container lg:mt-20 mx-auto max-md:mt-16 px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
+    <div className="container  lg:mt-16 mx-auto max-md:mt-16 px-4 py-8 bg-gray-100 ">
+      <div className="bg-white p-4 rounded-lg shadow-md flex mb-6 text-left">
+  {/* Image Container */}
+  <div className="flex items-center justify-center rounded-t-lg p-4">
+    <GiBroom className="w-12 h-12" /> {/* Adjust size as needed */}
+  </div>
+
+  {/* Text Container */}
+  <div className="text-start flex-1 pl-4 mt-3"> {/* Added flex-1 and pl-4 for spacing */}
+    <h1 className="text-lg font-bold mb-2">{service.name}</h1> {/* Removed text-center */}
+    <p className="text-gray-600">{service.description}</p> {/* Removed text-center */}
+  </div>
+
+        
+      </div>
+      <div className="flex flex-col lg:flex-row gap-8 ">
         {/* Sidebar */}
         <div className="lg:w-[300px] w-full">
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -158,7 +174,7 @@ const TechnicianList = () => {
                 <p className="text-lg mb-4">No Technicians Available</p>
                 <img
                   src={Filesearching || "/placeholder.svg"}
-                  className="h-[300px] w-auto"
+                  className="h-[300px] w-auto "
                   alt="No technicians found"
                 />
               </div>

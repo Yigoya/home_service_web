@@ -2,8 +2,7 @@ import React from 'react'
 import { Wrench, User } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
-import cleanImage from '../../assets/cockroach.jpg';
-
+import cleanImage from '../../assets//house_clean.png';
 
 const PreSignup = () => {
   const { t } = useTranslation();
