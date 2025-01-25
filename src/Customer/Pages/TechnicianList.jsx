@@ -92,11 +92,20 @@ const TechnicianList = () => {
   </div>
 
   {/* Text Container */}
-  <div className="text-start flex-1 pl-4 mt-3"> {/* Added flex-1 and pl-4 for spacing */}
-    <h1 className="text-lg font-bold mb-2">{service.name}</h1> {/* Removed text-center */}
-    <p className="text-gray-600">{service.description}</p> {/* Removed text-center */}
+  <div className="text-start flex-1 pl-4 mt-3"> 
+    <h1 className="text-lg font-bold mb-2">{service.name}</h1>
+    <p className="text-gray-600">{service.description}</p> 
+     {/* Display user's location */}
+     {userAddress.city && userAddress.subcity && (
+              <div className="hidden md:flex items-center gap-2  px-4 py-2  rounded-full">
+                <MapPin className="w-6 h-6 text-green-800" />
+                <p className="text-sm mt-3 font-medium text-green-800">
+                  {userAddress.city}, {userAddress.subcity}
+                </p>
+              </div>
+            )}
   </div>
-
+       
         
       </div>
       <div className="flex flex-col lg:flex-row gap-8 ">

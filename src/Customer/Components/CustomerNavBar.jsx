@@ -24,13 +24,13 @@ export default function CustomerNavBar() {
   return (
     <nav className="text-black bg-white shadow-lg fixed top-0 left-0 right-0 z-50 py-2">
       <div className="max-w-7xl mx-4 px-4 sm:px-6  lg:px-8">
-        <div className="flex h-16">
+        <div className="flex h-16 justify-between ">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img src={logo1} alt="Logo" className="h-10" />
             </Link>
-              {/* Display user's location */}
+              {/* Display user's location
               {userAddress.city && userAddress.subcity && (
               <div className="hidden md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
                 <MapPin className="w-6 h-6 text-green-800" />
@@ -38,7 +38,7 @@ export default function CustomerNavBar() {
                   {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Desktop Navigation */}
@@ -60,29 +60,52 @@ export default function CustomerNavBar() {
             </Link>
           
                 {/* Language Selector */}
-                <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
-                       bg-white rounded-ful
-                       transition-colors duration-200"
-              aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}
-            >
-              <Globe className="w-4 h-4" />
-              <span>{i18n.language === "en" ? "አማርኛ" : "English"}</span>
-            </button>
-          </div>
+                <div className="relative">
+                                <button
+                                  onClick={() => setIsOpen(!isOpen)}
+                                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-700 
+                                             bg-white rounded-full 
+                                             transition-colors duration-200"
+                                >
+                                  <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                                  <span>{i18n.language === "en" ? "አማርኛ" : i18n.language === "am" ? "English" : "Afaan Oromoo"}</span>
+                                </button>
+                                {isOpen && (
+                                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 ml-16">
+                                    <button
+                                      onClick={() => { i18n.changeLanguage("en"); setIsOpen(false); }}
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+                                    >
+                                      English
+                                    </button>
+                                    <button
+                                      onClick={() => { i18n.changeLanguage("am"); setIsOpen(false); }}
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-green-700 hover:bg-green-700 hover:text-white"
+                                    >
+                                      አማርኛ
+                                    </button>
+                                    <button
+                                      onClick={() => { i18n.changeLanguage("om"); setIsOpen(false); }}
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-green-700 hover:bg-green-700 hover:text-white"
+                                    >
+                                      Afaan Oromoo
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
           {/* Display user's location in mobile view */}
-          {userAddress.city && userAddress.subcity && (
+          {/* {userAddress.city && userAddress.subcity && (
           <div className="flex items-center  px-3 py-1.5 mt-5 ml-9 rounded-full">
             <MapPin className="w-10 h-10 text-green-800" />
             <p className="text-sm font-medium text-green-800">
               {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
-            )}
+            )} */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-green-600 focus:outline-none"
@@ -109,11 +132,24 @@ export default function CustomerNavBar() {
             >
               {t('notification')}
             </Link>
-            <button
-              onClick={toggleLanguage}
-              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
+             {/* Language Options in Mobile Menu */}
+             <button
+              onClick={() => toggleLanguage("en")}
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
             >
-              {i18n.language === "en" ? "አማርኛ" : "English"}
+              English
+            </button>
+            <button
+              onClick={() => toggleLanguage("am")}
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+            >
+              አማርኛ
+            </button>
+            <button
+              onClick={() => toggleLanguage("om")}
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+            >
+              Afaan Oromoo
             </button>
           </div>
         </div>
