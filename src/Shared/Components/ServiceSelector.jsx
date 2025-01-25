@@ -17,6 +17,14 @@ const ServiceSelector = ({ services, onSelect }) => {
     Hammer,
     Truck,
     TreeDeciduous,
+    TreeDeciduous,
+    TreeDeciduous,
+    Truck,
+    Truck,
+    TreeDeciduous,
+    TreeDeciduous,
+    Truck,
+    Truck,
   ];
 
   const formatName = (name) => {

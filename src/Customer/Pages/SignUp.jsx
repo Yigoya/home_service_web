@@ -5,6 +5,8 @@ import { customerSignUpApi } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
 import {message} from 'antd';
 import { useTranslation } from 'react-i18next';
+import cleanImage from '../../assets/cockroach.jpg';
+
 
 const SignUp = () => {
   const {t} = useTranslation();
@@ -55,9 +57,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex mt-12 items-center lg:pt-10 justify-center min-h-screen bg-gray-100">
+    <div className="flex mt-12 items-center lg:pt-10 justify-center min-h-screen bg-gray-100bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white max-md:mx-5 shadow-md rounded-lg p-5 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6">{t('signup')}</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">HuluMoya</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700">{t('name')}</label>

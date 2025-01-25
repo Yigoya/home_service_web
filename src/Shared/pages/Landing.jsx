@@ -120,8 +120,8 @@ console.log(servicesArray, "servicesArray");
 
           {/* Search Dropdown */}
           <div className="lg:w-1/2 w-72">
-      <div className="relative">
-        <div className="flex items-center bg-gray-300 text-gray-700 rounded-full shadow-md">
+      <div className="relative ">
+        <div className="flex items-center bg-gray-200 rounded-xl shadow-md">
           <input
             type="text"
             placeholder={t("search_services")}
@@ -129,10 +129,10 @@ console.log(servicesArray, "servicesArray");
             onChange={handleSearchChange}
             onFocus={() => setIsDropdownOpen(true)}
             onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="flex-grow outline-none font-bold bg-transparent placeholder-gray-700 max-md:text-sm lg:text-lg md:py-3 px-5"
+            className="flex-grow  outline-none font-normal  placeholder-black bg-transparent max-md:text-sm lg:text- md:py-3 px-5"
           />
           <div 
-            className="bg-green-800 hover:bg-green-700 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
+            className="bg-green-800 hover:bg-green-700 rounded-r-xl md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
             onClick={() => sendSearchToBackend(searchText)}
           >
             <FiSearch

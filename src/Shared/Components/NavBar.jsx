@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, MapPin } from 'lucide-react';
+import { Menu, X, Globe, MapPin, Phone } from 'lucide-react';
 import logo1 from '../../assets/logo1.png';
 import { LocationContext } from '../Context/LocationContext';
 
@@ -20,9 +20,9 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleLanguage = () => {
-    const newLanguage = i18n.language === "en" ? "am" : "en";
-    i18n.changeLanguage(newLanguage);
+  const toggleLanguage = (language) => {
+    i18n.changeLanguage(language);
+    setIsOpen(false); // Close the mobile menu after selecting a language
   };
 
   return (
@@ -33,7 +33,8 @@ const NavBar = () => {
           : 'bg-white shadow-md'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex md:justify-between max-md:gap items-center h-20">
+        <div className="flex justify-between items-center h-20">
+          {/* Left Section: Logo and Phone */}
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
@@ -42,98 +43,99 @@ const NavBar = () => {
             >
               <img
                 src={logo1}
-                className="h-12 sm:h-14  max-md:h-8 w-auto"
+                className="h-12 sm:h-14 max-md:h-8 w-auto"
                 alt="Logo"
               />
             </Link>
-            {userAddress.city && userAddress.subcity && (
-              <div className="flex md:hidden items-center">
-                <MapPin className=" w-8 h-8  text-green-800" />
-                <p className="text-xs mt-2 font-medium text-green-800 ml-2">
-                  
-                  {userAddress.city}, {userAddress.subcity}
-                </p>
-              </div>
-            )}
-            {/* Display user's location */}
-            {userAddress.city && userAddress.subcity && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-1 md:bg-green-50 rounded-full">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-green-800" />
-                <p className="text-xs sm:text-sm font-medium text-green-800">
-                  {userAddress.city}, {userAddress.subcity}
-                </p>
-              </div>
-            )}
+            <Link className="mx-3 flex items-center gap-3" to="">
+              <Phone className="w-8 h-8 mt-3 text-green-700" />
+              <p className="mt-8 font-bold text-xl text-green-700">0000</p>
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Auth Buttons */}
-            <Link
-              to="/login"
-              className="px-4 sm:px-8 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white mx-2
-                       transition-all duration-300 ease-in-out"
-            >
-              {t('login')}
-            </Link>
-            <Link
-              to="/pre-signup"
-              className="px-4 sm:px-8 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
-                       border-green-600 rounded-full hover:bg-green-600 hover:text-white
-                       transition-all duration-300 ease-in-out"
-            >
-              {t('signup')}
-            </Link>
+          {/* Right Section: Desktop Navigation and Mobile Menu Button */}
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
+              {/* Auth Buttons */}
+              <Link
+                to="/login"
+                className="px-6 sm:px-16 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
+                         border-green-700 rounded-full hover:bg-green-700 hover:text-white mx-4
+                         transition-all duration-300 ease-in-out"
+              >
+                {t('login')}
+              </Link>
+              <Link
+                to="/pre-signup"
+                className="px-4 sm:px-16 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2  
+                         border-green-700 rounded-full hover:bg-green-700 hover:text-white
+                         transition-all duration-300 ease-in-out"
+              >
+                {t('signup')}
+              </Link>
 
-            {/* Language Selector */}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-600 
-                       bg-white rounded-full hover:bg-green-50
-                       transition-colors duration-200"
-            >
-              <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>{i18n.language === "en" ? "አማርኛ" : "English"}</span>
-            </button>
-          </div>
+              {/* Language Dropdown (Desktop) */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-700 
+                             bg-white rounded-full 
+                             transition-colors duration-200"
+                >
+                  <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span>{i18n.language === "en" ? "አማርኛ" : i18n.language === "am" ? "English" : "Afaan Oromoo"}</span>
+                </button>
+                {isOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 ml-16">
+                    <button
+                      onClick={() => { i18n.changeLanguage("en"); setIsOpen(false); }}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+                    >
+                      English
+                    </button>
+                    <button
+                      onClick={() => { i18n.changeLanguage("am"); setIsOpen(false); }}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-green-700 hover:bg-green-700 hover:text-white"
+                    >
+                      አማርኛ
+                    </button>
+                    <button
+                      onClick={() => { i18n.changeLanguage("om"); setIsOpen(false); }}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-green-700 hover:bg-green-700 hover:text-white"
+                    >
+                      Afaan Oromoo
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden">
-           
-            <button
-              onClick={toggleLanguage}
-              className="p-2 rounded-full text-green-800 hover:bg-green-50 
-                        transition-colors duration-200"
-            >
-              <Globe className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full text-green-800 hover:bg-green-50 
-                        transition-colors duration-200"
-            >
-              {isOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
+            {/* Mobile Menu Button */}
+            <div className="flex items-center md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 rounded-full text-green-800 hover:bg-green-50 
+                          transition-colors duration-200"
+              >
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
-            isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
-          }`}
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          } overflow-hidden`}
         >
           <div className="py-4 space-y-2">
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className=" mx-16 block px-4 py-2 text-center text-green-800 bg-white 
-                       border-2 border-green-600 rounded-lg hover:bg-green-600 
+              className="block px-4 py-2 text-center text-green-800 bg-white 
+                       border-2 border-green-700 rounded-lg hover:bg-green-700 
                        hover:text-white transition-all duration-200"
             >
               {t('login')}
@@ -141,12 +143,32 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block mx-16 px-4 py-2 text-center text-white bg-green-600 
-                       border-2 border-green-600 rounded-lg hover:bg-green-700 
+              className="block px-4 py-2 text-center text-white bg-green-700 
+                       border-2 border-green-700 rounded-lg hover:bg-green-700 
                        transition-all duration-200"
             >
               {t('signup')}
             </Link>
+
+            {/* Language Options in Mobile Menu */}
+            <button
+              onClick={() => toggleLanguage("en")}
+              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+            >
+              English
+            </button>
+            <button
+              onClick={() => toggleLanguage("am")}
+              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+            >
+              አማርኛ
+            </button>
+            <button
+              onClick={() => toggleLanguage("om")}
+              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+            >
+              Afaan Oromoo
+            </button>
           </div>
         </div>
       </div>

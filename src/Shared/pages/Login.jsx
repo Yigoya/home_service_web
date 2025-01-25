@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
+import cleanImage from '../../assets/cockroach.jpg';
 import { auth, GoogleAuthProvider, signInWithPopup } from '../../firebase';
 const Login = () => {
   const FCMToken = localStorage.getItem('FCMToken')
@@ -123,9 +124,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex  items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6">{t('login')}</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">HuluMoya</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')} / {t('phone')}</label>
