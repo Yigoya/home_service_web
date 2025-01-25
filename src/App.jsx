@@ -26,6 +26,7 @@ import PreSignup from './Shared/Components/PreSignup';
 import { LocationProvider } from './Shared/Context/LocationContext';
 import { SelectedServiceProvider } from "./Shared/Context/SelectedServiceContext";
 import ServiceDescriptionBar from "./Shared/Components/ServiceDescriptionBar";
+import Checkout from './Customer/Pages/Checkout';
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -62,6 +63,7 @@ function App() {
                   <Route path="/notification/:id" element={<Notification />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/pre-signup" element={<PreSignup />} />
+                  <Route path='/checkout' element = {<Checkout />} />
                 </Route>
               )}
             </Routes>
