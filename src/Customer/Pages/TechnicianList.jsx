@@ -84,8 +84,8 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="container  lg:mt-16 mx-auto max-md:mt-16 px-4 py-8 bg-gray-100 ">
-      <div className="bg-white p-4 rounded-lg shadow-md flex mb-6 text-left">
+    <div className="container  lg:mt-16 mx-auto max-md:mt-16  py-8 bg-gray-100 ">
+      <div className="bg-white p-4 rounded- shadow-md flex mb-6 text-left">
   {/* Image Container */}
   <div className="flex items-center justify-center rounded-t-lg p-4">
     <GiBroom className="w-12 h-12" /> {/* Adjust size as needed */}
@@ -108,7 +108,7 @@ const TechnicianList = () => {
        
         
       </div>
-      <div className="flex flex-col lg:flex-row gap-8 ">
+      <div className="flex flex-col lg:flex-row gap-8 px-8">
         {/* Sidebar */}
         <div className="lg:w-[300px] w-full">
           <div className="bg-white rounded-lg shadow-md p-6">
