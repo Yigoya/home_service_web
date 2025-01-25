@@ -139,7 +139,7 @@ const resources = {
       "offer":"Offer Your services and grow your business",
       "find_tech":"Find reliable technicians for your needs",
       "testimonialSubtitle":"Discover what our customers are saying about their experiences",
-      "search":"Search Technicians by Name",
+      "search":"Search Name",
       "protech":"PROFESSIONAL TECHNICIAN",
       "business":"Business Hours",
       "sunday":"Sunday",

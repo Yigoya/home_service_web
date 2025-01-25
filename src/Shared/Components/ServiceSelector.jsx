@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Wrench, PaintRoller, Truck, Hammer, Flame, TreeDeciduous, Drill } from 'lucide-react';
 import { GiBroom } from "react-icons/gi";
 
 const ServiceSelector = ({ services, onSelect }) => {
-  const { t } = useTranslation();
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
@@ -27,26 +25,27 @@ const ServiceSelector = ({ services, onSelect }) => {
     Truck,
   ];
 
-  const formatName = (name) => {
-    return name.split(/ {3,}/g);
+  const renderIcon = (IconComponent, isSelected, isHovered) => {
+    if (!IconComponent) {
+      console.error("IconComponent is undefined");
+      return null; // or return a fallback component
+    }
+    return (
+      <IconComponent
+        className={`transition-all duration-300 ease-in-out
+          ${
+            isSelected
+              ? `w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-green-800`
+              : isHovered
+              ? "w-6 h-6 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-400 stroke-[2]"
+              : "w-6 h-6  sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
+          }`}
+      />
+    );
   };
-
-  const renderIcon = (IconComponent, isSelected, isHovered) => (
-    <IconComponent
-      className={`transition-all duration-300 ease-in-out
-        ${
-          isSelected
-            ? `w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-green-800`
-            : isHovered
-            ? "w-6 h-6 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-400 stroke-[2]"
-            : "w-6 h-6  sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
-        }`}
-    />
-  );
 
   return (
     <div className="relative w-full bg-background">
-        <div className="absolute bottom-0 left-4   w-[1000px] md:border-b border-border"></div>
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex justify-start items-center overflow-x-auto scrollbar-hide py-3 sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
           {services.map((service, index) => {
@@ -73,9 +72,6 @@ const ServiceSelector = ({ services, onSelect }) => {
                 `}
                 role="button"
                 tabIndex={0}
-                aria-label={t(
-                  `services.${service.categoryName.replace(/\s+/g, "")}.title`
-                )}
                 aria-pressed={isSelected}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -104,9 +100,7 @@ const ServiceSelector = ({ services, onSelect }) => {
                     }
                   `}
                 >
-                  {formatName(service.categoryName).map((line, i) => (
-                    <span key={i} className="block">{line}</span>
-                  ))}
+                  {service.categoryName}
                 </span>
               </div>
             );
@@ -118,4 +112,3 @@ const ServiceSelector = ({ services, onSelect }) => {
 };
 
 export default ServiceSelector;
-
