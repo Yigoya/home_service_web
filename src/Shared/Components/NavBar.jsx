@@ -48,8 +48,8 @@ const NavBar = () => {
               />
             </Link>
             <Link className="mx-3 flex items-center gap-3" to="">
-              <Phone className="w-8 h-8 mt-3 text-green-700" />
-              <p className="mt-8 font-bold text-xl text-green-700">0000</p>
+              <Phone className="w-8 h-8 mt-3 text-emerald-600" />
+              <p className="mt-8 font-bold text-xl text-emerald-600">2121</p>
             </Link>
           </div>
 
@@ -60,16 +60,16 @@ const NavBar = () => {
               {/* Auth Buttons */}
               <Link
                 to="/login"
-                className="px-6 sm:px-16 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2 
-                         border-green-700 rounded-full hover:bg-green-700 hover:text-white mx-4
+                className="px-6 sm:px-16 py-2 text-xs sm:text-sm font-medium text-emerald-600 bg-white border-2 
+                         border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
                          transition-all duration-300 ease-in-out"
               >
                 {t('login')}
               </Link>
               <Link
                 to="/pre-signup"
-                className="px-4 sm:px-16 py-2 text-xs sm:text-sm font-medium text-green-800 bg-white border-2  
-                         border-green-700 rounded-full hover:bg-green-700 hover:text-white
+                className="px-4 sm:px-16 py-2 text-xs sm:text-sm font-medium text-emerald-600 bg-white border-2  
+                         border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white
                          transition-all duration-300 ease-in-out"
               >
                 {t('signup')}
@@ -79,7 +79,7 @@ const NavBar = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-700 
+                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-emerald-600 
                              bg-white rounded-full 
                              transition-colors duration-200"
                 >
@@ -89,20 +89,20 @@ const NavBar = () => {
                 {isOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 ml-16">
                     <button
-                      onClick={() => { i18n.changeLanguage("en"); setIsOpen(false); }}
-                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+                      onClick={() => toggleLanguage("en")}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
                     >
                       English
                     </button>
                     <button
-                      onClick={() => { i18n.changeLanguage("am"); setIsOpen(false); }}
-                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-green-700 hover:bg-green-700 hover:text-white"
+                      onClick={() => toggleLanguage("am")}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-emerald-600 hover:bg-emerald-600 hover:text-white"
                     >
                       አማርኛ
                     </button>
                     <button
-                      onClick={() => { i18n.changeLanguage("om"); setIsOpen(false); }}
-                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-green-700 hover:bg-green-700 hover:text-white"
+                      onClick={() => toggleLanguage("om")}
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-emerald-600 hover:bg-emerald-600 hover:text-white"
                     >
                       Afaan Oromoo
                     </button>
@@ -115,7 +115,7 @@ const NavBar = () => {
             <div className="flex items-center md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-full text-green-800 hover:bg-green-50 
+                className="p-2 rounded-full text-emerald-600 hover:bg-emerald-600
                           transition-colors duration-200"
               >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -134,8 +134,8 @@ const NavBar = () => {
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-green-800 bg-white 
-                       border-2 border-green-700 rounded-lg hover:bg-green-700 
+              className="block px-4 py-2 text-center text-emerald-600 bg-white 
+                       border-2 border-emerald-600 rounded-lg hover:bg-emerald-600 
                        hover:text-white transition-all duration-200"
             >
               {t('login')}
@@ -143,8 +143,8 @@ const NavBar = () => {
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-white bg-green-700 
-                       border-2 border-green-700 rounded-lg hover:bg-green-700 
+              className="block px-4 py-2 text-center text-white bg-emerald-600 
+                       border-2 border-emerald-600 rounded-lg hover:bg-emerald-600 
                        transition-all duration-200"
             >
               {t('signup')}
@@ -153,19 +153,19 @@ const NavBar = () => {
             {/* Language Options in Mobile Menu */}
             <button
               onClick={() => toggleLanguage("en")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
             >
               English
             </button>
             <button
               onClick={() => toggleLanguage("am")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
             >
               አማርኛ
             </button>
             <button
               onClick={() => toggleLanguage("om")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
             >
               Afaan Oromoo
             </button>

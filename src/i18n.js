@@ -159,6 +159,7 @@ const resources = {
       "filter":"FILTERS",
       "accept":"Accept",
       "deny":"Deny",
+      "or":"or",
 
       
     }
@@ -318,6 +319,7 @@ const resources = {
       "filter":"ማጣሪያ",
       "accept":"ይቀበሉ",
       "deny":"ይከልክሉ",
+      "or":"ወይም",
 
        
        

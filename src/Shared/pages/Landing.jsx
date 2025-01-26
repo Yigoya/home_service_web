@@ -121,7 +121,7 @@ console.log(servicesArray, "servicesArray");
           {/* Search Dropdown */}
           <div className="lg:w-1/2 w-72">
       <div className="relative ">
-        <div className="flex items-center bg-gray-200 rounded-xl shadow-md">
+        <div className="flex items-center bg-gray-200 rounded-full shadow-md">
           <input
             type="text"
             placeholder={t("search_services")}
@@ -132,7 +132,7 @@ console.log(servicesArray, "servicesArray");
             className="flex-grow  outline-none font-normal  placeholder-black bg-transparent max-md:text-sm lg:text- md:py-3 px-5"
           />
           <div 
-            className="bg-green-800 hover:bg-green-700 rounded-r-xl md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
+            className="bg-emerald-700 hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
             onClick={() => sendSearchToBackend(searchText)}
           >
             <FiSearch
@@ -168,7 +168,7 @@ console.log(servicesArray, "servicesArray");
     </div>
             <div className="flex justify-center mb-8">
               {t('become_tech')}?
-            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-green-800 px-3 hover:text-green-800 hover:underline">
+            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-emerald-700 px-3 hover:text-emerald-700 hover:underline">
               {t('applay_now')}
           </Link>
             </div>
