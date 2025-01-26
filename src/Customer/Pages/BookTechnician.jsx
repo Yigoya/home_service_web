@@ -67,7 +67,8 @@ console.log(`${SingleService}/${serviceId}`)
         setloading(false);
         toast("Booking successful!");
         console.log("Booking successful:", response.data);
-        navigate(`/customer-profile/${customer?.id}`);
+        navigate('/checkout');
+        // navigate(`/customer-profile/${customer?.id}`);
       })
       .catch((error) => {
         console.error("Error booking service:", error);

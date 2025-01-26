@@ -104,7 +104,7 @@ const TechnicianList = () => {
                   className=" w-8 h-8 rounded-full hover:bg-green-700 flex items-center justify-center text-white"
                   onClick={fetchTechnicians}
                 >
-                  <Search className="h-6 w-6 text-green-600" />
+                  <Search className="h-6 w-6 text-green-800" />
                 </button>
               </div>
             </div>
@@ -138,7 +138,7 @@ const TechnicianList = () => {
                   </button>
                 ))}
               </div>
-              <button onClick={() => setSelectedRating(0)} className="text-sm text-green-600 hover:underline">
+              <button onClick={() => setSelectedRating(0)} className="text-sm text-green-800 hover:underline">
                 {t("clear")}
               </button>
             </div>
