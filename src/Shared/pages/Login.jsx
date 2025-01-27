@@ -154,14 +154,14 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className='text-sm lg:ml-64 text-green-800 hover:text-green-700  '>
+          <div className='text-sm lg:ml-64 text-emerald-800 hover:text-emerald-700  '>
           <Link to="/forgot-password">{t('forgot_pass')}</Link>
           </div>
          
           
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-800 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -178,7 +178,7 @@ const Login = () => {
           </button>
 
           {error && <p className="text-red-500 text-center">{error}</p>}
-          {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
+          {successMessage && <p className="text-emerald-500 text-center">{successMessage}</p>}
         </form>
 
         <div className="flex items-center my-4">
@@ -197,10 +197,6 @@ const Login = () => {
             {t('sign_facebook')}
           </button>
         </div>
-
-        <p className="mt-4 text-center text-gray-600">
-         {t('account')} <a href="/pre-signup" className="text-green-800 hover:underline">{t('signup')}</a>
-        </p>
       </div>
     </div>
   );

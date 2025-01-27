@@ -55,7 +55,7 @@ function App() {
                   <Route path="/all-technician-list" element={<TotalTechnicianList />} />
                   <Route path="/contact-us" element={<ContactUs />} />
                   <Route path="/technician-registration" element={<Registration />} />
-                  <Route path="/technician-details/:id" element={<TechnicianDetail />} />
+                  <Route path="/technician-details/:id/:Id" element={<TechnicianDetail />} />
                   <Route path="/book-technician/:id/:serviceId" element={<BookTechnician />} />
                   <Route path="/verify-email" element={<VerificationPage />} />
                   <Route path="/tech-verification-waiting" element={<TechVerificationPage />} />

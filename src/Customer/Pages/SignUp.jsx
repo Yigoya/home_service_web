@@ -1,77 +1,81 @@
-import React, { useState } from "react"
-import { FaGoogle, FaFacebook } from "react-icons/fa"
-import axios from "axios"
-import { customerSignUpApi } from "../Api/Api"
-import { useNavigate } from "react-router-dom"
-import { message } from "antd"
-import { useTranslation } from "react-i18next"
-import cleanImage from "../../assets/house_clean.png"
+import React, { useState } from "react";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
+import axios from "axios";
+import { customerSignUpApi } from "../Api/Api";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { useTranslation } from "react-i18next";
+import cleanImage from "../../assets/house_clean.png";
 
 const SignUp = () => {
-  const { t } = useTranslation()
-  const [error, setError] = useState(null)
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  const { t } = useTranslation();
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
     password: "",
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    setSuccessMessage(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
 
+    // Concatenate firstName and lastName into a single name field
     const submitData = {
-      ...formData,
-      name: `${formData.firstName} ${formData.lastName}`,
-    }
+      name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      password: formData.password,
+    };
 
     try {
       const response = await axios.post(customerSignUpApi, submitData, {
         headers: {
           "Content-Type": "application/json",
         },
-      })
-      message.success("Signup successful! Please check your email to verify your account.")
+      });
+      message.success("Signup successful! Please check your email to verify your account.");
       setTimeout(() => {
-        navigate("/verify-email")
-      }, 1000)
-      console.log("Response:", response.data)
+        navigate("/verify-email");
+      }, 1000);
+      console.log("Response:", response.data);
     } catch (err) {
-      console.error("Error:", err.response?.data || err.message)
-      message.error(err.response?.data?.details?.join(", ") || "An unexpected error occurred. Please try again.")
+      console.error("Error:", err.response?.data || err.message);
+      message.error(err.response?.data?.details?.join(", ") || "An unexpected error occurred. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div
-          className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${cleanImage})`,
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
-            backgroundBlend: "overlay",
-          }}
-        >
+      className="min-h-screen pt-28 pb-10 flex items-center justify-center px-4 bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${cleanImage})`,
+        backgroundColor: "rgba(255, 255, 255,0)",
+        backgroundBlendMode: "overlay",
+      }}
+    >
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-green-800 mb-8">HuluMoya</h2>
+        <h2 className="text-3xl font-bold text-center text-emerald-800 mb-8">HuluMoya</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* First Name and Last Name Fields */}
           <div className="flex gap-2">
             <input
               type="text"
@@ -93,6 +97,7 @@ const SignUp = () => {
             />
           </div>
 
+          {/* Email Field */}
           <div>
             <input
               type="email"
@@ -100,11 +105,12 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder={t("email")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
 
+          {/* Phone Number Field */}
           <div className="flex gap-2">
             <div className="flex-shrink-0">
               <select className="h-full px-3 py-3.5 border border-gray-400 rounded-lg bg-white focus:outline-none focus:border-emerald-700">
@@ -117,11 +123,12 @@ const SignUp = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder={t("phone")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
 
+          {/* Password Field */}
           <div>
             <input
               type="password"
@@ -129,15 +136,16 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder={t("password")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className={`w-full py-3.5 px-4 ${
-              isLoading ? "bg-green-700" : "bg-green-600 hover:bg-green-700"
+              isLoading ? "bg-emerald-700" : "bg-emerald-600 hover:bg-emerald-700"
             } text-white rounded-lg font-medium transition duration-300 ease-in-out`}
             disabled={isLoading}
           >
@@ -163,16 +171,19 @@ const SignUp = () => {
             )}
           </button>
 
-          {successMessage && <p className="text-green-600 text-center">{successMessage}</p>}
+          {/* Success and Error Messages */}
+          {successMessage && <p className="text-emerald-600 text-center">{successMessage}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
         </form>
 
+        {/* Divider */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-gray-200" />
           <span className="px-4 text-gray-500">or</span>
           <hr className="flex-grow border-gray-200" />
         </div>
 
+        {/* Social Sign-In Buttons */}
         <div className="space-y-3">
           <button className="w-full flex items-center justify-center px-4 py-3.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out">
             <FaGoogle className="mr-3 text-red-500" />
@@ -184,16 +195,16 @@ const SignUp = () => {
           </button>
         </div>
 
+        {/* Login Link */}
         <p className="mt-6 text-center text-gray-600">
           {t("yes_account")}{" "}
-          <a href="/login" className="text-green-600 hover:text-green-700 hover:underline">
+          <a href="/login" className="text-emerald-600 hover:text-emerald-700 hover:underline">
             {t("login")}
           </a>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
-
+export default SignUp;

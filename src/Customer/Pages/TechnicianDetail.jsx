@@ -12,8 +12,9 @@ const TechnicianDetail = () => {
   const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const [technician, setTechnician] = useState({});
-  const { id } = useParams();
-  const techBooking = `/book-technician/${id}/`;
+  const { id, Id } = useParams();
+  console.log(Id)
+  const techBooking = `/book-technician/${id}/${Id}`;
 
 
   useEffect(() => {
@@ -100,7 +101,7 @@ const TechnicianDetail = () => {
                 <div>
                 <Link
                   to={techBooking}
-                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                 >
                   {t('book')}
                 </Link>
