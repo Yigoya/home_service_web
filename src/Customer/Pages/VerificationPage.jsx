@@ -16,7 +16,7 @@ const VerificationPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-purple-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-emerald-100 to-purple-100">
       <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
           Verify Your Email
@@ -29,7 +29,7 @@ const VerificationPage = () => {
           Didn't receive the email? Check your spam folder or{' '}
           <button 
             onClick={handleResendVerification} 
-            className="text-blue-500 hover:underline focus:outline-none"
+            className="text-emerald-500 hover:underline focus:outline-none"
             disabled={resendStatus === 'sending'}
           >
             resend verification link
@@ -40,7 +40,7 @@ const VerificationPage = () => {
         </p>
         <div className="space-y-4">
           <a
-            className="block w-full bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300"
+            className="block w-full bg-emerald-500 text-white py-2 px-6 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-300 transition duration-300"
             href='https://mail.google.com/'
             target="_blank"
             rel="noopener noreferrer"

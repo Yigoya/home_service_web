@@ -97,7 +97,7 @@ const UploadPaymentImage = () => {
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
             Registration Fee Transfer
           </h1>
-          <div className="text-lg font-semibold text-blue-600">
+          <div className="text-lg font-semibold text-emerald-600">
             Amount: 500 Birr
           </div>
         </div>
@@ -128,7 +128,7 @@ const UploadPaymentImage = () => {
                   </button>
                 </div>
               ) : (
-                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-blue-500 transition-colors">
+                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-emerald-500 transition-colors">
                   <input
                     type="file"
                     accept="image/*"
@@ -139,7 +139,7 @@ const UploadPaymentImage = () => {
                   <div className="text-center">
                     <FiUpload className="mx-auto h-12 w-12 text-gray-400" />
                     <div className="mt-2">
-                      <span className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                      <span className="text-sm font-medium text-emerald-600 hover:text-emerald-500">
                         Click to upload
                       </span>{' '}
                       <span className="text-sm text-gray-500">
@@ -167,7 +167,7 @@ const UploadPaymentImage = () => {
             className={`w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white 
               ${!selectedFile || isSubmitting 
                 ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                : 'bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
               } transition-colors`}
           >
             {isSubmitting ? (

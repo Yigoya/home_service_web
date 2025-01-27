@@ -52,7 +52,7 @@ const SideBar = ({ customerInfo }) => {
               alt="User Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
             />
-            <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
+            <div className="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full" />
           </div>
           <h2 className="mt-4 text-lg font-semibold text-gray-900">{customerInfo?.name || 'User Name'}</h2>
           <p className="text-sm text-gray-500">{customerInfo?.email || 'Email not available'}</p>

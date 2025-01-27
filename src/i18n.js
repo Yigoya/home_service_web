@@ -77,7 +77,7 @@ const resources = {
       "sign_google":"Sign in with Google",
       "sign_facebook":"Sign in with Facebook",
       "account":"Don't have an account?",
-      "signup":"Sign Up",
+      "signup":"Create Account",
       "job":"Job Description",
       "accept":"Accept",
       "decline":"Decline",
@@ -160,6 +160,8 @@ const resources = {
       "accept":"Accept",
       "deny":"Deny",
       "or":"or",
+      "first_name":"First Name",
+      "last_name":"Last Name",
 
       
     }
@@ -320,6 +322,8 @@ const resources = {
       "accept":"ይቀበሉ",
       "deny":"ይከልክሉ",
       "or":"ወይም",
+      "first_name":"ስም",
+      "last_name":"የአባት ስም",
 
        
        

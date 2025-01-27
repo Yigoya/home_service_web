@@ -43,9 +43,9 @@ const TechnicianNavBar = () => {
           </Link>
             {/* Display user's location */}
             {userAddress.city && userAddress.subcity && (
-              <div className=" flex items-center md:gap-2  px-4 py-2 md:bg-green-50 rounded-full">
-                <MapPin className="md:w-6 md:h-6 max-md:w-8 max-md:h-8 text-green-800" />
-                <p className="text-sm mt-3 font-medium text-green-800">
+              <div className=" flex items-center md:gap-2  px-4 py-2 md:bg-emerald-50 rounded-full">
+                <MapPin className="md:w-6 md:h-6 max-md:w-8 max-md:h-8 text-emerald-800" />
+                <p className="text-sm mt-3 font-medium text-emerald-800">
                   {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
@@ -55,21 +55,21 @@ const TechnicianNavBar = () => {
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to={profileLink}
-              className="text-2xl text-green-800 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl text-emerald-800 hover:text-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('profile')}
             >
               <FaUserCircle/>
             </Link>
             <Link
               to={notificationLink}
-              className="text-2xl hover:text-green-600 text-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
+              className="text-2xl hover:text-emerald-600 text-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white rounded-full p-1"
               aria-label={t('notifications')}
             >
               <FaBell />
             </Link>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-green-600 
+              className="flex items-center gap-2 px-6 py-2.5 text-lg font-medium text-emerald-600 
                        bg-white rounded-ful
                        transition-colors duration-200"
               aria-label={`Change language to ${i18n.language === "en" ? "Amharic" : "English"}`}

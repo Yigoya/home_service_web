@@ -129,7 +129,7 @@ const Notification = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <LoadingPage className="h-8 w-8 animate-spin text-green-600" />
+        <LoadingPage className="h-8 w-8 animate-spin text-emerald-600" />
       </div>
     )
   }
@@ -159,7 +159,7 @@ const Notification = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">{t('unread_notification')}</span>
-                <span className="font-semibold text-green-600">{stats.unread}</span>
+                <span className="font-semibold text-emerald-600">{stats.unread}</span>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ const Notification = () => {
                     </div>
                   <div className="flex-grow bg-gray-200 rounded-full h-2">
                     <div
-                      className={`bg-green-600 rounded-full h-2`}
+                      className={`bg-emerald-600 rounded-full h-2`}
                       style={{ width: `${getPercentage(count)}%` }}
                     ></div>
                   </div>
@@ -191,7 +191,7 @@ const Notification = () => {
             <h2 className="text-xl font-bold mb-4">{t('quick_action')}</h2>
             <button 
               onClick={markAllAsRead}
-              className="w-full bg-green-600 text-white rounded-md py-2 px-4 hover:bg-green-600 transition duration-300 mb-2"
+              className="w-full bg-emerald-600 text-white rounded-md py-2 px-4 hover:bg-emerald-600 transition duration-300 mb-2"
             >
               {t('mark_all')}
             </button>
@@ -240,7 +240,7 @@ const Notification = () => {
                       {!notification.readStatus && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className="text-green-600 hover:text-green-600 transition duration-300 ease-in-out mb-2"
+                          className="text-emerald-600 hover:text-emerald-600 transition duration-300 ease-in-out mb-2"
                           aria-label="Mark as read"
                         >
                           {t('mark')}

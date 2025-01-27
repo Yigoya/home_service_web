@@ -84,7 +84,7 @@ const TechNotification = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
       </div>
     )
   }
@@ -128,7 +128,7 @@ const TechNotification = () => {
                   {!notification.readStatus && (
                     <button
                       onClick={() => markAsRead(notification.id)}
-                      className="ml-2 text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out"
+                      className="ml-2 text-emeraled-500 hover:text-emeraled-600 transition duration-300 ease-in-out"
                     >
                       {t('mark')}
                     </button>

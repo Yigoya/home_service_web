@@ -155,7 +155,7 @@ console.log(`${SingleService}/${serviceId}`)
           </div>
 
           <button type="submit" 
-          className="w-full mt-6 bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800"
+          className="w-full mt-6 bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700"
           disabled={loading}
           >
             {loading ? t('boooking') : t('book-technician')}

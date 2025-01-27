@@ -301,7 +301,7 @@ function Registration() {
             </div>
 
             {/* Submit Button part */}
-            <button type="submit" className="w-full bg-green-700 text-white py-2 mt-6 rounded-md hover:bg-green-600 focus:outline-none">
+            <button type="submit" className="w-full bg-emerald-700 text-white py-2 mt-6 rounded-md hover:bg-emerald-600 focus:outline-none">
             {t('regis')}
             </button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}

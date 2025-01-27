@@ -62,7 +62,7 @@ const TechnicianProfile = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#EBEBEB]">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-10 w-10 animate-spin text-blue-500" />
+          <Loader2 className="h-10 w-10 animate-spin text-emerald-500" />
           <p className="text-gray-600">Loading profile...</p>
         </div>
       </div>
@@ -77,7 +77,7 @@ const TechnicianProfile = () => {
           <p className="text-gray-700">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
           >
            {t('try')}
           </button>

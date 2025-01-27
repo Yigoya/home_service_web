@@ -15,7 +15,7 @@ const TechVerificationPage = () => {
         </p>
        
         <Link
-          className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          className="bg-emerald-500 text-white py-2 px-6 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-300"
           to='/'
         >
           {t('back')}

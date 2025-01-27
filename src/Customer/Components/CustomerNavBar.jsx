@@ -32,9 +32,9 @@ export default function CustomerNavBar() {
             </Link>
               {/* Display user's location
               {userAddress.city && userAddress.subcity && (
-              <div className="hidden md:flex items-center gap-2  px-4 py-2 md:bg-green-50 rounded-full">
-                <MapPin className="w-6 h-6 text-green-800" />
-                <p className="text-sm mt-3 font-medium text-green-800">
+              <div className="hidden md:flex items-center gap-2  px-4 py-2 md:bg-emerald-50 rounded-full">
+                <MapPin className="w-6 h-6 text-emerald-800" />
+                <p className="text-sm mt-3 font-medium text-emerald-800">
                   {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
@@ -46,14 +46,14 @@ export default function CustomerNavBar() {
             
             <Link
               to={profileLink}
-              className="text-2xl text-green-800 hover:text-green-600 transition duration-150 ease-in-out px-4"
+              className="text-2xl text-emerald-800 hover:text-emerald-600 transition duration-150 ease-in-out px-4"
               aria-label="Profile"
             >
               <FaUserCircle size={32} />
             </Link>
             <Link
               to={notificationLink}
-              className="text-2xl text-green-800 hover:text-green-600 transition duration-150 ease-in-out"
+              className="text-2xl text-emerald-800 hover:text-emerald-600 transition duration-150 ease-in-out"
               aria-label="Notifications"
             >
               <FaBell size={32} />
@@ -63,7 +63,7 @@ export default function CustomerNavBar() {
                 <div className="relative">
                                 <button
                                   onClick={() => setIsOpen(!isOpen)}
-                                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-green-700 
+                                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-emerald-700 
                                              bg-white rounded-full 
                                              transition-colors duration-200"
                                 >
@@ -74,19 +74,19 @@ export default function CustomerNavBar() {
                                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 ml-16">
                                     <button
                                       onClick={() => { i18n.changeLanguage("en"); setIsOpen(false); }}
-                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl text-emerald-700 hover:bg-emerald-700 hover:text-white"
                                     >
                                       English
                                     </button>
                                     <button
                                       onClick={() => { i18n.changeLanguage("am"); setIsOpen(false); }}
-                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-green-700 hover:bg-green-700 hover:text-white"
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-emerald-700 hover:bg-emerald-700 hover:text-white"
                                     >
                                       አማርኛ
                                     </button>
                                     <button
                                       onClick={() => { i18n.changeLanguage("om"); setIsOpen(false); }}
-                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-green-700 hover:bg-green-700 hover:text-white"
+                                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-emerald-700 hover:bg-emerald-700 hover:text-white"
                                     >
                                       Afaan Oromoo
                                     </button>
@@ -100,15 +100,15 @@ export default function CustomerNavBar() {
           {/* Display user's location in mobile view */}
           {/* {userAddress.city && userAddress.subcity && (
           <div className="flex items-center  px-3 py-1.5 mt-5 ml-9 rounded-full">
-            <MapPin className="w-10 h-10 text-green-800" />
-            <p className="text-sm font-medium text-green-800">
+            <MapPin className="w-10 h-10 text-emerald-800" />
+            <p className="text-sm font-medium text-emerald-800">
               {userAddress.city}, {userAddress.subcity}
                 </p>
               </div>
             )} */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-green-600 focus:outline-none"
+              className="text-emerald-600 focus:outline-none"
             >
               {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
             </button>
@@ -122,32 +122,32 @@ export default function CustomerNavBar() {
           <div className="px-4 pt-4 pb-4 space-y-2">
             <Link
               to={profileLink}
-              className="block text-green-700 px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
+              className="block text-emerald-700 px-3 py-2 rounded-md text-base font-medium hover:text-emerald-800 transition duration-150 ease-in-out"
             >
               {t('yrprofike')}
             </Link>
             <Link
               to={notificationLink}
-              className="block text-green-700 px-3 py-2 rounded-md text-base font-medium hover:text-green-800 transition duration-150 ease-in-out"
+              className="block text-emerald-700 px-3 py-2 rounded-md text-base font-medium hover:text-emerald-800 transition duration-150 ease-in-out"
             >
               {t('notification')}
             </Link>
              {/* Language Options in Mobile Menu */}
              <button
               onClick={() => toggleLanguage("en")}
-              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-emerald-700 hover:bg-emerald-700 hover:text-white"
             >
               English
             </button>
             <button
               onClick={() => toggleLanguage("am")}
-              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-emerald-700 hover:bg-emerald-700 hover:text-white"
             >
               አማርኛ
             </button>
             <button
               onClick={() => toggleLanguage("om")}
-              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-green-700 hover:bg-green-700 hover:text-white"
+              className="block w-full px-4 py-2 text-sm text-start rounded-xl text-emerald-700 hover:bg-emerald-700 hover:text-white"
             >
               Afaan Oromoo
             </button>

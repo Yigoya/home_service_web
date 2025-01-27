@@ -75,7 +75,7 @@ const ProfileContent = ({ jobs }) => {
                 </div>
                 <div className="justify-center lg:justify-start">
                   {(job.status === 'Pending' || job.status === 'Accepted') && (
-                    <button className="bg-blue-500 px-4 lg:px-[10px] mt-2 rounded-lg text-white font-bold">
+                    <button className="bg-emerald-500 px-4 lg:px-[10px] mt-2 rounded-lg text-white font-bold">
                       {t('edit')}
                     </button>
                   )}

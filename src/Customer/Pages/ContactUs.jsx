@@ -178,7 +178,7 @@ function ContactUs() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-800 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   {isSubmitting ? 'Submitting...' :t('submit')} 
                 </button>
@@ -192,7 +192,7 @@ function ContactUs() {
             )}
 
             {submitSuccess && (
-              <div className="mt-4 text-sm text-green-600">
+              <div className="mt-4 text-sm text-emerald-600">
                 {t('sent')}
               </div>
             )}

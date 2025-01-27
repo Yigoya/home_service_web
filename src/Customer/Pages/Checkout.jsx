@@ -121,7 +121,7 @@ const Checkout = () => {
 
           {/* Chapa Link */}
           <div className="text-center">
-            <a href="#" className="text-green-500 hover:text-green-600 font-medium transition-colors">
+            <a href="#" className="text-emerald-500 hover:text-emerald-600 font-medium transition-colors">
               Pay with Chapa
             </a>
           </div>
@@ -129,8 +129,8 @@ const Checkout = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-4 rounded-xl text-lg font-medium
-              hover:bg-green-700 active:bg-green-800 transition-colors duration-200
+            className="w-full bg-emerald-600 text-white py-4 rounded-xl text-lg font-medium
+              hover:bg-emerald-700 active:bg-emerald-800 transition-colors duration-200
                disabled:cursor-not-allowed"
             disabled={!selectedMethod || !phoneNumber}
           >

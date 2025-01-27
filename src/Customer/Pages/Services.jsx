@@ -51,7 +51,7 @@ export default function ServicesList() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-emerald-500"></div>
       </div>
     );
   }
@@ -79,7 +79,7 @@ export default function ServicesList() {
               onClick={() => handleCategoryClick(category)}
               className={`px-6 py-3 rounded-full transition duration-200 ease-in-out ${
                 selectedCategory?.categoryName === category.categoryName
-                  ? "bg-blue-500 text-white shadow-lg transform scale-105"
+                  ? "bg-emerald-500 text-white shadow-lg transform scale-105"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >

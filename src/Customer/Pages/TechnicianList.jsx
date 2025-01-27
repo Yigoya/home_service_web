@@ -127,7 +127,7 @@ const TechnicianList = () => {
       <div className="bg-white p-4 rounded- shadow-md flex mb-6 text-left">
         {/* Image Container */}
         <div className="flex items-center justify-center rounded-t-lg p-4">
-          <GiBroom className="w-12 h-12" /> {/* Adjust size as needed */}
+          <GiBroom className="w-16 h-16 text-emerald-700" /> {/* Adjust size as needed */}
         </div>
 
         {/* Text Container */}

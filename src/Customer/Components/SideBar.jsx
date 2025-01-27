@@ -36,7 +36,7 @@ export default function SideBar({ customerInfo }) {
         <img
           src={logo1}
           alt={`${customerInfo.name}'s profile`}
-          className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
+          className="w-24 h-24 rounded-full object-cover border-4 border-emerald-500"
         />
         <h2 className="mt-4 text-xl font-semibold text-gray-800">{customerInfo.name}</h2>
         <p className="text-gray-600">{customerInfo.email}</p>
@@ -48,14 +48,14 @@ export default function SideBar({ customerInfo }) {
           <button
             key={button.status}
             onClick={() => handleFilter(button.status)}
-            className="w-full py-2 px-4 text-left text-gray-700 hover:bg-blue-100 rounded transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 px-4 text-left text-gray-700 hover:bg-emerald-100 rounded transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             {button.label}
           </button>
         ))}
         <button
           onClick={() => handleFilter('All')}
-          className="w-full py-2 px-4 text-left text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full py-2 px-4 text-left text-emerald-600 hover:underline focus:outline-none focus:ring-2 focus:ring-emerald-500"
         >
           {t('reset')}
         </button>

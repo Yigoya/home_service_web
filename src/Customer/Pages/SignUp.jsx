@@ -105,7 +105,7 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder={t("email")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
@@ -114,7 +114,7 @@ const SignUp = () => {
           <div className="flex gap-2">
             <div className="flex-shrink-0">
               <select className="h-full px-3 py-3.5 border border-gray-400 rounded-lg bg-white focus:outline-none focus:border-emerald-700">
-                <option value="+251">🇪🇹</option>
+                <option value="+251">🇪T</option>
               </select>
             </div>
             <input
@@ -123,7 +123,7 @@ const SignUp = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder={t("phone")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
@@ -136,7 +136,7 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder={t("password")}
-              className="w-full px-4 py-3.5 border border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
               required
             />
           </div>
@@ -179,7 +179,7 @@ const SignUp = () => {
         {/* Divider */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-gray-200" />
-          <span className="px-4 text-gray-500">or</span>
+          <span className="px-4 text-gray-500">{t('or')}</span>
           <hr className="flex-grow border-gray-200" />
         </div>
 
@@ -196,12 +196,12 @@ const SignUp = () => {
         </div>
 
         {/* Login Link */}
-        <p className="mt-6 text-center text-gray-600">
+        {/* <p className="mt-6 text-center text-gray-600">
           {t("yes_account")}{" "}
           <a href="/login" className="text-emerald-600 hover:text-emerald-700 hover:underline">
             {t("login")}
           </a>
-        </p>
+        </p> */}
       </div>
     </div>
   );
