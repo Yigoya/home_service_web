@@ -114,7 +114,8 @@ const SignUp = () => {
           <div className="flex gap-2">
             <div className="flex-shrink-0">
               <select className="h-full px-3 py-3.5 border border-gray-400 rounded-lg bg-white focus:outline-none focus:border-emerald-700">
-                <option value="+251">🇪T</option>
+                <option value="+251">🇪🇹</option>
+                
               </select>
             </div>
             <input
