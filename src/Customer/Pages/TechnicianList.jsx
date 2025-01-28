@@ -86,7 +86,7 @@ const TechnicianList = () => {
   return (
     <div className="px-  lg:mt-16 max-md:mt-16  py-8 bg-gray-100 ">
       {/* Search and Location Input */}
-      <div className="w-full max-w-4xl mx-auto mb-6">
+      <div className="w-full max-w-4xl mx-auto mb-2">
       <div className="flex items-center gap-2 p-2 bg-white rounded-full shadow-sm border border-gray-200">
         {/* Search Input */}
         <div className="flex-1 flex items-center gap-2 px-">
@@ -124,7 +124,7 @@ const TechnicianList = () => {
        
       </div>
     </div>
-      <div className="bg-white p-4 rounded- shadow-md flex mb-6 text-left">
+      <div className="bg-white p-4 mx-10 rounded-lg shadow-md flex mb-2 text-left">
         {/* Image Container */}
         <div className="flex items-center justify-center rounded-t-lg p-4">
           <GiBroom className="w-16 h-16 text-emerald-700" /> {/* Adjust size as needed */}
@@ -146,7 +146,7 @@ const TechnicianList = () => {
             </div>  
       </div>
          
-      <div className="flex flex-col lg:flex-row gap-8 px-8">
+      <div className="flex flex-col bg-white rounded-lg py-4 mx-10 lg:flex-row gap-8 px-8">
         {/* Sidebar */}
         <div className="lg:w-[300px] w-full">
           <div className="bg-white rounded-lg shadow-md p-6">
