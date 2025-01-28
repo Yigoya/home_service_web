@@ -84,7 +84,7 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="px-  lg:mt-16 max-md:mt-16  py-8 bg-gray-100 ">
+    <div className="px-  lg:mt-16 max-md:mt-16  py-8 bg-gray-300 ">
       {/* Search and Location Input */}
       <div className="w-full max-w-4xl mx-auto mb-2">
       <div className="flex items-center gap-2 p-2 bg-white rounded-full shadow-sm border border-gray-200">
