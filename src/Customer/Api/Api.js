@@ -10,3 +10,4 @@ export const TechnicianBooking = `${API_URL}/booking/request`
 export const CustomerNotificationApi = `${API_URL}/notifications/unread`
 export const notificationStatusApi = `${API_URL}/notifications/fcm-send`
 export const techDetailApi = `${API_URL}/profile/technician`
+export const checkoutApi = `${API_URL}/payment/initialize`
