@@ -176,6 +176,21 @@ const SignUp = () => {
           {successMessage && <p className="text-emerald-600 text-center">{successMessage}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
         </form>
+        {/* Terms Text */}
+        <div className="text-center mt-2 text-sm text-gray-500 px-6">
+          <p>
+            By creating an account you
+            agree to our{" "}
+            <a href="/terms" className="text-emerald-600 hover:text-emerald-700">
+              terms of service
+            </a>{" "}
+            and{" "}
+            <a href="/privacy" className="text-emerald-600 hover:text-emerald-700">
+              privacy policy
+            </a>
+            .
+          </p>
+        </div>
 
         {/* Divider */}
         {/* <div className="flex items-center my-6">

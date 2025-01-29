@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, Globe, MapPin, Phone } from 'lucide-react';
@@ -10,6 +10,7 @@ const NavBar = () => {
   const { userAddress } = useContext(LocationContext); // Use the context
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dropdownRef = useRef(null); // Ref for the dropdown
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,24 @@ const NavBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Add event listener when the dropdown is open
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]); // Only re-run if isOpen changes
 
   const toggleLanguage = (language) => {
     i18n.changeLanguage(language);
@@ -76,18 +95,18 @@ const NavBar = () => {
               </Link>
 
               {/* Language Dropdown (Desktop) */}
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-emerald-600 
-                             bg-white rounded-full 
+                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-md  font-medium text-emerald-600 
+                             rounded-full 
                              transition-colors duration-200"
                 >
                   <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>{i18n.language === "en" ? "አማርኛ" : i18n.language === "am" ? "English" : "Afaan Oromoo"}</span>
                 </button>
                 {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 ml-16">
+                  <div className="absolute right- mt-2 w-48 bg-white rounded-xl shadow-lg z-10  text-center">
                     <button
                       onClick={() => toggleLanguage("en")}
                       className="block w-full text-left px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"

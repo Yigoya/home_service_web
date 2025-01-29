@@ -2,7 +2,7 @@ import React from 'react'
 import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6'
 import { SiApple, SiGoogleplay } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
-
+import { Link } from 'react-router-dom'
 const Footer = () => {
   const { t } = useTranslation()
 
@@ -25,18 +25,18 @@ const Footer = () => {
             <h3 className="text-sm font-semibold text-emerald-400 mb-2">Quick Links</h3>
             <ul className="space-y-1 text-gray-300 text-sm">
               <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
+                <Link to= "/contact-us" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
                   <span className="hover:translate-x-1 transition-transform duration-200">{t('contact')}</span>
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
+                  <span className="hover:translate-x-1 transition-transform duration-200">{t('terms')}</span>
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('faq')}</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('our_service')}</span>
+                  <span className="hover:translate-x-1 transition-transform duration-200">{t('privacy')}</span>
                 </a>
               </li>
             </ul>

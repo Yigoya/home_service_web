@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import  logo1  from '../../assets/tech.jpg';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../Shared/api';
 import { useTranslation } from 'react-i18next';
+import cleanImage from '../../assets//house_clean.png';
+
 
 function Registration() {
   const { t } = useTranslation();
@@ -170,12 +171,19 @@ function Registration() {
   , []);
 
   return (
-    <div className='w-full mt-24 min-h-screen'>
-      <div className="flex flex-col md:flex-row mx-4 md:mx-44  max-md:my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
+   <div
+         className="min-h-screen flex items-center justify-center px-4 bg-cover bg-center"
+         style={{
+           backgroundImage: `url(${cleanImage})`,
+           backgroundColor: "rgba(255, 255, 255, 0.9)",
+           backgroundBlend: "overlay",
+         }}
+       >
+      <div className="flex flex-col md:flex-row mx-4 md:mx-44 mt-16  max-md:my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
-        <div className="md:w-1/2 w-full lg:p-8 py-8 bg-white rounded-xl">
-          <h1 className="text-2xl font-bold mb-6">{t('tech_regi')}</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className=" w-full lg:p-8 p-6 py-8 my-12 bg-white rounded-xl">
+        <h1 className="text-3xl font-semibold text-gray-900 text-center">HuluMoya</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
             {/*  name part */}
 
@@ -301,29 +309,14 @@ function Registration() {
             </div>
 
             {/* Submit Button part */}
-            <button type="submit" className="w-full bg-emerald-700 text-white py-2 mt-6 rounded-md hover:bg-emerald-600 focus:outline-none">
+            <button type="submit" className="w-full bg-emerald-700 text-white py-3 mt-6 rounded-full hover:bg-emerald-600 focus:outline-none">
             {t('regis')}
             </button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           </form>
         </div>
 
-        {/* Right side */}
        
-        <div className="hidden md:block md:w-1/2 bg-black rounded-lg relative items-center justify-center">
-          <img
-            src={logo1}
-            alt="Guidance"
-            className="w-full h-full object-cover opacity-30 transition-opacity duration-300"
-          />
-          <div className="absolute top-0 mt-32 text-center px-8 text-white">
-            <h2 className="text-6xl font-semibold mb-8">{t('get_start')}</h2>
-            <h2 className="text-xl font-semibold mb-2">{t('reg')}</h2>
-            <h2 className="text-xl font-semibold mb-2">{t('verfy_reg')}</h2>
-            <h2 className="text-xl font-semibold">{t('Start_now')}</h2>
-          </div>
-        </div>
-        
    </div>
     </div>
   );

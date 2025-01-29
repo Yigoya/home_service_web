@@ -162,6 +162,8 @@ const resources = {
       "or":"or",
       "first_name":"First Name",
       "last_name":"Last Name",
+      "terms":"Terms of Service",
+      "privacy":"Privacy Policy",
     }
   },
   am: {
@@ -322,6 +324,8 @@ const resources = {
       "or":"ወይም",
       "first_name":"ስም",
       "last_name":"የአባት ስም",
+      "terms":"ደንቦች ",
+      "privacy":"ፕራይቬሲ",
 
        
        
