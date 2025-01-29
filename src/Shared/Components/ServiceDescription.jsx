@@ -30,6 +30,7 @@ const ServiceDescription = ({ title, description }) => {
   }, [title, description]);
 
   return (
+    <div className="px-12 bg-gradient-to-t from-emerald-50  to-white ">
     <div className="flex flex-col md:flex-row items-center bg-blue-100 py-6 mt-6 rounded-lg shadow-md">
       {/* Image Section */}
       <div className="w-full md:w-1/2 mb-4 md:mb-0 lg:ml-80 ml-0 px-8 lg:px-0  ">
@@ -52,6 +53,27 @@ const ServiceDescription = ({ title, description }) => {
             ) : null
           )}
         </ul>
+      </div>
+    </div>
+    <div className="   px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+          <div className="text-center">
+            <p className="text-2xl font-bold text-emerald-600">16+</p>
+            <p className="text-black">Total Services</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-emerald-600">150+</p>
+            <p className="text-black">Total Technicians</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-emerald-600">500+</p>
+            <p className="text-black">Total Customers</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-emerald-600">200+</p>
+            <p className="text-black">Total Jobs</p>
+          </div>
+        </div>
       </div>
     </div>
   );

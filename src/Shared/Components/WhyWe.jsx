@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const WhyWe = () => {
   const { t } = useTranslation();
   return (
-    <div className="bg-gradient-to-t from-emerald-100 via-emerald-50 to-white  py-8 px-4 rounded-lg">
+    <div className=" py-8 px-4 rounded-lg">
       <h2 className="text-center text-2xl font-bold mb-6">{t('why')}</h2>
       <div className="flex flex-col md:flex-row justify-between lg:items-center bg-gray-200 rounded-3xl py-4 px-6 space-y-4 md:space-y-0 md:space-x-6">
         {/* 1st Feature */}
@@ -34,26 +34,7 @@ const WhyWe = () => {
       </div>
 
       {/* Statistics Section */}
-      <div className="   px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-          <div className="text-center">
-            <p className="text-2xl font-bold text-emerald-600">16+</p>
-            <p className="text-black">Total Services</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl font-bold text-emerald-600">150+</p>
-            <p className="text-black">Total Technicians</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl font-bold text-emerald-600">500+</p>
-            <p className="text-black">Total Customers</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl font-bold text-emerald-600">200+</p>
-            <p className="text-black">Total Jobs</p>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };
