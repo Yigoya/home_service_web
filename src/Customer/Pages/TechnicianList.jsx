@@ -148,14 +148,14 @@ const TechnicianList = () => {
          
       <div className="flex flex-col bg-white rounded-lg py-4 mx-10 lg:flex-row gap-8 px-8">
         {/* Sidebar */}
-        <div className="lg:w-[300px] w-full">
-          <div className="bg-white rounded-lg shadow-md p-6">
+        {/* <div className="lg:w-[300px] w-full">
+          <div className="bg-white rounded-lg shadow-md p-6"> */}
             {/* <h2 className="text-xl font-semibold mb-6">{t("filter_by")}</h2> */}
 
          
 
             {/* Rating Filter */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <h3 className="font-semibold mb-3">{t("rating")}</h3>
               <div className="flex space-x-2 mb-2">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -173,7 +173,7 @@ const TechnicianList = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Content */}
         <div className="flex-1">

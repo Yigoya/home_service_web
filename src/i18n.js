@@ -11,7 +11,7 @@ const resources = {
       "choose_your_best": "Choose an Offer",
       "our_service":"Our Services",
       "our_top_technicians":"Our Top Technicians",
-      "testmony":"What the Customer Says",
+      "testmony":"Testmony",
       "contact":"Contact Us",
       "serv":"Services",
       "technicians":"Technicians",
@@ -31,10 +31,10 @@ const resources = {
       "regis":"Register",
       "message":"Message",
       "submit": "Submit",
-      "enter_name":"Enter Your Name",
+      "enter_name":"Name",
       "enter_email": "Enter Your Email",
       "enter_phone": "Enter Your Phone Number",
-      "enter_password": "Enter Your Password",
+      "enter_password": "Password",
       "enter_bio": "Tell us about Yourself",
       "select_subcity":"Select Sub City",
       "select_woreda":"Select Woreda",
@@ -131,7 +131,7 @@ const resources = {
       "submit":"Submit",
       "forgot_pass":"Forgot Password?",
       "reset_pass":"Reset Password",
-      "email_phone":" Please enter Email or Phone Number",
+      "email_phone":"Email/Phone Number",
       "join_us":"Join Our Platform",
       "Choose_option":"Choose how you want to sign up ",
       "signup_tech":"Sign Up as a Technician",
@@ -162,8 +162,6 @@ const resources = {
       "or":"or",
       "first_name":"First Name",
       "last_name":"Last Name",
-
-      
     }
   },
   am: {

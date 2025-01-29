@@ -208,41 +208,41 @@ console.log(servicesArray, "servicesArray");
       </section>
 
       {/* Technicians Section */}
-      <section className="py-12 bg-gray-50">
+      {/* <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-6 lg:px-32">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">
             {t("our_top_technicians")}
           </h2>
           <TechnicianCarousel />
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials Section */}
-      <section className="py-12 bg-white">
+      <section className="pb-12 bg-white">
         <div className="container mx-auto px-6 lg:px-32">
            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {t('testmony')}
             </h2>
-            <p className="text-gray-600 mx-auto">
+            {/* <p className="text-gray-600 mx-auto">
               {t('testimonialSubtitle')}
-            </p>
+            </p> */}
           <Testimonials />
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 bg-gray-100">
+      {/* <section className="py-12 bg-gray-100">
         <div className="container mx-auto px-6 lg:px-32">
           <FAQ />
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
-      <section className="py-12">
+      {/* <section className="py-12">
         <div className="container mx-auto  lg:px-32">
           <Contact />
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

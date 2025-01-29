@@ -124,7 +124,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
+    <div className="flex py-10  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md mx-10">
         <h2 className="text-3xl font-bold text-center mb-6">HuluMoya</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -161,7 +161,7 @@ const Login = () => {
           
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-full py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -181,13 +181,13 @@ const Login = () => {
           {successMessage && <p className="text-emerald-500 text-center">{successMessage}</p>}
         </form>
 
-        <div className="flex items-center my-4">
+        {/* <div className="flex items-center my-4">
           <hr className="flex-grow border-gray-300" />
           <span className="mx-2 text-gray-500">{t('or')}</span>
           <hr className="flex-grow border-gray-300" />
-        </div>
+        </div> */}
 
-        <div className="lg:flex justify-between lg:space-x-2">
+        {/* <div className="lg:flex justify-between lg:space-x-2">
           <button onClick={handleGoogleSignIn} className="w-full mb-2 lg:mb-0 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-700">
             <FaGoogle className="inline-block mr-2 text-red-500" />
             {t('sign_google')}
@@ -196,7 +196,7 @@ const Login = () => {
             <FaFacebook className="inline-block mr-2 text-blue-500" />
             {t('sign_facebook')}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -31,12 +31,12 @@ function PreSignup() {
             >
                 {t('signup_cust')}
             </button>
-            <div className="text-center text-sm ">
+            {/* <div className="text-center text-sm ">
               <span className="text-gray-600 "  >{t('yes_account')} </span>
               <a href="/login" className="text-emerald-700 hover:text-emerald-600">
               {t('login')}
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Divider */}
@@ -54,24 +54,24 @@ function PreSignup() {
             >
                {t('signup_tech')}
             </button>
-            <div className="text-center text-sm">
+            {/* <div className="text-center text-sm">
               <span className="text-gray-600">{t('yes_account')} </span>
               <a href="/login" className="text-emerald-700 hover:text-emerald-600">
                 {t('login')}
               </a>
-              </div>
+              </div> */}
           </div>
         </div>
 
         {/* Terms Text */}
         <div className="text-center text-sm text-gray-500 px-6">
           <p>
-            By creating an account or continuing to use the Sweepsouth application, website, or software, you
-            acknowledge and agree that you have accepted the{" "}
+            By creating an account you
+            agree to our{" "}
             <a href="/terms" className="text-emerald-600 hover:text-emerald-700">
               terms of service
             </a>{" "}
-            and have reviewed the{" "}
+            and{" "}
             <a href="/privacy" className="text-emerald-600 hover:text-emerald-700">
               privacy policy
             </a>

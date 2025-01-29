@@ -47,7 +47,7 @@ const NavBar = () => {
                 alt="Logo"
               />
             </Link>
-            <Link className="mx-3 flex items-center gap-3" to="">
+            <Link className="mx-3 lg:ml-10 flex items-center gap-3" to="">
               <Phone className="w-8 h-8 mt-3 text-emerald-600" />
               <p className="mt-8 font-bold text-xl text-emerald-600">2121</p>
             </Link>

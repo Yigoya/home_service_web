@@ -147,7 +147,7 @@ const SignUp = () => {
             type="submit"
             className={`w-full py-3.5 px-4 ${
               isLoading ? "bg-emerald-700" : "bg-emerald-600 hover:bg-emerald-700"
-            } text-white rounded-lg font-medium transition duration-300 ease-in-out`}
+            } text-white rounded-3xl font-medium transition duration-300 ease-in-out`}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -178,14 +178,14 @@ const SignUp = () => {
         </form>
 
         {/* Divider */}
-        <div className="flex items-center my-6">
+        {/* <div className="flex items-center my-6">
           <hr className="flex-grow border-gray-200" />
           <span className="px-4 text-gray-500">{t('or')}</span>
           <hr className="flex-grow border-gray-200" />
-        </div>
+        </div> */}
 
         {/* Social Sign-In Buttons */}
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <button className="w-full flex items-center justify-center px-4 py-3.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out">
             <FaGoogle className="mr-3 text-red-500" />
             {t("sign_google")}
@@ -194,7 +194,7 @@ const SignUp = () => {
             <FaFacebook className="mr-3 text-blue-500" />
             {t("sign_facebook")}
           </button>
-        </div>
+        </div> */}
 
         {/* Login Link */}
         {/* <p className="mt-6 text-center text-gray-600">
