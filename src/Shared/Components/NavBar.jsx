@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, Globe, MapPin, Phone } from 'lucide-react';
-import logo1 from '../../assets/logo1.png';
+import logo1 from '../../assets/logo.png';
 import { LocationContext } from '../Context/LocationContext';
 
 const NavBar = () => {

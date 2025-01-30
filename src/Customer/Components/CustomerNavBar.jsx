@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaGlobe, FaUserCircle, FaBell, FaBars, FaTimes } from "react-icons/fa";
-import logo1 from "../../assets/logo1.png";
+import logo1 from "../../assets/logo.png";
 import { Menu, X, Globe, MapPin } from 'lucide-react';
 import { LocationContext } from "../../Shared/Context/LocationContext";
 
