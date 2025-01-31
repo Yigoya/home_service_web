@@ -50,6 +50,7 @@ const servicesArray = services.map(service => {
   return service.services.map(subService => ({
     id: subService.serviceId,
     name: subService.name,
+    icon: subService.icon,
   }));
 }).flat(); // Flattening the nested arrays into a single array
 console.log(servicesArray, "servicesArray");
@@ -146,16 +147,24 @@ console.log(servicesArray, "servicesArray");
         {isDropdownOpen && (
           <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
             {filteredServices.length > 0 ? (
-              filteredServices.map((service) => (
-                <Link
-                  key={service.id}
-                  to={`/technician-list/${service.id}`}
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold"
-                >
-                  {service.name}
-                </Link>
-              ))
+              filteredServices.map((service) => {
+                console.log("Service object:", service); // Log full service object
+                console.log("Image URL:", `${API_URL}/uploads/${service.icon}`); // Log final image URL
+                return (
+                  <Link
+                    key={service.id}
+                    to={`/technician-list/${service.id}`}
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
+                  >
+                    <img  src={ `${API_URL}/uploads/${service.icon}` }
+                              className="w-16 h-16 rounded-fu object-cover"
+                              />
+                    {service.name}
+                 
+                  </Link>
+                );
+              })
             ) : (
               <div className="px-4 py-2 text-sm text-gray-500">
                 No results found
@@ -164,6 +173,7 @@ console.log(servicesArray, "servicesArray");
           </div>
         )}
       </div>
+      
     </div>
     </div>
             <div className="flex justify-center mb-8">

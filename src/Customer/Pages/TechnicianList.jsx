@@ -127,8 +127,11 @@ const TechnicianList = () => {
       <div className="bg-white p-4 mx-10 rounded-lg shadow-md flex mb-2 text-left">
         {/* Image Container */}
         <div className="flex items-center justify-center rounded-t-lg p-4">
-          <GiBroom className="w-16 h-16 text-emerald-700" /> {/* Adjust size as needed */}
-        </div>
+          {/* <GiBroom className="w-16 h-16 text-emerald-700" /> Adjust size as needed */}
+          <img  src={ `${API_URL}/uploads/${service.icon}` }
+          className="w-16 h-16 rounded-fu object-cover" alt={service.name}
+          />
+          </div>
 
         {/* Text Container */}
         <div className="text-start flex-1 pl-4 mt-3"> 
