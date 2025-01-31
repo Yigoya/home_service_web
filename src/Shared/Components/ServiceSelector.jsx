@@ -12,8 +12,6 @@ const ServiceSelector = ({ services, onSelect }) => {
     Flame,
     Drill,
     PaintRoller,
-    Hammer,
-    Truck,
     TreeDeciduous,
     TreeDeciduous,
     TreeDeciduous,
@@ -46,7 +44,7 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   return (
     <div className="relative w-full bg-background">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+      <div className="max-w-7xl lg:mx-24 mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex justify-start items-center overflow-x-auto scrollbar-hide py-3 sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
           {services.map((service, index) => {
             const isSelected = selectedServiceId === service.categoryId;

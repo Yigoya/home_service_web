@@ -20,7 +20,7 @@ const ServiceTypes = ({ types }) => {
   };
 
   return (
-    <div className="w-full md:px-6 max-md:px-2 max-w-7xl mx-auto">
+    <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:mx-12 mx-auto">
       <div
         className="flex flex-wrap gap-2 py-6 overflow-x-auto 
         scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"

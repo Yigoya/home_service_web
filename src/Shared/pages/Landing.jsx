@@ -158,7 +158,7 @@ console.log(servicesArray, "servicesArray");
                     className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
                   >
                     <img  src={ `${API_URL}/uploads/${service.icon}` }
-                              className="w-16 h-16 rounded-fu object-cover"
+                              className="w-8 h-8 mx-4  object-cover"
                               />
                     {service.name}
                  
@@ -183,7 +183,7 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-28">
+        <div className="w-full max-w-7xl mx-auto  px-4 sm:px-6 lg:px-28">
       <div className="w-full">
         {selectedService && (
           <>
