@@ -110,7 +110,7 @@ const TechnicianList = () => {
 
         {/* Location Input */}
         <div className="flex-1 flex items-center gap-2 px-4">
-          <MapPin className="h-5 w-5 text-gray-400" />
+          <MapPin className="h-5 w-5 text-emerald-800" />
           <input
             type="text"
             placeholder={t("locations.select")}

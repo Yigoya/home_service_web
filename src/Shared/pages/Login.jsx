@@ -126,7 +126,7 @@ const Login = () => {
   return (
     <div className="flex py-10  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md mx-10">
-        <h2 className="text-3xl font-bold text-center mb-6">HuluMoya</h2>
+        <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">HuluMoya</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')} / {t('phone')}</label>
@@ -176,6 +176,20 @@ const Login = () => {
               t('login')
             )}
           </button>
+          <div className="text-center mt-2 text-sm text-gray-500 px-6">
+          <p>
+            By creating an account you
+            agree to our{" "}
+            <a href="/terms" className="text-emerald-600 hover:text-emerald-700">
+              terms of service
+            </a>{" "}
+            and{" "}
+            <a href="/privacy" className="text-emerald-600 hover:text-emerald-700">
+              privacy policy
+            </a>
+            .
+          </p>
+        </div>
 
           {error && <p className="text-red-500 text-center">{error}</p>}
           {successMessage && <p className="text-emerald-500 text-center">{successMessage}</p>}
