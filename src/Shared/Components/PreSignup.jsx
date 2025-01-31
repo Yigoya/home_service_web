@@ -19,7 +19,7 @@ function PreSignup() {
     >
       <div className="w-full max-w-md space-y-8 bg-white/90 backdrop-blur-sm p-8 mt-24 rounded-2xl shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-gray-900">HuluMoya</h1>
+          <h1 className="text-3xl font-semibold text-emerald-800">HuluMoya</h1>
         </div>
 
         <div className="space-y-4">
