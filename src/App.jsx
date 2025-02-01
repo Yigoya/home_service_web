@@ -27,11 +27,13 @@ import { LocationProvider } from './Shared/Context/LocationContext';
 import { SelectedServiceProvider } from "./Shared/Context/SelectedServiceContext";
 import ServiceDescriptionBar from "./Shared/Components/ServiceDescriptionBar";
 import Checkout from './Customer/Pages/Checkout';
+import { LanguageProvider } from './Shared/Context/LanguageContext';
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   return (
+    <LanguageProvider>
     <SelectedServiceProvider>
       <LocationProvider>
         <AuthProvider>
@@ -72,6 +74,7 @@ function App() {
         </AuthProvider>
       </LocationProvider>
     </SelectedServiceProvider>
+    </LanguageProvider>
   );
 }
 

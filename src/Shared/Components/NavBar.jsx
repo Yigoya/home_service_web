@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Menu, X, Globe, MapPin, Phone } from 'lucide-react';
 import logo1 from '../../assets/logo.png';
 import { LocationContext } from '../Context/LocationContext';
+import { LanguageContext } from '../Context/LanguageContext';
+
+
 
 const NavBar = () => {
   const { i18n, t } = useTranslation();
@@ -11,6 +14,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null); // Ref for the dropdown
+  const { lang, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +45,7 @@ const NavBar = () => {
 
   const toggleLanguage = (language) => {
     i18n.changeLanguage(language);
+    setLanguage(lang);
     setIsOpen(false); // Close the mobile menu after selecting a language
   };
 
