@@ -9,10 +9,11 @@ const ServiceSelector = ({ services, onSelect }) => {
   const iconComponents = [
     GiBroom,
     Wrench,
-    Flame,
     Drill,
     PaintRoller,
-    TreeDeciduous,
+    TreeDeciduous, 
+    Flame,
+   
     TreeDeciduous,
     TreeDeciduous,
     Truck,
@@ -33,10 +34,10 @@ const ServiceSelector = ({ services, onSelect }) => {
         className={`transition-all duration-300 ease-in-out
           ${
             isSelected
-              ? `w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-emerald-700`
+              ? `w-8 h-8 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-emerald-700`
               : isHovered
-              ? "w-6 h-6 sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-400 stroke-[2]"
-              : "w-6 h-6  sm:w-4 sm:h-4 md:w-6 md:h-6 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
+              ? "w-8 h-8 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-400 stroke-[2]"
+              : "w-8 h-8  sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
           }`}
       />
     );

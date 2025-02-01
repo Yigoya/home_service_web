@@ -53,21 +53,21 @@ const ServiceDescription = ({ title, description }) => {
       const techniciansResponse = await fetch(`${API_URL}/admin/technicians`);
       if (!techniciansResponse.ok) throw new Error("Failed to fetch technicians");
       const techniciansData = await techniciansResponse.json();
-      const totalTechnicians = techniciansData.length;
+      const totalTechnicians = techniciansData.content.length;
       console.log("Total Technicians:", totalTechnicians);
 
       // Fetch all customers
       const customersResponse = await fetch(`${API_URL}/admin/customers`);
       if (!customersResponse.ok) throw new Error("Failed to fetch customers");
       const customersData = await customersResponse.json();
-      const totalCustomers = customersData.length;
+      const totalCustomers = customersData.content.length;
       console.log("Total Customers:", totalCustomers);
 
       // Fetch all jobs (bookings)
       const jobsResponse = await fetch(`${API_URL}/admin/bookings`);
       if (!jobsResponse.ok) throw new Error("Failed to fetch jobs");
       const jobsData = await jobsResponse.json();
-      const totalJobs = jobsData.length;
+      const totalJobs = jobsData.content.length;
       console.log("Total Jobs:", totalJobs);
 
       // Update statistics state
@@ -84,9 +84,9 @@ const ServiceDescription = ({ title, description }) => {
 
   return (
     <div className="px-12 bg-gradient-to-t from-emerald-50 to-white">
-      <div className="flex flex-col md:flex-row items-center bg-blue-100 py-6 mt-6 rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row items-center bg-blue-100 py-12 mt-6 rounded-lg shadow-md">
         {/* Image Section */}
-        <div className="w-full md:w-1/2 mb-4 md:mb-0 lg:ml-80 ml-0 px-8 lg:px-0">
+        <div className="w-full md:w-2/3 mb-4 md:mb-0 lg:ml-80 ml-0 px-8 lg:px-0">
           <img
             src={selectedImage}
             alt={title}
@@ -95,7 +95,7 @@ const ServiceDescription = ({ title, description }) => {
         </div>
 
         {/* Text Section */}
-        <div className="lg:absolute md:w-96 lg:bg-white p-12 lg:ml-4 rounded-md lg:shadow-md">
+        <div className="lg:absolute md:w-96 lg:bg-white p-6 lg:ml-4 rounded-md lg:shadow-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">{title}</h2>
           <ul className="list-disc list-inside text-gray-600 space-y-2">
             {description.split(".").map((item, index) =>

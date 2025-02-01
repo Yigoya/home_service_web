@@ -86,12 +86,12 @@ const TechnicianList = () => {
   return (
     <div className="px-  lg:mt-16 max-md:mt-16  py-8 bg-gray-300 ">
       {/* Search and Location Input */}
-      <div className="w-full max-w-4xl mx-auto mb-2">
+      <div className="w-full max-w-4xl mx-auto my-6  ">
       <div className="flex items-center gap-2 p-2 bg-white rounded-full shadow-sm border border-gray-200">
         {/* Search Input */}
-        <div className="flex-1 flex items-center gap-2 px-">
+        <div className="flex-1 flex items-center gap-2 ">
         <button
-          className="p-3 mr-6 rounded-full bg-emerald-600 hover:bg-emerald-700 flex items-center justify-center text-white transition-colors"
+          className="p-2 mr-6 rounded-full bg-emerald-600 hover:bg-emerald-700 flex items-center justify-center text-white transition-colors"
           onClick={fetchTechnicians}
         >
           <Search className="h-5 w-5" />
@@ -110,7 +110,7 @@ const TechnicianList = () => {
 
         {/* Location Input */}
         <div className="flex-1 flex items-center gap-2 px-4">
-          <MapPin className="h-5 w-5 text-emerald-800" />
+          <MapPin className="h-8 w-8 text-emerald-800" />
           <input
             type="text"
             placeholder={t("locations.select")}
