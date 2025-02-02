@@ -18,6 +18,7 @@ import WhyWe from "../Components/WhyWe";
 import { API_URL } from "../api";
 import LoadingPage from "../Components/LoadingPage";
 import { useSelectedService } from "../Context/SelectedServiceContext"; // Import the context hook
+import { LanguageContext } from "../Context/LanguageContext";
 
 const Landing = () => {
   const { t} = useTranslation();
@@ -27,13 +28,14 @@ const Landing = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { setSelectedService: setSelectedServiceContext } = useSelectedService(); // Use the context
-  
+  const {language} = useContext(LanguageContext);
 
   // Fetch services from the backend
   const fetchServices = async () => {
+    console.log(language, "language");
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/admin/services`);
+      const response = await axios.get(`${API_URL}/admin/services?lang=${language}`);
       if (response.data) {
         setServices(response.data);
         setLoading(false);
@@ -57,7 +59,7 @@ console.log(servicesArray, "servicesArray");
 
   useEffect(() => {
     fetchServices();
-  }, []);
+  }, [language]);
 
   // Handle search submission
 

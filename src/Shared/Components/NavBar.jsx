@@ -14,7 +14,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null); // Ref for the dropdown
-  const { lang, setLanguage } = useContext(LanguageContext);
+  const { language, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,9 +45,11 @@ const NavBar = () => {
 
   const toggleLanguage = (language) => {
     i18n.changeLanguage(language);
+    let lang = language === "en" ? "ENGLISH" : language === "am" ? "AMHARIC" : "AFAN_OROMO";
     setLanguage(lang);
     setIsOpen(false); // Close the mobile menu after selecting a language
   };
+  console.log(language)
 
   return (
     <nav
