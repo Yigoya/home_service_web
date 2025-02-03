@@ -45,7 +45,7 @@ const NavBar = () => {
 
   const toggleLanguage = (language) => {
     i18n.changeLanguage(language);
-    let lang = language === "en" ? "ENGLISH" : language === "am" ? "AMHARIC" : "AFAN_OROMO";
+    let lang = language === "en" ? "ENGLISH" : language === "am" ? "AMHARIC" : "OROMO";
     setLanguage(lang);
     setIsOpen(false); // Close the mobile menu after selecting a language
   };
