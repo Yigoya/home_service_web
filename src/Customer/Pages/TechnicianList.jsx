@@ -12,6 +12,7 @@ import { LocationContext } from "../../Shared/Context/LocationContext"
 import { useSelectedService } from "../../Shared/Context/SelectedServiceContext"
 import { SingleService } from "../Api/Api"
 import { GiBroom } from "react-icons/gi";
+import { LanguageContext } from "../../Shared/Context/LanguageContext"
 
 
 const TechnicianList = () => {
@@ -27,11 +28,12 @@ const TechnicianList = () => {
   const { userAddress, setUserAddress } = useContext(LocationContext)
   const { selectedService } = useSelectedService()
   const [service, setService] = useState([])
+  const {language} = useContext(LanguageContext)
   const techniciansPerPage = 6
 
   useEffect(() => {
     axios
-      .get(`${SingleService}/${id}`)
+      .get(`${SingleService}/${id}?lang=${language}`)
       .then((response) => {
         setService(response.data.service)
       })
