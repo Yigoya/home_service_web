@@ -7,18 +7,20 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   const renderImage = (icon, isSelected, isHovered) => {
     return (
-      <img
-        src={icon}
-        alt="service-icon"
-        className={`transition-all duration-300 ease-in-out
-          ${
-            isSelected
-              ? `w-10 h-10 sm:w-8 sm:h-8 md:w-10 md:h-10 text-emerald-700`
-              : isHovered
-              ? "w-10 h-10 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-400"
-              : "w-10 h-10 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-600 hover:text-primary-foreground"
-          }`}
-      />
+      <div className="w-10">
+        <img
+          src={icon}
+          alt="service-icon"
+          className={`transition-all duration-300 ease-in-out
+            ${
+              isSelected
+                ? `w-12 h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 text-emerald-700`
+                : isHovered
+                ? "w-12 h-12 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-400"
+                : "w-12 h-12 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-600 hover:text-primary-foreground"
+            }`}
+        />
+      </div>
     );
   };
 
@@ -41,7 +43,7 @@ const ServiceSelector = ({ services, onSelect }) => {
                 onMouseLeave={() => setHoveredId(null)}
                 className={`
                   flex flex-col items-center justify-center
-                  min-w-[60px] sm:min-w-[70px] md:min-w-[80px]
+                  min-w-[80px] sm:min-w-[90px] md:min-w-[100px] flex-grow
                   py-2 sm:py-3
                   px-1 sm:px-2
                   transition-all duration-300 ease-in-out
@@ -58,20 +60,16 @@ const ServiceSelector = ({ services, onSelect }) => {
                   }
                 }}
               >
-                <div className="mb-1 max-md:ml-10 sm:mb-2">
+                <div className="mb-1 sm:mb-2">
                   {renderImage(
                     `${API_URL}/uploads/${service.icon}`,
                     isSelected,
                     isHovered
                   )}
-                  {
-                   console.log("Service object:",service.services.icon) // Log full service object
-
-                  }
                 </div>
                 <span
                   className={`
-                    text-2xs max-md:text-xs max-md:ml-8 sm:text-xs md:text-sm text-center
+                    text-xs sm:text-sm md:text-base text-center
                     transition-all duration-300 ease-in-out
                     relative after:content-[''] after:absolute
                     after:w-full after:h-0.5 after:bg-current
