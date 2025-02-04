@@ -164,6 +164,24 @@ const resources = {
       "last_name":"Last Name",
       "terms":"Terms of Service",
       "privacy":"Privacy Policy",
+      "total_service":"Total Services",
+      "total_technician":"Total Technicians",
+      "total_customer":"Total Customers",
+      "total_booking":"Total Bookings",
+      "quick_link":"Quick Links",
+      "connecting":"Connecting you with the best technicians in town",
+      "download":"Download Our App",
+      "follow":"Follow Us",
+      "right":"©2024 huluMoya. All rights reserved. Built with 💚 in Ethiopia",
+      "addr":"Address",
+      "from_google":"Google Play",
+      "from_apple":"App Store",
+      "get":"Get it on",
+      "agrree":"By creating an account you agree to our terms of service and privacy policy.",
+
+
+
+
     }
   },
   am: {
@@ -326,6 +344,21 @@ const resources = {
       "last_name":"የአባት ስም",
       "terms":"ደንቦች ",
       "privacy":"ፕራይቬሲ",
+      "total_service":"አገልግሎቶች ",
+      "total_technician":"ባለሞያዎች",
+      "total_customer":"ተጠቃሚዎች",
+      "total_booking":"ውሎች",
+      "quick_link":"ተጨማሪ",
+      "connecting":"ሰዎችን ከአዳዲስ መፍትሄዎች ጋር ማገናኘት ለዘላቂ ቀጣይነት",
+      "download":"አፕሊኬሽናችንን ያውርዱ",
+      "follow":"ቤተሰብ ይሁኑ",
+      "right":"በ2017 ዓ.ም በኢትዮጵያ ተሰራ 💚 ሁሉም መብቶች የተጠበቁ ናቸው።",
+      "addr":"አድራሻ  ",
+      "from_google":"ከጉግልመተግበሪያ ",
+      "from_apple":"ከአፕል መተግበሪያ",
+      "get":"ያውርዱ",
+      "agrree":"በመመዝገብ በአገልግሎት ውላችን እና በግላዊነት ፖሊሲያችን ተስማምተዋል።"
+
 
        
        

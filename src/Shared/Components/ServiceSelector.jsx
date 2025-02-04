@@ -1,43 +1,22 @@
 import React, { useState } from "react";
-import { Wrench, PaintRoller, Truck, Hammer, Flame, TreeDeciduous, Drill } from 'lucide-react';
-import { GiBroom } from "react-icons/gi";
+import { API_URL } from "../api";
 
 const ServiceSelector = ({ services, onSelect }) => {
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
-  const iconComponents = [
-    GiBroom,
-    Wrench,
-    Drill,
-    PaintRoller,
-    TreeDeciduous, 
-    Flame,
-   
-    TreeDeciduous,
-    TreeDeciduous,
-    Truck,
-    Truck,
-    TreeDeciduous,
-    TreeDeciduous,
-    Truck,
-    Truck,
-  ];
-
-  const renderIcon = (IconComponent, isSelected, isHovered) => {
-    if (!IconComponent) {
-      console.error("IconComponent is undefined");
-      return null; // or return a fallback component
-    }
+  const renderImage = (icon, isSelected, isHovered) => {
     return (
-      <IconComponent
+      <img
+        src={icon}
+        alt="service-icon"
         className={`transition-all duration-300 ease-in-out
           ${
             isSelected
-              ? `w-8 h-8 sm:w-8 sm:h-8 md:w-10 md:h-10 stroke-[1.5] text-emerald-700`
+              ? `w-10 h-10 sm:w-8 sm:h-8 md:w-10 md:h-10 text-emerald-700`
               : isHovered
-              ? "w-8 h-8 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-400 stroke-[2]"
-              : "w-8 h-8  sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-600 stroke-[1.5] hover:text-primary-foreground"
+              ? "w-10 h-10 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-400"
+              : "w-10 h-10 sm:w-4 sm:h-4 md:w-8 md:h-8 text-gray-600 hover:text-primary-foreground"
           }`}
       />
     );
@@ -47,7 +26,7 @@ const ServiceSelector = ({ services, onSelect }) => {
     <div className="relative w-full bg-background">
       <div className="max-w-7xl lg:mx-24 mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex justify-start items-center overflow-x-auto scrollbar-hide py-3 sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const isSelected = selectedServiceId === service.categoryId;
             const isHovered = hoveredId === service.categoryId;
 
@@ -80,7 +59,15 @@ const ServiceSelector = ({ services, onSelect }) => {
                 }}
               >
                 <div className="mb-1 max-md:ml-10 sm:mb-2">
-                  {renderIcon(iconComponents[index], isSelected, isHovered)}
+                  {renderImage(
+                    `${API_URL}/uploads/${service.icon}`,
+                    isSelected,
+                    isHovered
+                  )}
+                  {
+                   console.log("Service object:",service.services.icon) // Log full service object
+
+                  }
                 </div>
                 <span
                   className={`

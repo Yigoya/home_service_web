@@ -10,8 +10,11 @@ import expert from "../../assets/talkto.webp";
 import tech from "../../assets/tehcn.png";
 import { API_URL } from "../api";
 import { serviceApi } from "../api";
+import { useTranslation } from "react-i18next";
+
 
 const ServiceDescription = ({ title, description }) => {
+  const { t } = useTranslation();
   const images = [
     clean,
     ambulance,
@@ -114,25 +117,25 @@ const ServiceDescription = ({ title, description }) => {
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalServices}+
             </p>
-            <p className="text-black">Total Services</p>
+            <p className="text-black">{t('total_service')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalTechnicians}+
             </p>
-            <p className="text-black">Total Technicians</p>
+            <p className="text-black">{t('total_technician')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalCustomers}+
             </p>
-            <p className="text-black">Total Customers</p>
+            <p className="text-black">{t('total_customer')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalJobs}+
             </p>
-            <p className="text-black">Total Bookings</p>
+            <p className="text-black">{t('total_booking')}</p>
           </div>
         </div>
       </div>
