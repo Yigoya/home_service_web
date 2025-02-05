@@ -21,6 +21,7 @@ const ServiceTypes = ({ types }) => {
 
   return (
     <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:mx-12 mx-auto">
+      <div className="border border-b-1 border-gray-400 mb-4 w-auto ml-4 mr-24"></div>
       <div
         className="flex flex-wrap gap-2 py-6 overflow-x-auto 
         scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
@@ -46,7 +47,7 @@ const ServiceTypes = ({ types }) => {
                 rounded-full border-2
                 font-bold
                 transition-all duration-300 ease-out
-                focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2
+                focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
                 active:scale-95
                 shadow-sm
                 flex-col gap-1.5 text-center
@@ -55,7 +56,7 @@ const ServiceTypes = ({ types }) => {
                     ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
                     : isHovered
                     ? "border-emerald-700  shadow-md"
-                    : "border-gray-300 text-gray-900 bg-white hover:border-emerald-700 hover:text-emerald-700 hover:bg-emerald-70050 hover:shadow-md"
+                    : "border-gray-500 text-gray-900 bg-white hover:border-emerald-700 hover:text-emerald-700  hover:shadow-md"
                 }
               `}
             >

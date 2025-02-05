@@ -183,7 +183,7 @@ const TechnicianList = () => {
         {/* Main Content */}
         <div className="flex-1">
           {/* Technician Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {error ? (
               <p className="text-red-500 text-center col-span-3">{error}</p>
             ) : paginatedTechnicians.length > 0 ? (
