@@ -126,8 +126,8 @@ const Login = () => {
   return (
     <div className="flex py-10  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md mx-10">
-        <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">HuluMoya</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')} / {t('phone')}</label>
             <input

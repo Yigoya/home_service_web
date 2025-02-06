@@ -72,7 +72,7 @@ const SignUp = () => {
       }}
     >
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-emerald-800 mb-8">HuluMoya</h2>
+        <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* First Name and Last Name Fields */}

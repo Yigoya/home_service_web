@@ -11,6 +11,7 @@ import tech from "../../assets/tehcn.png";
 import { API_URL } from "../api";
 import { serviceApi } from "../api";
 import { useTranslation } from "react-i18next";
+import { FiCheck } from "react-icons/fi";
 
 
 const ServiceDescription = ({ title, description }) => {
@@ -98,17 +99,19 @@ const ServiceDescription = ({ title, description }) => {
         </div>
 
         {/* Text Section */}
-        <div className="lg:absolute md:w-96 lg:bg-white p-6 lg:ml-4 rounded-md lg:shadow-md">
+        <div className="lg:absolute md:w-96 lg:bg-white p-6 lg:ml-4 rounded-md lg:shadow-md py-12 px-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">{title}</h2>
-          <ul className="list-disc list-inside text-gray-600 space-y-2">
-            {description.split(".").map((item, index) =>
-              item.trim() ? (
-                <li key={index} className="text-sm">
-                  {item.trim()}.
-                </li>
-              ) : null
-            )}
-          </ul>
+          
+        <ul className="text-gray-600 space-y-2">
+          {description.split(".").map((item, index) =>
+            item.trim() ? (
+              <li key={index} className="text-sm flex items-center">
+                <FiCheck className="text-emerald-600 mr-4" size={46} />
+                {item.trim()}.
+              </li>
+            ) : null
+          )}
+        </ul>
         </div>
       </div>
       <div className="px-6">

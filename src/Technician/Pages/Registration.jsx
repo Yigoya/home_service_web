@@ -182,7 +182,7 @@ function Registration() {
       <div className="flex flex-col md:flex-row mx-4 md:mx-44 mt-16  max-md:my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
         {/* Left part*/}
         <div className=" w-full lg:p-8 p-6 py-8 my-12 bg-white rounded-xl">
-        <h1 className="text-3xl font-semibold text-gray-900 text-center">HuluMoya</h1>
+        <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
 
             {/*  name part */}
