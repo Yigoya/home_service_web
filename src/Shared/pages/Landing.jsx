@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
+import backgroundImage from '../../assets/bgg.jpg';
+
 
 import ServiceDescription from "../Components/ServiceDescription";
 import ServiceTypes from "../Components/ServiceTypes";
@@ -21,7 +23,8 @@ import { useSelectedService } from "../Context/SelectedServiceContext"; // Impor
 import { LanguageContext } from "../Context/LanguageContext";
 
 const Landing = () => {
-  const { t} = useTranslation();
+  const { t,i18n} = useTranslation();
+  const isAmharic = i18n.language === "am";
   const [loading , setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [services, setServices] = useState([]);
@@ -132,7 +135,7 @@ console.log(servicesArray, "servicesArray");
             onChange={handleSearchChange}
             onFocus={() => setIsDropdownOpen(true)}
             onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="flex-grow  outline-none font-normal  placeholder-black bg-transparent max-md:text-sm lg:text- md:py-3 px-5"
+            className={`flex-grow  outline-none font-normal  placeholder-black bg-transparent  ${isAmharic ? "text-lg" : "text-base"} md:py-3 px-5`}
           />
           <div 
             className="bg-emerald-700 hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
@@ -180,7 +183,7 @@ console.log(servicesArray, "servicesArray");
     </div>
             <div className="flex justify-center mb-8">
               {t('become_tech')}?
-            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className="text-emerald-700 px-3 hover:text-emerald-700 hover:underline">
+            <Link to="/technician-registration" onClick={() => setIsOpen(false)} className={`text-emerald-700 px-3 hover:text-emerald-700 hover:underline ${isAmharic ? "text-lg" : "text-base"}`}>
               {t('applay_now')}
           </Link>
             </div>

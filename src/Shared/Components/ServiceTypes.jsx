@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ServiceTypes = ({ types }) => {
+  const { t } = useTranslation();
   const typees = types[0];
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
@@ -49,6 +51,7 @@ const ServiceTypes = ({ types }) => {
                 inline-flex items-center justify-center
                 ${isLongText ? "min-w-[140px] py-1 text-xs sm:text-sm" : "min-w-[160px] py-2 text-sm sm:text-base"}
                 px-4 sm:px-6
+                mx-3
                 rounded-full 
                 font-bold
                 transition-all duration-300 ease-out
@@ -95,6 +98,7 @@ const ServiceTypes = ({ types }) => {
               transition-all duration-300 ease-out
               active:scale-95
               shadow-sm
+              
               ${
                 showAll
                   ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
@@ -102,7 +106,7 @@ const ServiceTypes = ({ types }) => {
               }
             `}
           >
-            {showAll ? "See Less" : "See More"}
+            {showAll ? t('see_less'): t('see_more')}
           </button>
         </div>
       )}

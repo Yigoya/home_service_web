@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { API_URL } from "../api";
+import { useTranslation } from "react-i18next";
 
 const ServiceSelector = ({ services, onSelect }) => {
+  const { i18n } = useTranslation();
+    const isAmharic = i18n.language === "am";
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
@@ -47,7 +50,7 @@ const ServiceSelector = ({ services, onSelect }) => {
                   py-2 sm:py-3
                   px-1 sm:px-2
                   transition-all duration-300 ease-in-out
-                  cursor-pointer relative
+                  cursor-pointer relative text-gray-600 mr-4 ${isAmharic ? "text-lg" : "text-xs"}
                   ${isSelected ? "text-primary" : "text-muted-foreground"}
                 `}
                 role="button"
@@ -74,7 +77,7 @@ const ServiceSelector = ({ services, onSelect }) => {
                     relative after:content-[''] after:absolute
                     after:w-full after:h-0.5 after:bg-current
                     after:left-0 after:-bottom-1 sm:after:-bottom-2
-                    after:transition-all after:duration-300
+                    after:transition-all after:duration-300 
                     ${
                       isSelected
                         ? "font-bold text-emerald-700 after:scale-x-100"
