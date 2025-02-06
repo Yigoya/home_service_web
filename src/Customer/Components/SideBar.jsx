@@ -4,7 +4,7 @@ import { AuthContext } from '../../Shared/Context/AuthContext';
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { logo1 } from '../../Shared/Components/Images';
 import { useTranslation } from 'react-i18next';
-
+import { API_URL } from '../../Shared/api';
 
 export default function SideBar({ customerInfo }) {
   const { t} = useTranslation();
@@ -34,7 +34,7 @@ export default function SideBar({ customerInfo }) {
     <div className="bg-white lg:h-screen lg:ml-1 rounded-lg shadow-lg p-6 space-y-6">
       <div className="flex flex-col items-center">
         <img
-          src={logo1}
+          src={ `${API_URL}/uploads/${customerInfo.profileImage}` } 
           alt={`${customerInfo.name}'s profile`}
           className="w-24 h-24 rounded-full object-cover border-4 border-emerald-600"
         />

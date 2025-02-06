@@ -5,6 +5,12 @@ const ServiceTypes = ({ types }) => {
   const typees = types[0];
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+
+  // Calculate the number of service types to display in the first two rows
+  const itemsPerRow = 5; // Adjust this based on your design
+  const initialDisplayCount = 2 * itemsPerRow;
+  const displayTypes = showAll ? typees : typees.slice(0, initialDisplayCount);
 
   // Helper function to count spaces in a name
   const countSpaces = (name) => (name.match(/\s+/g) || []).length;
@@ -21,12 +27,11 @@ const ServiceTypes = ({ types }) => {
 
   return (
     <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:mx-12 mx-auto">
-      <div className="border border-b-1 border-gray-400 mb-4 w-auto ml-4 mr-24"></div>
-      <div
+<div className="border border-gray-300 mb-4 w-auto ml-4 lg:mr-24" style={{ borderBottomWidth: '0px' }}></div>      <div
         className="flex flex-wrap gap-2 py-6 overflow-x-auto 
         scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
-        {typees.map((type, index) => {
+        {displayTypes.map((type, index) => {
           const isSelected = selectedId === type.serviceId;
           const isHovered = hoveredId === type.serviceId;
           const spaces = countSpaces(type.name);
@@ -44,7 +49,7 @@ const ServiceTypes = ({ types }) => {
                 inline-flex items-center justify-center
                 ${isLongText ? "min-w-[140px] py-1 text-xs sm:text-sm" : "min-w-[160px] py-2 text-sm sm:text-base"}
                 px-4 sm:px-6
-                rounded-full border-2
+                rounded-full 
                 font-bold
                 transition-all duration-300 ease-out
                 focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
@@ -59,6 +64,7 @@ const ServiceTypes = ({ types }) => {
                     : "border-gray-500 text-gray-900 bg-white hover:border-emerald-700 hover:text-emerald-700  hover:shadow-md"
                 }
               `}
+              style={{ borderWidth: '1px' }}
             >
               {formatName(type.name).map((line, i) => (
                 <span
@@ -70,12 +76,39 @@ const ServiceTypes = ({ types }) => {
                   style={{ transitionDelay: `${i * 50}ms` }}
                 >
                   {line}
+                  
                 </span>
+                
               ))}
             </Link>
+            
           );
         })}
+        {typees.length > initialDisplayCount && (
+        <div className="flex justify-center ">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className={`
+              px-6 py-2 
+              rounded-full border-2
+              font-bold
+              transition-all duration-300 ease-out
+              active:scale-95
+              shadow-sm
+              ${
+                showAll
+                  ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
+                  : "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
+              }
+            `}
+          >
+            {showAll ? "See Less" : "See More"}
+          </button>
+        </div>
+      )}
       </div>
+
+      
 
       <style jsx>{`
         /* For Webkit browsers like Chrome/Safari */

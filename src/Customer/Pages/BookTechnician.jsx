@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import cleanImage from '../../assets//house_clean.png';
+
 
 const BookTechnician = () => {
    const { t } = useTranslation();
@@ -79,9 +81,9 @@ console.log(`${SingleService}/${serviceId}`)
   };
 
   return (
-    <div>
-      <div className="max-w-md lg:mt-24 max-md:mt-24 max-md:mx-5 mx-auto bg-gray-50 rounded-lg shadow-md p-6">
-        <div className="flex flex-col items-center">
+        <div className="flex py-10  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
+      <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md mx-10">
+      <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full mb-4"
             src={`${API_URL}/uploads/${Technicain.profileImage}` || 'https://via.placeholder.com/150'}
