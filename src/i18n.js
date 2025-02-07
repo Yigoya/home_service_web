@@ -54,7 +54,8 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "All in One Services, On Demand!",
+      "every_service": "All in One Services,",
+      "every_service1": "On Demand!",
       "search_services": "What do you need help with?",
       "our-servises": "Our Services",  
       "pending":"Pending",

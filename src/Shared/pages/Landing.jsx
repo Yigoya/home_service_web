@@ -7,13 +7,15 @@ import { FiSearch } from "react-icons/fi";
 import ServiceDescription from "../Components/ServiceDescription";
 import ServiceTypes from "../Components/ServiceTypes";
 import ServiceSelector from "../Components/ServiceSelector";
-
+import tr from '../../assets/tr.png'
+import bl from '../../assets/bl.png'
 import TechnicianCarousel from "../UIComponents/TechnicianCarousel";
 import Testimonials from "../UIComponents/Testimonials";
 import FAQ from "../UIComponents/FAQ";
 import Contact from "../../Customer/Pages/ContactUs";
 
 // import home from "../../assets/home.png";
+import bgimg from '../../assets/bgimg.jpg'
 import WhyWe from "../Components/WhyWe";
 import { API_URL } from "../api";
 import LoadingPage from "../Components/LoadingPage";
@@ -112,17 +114,16 @@ console.log(servicesArray, "servicesArray");
     <div className="font-sans ">
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
-        <div className="flex flex-col justify-center items-center px-8 lg:px-0 lg:pt-44 pt-36 pb-8">
-          <h1 className="max-md:text-3xl lg:text-5xl font-extrabold leading-tight mb-16 text-center">
-            {t('every_service')}
-          </h1>
-          {/* <p className="text-lg text-gray-600 mb-4 text-center">
-            {t("header")}
-          </p> */}
-          {/* <p className="text-sm text-gray-500 mb-6 text-center">{t("which")}</p> */}
+        <div className="flex ">
+    <img className="lg:mt-24 lg:block hidden" src={bl} alt="" />
 
-          {/* Search Dropdown */}
-          <div className="lg:w-1/2 w-72">
+     <div className="flex flex-col xl:ml-24 2xl:ml-72 justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
+          <h1 className="max-md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold leading-tight mb-16 text-">
+            <span>{t('every_service')}</span> <br />
+            <span className="lg:ml-16 mt-2">{t('every_service1')}</span>
+          
+          </h1>
+          <div className=" lg:w-[700px] 2xl:w-[800px]">
       <div className="relative ">
         <div className="flex items-center bg-gray-200 rounded-full shadow-md">
           <input
@@ -177,6 +178,10 @@ console.log(servicesArray, "servicesArray");
       </div>
       
     </div>
+    </div>
+    <div className="hidden lg:block lg:mt-20 absolute right-0">
+          <img src={tr} alt="Top-right decoration"  />
+        </div>
     </div>
             <div className="flex justify-center mb-8">
               {t('become_tech')}?
