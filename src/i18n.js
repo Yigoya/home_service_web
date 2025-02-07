@@ -239,7 +239,8 @@ const resources = {
         "kirkos": "ቂርቆስ",
         "lideta": "ልደታ"
       },
-      "every_service": "የፈለጉት ሙያ በፈለጉት ቦታ እና ሰዓት",
+      "every_service": "የፈለጉት ሙያ በፈለጉት",
+      "every_service1": "ቦታ እና ሰዓት",
       "search_services": "አገልግሎት ይምረጡ",
       "our-servises": "የምንሰጣቸው አገልግሎቶች",
       "pending":"በሂደት ላይ ያለ  ",
@@ -420,7 +421,8 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "Tajaajila Hundaa Tokko Keessatti, Gaaffii Irratti!",
+      "every_service": "Tajaajila Hundaa Tokko ",
+      "every_service1": "Keessatti, Gaaffii Irratti!",
       "search_services": "Maal irratti gargaarsi si barbaachisa?",
       "our-servises": "Tajaajila Keenya",  
       "pending":"Eeggataa kan jiru",
