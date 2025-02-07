@@ -131,7 +131,7 @@ const Login = () => {
       <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className={`block ${isAmharic ? "text-lg" : "text-base"} font-medium text-gray-700`}>{t('email')} / {t('phone')}</label>
+            <label htmlFor="email" className={`block ${isAmharic ? "text-xl" : "text-base"} font-medium text-gray-700`}>{t('email')} / {t('phone')}</label>
             <input
               id="email"
               type="email"
@@ -144,7 +144,7 @@ const Login = () => {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="password" className={`block ${isAmharic ? "text-lg" : "text-base"} font-medium text-gray-700`}>{t('password')}</label>
+            <label htmlFor="password" className={`block ${isAmharic ? "text-xl" : "text-base"} font-medium text-gray-700`}>{t('password')}</label>
             <input
               id="password"
               type="password"
@@ -156,14 +156,14 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
           </div>
-          <div className={` ${isAmharic ? "text-lg" : "text-base"} lg:ml-64 text-emerald-800 hover:text-emerald-700`}>
+          <div className={` ${isAmharic ? "text-xl" : "text-base"} lg:ml-64 text-emerald-800 hover:text-emerald-700`}>
           <Link to="/forgot-password">{t('forgot_pass')}</Link>
           </div>
          
           
           <button
             type="submit"
-            className={`w-full py-2 px-4 border ${isAmharic ? "text-lg" : "text-base"} border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2  disabled:opacity-50`}
+            className={`w-full py-2 px-4 border ${isAmharic ? "text-xl" : "text-base"} border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2  disabled:opacity-50`}
             disabled={isLoading}
           >
             {isLoading ? (

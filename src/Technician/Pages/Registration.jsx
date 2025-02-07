@@ -189,7 +189,7 @@ function Registration() {
             {/*  name part */}
 
             <div>
-              <label className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('name')}<span className='text-red-500 text-sm'>*</span></label>
+              <label className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('name')}<span className='text-red-500 text-sm'>*</span></label>
               <input type="text" name="name" placeholder={t('enter_name')} value={formData.name} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}         
             </div>
@@ -198,7 +198,7 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('email')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('email')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="email" name="email" placeholder={t('enter_email')} value={formData.email} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
@@ -206,7 +206,7 @@ function Registration() {
                {/*  phoneNumber part */}
 
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('phone')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('phone')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="tel" name="phoneNumber" placeholder={t('enter_phone')} value={formData.phoneNumber} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}              
               </div>
@@ -214,7 +214,7 @@ function Registration() {
                  
                   {/*  bio part */}
             <div>
-              <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('bio')} <span className='text-red-500 text-sm'>*</span></label>
+              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('bio')} <span className='text-red-500 text-sm'>*</span></label>
               <textarea name="bio" placeholder={t('bio')} value={formData.bio} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none h-20" required></textarea>
               {errors.bio && <p className="text-red-500 text-sm">{errors.bio}</p>}
             </div>
@@ -222,7 +222,7 @@ function Registration() {
             {/* Service part */}
 
             <div>
-              <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>Services <span className='text-red-500 text-sm'>*</span></label>
+              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>Services <span className='text-red-500 text-sm'>*</span></label>
               <select onChange={handleSelect} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none">
                 <option value="">Select a service</option>
                 {services.map(service => (
@@ -243,7 +243,7 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('subcity')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('subcity')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="subcity" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
                   <option value="">{t('select_subcity')}</option>
                   {subCities.map(city => (
@@ -252,7 +252,7 @@ function Registration() {
                 </select>
               </div>
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('woreda')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('woreda')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="wereda" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
                   <option value="">{t('select_woreda')}</option>
                   {weredas.map(wereda => (
@@ -296,21 +296,21 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('password')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('password')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="password" name="password" placeholder={t('enter_password')} value={formData.password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               </div>
 
                {/*  confirm part */}
 
               <div className="flex-1">
-                <label  className={`block ${isAmharic ? "text-lg" : "text-md"} font-medium text-gray-700`}>{t('confirm_password')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('confirm_password')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="password" name="confirm_password" placeholder={t('confirm_password')} value={formData.confirm_password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.confirm_password && <p className="text-red-500 text-sm">{errors.confirm_password}</p>}
                 </div>
             </div>
 
             {/* Submit Button part */}
-            <button type="submit" className="w-full bg-emerald-700 text-white py-3 mt-6 rounded-full hover:bg-emerald-600 focus:outline-none">
+            <button type="submit" className={` ${isAmharic ? "text-xl" : "text-md"} w-full bg-emerald-700 text-white py-3 mt-6 rounded-full hover:bg-emerald-600 focus:outline-none`}>
             {t('regis')}
             </button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}

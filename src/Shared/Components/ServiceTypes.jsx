@@ -29,7 +29,7 @@ const ServiceTypes = ({ types }) => {
 
   return (
     <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:mx-12 mx-auto">
-<div className="border border-gray-300 mb-4 w-auto ml-4 lg:mr-24" style={{ borderBottomWidth: '0px' }}></div>      <div
+<div className="border border-gray-300  w-auto ml-4 lg:mr-24" style={{ borderBottomWidth: '0px' }}></div>      <div
         className="flex flex-wrap gap-2 py-6 overflow-x-auto 
         scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
@@ -51,7 +51,7 @@ const ServiceTypes = ({ types }) => {
                 inline-flex items-center justify-center
                 ${isLongText ? "min-w-[140px] py-1 text-xs sm:text-sm" : "min-w-[160px] py-2 text-sm sm:text-base"}
                 px-4 sm:px-6
-                mx-3
+                ml-3 mb-2
                 rounded-full 
                 font-bold
                 transition-all duration-300 ease-out

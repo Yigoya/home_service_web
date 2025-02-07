@@ -19,7 +19,7 @@ const WhyWe = () => {
           <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
             <img src={transparency} alt="Quality Guarantee" className="w-6 h-6" />
           </div>
-          <p className={`text-gray-700 font-medium ${isAmharic ? "text-lg" : "text-base"}`}>
+          <p className={`text-gray-700 font-medium my-2 ${isAmharic ? "text-xl" : "text-md"}`}>
             {t('one_year')}
           </p>
           </div>
@@ -28,7 +28,7 @@ const WhyWe = () => {
           <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
             <img src={equipment} alt="Scheduling and Punctuality" className="w-6 h-6" />
           </div>
-          <p className={`text-gray-700 font-medium ${isAmharic ? "text-lg" : "text-base"}`}>
+          <p className={`text-gray-700 font-medium my-2 ${isAmharic ? "text-xl" : "text-md"}`}>
             {t('time_sche')}
           </p>
         </div>
@@ -37,7 +37,7 @@ const WhyWe = () => {
           <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full">
             <img src={expert} alt="Trusted Technicians" className="w-6 h-6" />
           </div>
-          <p className={`text-gray-700 font-medium ${isAmharic ? "text-lg" : "text-base"}`}>{t('trust')}</p>
+          <p className={`text-gray-700 font-medium my-2 ${isAmharic ? "text-xl" : "text-md"}`}>{t('trust')}</p>
         </div>
       </div>
 

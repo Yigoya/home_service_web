@@ -8,7 +8,8 @@ import { useTranslation } from "react-i18next";
 import cleanImage from "../../assets/house_clean.png";
 
 const SignUp = () => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +84,7 @@ const SignUp = () => {
               value={formData.firstName}
               onChange={handleChange}
               placeholder={t("first_name")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
             <input
@@ -92,7 +93,7 @@ const SignUp = () => {
               value={formData.lastName}
               onChange={handleChange}
               placeholder={t("last_name")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -105,8 +106,7 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder={t("email")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
-              required
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}              required
             />
           </div>
 
@@ -124,7 +124,7 @@ const SignUp = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder={t("phone")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -137,7 +137,7 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder={t("password")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -147,7 +147,7 @@ const SignUp = () => {
             type="submit"
             className={`w-full py-3.5 px-4 ${
               isLoading ? "bg-emerald-700" : "bg-emerald-600 hover:bg-emerald-700"
-            } text-white rounded-3xl font-medium transition duration-300 ease-in-out`}
+            } ${isAmharic? "text-lg": "text-base"} text-white rounded-3xl font-medium transition duration-300 ease-in-out`}
             disabled={isLoading}
           >
             {isLoading ? (
