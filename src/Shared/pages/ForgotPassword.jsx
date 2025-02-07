@@ -4,11 +4,12 @@ import { forgotpasswordApi } from '../api';
 import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
-  const {t} = useTranslation();
+  const {t,i18n} = useTranslation();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const isAmharic = i18n.language === "am";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,18 +50,18 @@ const ForgotPassword = () => {
       <div className="w-full max-w-md bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-6 space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900">{t('forgot_pass')}</h2>
+            <h2 className={`${isAmharic? "text-3xl" : "text-2xl"} font-bold text-gray-900`}>{t('forgot_pass')}</h2>
            
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                {t('email')}
+              <label htmlFor="email" className={`block ${isAmharic?"text-lg": "text-sm"} font-medium text-gray-700`}>
+                {t('email')}/{t('phone')}
               </label>
               <input
                 type="email"
                 id="email"
-                placeholder= {t('enter_email')}
+                placeholder={`${t('email')}/${t('phone')}`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -70,7 +71,7 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm ${isAmharic?"text-lg": "text-sm"} font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                 isLoading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
@@ -79,12 +80,12 @@ const ForgotPassword = () => {
           </form>
           {message && (
             <div className="bg-green-50 border-l-4 border-green-400 p-4">
-              <p className="text-sm text-green-700">{message}</p>
+              <p className={`${isAmharic?"text-lg": "text-sm"} text-green-700`}>{message}</p>
             </div>
           )}
           {error && (
             <div className="bg-red-50 border-l-4 border-red-400 p-4">
-              <p className="text-sm text-red-700">{error}</p>
+              <p className={`${isAmharic?"text-lg": "text-sm"} text-red-700`}>{error}</p>
             </div>
           )}
         </div>

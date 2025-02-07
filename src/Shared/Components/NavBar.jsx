@@ -10,6 +10,7 @@ import { LanguageContext } from '../Context/LanguageContext';
 
 const NavBar = () => {
   const { i18n, t } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const { userAddress } = useContext(LocationContext); // Use the context
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -86,17 +87,17 @@ const NavBar = () => {
               {/* Auth Buttons */}
               <Link
                 to="/login"
-                className="px-6 sm:px-16 py-2 text-xs sm:text-sm font-medium text-emerald-600 bg-white border-2 
+                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"} sm:text-sm font-medium text-emerald-600 bg-white border-2 
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
-                         transition-all duration-300 ease-in-out"
+                         transition-all duration-300 ease-in-out`}
               >
                 {t('login')}
               </Link>
               <Link
                 to="/pre-signup"
-                className="px-4 sm:px-16 py-2 text-xs sm:text-sm font-medium text-emerald-600 bg-white border-2  
-                         border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white
-                         transition-all duration-300 ease-in-out"
+                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"} sm:text-sm font-medium text-emerald-600 bg-white border-2 
+                         border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
+                         transition-all duration-300 ease-in-out`}
               >
                 {t('signup')}
               </Link>
@@ -105,9 +106,9 @@ const NavBar = () => {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="flex items-center gap-2 px-4 sm:px-6 py-2 text-md  font-medium text-emerald-600 
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2 ${isAmharic ? "text-lg" : "text-md"} font-medium text-emerald-600 
                              rounded-full 
-                             transition-colors duration-200"
+                             transition-colors duration-200`}
                 >
                   <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>{i18n.language === "en" ? "አማርኛ" : i18n.language === "am" ? "English" : "Afaan Oromoo"}</span>
@@ -122,7 +123,7 @@ const NavBar = () => {
                     </button>
                     <button
                       onClick={() => toggleLanguage("am")}
-                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                      className="block w-full text-left px-4 py-2 text-lg rounded-xl  text-emerald-600 hover:bg-emerald-600 hover:text-white"
                     >
                       አማርኛ
                     </button>
@@ -160,19 +161,17 @@ const NavBar = () => {
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-emerald-600 bg-white 
-                       border-2 border-emerald-600 rounded-lg hover:bg-emerald-600 
-                       hover:text-white transition-all duration-200"
-            >
+              className={`flex items-center gap-2 px-4 sm:px-6 py-2 ${isAmharic ? "text-lg" : "text-md"} font-medium text-emerald-600 
+              rounded-full 
+              transition-colors duration-200`}>
               {t('login')}
             </Link>
             <Link
               to="/pre-signup"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-center text-white bg-emerald-600 
-                       border-2 border-emerald-600 rounded-lg hover:bg-emerald-600 
-                       transition-all duration-200"
-            >
+              className={`flex items-center gap-2 px-4 sm:px-6 py-2 ${isAmharic ? "text-lg" : "text-md"} font-medium text-emerald-600 
+                             rounded-full 
+                             transition-colors duration-200`}>
               {t('signup')}
             </Link>
 
@@ -185,7 +184,7 @@ const NavBar = () => {
             </button>
             <button
               onClick={() => toggleLanguage("am")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
+              className="block w-full px-4 py-2 text-lg rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
             >
               አማርኛ
             </button>

@@ -179,6 +179,8 @@ const resources = {
       "from_apple":"App Store",
       "get":"Get it on",
       "agrree":"By creating an account you agree to our terms of service and privacy policy.",
+      "see_more":"See More",
+      "see_less":"See Less",
 
 
 
@@ -358,7 +360,9 @@ const resources = {
       "from_google":"ከጉግልመተግበሪያ ",
       "from_apple":"ከአፕል መተግበሪያ",
       "get":"ያውርዱ",
-      "agrree":"በመመዝገብ በአገልግሎት ውላችን እና በግላዊነት ፖሊሲያችን ተስማምተዋል።"
+      "agrree":"በመመዝገብ በአገልግሎት ውላችን እና በግላዊነት ፖሊሲያችን ተስማምተዋል።",
+      "See_more":"ተጨማሪ ይመልከቱ",
+      "See_less":"ያሳንሱ",
 
 
        
@@ -540,6 +544,8 @@ const resources = {
       "from_apple":"App Store",
       "get":"Irra kaa'i",
       "agrree":"Akkaawuntii uumuudhaan haala tajaajilaa fi imaammata dhuunfaa keenyaa irratti walii galta.",
+      "See_more":"Dabalataa",
+      "See_less":"Dabalataa",
 
 
 
