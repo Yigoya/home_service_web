@@ -242,9 +242,9 @@ function Registration() {
             {/* Service part */}
 
             <div>
-              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>Services <span className='text-red-500 text-sm'>*</span></label>
+              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('serv')}<span className='text-red-500 text-sm'>*</span></label>
               <select onChange={handleSelect} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none">
-                <option value="">Select a service</option>
+                <option value="">{t('select_service')}</option>
                 {services.map(service => (
                   <option key={service.id} value={service.id}>{service.name}</option>
                 ))}

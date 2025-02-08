@@ -181,6 +181,7 @@ const resources = {
       "agrree":"By creating an account you agree to our terms of service and privacy policy.",
       "see_more":"See More",
       "see_less":"See Less",
+      "select_service":"Select Service",
 
 
 
@@ -364,6 +365,7 @@ const resources = {
       "agrree":"በመመዝገብ በአገልግሎት ውላችን እና በግላዊነት ፖሊሲያችን ተስማምተዋል።",
       "See_more":"ተጨማሪ ይመልከቱ",
       "See_less":"ያሳንሱ",
+      "select_service":"አገልግሎት ይምረጡ",
 
 
        
@@ -548,6 +550,7 @@ const resources = {
       "agrree":"Akkaawuntii uumuudhaan haala tajaajilaa fi imaammata dhuunfaa keenyaa irratti walii galta.",
       "See_more":"Dabalataa",
       "See_less":"Dabalataa",
+      "select_service":"Tajaajila Filadhu",
 
 
 
