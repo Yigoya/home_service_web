@@ -12,10 +12,10 @@ const ServiceTypes = ({ types }) => {
   const [showAll, setShowAll] = useState(false);
 
   // Calculate the number of service types to display in the first two rows
-  const itemsPerRow = 5; // Adjust this based on your design
-  const initialDisplayCount = 2 * itemsPerRow;
+ // Adjust this based on your design
+  const initialDisplayCount = 8;
   const displayTypes = showAll ? typees : typees.slice(0, initialDisplayCount);
-
+  
   // Helper function to count spaces in a name
   const countSpaces = (name) => (name.match(/\s+/g) || []).length;
 

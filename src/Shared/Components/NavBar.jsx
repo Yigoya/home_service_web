@@ -87,7 +87,7 @@ const NavBar = () => {
               {/* Auth Buttons */}
               <Link
                 to="/login"
-                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white  border-2
+                className={`px-6 sm:px-12 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white  border-2
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
                          transition-all duration-300 ease-in-out`} 
               >
@@ -95,7 +95,7 @@ const NavBar = () => {
               </Link>
               <Link
                 to="/pre-signup"
-                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white border-2 
+                className={`px-6 sm:px-8 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white border-2 
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
                          transition-all duration-300 ease-in-out`}
               >
