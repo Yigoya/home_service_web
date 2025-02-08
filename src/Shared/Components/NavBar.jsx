@@ -59,8 +59,8 @@ const NavBar = () => {
           ? 'bg-white/80 backdrop-blur-md shadow-l'
           : 'bg-white shadow-m'}`}
     >
-      <div className="max-w-7xl mx-32 px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="max-w-7xl mx- px-4 sm:px-6 lg:px-8 mx-auto">
+        <div className="flex justify-between items-c h-20">
           {/* Left Section: Logo and Phone */}
           <div className="flex items-center gap-4">
             {/* Logo */}
@@ -87,9 +87,9 @@ const NavBar = () => {
               {/* Auth Buttons */}
               <Link
                 to="/login"
-                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white border-2 
+                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white  border-2
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
-                         transition-all duration-300 ease-in-out`}
+                         transition-all duration-300 ease-in-out`} 
               >
                 {t('login')}
               </Link>
