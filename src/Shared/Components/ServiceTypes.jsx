@@ -55,7 +55,7 @@ const ServiceTypes = ({ types }) => {
                 px-4 sm:px-6
                 ml-3 mb-2
                 rounded-full 
-                font-bold
+                ${isAmharic ? "font-normal" : "font-bold"}
                 transition-all duration-300 ease-out
                 focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
                 active:scale-95

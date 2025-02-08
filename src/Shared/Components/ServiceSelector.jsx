@@ -38,6 +38,7 @@ const ServiceSelector = ({ services, onSelect }) => {
             const isHovered = hoveredId === service.categoryId
 
             return (
+              
               <div
                 key={service.categoryId}
                 onClick={() => {
@@ -49,8 +50,8 @@ const ServiceSelector = ({ services, onSelect }) => {
                 className={`
                   flex flex-col items-center justify-center
                   min-w-[80px] sm:min-w-[100px] md:min-w-[120px] lg:min-w-[140px] 2xl:min-w-[140px]
-                  py-2 sm:py-3 md:py-4
-                  px-1 sm:px-2 md:px-3
+                  py-2 sm:py-3 md:py-
+                  px-1 sm:px-2 md:mx-
                   transition-all duration-300 ease-in-out
                   cursor-pointer relative text-gray-600 mr-4 
                   ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-sm sm:text-md 2xl:text-lg"}

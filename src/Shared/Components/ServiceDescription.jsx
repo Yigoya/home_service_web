@@ -120,8 +120,8 @@ const ServiceDescription = ({ title, description }) => {
         </div>
       </div>
       <div className="px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-          <div className="text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 py-6">
+          <div className="text-center ">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalServices}+
             </p>
