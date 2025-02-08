@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { FiSearch } from "react-icons/fi"
+import tr from '../../assets/tr.png'
 
 import ServiceDescription from "../Components/ServiceDescription"
 import ServiceTypes from "../Components/ServiceTypes"
@@ -172,9 +173,9 @@ console.log(servicesArray, "servicesArray");
   </div>
   </div>
   </div>
-    {/* <div className="hidden lg:block lg:mt-10 lg:w-72 absolute right-0">
+    <div className="hidden lg:block lg:mt-28 lg:w-72 absolute right-0">
           <img src={tr || "/placeholder.svg"} alt="Top-right decoration "  />
-        </div> */}
+        </div>
     </div>
             <div className="flex mt-2 justify-center ">
              <p className="mt-1">{t('become_tech')}?</p> 
