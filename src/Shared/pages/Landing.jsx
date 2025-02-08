@@ -116,62 +116,62 @@ console.log(servicesArray, "servicesArray");
             {/* <span className="">{t('every_service1')}</span> */}
           
           </h1>
-          <div className="w-full max-w-2xl mx-auto px-4">
-      <div className="relative ">
-        <div className="flex items-center bg-gray-200 rounded-full shadow-md">
-          <input
-            type="text"
-            placeholder={t("search_services")}
-            value={searchText}
-            onChange={handleSearchChange}
-            onFocus={() => setIsDropdownOpen(true)}
-            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className={`flex-grow  outline-none font-normal  placeholder-black bg-transparent  ${isAmharic ? "text-lg" : "text-base"} md:py-3 px-5`}
-          />
-          <div 
-            className="bg-emerald-700 hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
-            onClick={() => sendSearchToBackend(searchText)}
-          >
-            <FiSearch
-              size={20}
-              className="cursor-pointer text-white"
-            />
-          </div>
-        </div>
-        </div>
+          <div className="w-full max-w-3xl mx-auto px-4">
+  <div className="relative">
+    <div className="flex items-center bg-gray-200 rounded-full shadow-md">
+      <input
+        type="text"
+        placeholder={t("search_services")}
+        value={searchText}
+        onChange={handleSearchChange}
+        onFocus={() => setIsDropdownOpen(true)}
+        onBlur={() => {
+          if (!document.activeElement.closest(".dropdown-container")) {
+            setIsDropdownOpen(false);
+          }
+        }}
+        className={`flex-grow outline-none font-normal placeholder-black bg-transparent ${
+          isAmharic ? "text-lg" : "text-base"
+        } md:py-3 px-5`}
+      />
+      <div
+        className="bg-emerald-700 hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
+        onClick={() => sendSearchToBackend(searchText)}
+      >
+        <FiSearch size={20} className="cursor-pointer text-white" />
+      </div>
+    </div>
 
-        {/* Dropdown Suggestions */}
-        {isDropdownOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
-            {filteredServices.length > 0 ? (
-              filteredServices.map((service) => {
-                console.log("Service object:", service); // Log full service object
-                console.log("Image URL:", `${API_URL}/uploads/${service.icon}`); // Log final image URL
-                return (
-                  <Link
-                    key={service.id}
-                    to={`/technician-list/${service.id}`}
-                    onClick={() => setIsDropdownOpen(false)}
-                    className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
-                  >
-                    <img  src={ `${API_URL || "/placeholder.svg"}/uploads/${service.icon}` }
-                              className="w-8 h-8 mx-4  object-cover"
-                              />
-                    {service.name}
-                 
-                  </Link>
-                );
-              })
-            ) : (
-              <div className="px-4 py-2 text-sm text-gray-500">
-                No results found
-              </div>
-            )}
-          </div>
+    {/* Dropdown Suggestions */}
+    {isDropdownOpen && (
+      <div className="dropdown-container absolute top-full left-0 w-full bg-white border text-black py-4 border-gray-200 rounded-md shadow-lg mt-2 z-20 max-h-60 overflow-y-auto">
+        {filteredServices.length > 0 ? (
+          filteredServices.map((service) => (
+            <Link
+              key={service.id}
+              to={`/technician-list/${service.id}`}
+              onClick={() => {
+                console.log("Service selected:", service.id); // Debugging
+                setIsDropdownOpen(false);
+              }}
+              className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
+            >
+              <img
+                src={`${API_URL || "/placeholder.svg"}/uploads/${service.icon}`}
+                className="w-8 h-8 mx-4 object-cover"
+                alt={service.name}
+              />
+              {service.name}
+            </Link>
+          ))
+        ) : (
+          <div className="px-4 py-2 text-sm text-gray-500">No results found</div>
         )}
       </div>
-      
-    </div>
+    )}
+  </div>
+  </div>
+  </div>
     {/* <div className="hidden lg:block lg:mt-10 lg:w-72 absolute right-0">
           <img src={tr || "/placeholder.svg"} alt="Top-right decoration "  />
         </div> */}
