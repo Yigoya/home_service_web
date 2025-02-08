@@ -118,15 +118,15 @@ console.log(servicesArray, "servicesArray");
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
         <div className="flex ">
-    <img className="lg:mt-24 lg:block hidden" src={bl} alt="" />
+    {/* <img className="lg:mt-24 lg:block hidden" src={bl} alt="" /> */}
 
-     <div className="flex flex-col xl:ml-28 2xl:ml-64 justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
-          <h1 className="max-md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold leading-tight mb-16 text-">
-            <span>{t('every_service')}</span> <br />
-            <span className={`mt-2 ${i18n.language === "om" ? "ml-0" : "lg:ml-16"}`}>{t('every_service1')}</span>
+     <div className="flex flex-col lg:mt-20 lg:ml-48 xl:ml-[200px] 2xl:ml-[360px] justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
+          <h1 className="max-md:text-3xl lg:text-[40px] lg:mt-3 xl:text-6xl 2xl:text-7xl font-extrabold leading-tight mb- text-">
+            <span>{t('every_service')}</span> 
+            <span className="">{t('every_service1')}</span>
           
           </h1>
-          <div className=" lg:w-[700px] 2xl:w-[800px]">
+          <div className=" lg:w-[500px] xl:w-[700px] 2xl:w-[850px] xl:mr-20">
       <div className="relative ">
         <div className="flex items-center bg-gray-200 rounded-full shadow-md">
           <input
@@ -182,18 +182,18 @@ console.log(servicesArray, "servicesArray");
       
     </div>
     </div>
-    <div className="hidden lg:block lg:mt-20 absolute right-0">
-          <img src={tr} alt="Top-right decoration"  />
+    <div className="hidden lg:block lg:mt-10 lg:w-72 absolute right-0">
+          <img src={tr} alt="Top-right decoration "  />
         </div>
     </div>
-            <div className="flex justify-center mb-8">
-              {t('become_tech')}?
+            <div className="flex mt-2 justify-center ">
+             <p className="mt-1">{t('become_tech')}?</p> 
             <Link to="/technician-registration" onClick={() => setIsOpen(false)} className={`text-emerald-700 px-3 hover:text-emerald-700 hover:underline ${isAmharic ? "text-lg" : "text-base"}`}>
               {t('applay_now')}
           </Link>
             </div>
         {/* Service Section */}
-        <div className="w-full max-w-7xl mx-auto  px-4 sm:px-6 lg:px-28">
+        <div className="w-full max-w-7xl mx-auto  px-4  2xl:px-16 xl:px-10">
       <div className="w-full">
         {selectedService && (
           <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
@@ -6,21 +6,41 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../Shared/api';
 import { useTranslation } from 'react-i18next';
 import cleanImage from '../../assets//house_clean.png';
+import { LanguageContext } from '../../Shared/Context/LanguageContext';
 
 
 function Registration() {
   const { t,i18n } = useTranslation();
   const isAmharic = i18n.language === "am";
   const [error, setError] = useState(null);
+  const [subcity, setSubcity] = useState([]);
   const [files, setFiles] = useState({
     documents: null,
     idCardImage: null,
     profileImage: null,
   });
   const [services, setService] = useState([]);
-
-
-
+  const {language} = useContext(LanguageContext)
+  const fetchdistrict = async () => {
+    
+    try {
+      const response = await axios.get(`${API_URL}/districts?lang=${language}`);
+      if (response.data) {
+        setSubcity(response.data);
+    
+        console.log(response.data);
+       
+        //  setSelectedServiceContext(response.data[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
+  console.log(subcity)
+  useEffect(()=>{
+    fetchdistrict();
+  },[])
+ console.log(subcity)
   const subCities = [
     { id: 1, name: "Bole" },
     { id: 2, name: "Kality" },
