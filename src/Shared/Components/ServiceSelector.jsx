@@ -31,8 +31,8 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   return (
     <div className="relative w-full bg-background">
-      <div className="max-w-7xl lg:mx-24 mx-auto px-3 sm:px-4 lg:px-">
-        <div className="flex justify-start items-center overflow-x-auto scrollbar-hide sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
+      <div className="max-w-7xl lg:ml-44 mx-auto px-3 ">
+        <div className="flex justify-start items-center overflow-x-auto scrollbar-hide sm:py-4 space-x- sm:space-x- md:space-x-">
           {services.map((service) => {
             const isSelected = selectedServiceId === service.categoryId
             const isHovered = hoveredId === service.categoryId
@@ -51,9 +51,9 @@ const ServiceSelector = ({ services, onSelect }) => {
                   flex flex-col items-center justify-center
                   min-w-[80px] sm:min-w-[100px] md:min-w-[120px] lg:min-w-[140px] 2xl:min-w-[140px]
                   py-2 sm:py-3 md:py-
-                  px-1 sm:px-2 md:mx-
+                  px-1 sm:px-3 md:mx-
                   transition-all duration-300 ease-in-out
-                  cursor-pointer relative text-gray-600 mr-4 
+                  cursor-pointer relative text-gray-600 mr- 
                   ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-sm sm:text-md 2xl:text-lg"}
                   ${isSelected ? "text-primary" : "text-muted-foreground"}
                 `}

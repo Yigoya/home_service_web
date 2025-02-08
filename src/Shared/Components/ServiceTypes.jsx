@@ -30,9 +30,9 @@ const ServiceTypes = ({ types }) => {
   };
 
   return (
-    <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:mx-12 mx-auto">
+    <div className="w-full md:px-6 max-md:px-2 max-w-7xl lg:ml-12  mx-auto">
 <div className="border border-gray-300  w-auto ml-16 lg:mr-24" style={{ borderBottomWidth: '0px' }}></div>     
- <div className="flex flex-wrap gap-2 py-6 overflow-x-auto px-12
+ <div className="flex flex-wrap gap-2  py-6 overflow-x-auto px-12
         scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
         {displayTypes.map((type, index) => {
