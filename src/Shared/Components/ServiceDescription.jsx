@@ -15,7 +15,8 @@ import { FiCheck } from "react-icons/fi";
 
 
 const ServiceDescription = ({ title, description }) => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const images = [
     clean,
     ambulance,
@@ -100,13 +101,13 @@ const ServiceDescription = ({ title, description }) => {
 
         {/* Text Section */}
         <div className="lg:absolute md:w-96 lg:bg-white p-6 lg:ml-4 rounded-md lg:shadow-md py-12 px-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">{title}</h2>
+          <h2 className={`${isAmharic? "text-2xl": "text-lg"} font-bold text-gray-800 mb-4`}>{title}</h2>
           
         <ul className="text-gray-600 space-y-2">
           {description.split(".").map((item, index) =>
             item.trim() ? (
-              <li key={index} className="text-sm flex items-center">
-                <FiCheck className="text-emerald-600 mr-4" size={46} />
+              <li key={index} className={`${isAmharic? "text-lg": "text-md"} flex items-center`}>
+                <FiCheck className="text-emerald-600 mr-4" size={64} />
                 {item.trim()}.
               </li>
             ) : null
@@ -120,25 +121,25 @@ const ServiceDescription = ({ title, description }) => {
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalServices}+
             </p>
-            <p className="text-black">{t('total_service')}</p>
+            <p className={`${isAmharic? "text-lg": "text-md"} `}>{t('total_service')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalTechnicians}+
             </p>
-            <p className="text-black">{t('total_technician')}</p>
+            <p className={`${isAmharic? "text-lg": "text-md"} `}>{t('total_technician')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalCustomers}+
             </p>
-            <p className="text-black">{t('total_customer')}</p>
+            <p className={`${isAmharic? "text-lg": "text-md"} `}>{t('total_customer')}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-emerald-600">
               {statistics.totalJobs}+
             </p>
-            <p className="text-black">{t('total_booking')}</p>
+            <p className={`${isAmharic? "text-lg": "text-md"} `}>{t('total_booking')}</p>
           </div>
         </div>
       </div>

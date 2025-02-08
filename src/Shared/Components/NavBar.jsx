@@ -87,7 +87,7 @@ const NavBar = () => {
               {/* Auth Buttons */}
               <Link
                 to="/login"
-                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"} sm:text-sm font-medium text-emerald-600 bg-white border-2 
+                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white border-2 
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
                          transition-all duration-300 ease-in-out`}
               >
@@ -95,7 +95,7 @@ const NavBar = () => {
               </Link>
               <Link
                 to="/pre-signup"
-                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"} sm:text-sm font-medium text-emerald-600 bg-white border-2 
+                className={`px-6 sm:px-16 py-2  ${isAmharic ? "text-lg" : "text-md"}  font-medium text-emerald-600 bg-white border-2 
                          border-emerald-600 rounded-full hover:bg-emerald-600 hover:text-white mx-4
                          transition-all duration-300 ease-in-out`}
               >
@@ -129,7 +129,7 @@ const NavBar = () => {
                     </button>
                     <button
                       onClick={() => toggleLanguage("om")}
-                      className="block w-full text-left px-4 py-2 text-sm rounded-xl t text-emerald-600 hover:bg-emerald-600 hover:text-white"
+                      className="block w-full text-left px-4 py-2 text-sm rounded-xl  text-emerald-600 hover:bg-emerald-600 hover:text-white"
                     >
                       Afaan Oromoo
                     </button>
