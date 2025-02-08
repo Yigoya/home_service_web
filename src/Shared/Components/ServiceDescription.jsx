@@ -107,7 +107,7 @@ const ServiceDescription = ({ title, description }) => {
           {description.split(".").map((item, index) =>
             item.trim() ? (
               <li key={index} className={`${isAmharic? "2xl:text-xl": "text-md"} 2xl:leading-8 flex items-center`}>
-                {/* <FiCheck className="text-emerald-600 mr-4" size={64} /> */}
+                <FiCheck className="text-emerald-600 mr-4" size={64} />
                 {item.trim()}.
               </li>
             ) : null

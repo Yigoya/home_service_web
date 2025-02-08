@@ -1,56 +1,59 @@
-import React, { useState } from "react";
-import { API_URL } from "../api";
-import { useTranslation } from "react-i18next";
+"use client"
+
+import { useState } from "react"
+import { API_URL } from "../api"
+import { useTranslation } from "react-i18next"
 
 const ServiceSelector = ({ services, onSelect }) => {
-  const { i18n } = useTranslation();
-    const isAmharic = i18n.language === "am";
-  const [selectedServiceId, setSelectedServiceId] = useState(null);
-  const [hoveredId, setHoveredId] = useState(null);
+  const { i18n } = useTranslation()
+  const isAmharic = i18n.language === "am"
+  const [selectedServiceId, setSelectedServiceId] = useState(null)
+  const [hoveredId, setHoveredId] = useState(null)
 
   const renderImage = (icon, isSelected, isHovered) => {
     return (
-      <div className="w-10">
+      <div className="w-full flex justify-center items-center">
         <img
-          src={icon}
+          src={`${API_URL}/uploads/${icon}`}
           alt="service-icon"
           className={`transition-all duration-300 ease-in-out
             ${
               isSelected
-                ? `w-12 h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 text-emerald-700`
+                ? "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 text-emerald-700"
                 : isHovered
-                ? "w-12 h-12 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-400"
-                : "w-12 h-12 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-600 hover:text-primary-foreground"
+                  ? "w-11 h-11 sm:w-13 sm:h-13 md:w-15 md:h-15 lg:w-18 lg:h-18 text-gray-400"
+                  : "w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-gray-600 hover:text-primary-foreground"
             }`}
         />
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="relative w-full bg-background">
       <div className="max-w-7xl lg:mx-24 mx-auto px-3 sm:px-4 lg:px-6">
-        <div className="flex justify-start items-center overflow-x-auto scrollbar-hide  sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
+        <div className="flex justify-start items-center overflow-x-auto scrollbar-hide sm:py-4 space-x-3 sm:space-x-4 md:space-x-6">
           {services.map((service) => {
-            const isSelected = selectedServiceId === service.categoryId;
-            const isHovered = hoveredId === service.categoryId;
+            const isSelected = selectedServiceId === service.categoryId
+            const isHovered = hoveredId === service.categoryId
 
             return (
               <div
                 key={service.categoryId}
                 onClick={() => {
-                  setSelectedServiceId(service.categoryId);
-                  onSelect(service);
+                  setSelectedServiceId(service.categoryId)
+                  onSelect(service)
                 }}
                 onMouseEnter={() => setHoveredId(service.categoryId)}
                 onMouseLeave={() => setHoveredId(null)}
                 className={`
                   flex flex-col items-center justify-center
-                  min-w-[80px] sm:min-w-[90px] md:min-w-[100px]flex-grow
-                  py-2 sm:py-3
-                  px-1 sm:px-2
+                  min-w-[80px] sm:min-w-[100px] md:min-w-[120px] lg:min-w-[140px]
+                  py-2 sm:py-3 md:py-4
+                  px-1 sm:px-2 md:px-3
                   transition-all duration-300 ease-in-out
-                  cursor-pointer relative text-gray-600 mr-4 ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-md"}
+                  cursor-pointer relative text-gray-600 mr-4 
+                  ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-sm sm:text-md md:text-lg"}
                   ${isSelected ? "text-primary" : "text-muted-foreground"}
                 `}
                 role="button"
@@ -58,21 +61,15 @@ const ServiceSelector = ({ services, onSelect }) => {
                 aria-pressed={isSelected}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
-                    setSelectedServiceId(service.categoryId);
-                    onSelect(service);
+                    setSelectedServiceId(service.categoryId)
+                    onSelect(service)
                   }
                 }}
               >
-                <div className="mb-1 sm:mb-2">
-                  {renderImage(
-                    `${API_URL}/uploads/${service.icon}`,
-                    isSelected,
-                    isHovered
-                  )}
-                </div>
+                <div className="mb-1 sm:mb-2 md:mb-3">{renderImage(service.icon, isSelected, isHovered)}</div>
                 <span
                   className={`
-                     text-center
+                    text-center
                     transition-all duration-300 ease-in-out
                     relative after:content-[''] after:absolute
                     after:w-full after:h-0.5 after:bg-current
@@ -82,20 +79,21 @@ const ServiceSelector = ({ services, onSelect }) => {
                       isSelected
                         ? "font-bold text-emerald-700 after:scale-x-100"
                         : isHovered
-                        ? "font-medium after:scale-x-50"
-                        : "font-medium after:scale-x-0"
+                          ? "font-medium after:scale-x-50"
+                          : "font-medium after:scale-x-0"
                     }
                   `}
                 >
                   {service.categoryName}
                 </span>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ServiceSelector;
+export default ServiceSelector
+

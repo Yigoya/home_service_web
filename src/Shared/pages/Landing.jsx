@@ -184,7 +184,7 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className="w-full max-w-7xl mx-auto  px-4  2xl:px- xl:px-10">
+        <div className="w-full 2xl:max-w-[1500px] max-w-7xl mx-auto   2xl:px- xl:px-10">
       <div className="w-full">
         {selectedService && (
           <>
