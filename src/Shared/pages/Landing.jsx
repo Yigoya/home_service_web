@@ -120,7 +120,7 @@ console.log(servicesArray, "servicesArray");
         <div className="flex ">
     {/* <img className="lg:mt-24 lg:block hidden" src={bl} alt="" /> */}
 
-     <div className="flex flex-col lg:mt-20 lg:ml-48 xl:ml-[220px] 2xl:ml-[360px] justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
+     <div className="flex flex-col lg:mt-20 lg:ml-44 xl:ml-[200px] 2xl:ml-[360px] justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
           <h1 className="max-md:text-3xl lg:text-[40px] lg:mt-3 xl:text-6xl 2xl:text-7xl font-extrabold leading-tight mb- text-">
             <span>{t('every_service')}</span> 
             <span className="">{t('every_service1')}</span>
