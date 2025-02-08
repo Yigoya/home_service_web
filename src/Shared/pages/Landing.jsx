@@ -111,15 +111,15 @@ console.log(servicesArray, "servicesArray");
         <div className="flex ">
     {/* <img className="lg:mt-24 lg:block hidden" src={bl || "/placeholder.svg"} alt="" /> */}
 
-      <div className="flex flex-col w-full items-center lg:mt-8 justify-center text-center lg:pt-24 px-4 mb-4 pt-36">
-          <h1 className="max-md:text-3xl text-gray-600  lg:text-[30px] lg:mt-3 xl:text-5xl 2xl:text-6xl font-extrabold leading-tight mb-8 text-center">
+      <div className="flex flex-col w-full items-center lg:mt-8 justify-center text-center lg:pt-16 px-4 mb-4 pt-36">
+          <h1 className=" pt-28 pb-8 max-md:text-3xl text-gray-600  lg:text-[30px] lg:mt-3 xl:text-5xl 2xl:text-6xl font-extrabold leading-tight mb-8 text-center">
             <span>{t('every_service')}</span> 
             {/* <span className="">{t('every_service1')}</span> */}
           
           </h1>
-          <div className="w-full max-w-3xl mx-auto px-4">
+          <div className="w-full max-w-3xl mx-auto px-4 pb-8">
   <div className="relative">
-    <div className="flex items-center bg-gray-200 rounded-full shadow-md">
+    <div className="flex items-center bg-gray-200 rounded-full shadow-md ">
       <input
         type="text"
         placeholder={t("search_services")}
@@ -136,7 +136,7 @@ console.log(servicesArray, "servicesArray");
         } md:py-3 px-5`}
       />
       <div
-        className="bg-emerald-700 hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
+        className="bg-emerald-700  hover:bg-emerald-800 rounded-r-full md:p-5 max-md:py-3 md:px-8 max-md:px-4 cursor-pointer flex items-center justify-center"
         onClick={() => sendSearchToBackend(searchText)}
       >
         <FiSearch size={20} className="cursor-pointer text-white" />
@@ -180,12 +180,12 @@ console.log(servicesArray, "servicesArray");
           <img src={tr || "/placeholder.svg"} alt="Top-right decoration "  />
         </div>
     </div>
-            <div className="flex mt-2 justify-center ">
+            {/* <div className="flex mt-2 justify-center ">
              <p className="mt-1">{t('become_tech')}?</p> 
             <Link to="/technician-registration" onClick={() => setIsOpen(false)} className={`text-emerald-700 px-3 hover:text-emerald-700 hover:underline ${isAmharic ? "text-lg" : "text-base"}`}>
               {t('applay_now')}
           </Link>
-            </div>
+            </div> */}
         {/* Service Section */}
         <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
       <div className="w-full">

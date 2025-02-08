@@ -89,25 +89,29 @@ const ServiceDescription = ({ title, description }) => {
 
   return (
     <div className="px-12 bg-gradient-to-t from-emerald-50 to-white">
-      <div className="flex flex-col md:flex-row items-center bg-blue-100 py-12 mt-6 rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row items-center mx-20 bg-blue-100 py-12 mt-6 rounded-lg shadow-md">
         {/* Image Section */}
         <div className="w-full  mb-4 md:mb-0 lg:ml-24 ml-0 px-3 lg:px-12">
           <img
             src={selectedImage}
             alt={title}
-            className="object-cover rounded-md shadow-lg w-full h-auto"
+            
+            className="object-cover rounded-md shadow-lg w-full h-[500px] "
           />
         </div>
 
         {/* Text Section */}
-        <div className="lg:absolute md:w-96  lg:bg-white p-6 lg:ml-4 rounded-md lg:shadow-md py-12 px-8">
-          <h2 className={`${isAmharic? "2xl:text-2xl": "text-lg"} font-bold text-gray-800 mb-4`}>{title}</h2>
+        <div className="lg:absolute md:w-[460px]  lg:bg-white  lg:ml-16 rounded-md lg:shadow-md py-12 px-8 ">
+          <h2 className={`${isAmharic? "2xl:text-2xl": "text-3xl "} font-semibold  text-gray-800 mb-8`}>{title}</h2>
           
-        <ul className="text-gray-600 space-y-2">
+        <ul className="text-gray-900 font-sans space-y-2">
           {description.split(".").map((item, index) =>
-            item.trim() ? (
-              <li key={index} className={`${isAmharic? "2xl:text-xl": "text-md"} 2xl:leading-8 flex items-center`}>
-                <FiCheck className="text-emerald-600 mr-4" size={64} />
+            item.trim() && index <2 ? (
+              <li key={index} className={`${isAmharic? "2xl:text-xl": "text-lg  font-normal"} 2xl:leading-8 flex `}>
+                <div className="w-12 h-12 pt-3">
+                <FiCheck className="mr-4" size={24} />
+                </div>
+                
                 {item.trim()}.
               </li>
             ) : null

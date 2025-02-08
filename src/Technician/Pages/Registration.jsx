@@ -287,7 +287,7 @@ function Registration() {
             <div className="flex flex-col gap-4">
                   {['documents', 'idCardImage', 'profileImage'].map((type) => (
                     <div key={type} className="flex flex-col items-start space-y-2">
-                      <label className="block text-sm font-medium text-gray-700 capitalize">
+                      <label className={`${isAmharic ? "text-xl" : "text-md"} block  font-medium text-gray-700 capitalize`}>
                         {type === 'documents' ? t('cv') : type === 'idCardImage' ? t('id_card') : t('profile')}
                       </label>
                       <input
@@ -314,7 +314,7 @@ function Registration() {
 
             {/* Password part */}
 
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-4 pb-6">
               <div className="flex-1">
                 <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('password')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="password" name="password" placeholder={t('enter_password')} value={formData.password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />

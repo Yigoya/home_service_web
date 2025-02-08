@@ -12,7 +12,7 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   const renderImage = (icon, isSelected, isHovered) => {
     return (
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex justify-center items-center ">
         <img
           src={`${API_URL}/uploads/${icon}`}
           alt="service-icon"

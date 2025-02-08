@@ -25,7 +25,7 @@ const resources = {
       "bio":"Bio",
       "id_card":"Id Card",
       "profile":"Profile Image",
-      "cv":"Your CV an Documents",
+      "cv":"Your CV and Documents",
       "subcity":"Sub City",
       "woreda":"Woreda",
       "regis":"Register",
@@ -421,7 +421,7 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "Tajaajila hundaa bakka tokkotti ",
+      "every_service": "Tajaajila manaa hunda Tokko keessatti",
       // "every_service1": "Keessatti, Gaaffii Irratti!",
       "search_services": "Maal irratti gargaarsi si barbaachisa?",
       "our-servises": "Tajaajila Keenya",  
