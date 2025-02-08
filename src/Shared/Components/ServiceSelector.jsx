@@ -21,8 +21,8 @@ const ServiceSelector = ({ services, onSelect }) => {
               isSelected
                 ? "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 text-emerald-700"
                 : isHovered
-                  ? "w-11 h-11 sm:w-13 sm:h-13 md:w-15 md:h-15 lg:w-18 lg:h-18 text-gray-400"
-                  : "w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-gray-600 hover:text-primary-foreground"
+                  ? "w-11 h-11 sm:w-13 sm:h-13 md:w-15 md:h-15 lg:w-12 lg:h-12 text-gray-400"
+                  : "w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 text-gray-600 hover:text-primary-foreground"
             }`}
         />
       </div>
@@ -48,12 +48,12 @@ const ServiceSelector = ({ services, onSelect }) => {
                 onMouseLeave={() => setHoveredId(null)}
                 className={`
                   flex flex-col items-center justify-center
-                  min-w-[80px] sm:min-w-[100px] md:min-w-[120px] lg:min-w-[140px]
+                  min-w-[80px] sm:min-w-[100px] md:min-w-[120px] lg:min-w-[140px] 2xl:min-w-[140px]
                   py-2 sm:py-3 md:py-4
                   px-1 sm:px-2 md:px-3
                   transition-all duration-300 ease-in-out
                   cursor-pointer relative text-gray-600 mr-4 
-                  ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-sm sm:text-md md:text-lg"}
+                  ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-sm sm:text-md 2xl:text-lg"}
                   ${isSelected ? "text-primary" : "text-muted-foreground"}
                 `}
                 role="button"

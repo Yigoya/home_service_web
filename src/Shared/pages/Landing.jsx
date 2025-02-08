@@ -149,21 +149,24 @@ console.log(servicesArray, "servicesArray");
         {filteredServices.length > 0 ? (
           filteredServices.map((service) => (
             <Link
-              key={service.id}
-              to={`/technician-list/${service.id}`}
-              onClick={() => {
-                console.log("Service selected:", service.id); // Debugging
-                setIsDropdownOpen(false);
-              }}
-              className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
-            >
-              <img
-                src={`${API_URL || "/placeholder.svg"}/uploads/${service.icon}`}
-                className="w-8 h-8 mx-4 object-cover"
-                alt={service.name}
-              />
-              {service.name}
-            </Link>
+  key={service.id}
+  to={`/technician-list/${service.id}`}
+  onClick={(e) => {
+    console.log("Service selected:", service.id); // Debugging
+    setTimeout(() => {
+      setIsDropdownOpen(false); // Delay closing dropdown
+    }, 100); 
+  }}
+  className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
+>
+  <img
+    src={`${API_URL || "/placeholder.svg"}/uploads/${service.icon}`}
+    className="w-8 h-8 mx-4 object-cover"
+    alt={service.name}
+  />
+  {service.name}
+</Link>
+
           ))
         ) : (
           <div className="px-4 py-2 text-sm text-gray-500">No results found</div>
@@ -184,7 +187,7 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className="w-full 2xl:max-w-[1500px] max-w-7xl mx-auto   2xl:px- xl:px-10">
+        <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
       <div className="w-full">
         {selectedService && (
           <>
