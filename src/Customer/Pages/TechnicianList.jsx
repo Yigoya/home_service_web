@@ -16,7 +16,9 @@ import { LanguageContext } from "../../Shared/Context/LanguageContext"
 
 
 const TechnicianList = () => {
+  const {i18n} = useTranslation()
   const { t } = useTranslation()
+  const isAmharic = i18n.language === "am";
   const { id } = useParams()
   const [technicians, setTechnicians] = useState([])
   const [selectedLocation, setSelectedLocation] = useState("")
@@ -86,7 +88,7 @@ const TechnicianList = () => {
   }
 
   return (
-    <div className="px-  lg:mt-16 max-md:mt-16  py-8 bg-gray-300 ">
+    <div className={`${isAmharic ? "text-2xl" : "text-lg"} lg:mt-16 max-md:mt-16 py-8 bg-gray-300`}>
       {/* Search and Location Input */}
       <div className="w-full max-w-4xl mx-auto my-6  ">
       <div className="flex items-center gap-2 p-2 bg-white rounded-full shadow-sm border border-gray-200">
@@ -130,7 +132,7 @@ const TechnicianList = () => {
         {/* Image Container */}
         <div className="flex items-center justify-center rounded-t-lg p-4">
           {/* <GiBroom className="w-16 h-16 text-emerald-700" /> Adjust size as needed */}
-          <img  src={ `${API_URL}/uploads/${service.icon}` }
+          <img src={`${API_URL}/uploads/${service.icon}`} 
           className="w-16 h-16 rounded-fu object-cover" alt={service.name}
           />
           </div>

@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const ServiceTypes = ({ types }) => {
+  const { i18n } = useTranslation();
   const { t } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const typees = types[0];
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
@@ -59,6 +61,7 @@ const ServiceTypes = ({ types }) => {
                 active:scale-95
                 shadow-sm
                 flex-col gap-1.5 text-center
+                ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-md"}
                 ${
                   isSelected
                     ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"

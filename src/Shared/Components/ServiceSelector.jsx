@@ -46,11 +46,11 @@ const ServiceSelector = ({ services, onSelect }) => {
                 onMouseLeave={() => setHoveredId(null)}
                 className={`
                   flex flex-col items-center justify-center
-                  min-w-[80px] sm:min-w-[90px] md:min-w-[100px] flex-grow
+                  min-w-[80px] sm:min-w-[90px] md:min-w-[100px]flex-grow
                   py-2 sm:py-3
                   px-1 sm:px-2
                   transition-all duration-300 ease-in-out
-                  cursor-pointer relative text-gray-600 mr-4 ${isAmharic ? "text-xl" : "text-md"}
+                  cursor-pointer relative text-gray-600 mr-4 ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-md"}
                   ${isSelected ? "text-primary" : "text-muted-foreground"}
                 `}
                 role="button"

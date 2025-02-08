@@ -10,6 +10,9 @@ export default {
         roboto: ['Roboto', 'sans-serif'], 
         inter: ['Inter', 'sans-serif'], 
       },
+      screens: {
+        '3xl': '1920px',
+      },
   },
 },
   plugins: [],

@@ -1,28 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { FiSearch } from "react-icons/fi";
-import backgroundImage from '../../assets/bgg.jpg';
+import { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
+import axios from "axios"
+import { FiSearch } from "react-icons/fi"
 
-
-import ServiceDescription from "../Components/ServiceDescription";
-import ServiceTypes from "../Components/ServiceTypes";
-import ServiceSelector from "../Components/ServiceSelector";
-import tr from '../../assets/tr.png'
-import bl from '../../assets/bl.png'
-import TechnicianCarousel from "../UIComponents/TechnicianCarousel";
-import Testimonials from "../UIComponents/Testimonials";
-import FAQ from "../UIComponents/FAQ";
-import Contact from "../../Customer/Pages/ContactUs";
-
-// import home from "../../assets/home.png";
-import bgimg from '../../assets/bgimg.jpg'
-import WhyWe from "../Components/WhyWe";
-import { API_URL } from "../api";
-import LoadingPage from "../Components/LoadingPage";
-import { useSelectedService } from "../Context/SelectedServiceContext"; // Import the context hook
-import { LanguageContext } from "../Context/LanguageContext";
+import ServiceDescription from "../Components/ServiceDescription"
+import ServiceTypes from "../Components/ServiceTypes"
+import ServiceSelector from "../Components/ServiceSelector"
+import Testimonials from "../UIComponents/Testimonials"
+import WhyWe from "../Components/WhyWe"
+import { API_URL } from "../api"
+import LoadingPage from "../Components/LoadingPage"
+import { useSelectedService } from "../Context/SelectedServiceContext" // Import the context hook
+import { LanguageContext } from "../Context/LanguageContext"
 
 const Landing = () => {
   const { t,i18n} = useTranslation();
@@ -53,13 +43,13 @@ const Landing = () => {
     }
   };
   // Extracting service names and IDs from each service object to display in the dropdown
-const servicesArray = services.map(service => {
+const servicesArray = services.flatMap(service => {
   return service.services.map(subService => ({
     id: subService.serviceId,
     name: subService.name,
     icon: subService.icon,
   }));
-}).flat(); // Flattening the nested arrays into a single array
+}); // Flattening the nested arrays into a single array
 console.log(servicesArray, "servicesArray");
 
   useEffect(() => {
@@ -118,15 +108,15 @@ console.log(servicesArray, "servicesArray");
       {/* Hero Section */}
       <section className="w-full bg-white text-black">
         <div className="flex ">
-    {/* <img className="lg:mt-24 lg:block hidden" src={bl} alt="" /> */}
+    {/* <img className="lg:mt-24 lg:block hidden" src={bl || "/placeholder.svg"} alt="" /> */}
 
-     <div className="flex flex-col lg:mt-20 lg:ml-44 xl:ml-[200px] 2xl:ml-[360px] justify-center items-center lg:pt-24 px-4 mb-4 max-md:ml-4 pt-36">
-          <h1 className="max-md:text-3xl lg:text-[40px] lg:mt-3 xl:text-6xl 2xl:text-7xl font-extrabold leading-tight mb- text-">
+      <div className="flex flex-col w-full items-center mt-8 justify-center text-center lg:pt-24 px-4 mb-4 pt-36">
+          <h1 className="max-md:text-3xl text-gray-600  lg:text-[30px] lg:mt-3 xl:text-5xl 2xl:text-6xl font-extrabold leading-tight mb-8 text-center">
             <span>{t('every_service')}</span> 
-            <span className="">{t('every_service1')}</span>
+            {/* <span className="">{t('every_service1')}</span> */}
           
           </h1>
-          <div className=" lg:w-[500px] xl:w-[700px] 2xl:w-[850px] 2xl:mr-4 lg:mr-20">
+          <div className="w-full max-w-2xl mx-auto px-4">
       <div className="relative ">
         <div className="flex items-center bg-gray-200 rounded-full shadow-md">
           <input
@@ -148,6 +138,7 @@ console.log(servicesArray, "servicesArray");
             />
           </div>
         </div>
+        </div>
 
         {/* Dropdown Suggestions */}
         {isDropdownOpen && (
@@ -163,7 +154,7 @@ console.log(servicesArray, "servicesArray");
                     onClick={() => setIsDropdownOpen(false)}
                     className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
                   >
-                    <img  src={ `${API_URL}/uploads/${service.icon}` }
+                    <img  src={ `${API_URL || "/placeholder.svg"}/uploads/${service.icon}` }
                               className="w-8 h-8 mx-4  object-cover"
                               />
                     {service.name}
@@ -181,10 +172,9 @@ console.log(servicesArray, "servicesArray");
       </div>
       
     </div>
-    </div>
-    <div className="hidden lg:block lg:mt-10 lg:w-72 absolute right-0">
-          <img src={tr} alt="Top-right decoration "  />
-        </div>
+    {/* <div className="hidden lg:block lg:mt-10 lg:w-72 absolute right-0">
+          <img src={tr || "/placeholder.svg"} alt="Top-right decoration "  />
+        </div> */}
     </div>
             <div className="flex mt-2 justify-center ">
              <p className="mt-1">{t('become_tech')}?</p> 
@@ -193,7 +183,7 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div>
         {/* Service Section */}
-        <div className="w-full max-w-7xl mx-auto  px-4  2xl:px-16 xl:px-10">
+        <div className="w-full max-w-7xl mx-auto  px-4  2xl:px- xl:px-10">
       <div className="w-full">
         {selectedService && (
           <>
@@ -268,3 +258,4 @@ console.log(servicesArray, "servicesArray");
 };
 
 export default Landing;
+
