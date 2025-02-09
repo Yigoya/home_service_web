@@ -12,7 +12,7 @@ const ServiceSelector = ({ services, onSelect }) => {
 
   const renderImage = (icon, isSelected, isHovered) => {
     return (
-      <div className="w-full flex justify-center items-center ">
+      <div className="w-full  flex justify-center items-center ">
         <img
           src={`${API_URL}/uploads/${icon}`}
           alt="service-icon"
@@ -30,7 +30,7 @@ const ServiceSelector = ({ services, onSelect }) => {
   }
 
   return (
-    <div className="relative w-full bg-background">
+    <div className="relative w-full bg-background px-3 lg:px-0">
       <div className="max-w-7xl lg:ml-44 mx-auto px-3 ">
         <div className="flex justify-start items-center overflow-x-auto scrollbar-hide sm:py-4 space-x- sm:space-x- md:space-x-">
           {services.map((service) => {

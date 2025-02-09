@@ -88,15 +88,15 @@ const ServiceDescription = ({ title, description }) => {
   };
 
   return (
-    <div className="px-12 bg-gradient-to-t from-emerald-50 to-white">
-      <div className="flex flex-col md:flex-row items-center mx-20 bg-blue-100 py-12 mt-6 rounded-lg shadow-md">
+    <div className="lg:px-12 bg-gradient-to-t from-emerald-50 to-white">
+      <div className="flex flex-col md:flex-row items-center lg:mx-20 bg-blue-100 pt-6 lg:py-12 mt-6 rounded-lg shadow-md">
         {/* Image Section */}
         <div className="w-full  mb-4 md:mb-0 lg:ml-24 ml-0 px-3 lg:px-12">
           <img
             src={selectedImage}
             alt={title}
             
-            className="object-cover rounded-md shadow-lg w-full h-[500px] "
+            className="object-cover rounded-md shadow-lg w-full h-64 lg:h-[500px] "
           />
         </div>
 
