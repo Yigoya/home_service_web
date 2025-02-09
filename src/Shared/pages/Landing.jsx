@@ -258,7 +258,7 @@ console.log(servicesArray, "servicesArray");
           <Contact />
         </div>
       </section> */}
-      <MultiSelectWithCheckboxes />
+      
     </div>
   );
 };
