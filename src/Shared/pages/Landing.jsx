@@ -14,6 +14,7 @@ import { API_URL } from "../api"
 import LoadingPage from "../Components/LoadingPage"
 import { useSelectedService } from "../Context/SelectedServiceContext" // Import the context hook
 import { LanguageContext } from "../Context/LanguageContext"
+import MultiSelectWithCheckboxes from "../../try"
 
 const Landing = () => {
   const { t,i18n} = useTranslation();
@@ -192,7 +193,7 @@ console.log(servicesArray, "servicesArray");
         {selectedService && (
           <>
             <ServiceSelector
-              services={services}
+              services={services.sort((a, b) => a.categoryId - b.categoryId)}
               selectedService={selectedService}
               onSelect={handleService}
             />
@@ -257,6 +258,7 @@ console.log(servicesArray, "servicesArray");
           <Contact />
         </div>
       </section> */}
+      <MultiSelectWithCheckboxes />
     </div>
   );
 };

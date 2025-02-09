@@ -57,8 +57,15 @@ function Registration() {
 
   // srevice part
   const [selectedServices, setSelectedServices] = useState([]);
-  const handleSelect = (event) => {
-    const selectedValue = event.target.value;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleCheckboxChange = (value) => {
+    // setSelectedOptions((prev) =>
+    //   prev.includes(value)
+    //     ? prev.filter((item) => item !== value)
+    //     : [...prev, value]
+    // );
+    const selectedValue = value;
     const isAlreadySelected = selectedServices.some(service => service.id === parseInt(selectedValue));
 
     if (!isAlreadySelected && selectedValue) {
@@ -67,7 +74,7 @@ function Registration() {
     }
   };
 
-  const handleRemove = (id) => {
+  const handleRemoveService = (id) => {
     setSelectedServices(selectedServices.filter(service => service.id !== id));
   };
  
@@ -240,24 +247,111 @@ function Registration() {
             </div>
 
             {/* Service part */}
-
-            <div>
-              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('serv')}<span className='text-red-500 text-sm'>*</span></label>
-              <select onChange={handleSelect} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none">
-                <option value="">{t('select_service')}</option>
-                {services.map(service => (
-                  <option key={service.id} value={service.id}>{service.name}</option>
-                ))}
-              </select>
-              <div className="flex flex-wrap gap-2 mt-3 p-2 rounded-md">
-                {selectedServices.map(service => (
-                  <div key={service.id} className="flex items-center px-3 py-1 text-gray-700 rounded-full bg-gray-200">
-                    <span>{service.name}</span>
-                    <button onClick={() => handleRemove(service.id)} type="button" className="ml-2 text-gray-500 hover:text-gray-700 focus:outline-none">&times;</button>
+           <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+                  {/* Custom Select Button */}
+                  <div
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    style={{
+                      padding: "10px",
+                      border: "1px solid #ccc",
+                      cursor: "pointer",
+                      width: "100%",
+                      background: "#fff",
+                      borderRadius: "4px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {selectedServices.length > 0
+                      ?  t('select_service'): t('select_service')}
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  {/* Dropdown Menu */}
+                  {dropdownOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        width: "100%",
+                        maxHeight: "150px",
+                        overflowY: "auto",
+                        background: "#fff",
+                        border: "1px solid #ccc",
+                        boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
+                        zIndex: 1,
+                        borderRadius: "4px",
+                      }}
+                    >
+                      {services.map((service) => (
+                        <label
+                          key={service.id}
+                          style={{
+                            display: "block",
+                            padding: "10px",
+                            borderBottom: "1px solid #eee",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            value={service.id}
+                            checked={selectedServices.some(
+                              (selectedService) => selectedService.id === service.id
+                            )}
+                            onChange={() => handleCheckboxChange(service.id)}
+                            style={{ marginRight: "10px" }}
+                          />
+                          {service.name}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Selected Services */}
+                  {selectedServices.length > 0 && (
+  <div
+    style={{
+      marginTop: "10px",
+      width: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "8px",
+    }}
+  >
+    {selectedServices.map((service) => (
+      <div
+        key={service.id}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          background: "#f1f1f1",
+          padding: "6px 12px",
+          borderRadius: "20px",
+          fontSize: "14px",
+          color: "#333",
+        }}
+      >
+        <span>{service.name}</span>
+        <button
+          onClick={() => handleRemoveService(service.id)}
+          style={{
+            marginLeft: "8px",
+            background: "none",
+            border: "none",
+            color: "#666",
+            cursor: "pointer",
+            fontSize: "14px",
+            padding: "0",
+          }}
+        >
+          ×
+        </button>
+      </div>
+    ))}
+  </div>
+)}
+                  
+                </div>
 
             {/* Address part */}
 

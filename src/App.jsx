@@ -28,6 +28,7 @@ import { SelectedServiceProvider } from "./Shared/Context/SelectedServiceContext
 import ServiceDescriptionBar from "./Shared/Components/ServiceDescriptionBar";
 import Checkout from './Customer/Pages/Checkout';
 import { LanguageProvider } from './Shared/Context/LanguageContext';
+import ScrollTop from './Shared/Components/ScrollTop';
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -39,6 +40,7 @@ function App() {
         <AuthProvider>
           <Router>
               {/* Render the ServiceDescriptionBar outside the Routes */}
+              <ScrollTop />
                <ServiceDescriptionBar />
             <Routes>
               <Route path="/tech-upload-payment" element={<UploadPaymentImage />} />
