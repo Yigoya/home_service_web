@@ -157,7 +157,7 @@ const NavBar = () => {
             isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           } overflow-hidden`}
         >
-          <div className="py-4 space-y-2">
+          <div className="py-4 space-y-2 ">
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
@@ -178,19 +178,19 @@ const NavBar = () => {
             {/* Language Options in Mobile Menu */}
             <button
               onClick={() => toggleLanguage("en")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
+              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white text-left"
             >
               English
             </button>
             <button
               onClick={() => toggleLanguage("am")}
-              className="block w-full px-4 py-2 text-lg rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
+              className="block w-full px-4 py-2 text-lg rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white text-left"
             >
               አማርኛ
             </button>
             <button
               onClick={() => toggleLanguage("om")}
-              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white"
+              className="block w-full px-4 py-2 text-sm rounded-xl text-emerald-600 hover:bg-emerald-600 hover:text-white text-left"
             >
               Afaan Oromoo
             </button>
