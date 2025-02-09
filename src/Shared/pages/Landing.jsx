@@ -14,7 +14,7 @@ import { API_URL } from "../api"
 import LoadingPage from "../Components/LoadingPage"
 import { useSelectedService } from "../Context/SelectedServiceContext" // Import the context hook
 import { LanguageContext } from "../Context/LanguageContext"
-import MultiSelectWithCheckboxes from "../../try"
+
 
 const Landing = () => {
   const { t,i18n} = useTranslation();
