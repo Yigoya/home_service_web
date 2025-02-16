@@ -8,7 +8,8 @@ import { useTranslation } from "react-i18next";
 import cleanImage from "../../assets/house_clean.png";
 
 const SignUp = () => {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +73,7 @@ const SignUp = () => {
       }}
     >
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-emerald-800 mb-8">HuluMoya</h2>
+        <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* First Name and Last Name Fields */}
@@ -83,7 +84,7 @@ const SignUp = () => {
               value={formData.firstName}
               onChange={handleChange}
               placeholder={t("first_name")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
             <input
@@ -92,7 +93,7 @@ const SignUp = () => {
               value={formData.lastName}
               onChange={handleChange}
               placeholder={t("last_name")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -105,8 +106,7 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder={t("email")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
-              required
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}              required
             />
           </div>
 
@@ -124,7 +124,7 @@ const SignUp = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder={t("phone")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -137,7 +137,7 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder={t("password")}
-              className="w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-600 transition-colors"
+              className={` ${isAmharic? "text-lg" : "text-base"} w-full px-4 py-3.5 border border-gray-400 rounded-lg focus:outline-none focus:border-emerald-700 transition-colors`}
               required
             />
           </div>
@@ -147,7 +147,7 @@ const SignUp = () => {
             type="submit"
             className={`w-full py-3.5 px-4 ${
               isLoading ? "bg-emerald-700" : "bg-emerald-600 hover:bg-emerald-700"
-            } text-white rounded-3xl font-medium transition duration-300 ease-in-out`}
+            } ${isAmharic? "text-lg": "text-base"} text-white rounded-3xl font-medium transition duration-300 ease-in-out`}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -176,6 +176,21 @@ const SignUp = () => {
           {successMessage && <p className="text-emerald-600 text-center">{successMessage}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
         </form>
+        {/* Terms Text */}
+        <div className="text-center mt-2 text-sm text-gray-500 px-6">
+          <p>
+            By creating an account you
+            agree to our{" "}
+            <a href="/terms" className="text-emerald-600 hover:text-emerald-700">
+              terms of service
+            </a>{" "}
+            and{" "}
+            <a href="/privacy" className="text-emerald-600 hover:text-emerald-700">
+              privacy policy
+            </a>
+            .
+          </p>
+        </div>
 
         {/* Divider */}
         {/* <div className="flex items-center my-6">

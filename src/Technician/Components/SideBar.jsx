@@ -9,6 +9,7 @@ import {
 import { FilterContext } from '../../Shared/Context/FilterContext';
 import { AuthContext } from '../../Shared/Context/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { API_URL } from '../../Shared/api';
 
 const SideBar = ({ customerInfo }) => {
   const { t } = useTranslation();
@@ -48,7 +49,7 @@ const SideBar = ({ customerInfo }) => {
         <div className="flex flex-col items-center text-center">
           <div className="relative">
             <img
-              src={customerInfo?.profilePicture || 'https://via.placeholder.com/150'}
+             src={ `${API_URL}/uploads/${customerInfo.profileImage}` } 
               alt="User Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
             />
@@ -61,7 +62,7 @@ const SideBar = ({ customerInfo }) => {
       </div>
 
       {/* Filter Buttons */}
-      <nav className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+      <nav className="flex-1 p-4 space-y-2 overflow-y-auto bg-gray-50">
         <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">
           {t('filter')}
         </h3>
@@ -71,7 +72,7 @@ const SideBar = ({ customerInfo }) => {
             onClick={() => handleFilter(status)}
             className={`flex items-center w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
               activeFilter === status
-                ? 'bg-blue-500 text-white'
+                ? 'bg-emerald-500 text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`}
           >
@@ -81,7 +82,7 @@ const SideBar = ({ customerInfo }) => {
         ))}
         <button
           onClick={handleResetFilter}
-          className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+          className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 hover:underline   rounded-lg transition-colors "
         >
           {t('reset')}
         </button>

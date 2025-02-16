@@ -2,7 +2,7 @@ import React from 'react'
 import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6'
 import { SiApple, SiGoogleplay } from 'react-icons/si'
 import { useTranslation } from 'react-i18next'
-
+import { Link } from 'react-router-dom'
 const Footer = () => {
   const { t } = useTranslation()
 
@@ -16,27 +16,27 @@ const Footer = () => {
               huluMoya
             </h2>
             <p className="text-gray-300 text-xs max-w-xs">
-              Connecting people with innovative solutions for a sustainable future.
+              {t('connecting')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold text-emerald-400 mb-2">Quick Links</h3>
+            <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('quick_link')}</h3>
             <ul className="space-y-1 text-gray-300 text-sm">
               <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
+                <Link to= "/contact-us" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
                   <span className="hover:translate-x-1 transition-transform duration-200">{t('contact')}</span>
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
+                  <span className="hover:translate-x-1 transition-transform duration-200">{t('terms')}</span>
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('faq')}</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('our_service')}</span>
+                  <span className="hover:translate-x-1 transition-transform duration-200">{t('privacy')}</span>
                 </a>
               </li>
             </ul>
@@ -44,22 +44,22 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-sm font-semibold text-emerald-400 mb-2">Contact Us</h3>
+            <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('contact')}</h3>
             <ul className="space-y-1 text-gray-300 text-sm">
               <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">Email:</span>
+                <span className="text-emerald-400">{t('email')}:</span>
                 <a href="mailto:info@example.com" className="hover:text-emerald-400 transition-colors duration-200">
-                  info@example.com
+                  HuluMoya@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">Phone:</span>
+                <span className="text-emerald-400">{t('phone')}:</span>
                 <a href="tel:+12345678900" className="hover:text-emerald-400 transition-colors duration-200">
                   +1 234 567 8900
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">Address:</span>
+                <span className="text-emerald-400">{t('location')}:</span>
                 <span>Addis Ababa, Ethiopia</span>
               </li>
             </ul>
@@ -68,7 +68,7 @@ const Footer = () => {
           {/* Download Apps and Social Media */}
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-semibold text-emerald-400 mb-2">Download Our App</h3>
+              <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('download')}</h3>
               <div className="flex gap-2">
                 <a
                   href="#"
@@ -76,8 +76,8 @@ const Footer = () => {
                 >
                   <SiGoogleplay className="w-6 h-6 mr-2 text-gray-300 group-hover:text-emerald-400 transition-colors duration-200" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-400">GET IT ON</span>
-                    <span className="text-xs font-semibold">Google Play</span>
+                    <span className="text-[10px] text-gray-400">{t('get')}</span>
+                    <span className="text-xs font-semibold">{t('from_google')}</span>
                   </div>
                 </a>
                 <a
@@ -86,8 +86,8 @@ const Footer = () => {
                 >
                   <SiApple className="w-6 h-6 mr-2 text-gray-300 group-hover:text-emerald-400 transition-colors duration-200" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-400">Download on the</span>
-                    <span className="text-xs font-semibold">App Store</span>
+                    <span className="text-[10px] text-gray-400">{t('get')}</span>
+                    <span className="text-xs font-semibold">{t('from_apple')}</span>
                   </div>
                 </a>
               </div>
@@ -95,7 +95,7 @@ const Footer = () => {
 
             {/* Social Media Icons */}
             <div>
-              <h3 className="text-sm font-semibold text-emerald-400 mb-2">Follow Us</h3>
+              <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('follow')}</h3>
               <div className="flex space-x-4">
                 <a href="#" className="hover:text-emerald-400 transition-colors duration-200 transform hover:scale-110">
                   <FaFacebookF className="w-5 h-5" />
@@ -117,7 +117,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="pt-4 border-t border-gray-800">
           <p className="text-center text-xs text-gray-400">
-            ©2024 huluMoya. All rights reserved. Built with 💚 in Ethiopia
+           {t('right')}
           </p>
         </div>
       </div>

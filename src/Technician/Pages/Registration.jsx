@@ -1,24 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import  logo1  from '../../assets/tech.jpg';
 import { technicianSignUpApi } from '../Api/Api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../Shared/api';
 import { useTranslation } from 'react-i18next';
+import cleanImage from '../../assets//house_clean.png';
+import { LanguageContext } from '../../Shared/Context/LanguageContext';
+
 
 function Registration() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const [error, setError] = useState(null);
+  const [subcity, setSubcity] = useState([]);
   const [files, setFiles] = useState({
     documents: null,
     idCardImage: null,
     profileImage: null,
   });
   const [services, setService] = useState([]);
-
-
-
+  const {language} = useContext(LanguageContext)
+  const fetchdistrict = async () => {
+    
+    try {
+      const response = await axios.get(`${API_URL}/districts?lang=${language}`);
+      if (response.data) {
+        setSubcity(response.data);
+    
+        console.log(response.data);
+       
+        //  setSelectedServiceContext(response.data[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
+  console.log(subcity)
+  useEffect(()=>{
+    fetchdistrict();
+  },[])
+ console.log(subcity)
   const subCities = [
     { id: 1, name: "Bole" },
     { id: 2, name: "Kality" },
@@ -35,8 +57,15 @@ function Registration() {
 
   // srevice part
   const [selectedServices, setSelectedServices] = useState([]);
-  const handleSelect = (event) => {
-    const selectedValue = event.target.value;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleCheckboxChange = (value) => {
+    // setSelectedOptions((prev) =>
+    //   prev.includes(value)
+    //     ? prev.filter((item) => item !== value)
+    //     : [...prev, value]
+    // );
+    const selectedValue = value;
     const isAlreadySelected = selectedServices.some(service => service.id === parseInt(selectedValue));
 
     if (!isAlreadySelected && selectedValue) {
@@ -45,7 +74,7 @@ function Registration() {
     }
   };
 
-  const handleRemove = (id) => {
+  const handleRemoveService = (id) => {
     setSelectedServices(selectedServices.filter(service => service.id !== id));
   };
  
@@ -170,17 +199,24 @@ function Registration() {
   , []);
 
   return (
-    <div className='w-full mt-24 min-h-screen'>
-      <div className="flex flex-col md:flex-row mx-4 md:mx-44  max-md:my-12 rounded-lg shadow-lg shadow-gray-400 px-8 lg:px-0 ">
+   <div
+         className="min-h-screen flex items-cente justify-center px-4 bg-cover bg-center"
+         style={{
+           backgroundImage: `url(${cleanImage})`,
+           backgroundColor: "rgba(255, 255, 255, 0.9)",
+           backgroundBlend: "overlay",
+         }}
+       >
+      <div className="flex flex-col md:flex-row mx-4 md:mx-44 mt-16  max-md:my-12 rounded-lg lg:shadow-lg lg:shadow-gray-400 px-8 lg:px-0  ">
         {/* Left part*/}
-        <div className="md:w-1/2 w-full lg:p-8 py-8 bg-white rounded-xl">
-          <h1 className="text-2xl font-bold mb-6">{t('tech_regi')}</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className=" w-full lg:p-8 px-12 py-8 my-12 bg-white rounded-xl">
+        <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
 
             {/*  name part */}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('name')}<span className='text-red-500 text-sm'>*</span></label>
+              <label className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('name')}<span className='text-red-500 text-sm'>*</span></label>
               <input type="text" name="name" placeholder={t('enter_name')} value={formData.name} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}         
             </div>
@@ -189,7 +225,7 @@ function Registration() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('email')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('email')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="email" name="email" placeholder={t('enter_email')} value={formData.email} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
@@ -197,7 +233,7 @@ function Registration() {
                {/*  phoneNumber part */}
 
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('phone')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('phone')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="tel" name="phoneNumber" placeholder={t('enter_phone')} value={formData.phoneNumber} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}              
               </div>
@@ -205,36 +241,123 @@ function Registration() {
                  
                   {/*  bio part */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('bio')} <span className='text-red-500 text-sm'>*</span></label>
+              <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('bio')} <span className='text-red-500 text-sm'>*</span></label>
               <textarea name="bio" placeholder={t('bio')} value={formData.bio} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none h-20" required></textarea>
               {errors.bio && <p className="text-red-500 text-sm">{errors.bio}</p>}
             </div>
 
             {/* Service part */}
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Services <span className='text-red-500 text-sm'>*</span></label>
-              <select onChange={handleSelect} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none">
-                <option value="">Select a service</option>
-                {services.map(service => (
-                  <option key={service.id} value={service.id}>{service.name}</option>
-                ))}
-              </select>
-              <div className="flex flex-wrap gap-2 mt-3 p-2 rounded-md">
-                {selectedServices.map(service => (
-                  <div key={service.id} className="flex items-center px-3 py-1 text-gray-700 rounded-full bg-gray-200">
-                    <span>{service.name}</span>
-                    <button onClick={() => handleRemove(service.id)} type="button" className="ml-2 text-gray-500 hover:text-gray-700 focus:outline-none">&times;</button>
+           <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+                  {/* Custom Select Button */}
+                  <div
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    style={{
+                      padding: "10px",
+                      border: "1px solid #ccc",
+                      cursor: "pointer",
+                      width: "100%",
+                      background: "#fff",
+                      borderRadius: "4px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {selectedServices.length > 0
+                      ?  t('select_service'): t('select_service')}
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  {/* Dropdown Menu */}
+                  {dropdownOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        width: "100%",
+                        maxHeight: "150px",
+                        overflowY: "auto",
+                        background: "#fff",
+                        border: "1px solid #ccc",
+                        boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
+                        zIndex: 1,
+                        borderRadius: "4px",
+                      }}
+                    >
+                      {services.map((service) => (
+                        <label
+                          key={service.id}
+                          style={{
+                            display: "block",
+                            padding: "10px",
+                            borderBottom: "1px solid #eee",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            value={service.id}
+                            checked={selectedServices.some(
+                              (selectedService) => selectedService.id === service.id
+                            )}
+                            onChange={() => handleCheckboxChange(service.id)}
+                            style={{ marginRight: "10px" }}
+                          />
+                          {service.name}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Selected Services */}
+                  {selectedServices.length > 0 && (
+  <div
+    style={{
+      marginTop: "10px",
+      width: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "8px",
+    }}
+  >
+    {selectedServices.map((service) => (
+      <div
+        key={service.id}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          background: "#f1f1f1",
+          padding: "6px 12px",
+          borderRadius: "20px",
+          fontSize: "14px",
+          color: "#333",
+        }}
+      >
+        <span>{service.name}</span>
+        <button
+          onClick={() => handleRemoveService(service.id)}
+          style={{
+            marginLeft: "8px",
+            background: "none",
+            border: "none",
+            color: "#666",
+            cursor: "pointer",
+            fontSize: "14px",
+            padding: "0",
+          }}
+        >
+          ×
+        </button>
+      </div>
+    ))}
+  </div>
+)}
+                  
+                </div>
 
             {/* Address part */}
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('subcity')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('subcity')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="subcity" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
                   <option value="">{t('select_subcity')}</option>
                   {subCities.map(city => (
@@ -243,7 +366,7 @@ function Registration() {
                 </select>
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('woreda')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('woreda')} <span className='text-red-500 text-sm'>*</span></label>
                 <select name="wereda" className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required>
                   <option value="">{t('select_woreda')}</option>
                   {weredas.map(wereda => (
@@ -258,7 +381,7 @@ function Registration() {
             <div className="flex flex-col gap-4">
                   {['documents', 'idCardImage', 'profileImage'].map((type) => (
                     <div key={type} className="flex flex-col items-start space-y-2">
-                      <label className="block text-sm font-medium text-gray-700 capitalize">
+                      <label className={`${isAmharic ? "text-xl" : "text-md"} block  font-medium text-gray-700 capitalize`}>
                         {type === 'documents' ? t('cv') : type === 'idCardImage' ? t('id_card') : t('profile')}
                       </label>
                       <input
@@ -285,45 +408,30 @@ function Registration() {
 
             {/* Password part */}
 
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-4 pb-6">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('password')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('password')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="password" name="password" placeholder={t('enter_password')} value={formData.password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
               </div>
 
                {/*  confirm part */}
 
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700">{t('confirm_password')} <span className='text-red-500 text-sm'>*</span></label>
+                <label  className={`block ${isAmharic ? "text-xl" : "text-md"} font-medium text-gray-700`}>{t('confirm_password')} <span className='text-red-500 text-sm'>*</span></label>
                 <input type="password" name="confirm_password" placeholder={t('confirm_password')} value={formData.confirm_password} onChange={handleInputChange} className="w-full mt-1 border border-gray-300 rounded-md p-2 focus:outline-none" required />
                 {errors.confirm_password && <p className="text-red-500 text-sm">{errors.confirm_password}</p>}
                 </div>
             </div>
 
             {/* Submit Button part */}
-            <button type="submit" className="w-full bg-emerald-700 text-white py-2 mt-6 rounded-md hover:bg-emerald-600 focus:outline-none">
+            <button type="submit" className={` ${isAmharic ? "text-xl" : "text-md"} w-full bg-emerald-700 text-white py-3 mt-6 rounded-full hover:bg-emerald-600 focus:outline-none`}>
             {t('regis')}
             </button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
           </form>
         </div>
 
-        {/* Right side */}
        
-        <div className="hidden md:block md:w-1/2 bg-black rounded-lg relative items-center justify-center">
-          <img
-            src={logo1}
-            alt="Guidance"
-            className="w-full h-full object-cover opacity-30 transition-opacity duration-300"
-          />
-          <div className="absolute top-0 mt-32 text-center px-8 text-white">
-            <h2 className="text-6xl font-semibold mb-8">{t('get_start')}</h2>
-            <h2 className="text-xl font-semibold mb-2">{t('reg')}</h2>
-            <h2 className="text-xl font-semibold mb-2">{t('verfy_reg')}</h2>
-            <h2 className="text-xl font-semibold">{t('Start_now')}</h2>
-          </div>
-        </div>
-        
    </div>
     </div>
   );

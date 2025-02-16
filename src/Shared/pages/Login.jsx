@@ -10,7 +10,9 @@ import cleanImage from '../../assets//house_clean.png';
 import { auth, GoogleAuthProvider, signInWithPopup } from '../../firebase';
 const Login = () => {
   const FCMToken = localStorage.getItem('FCMToken')
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
+
   const { login } = React.useContext(AuthContext);
   const [error, setError] = React.useState(null);
   const [successMessage, setSuccessMessage] = React.useState(null);
@@ -126,10 +128,10 @@ const Login = () => {
   return (
     <div className="flex py-10  items-center justify-center min-h-screen  bg-cover bg-center" style={{ backgroundImage: `url(${cleanImage})` }}>
       <div className="bg-white lg:mt-20 max-md:mt-16 max-md:mx-5 shadow-md rounded-lg p-8 w-full max-w-md mx-10">
-        <h2 className="text-3xl font-bold text-center mb-6">HuluMoya</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')} / {t('phone')}</label>
+            <label htmlFor="email" className={`block ${isAmharic ? "text-xl" : "text-base"} font-medium text-gray-700`}>{t('email')} / {t('phone')}</label>
             <input
               id="email"
               type="email"
@@ -142,7 +144,7 @@ const Login = () => {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('password')}</label>
+            <label htmlFor="password" className={`block ${isAmharic ? "text-xl" : "text-base"} font-medium text-gray-700`}>{t('password')}</label>
             <input
               id="password"
               type="password"
@@ -154,14 +156,14 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
           </div>
-          <div className='text-sm lg:ml-64 text-emerald-800 hover:text-emerald-700  '>
+          <div className={` ${isAmharic ? "text-xl" : "text-base"} lg:ml-64 text-emerald-800 hover:text-emerald-700`}>
           <Link to="/forgot-password">{t('forgot_pass')}</Link>
           </div>
          
           
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className={`w-full py-2 px-4 border ${isAmharic ? "text-xl" : "text-base"} border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2  disabled:opacity-50`}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -176,10 +178,25 @@ const Login = () => {
               t('login')
             )}
           </button>
+          <div className="text-center mt-2 text-sm text-gray-500 px-6">
+          <p>
+            By creating an account you
+            agree to our{" "}
+            <a href="/terms" className="text-emerald-600 hover:text-emerald-700">
+              terms of service
+            </a>{" "}
+            and{" "}
+            <a href="/privacy" className="text-emerald-600 hover:text-emerald-700">
+              privacy policy
+            </a>
+            .
+          </p>
+        </div>
 
           {error && <p className="text-red-500 text-center">{error}</p>}
           {successMessage && <p className="text-emerald-500 text-center">{successMessage}</p>}
         </form>
+        
 
         {/* <div className="flex items-center my-4">
           <hr className="flex-grow border-gray-300" />

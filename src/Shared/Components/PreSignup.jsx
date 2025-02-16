@@ -5,7 +5,8 @@ import cleanImage from '../../assets//house_clean.png';
  // Make sure to add your background image
 
 function PreSignup() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
+  const isAmharic = i18n.language === "am";
   const navigate = useNavigate()
 
   return (
@@ -19,7 +20,7 @@ function PreSignup() {
     >
       <div className="w-full max-w-md space-y-8 bg-white/90 backdrop-blur-sm p-8 mt-24 rounded-2xl shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-gray-900">HuluMoya</h1>
+        <h2 className="text-5xl font-bold text-center text-emerald-800 mb-8">huluMoya</h2>
         </div>
 
         <div className="space-y-4">
@@ -27,7 +28,7 @@ function PreSignup() {
           <div className="space-y-2">
             <button
               onClick={() => navigate("/customer-signup")}
-              className="w-full py-4 px-6 text-center text-white bg-emerald-700 hover:bg-emerald-600 rounded-full text-lg font-medium transition-colors"
+              className={`w-full py-4 px-6 text-center text-white bg-emerald-700 hover:bg-emerald-600 rounded-full  ${isAmharic ? "text-xl" : "text-base"} font-medium transition-colors`}
             >
                 {t('signup_cust')}
             </button>
@@ -50,7 +51,7 @@ function PreSignup() {
           <div className="space-y-2">
             <button
               onClick={() => navigate("/technician-registration")}
-              className="w-full py-4 px-6 text-center text-white bg-black hover:bg-gray-800 rounded-full text-lg font-medium transition-colors"
+              className={`${isAmharic ? "text-xl" : "text-base"} w-full py-4 px-6 text-center text-white bg-black hover:bg-gray-800 rounded-full text-lg font-medium transition-colors`}
             >
                {t('signup_tech')}
             </button>
@@ -64,7 +65,7 @@ function PreSignup() {
         </div>
 
         {/* Terms Text */}
-        <div className="text-center text-sm text-gray-500 px-6">
+        <div className={`text-center ${isAmharic ? "text-lg" : "text-sm"} text-gray-500 px-6`}>
           <p>
             By creating an account you
             agree to our{" "}
