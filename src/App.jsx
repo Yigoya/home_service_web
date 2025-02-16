@@ -27,6 +27,7 @@ import { LocationProvider } from './Shared/Context/LocationContext';
 import { SelectedServiceProvider } from "./Shared/Context/SelectedServiceContext";
 import ServiceDescriptionBar from "./Shared/Components/ServiceDescriptionBar";
 import Checkout from './Customer/Pages/Checkout';
+import TenderPage from './Tender/TenderPage';
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -64,8 +65,11 @@ function App() {
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/pre-signup" element={<PreSignup />} />
                   <Route path='/checkout' element = {<Checkout />} />
+                 
+                  <Route path="*" element={<div>404 Not Found</div>} />
                 </Route>
               )}
+              <Route path="/tender" element={<TenderPage/>} />
             </Routes>
             <Footer />
           </Router>
