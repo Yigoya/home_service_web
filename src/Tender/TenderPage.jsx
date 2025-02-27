@@ -204,7 +204,7 @@ export default function TenderPage() {
                   {/* Tenders List */}
                   <div className="space-y-4 p-2">
                     {tenders.map((tender) => (
-                    <div key={tender.id} className="border-b pb-4" onClick={() => navigate(`/tender/${tender.id}`)}>
+                    <div key={tender.id} className="border-b pb-4 cursor-pointer" onClick={() => navigate(`/tender/${tender.id}`)}>
                       <h3 className="text-black font-medium mb-2 text-sm">{tender.title}</h3>
                       <div className="grid grid-cols-1 gap-1 text-sm">
                       <div className="flex items-center gap-2">

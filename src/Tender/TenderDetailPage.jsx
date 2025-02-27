@@ -60,7 +60,7 @@ function TenderDetailPage() {
   return (
     <div className="container mx-auto max-w-4xl py-4 px-4 mt-32">
       {/* Main Tender Information */}
-      <div className="border rounded-md mb-4">
+      <div className="border rounded mb-4">
         <div className="border-b p-3 bg-gray-50">
           <h2 className="font-medium">{tender.title}</h2>
         </div>
@@ -97,9 +97,9 @@ function TenderDetailPage() {
       </div>
 
       {/* Organization Details */}
-      <div className="border rounded-md mb-4">
+      <div className="border rounded mb-4">
         <div className="border-b p-3 bg-gray-50">
-          <h2 className="font-medium">Organization Details:</h2>
+          <h2 className="font-medium">Organization Details, Notice Details and Documents</h2>
         </div>
 
                 <div className="p-3 relative">
