@@ -88,6 +88,11 @@ console.log(servicesArray, "servicesArray");
     const serviceName = service.name || ""; // Use an empty string if name is undefined
     return serviceName.toLowerCase().includes(searchText.toLowerCase());
   });
+
+  const handleServiceClick = (serviceId) => {
+    // Navigate to the technician list page with the selected service ID
+    window.location.href = `/technician-list/${serviceId}`;
+  };
   
   
 
@@ -97,6 +102,10 @@ console.log(servicesArray, "servicesArray");
     setSelectedServiceContext(service); // Update the context
   };
   const handleService = (service) => {
+    if (service.categoryId === 3) {
+      window.location.href = "/tender";
+      return;
+    }
     setSelectedService(service);
   }
 
@@ -158,7 +167,7 @@ console.log(servicesArray, "servicesArray");
       setIsDropdownOpen(false); // Delay closing dropdown
     }, 100); 
   }}
-  className="block px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
+  className="px-4 py-2 hover:bg-gray-100 text-sm font-bold flex"
 >
   <img
     src={`${API_URL || "/placeholder.svg"}/uploads/${service.icon}`}

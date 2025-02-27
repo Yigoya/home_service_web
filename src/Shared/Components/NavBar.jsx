@@ -8,7 +8,7 @@ import { LanguageContext } from '../Context/LanguageContext';
 
 
 
-const NavBar = () => {
+const NavBar = ({ isTender }) => {
   const { i18n, t } = useTranslation();
   const isAmharic = i18n.language === "am";
   const { userAddress } = useContext(LocationContext); // Use the context
@@ -59,7 +59,7 @@ const NavBar = () => {
           ? 'bg-white/80 backdrop-blur-md shadow-l'
           : 'bg-white shadow-m'}`}
     >
-      <div className="max-w-7xl mx- px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className={`${!isTender && "max-w-7xl"} mx- px-4 sm:px-6 lg:px-8 mx-auto`}>
         <div className="flex justify-between items-c h-20">
           {/* Left Section: Logo and Phone */}
           <div className="flex items-center gap-4">

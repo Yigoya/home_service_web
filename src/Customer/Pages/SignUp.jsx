@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import axios from "axios";
 import { customerSignUpApi } from "../Api/Api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import cleanImage from "../../assets/house_clean.png";
@@ -21,6 +21,10 @@ const SignUp = () => {
     phoneNumber: "",
     password: "",
   });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const nextRoute = searchParams.get('next');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,9 +55,15 @@ const SignUp = () => {
         },
       });
       message.success("Signup successful! Please check your email to verify your account.");
-      setTimeout(() => {
-        navigate("/verify-email");
-      }, 1000);
+      if (nextRoute) {
+        setTimeout(() => {
+          navigate(nextRoute);
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          navigate("/verify-email");
+        }, 1000);
+      }
       console.log("Response:", response.data);
     } catch (err) {
       console.error("Error:", err.response?.data || err.message);

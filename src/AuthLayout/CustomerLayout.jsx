@@ -6,14 +6,14 @@ import { AuthContext } from '../Shared/Context/AuthContext';
 import { FilterProvider } from '../Shared/Context/FilterContext';
 
 
-const CustomerLayout = () => {
+const CustomerLayout = ({ isTender }) => {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <CustomerNavBar /> : <NavBar />}
+        {isLoggedIn ? <CustomerNavBar isTender={isTender}/> : <NavBar isTender={isTender}/>}
         <Outlet />
       </div>
     </div>

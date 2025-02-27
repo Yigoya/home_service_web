@@ -23,6 +23,7 @@ export default function Profile() {
           axios.get(`${CustomerIdentity}/${id}`),
           axios.get(`${CustomerJobs}/${id}`)
         ]);
+        console.log(customerRes.data)
         setCustomer(customerRes.data);
         setServices(servicesRes.data);
       } catch (error) {

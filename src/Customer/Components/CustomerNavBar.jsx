@@ -8,7 +8,7 @@ import logo1 from "../../assets/logo.png"
 import { Globe } from "lucide-react"
 import { LocationContext } from "../../Shared/Context/LocationContext"
 
-export default function CustomerNavBar() {
+export default function CustomerNavBar({ isTender }) {
   const { i18n, t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const Customer = JSON.parse(localStorage.getItem("customer") || "{}")
@@ -26,7 +26,7 @@ export default function CustomerNavBar() {
 
   return (
     <nav className="text-black bg-white  fixed top-0 left-0 right-0 z-50 py-2">
-      <div className="max-w-7xl mx-4 px-4 sm:px-6  lg:px-8">
+      <div className={`${!isTender && "max-w-7xl"} mx-4 px-4 sm:px-6  lg:px-8`}>
         <div className="flex h-16 justify-between ">
           {/* Logo Section */}
           <div className="flex items-center">

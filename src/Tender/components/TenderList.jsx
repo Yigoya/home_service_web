@@ -13,7 +13,7 @@ function TenderList() {
   useEffect(() => {
     const fetchTenders = async () => {
       try {
-        const response = await axios.get(`${tenderListApi}/85`)
+        const response = await axios.get(`${tenderListApi}/78`)
         setTenders(response.data["content"])
       } catch (err) {
         setError("Failed to fetch tenders")
