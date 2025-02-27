@@ -85,8 +85,6 @@ const allFeatures = [
   "Personalized Dashboard",
   "Unlimited Keywords**",
   "Unlimited Profile Modifications",
-  "Local Country Access",
-  "24/7 website access",
   "Soft Copies, Tender Documents, Corrigendum (if available)",
   "Daily Email Alerts - Tender Notices, RFPs, RFQs, Pre-qualifications",
   "Daily Email Alerts - Contract Awards",

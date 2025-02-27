@@ -49,6 +49,20 @@ export default function TenderPage() {
     }
   };
 
+  const fetchTendersByLocation = async (location) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`${API_URL}/tenders/location?location=${location}`);
+      setTenders(response.data['content']);
+    } catch (error) {
+      setError('Error fetching tenders by location');
+      console.error('Error fetching tenders by location:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const searchTenders = async (payload) => {
     setLoading(true);
     setError(null);
@@ -105,7 +119,7 @@ export default function TenderPage() {
       <nav className="bg-white border-b border-gray-200">
       <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
         
-              {['RFP Issuing Agencies', 'RFP Categories', 'RFP Locations', 'Offshore RFPs', 'Monthly/Annually RFP Subscription', 'Expired (Sample) RFPs (Free)', 'API & Email Preferences', 'RSS / Atom Feeds', 'RFP FAQs'].map((item, index) => (
+              {['Tender Issuing Agencies', 'Tender Categories', 'Tender Locations', 'Monthly/Annually Tender Subscription', 'Expired (Sample) Tenders (Free)', 'RSS / Atom Feeds', 'Tender FAQs'].map((item, index) => (
                 <div key={index} className="flex flex-row items-center justify-center px-2 border border-gray-200 w-full">
                 <a
                   key={item}
@@ -121,13 +135,13 @@ export default function TenderPage() {
       </div>
     </nav>  
       <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories}/>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto  ">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Left Sidebar */}
           <div className="md:col-span-2">
             <div className="space-y-4">
               <button onClick={()=> navigateToSubscription()} className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
-                Announce or Publish your RFP on RFPMart
+                Announce or Publish your Tender on TenderMart
               </button>
               <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Member Login</button>
               <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Member Login (Captcha)</button>
@@ -136,7 +150,7 @@ export default function TenderPage() {
                 <h3 className="font-bold text-[#3498db] mb-2">REGISTER AS</h3>
                 <p className="font-bold">AGENCY ( BUYER ) &</p>
                 <p className="text-[#3498db] font-bold text-xl">PUBLISH</p>
-                <p>YOUR RFP WITH US</p>
+                <p>YOUR Tender WITH US</p>
               </div>
             </div>
           </div>
@@ -157,7 +171,8 @@ export default function TenderPage() {
                   {locations.map((location, index) => (
                     <div
                     key={location.name}
-                    className={`px-3 py-5 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${index !== locations.length - 1 ? "border-b border-gray-100" : ""}`}
+                    onClick={() => fetchTendersByLocation(location.name)}
+                    className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${index !== locations.length - 1 ? "border-b border-gray-100" : ""}`}
                     >
                     <span>{location.name}</span>
                     {location.hasDropdown && <ChevronDown className="w-4 h-4 text-[#3498db]" />}
@@ -183,13 +198,13 @@ export default function TenderPage() {
                   <div className="p-2 flex items-center gap-8 border-b bg-gray-200">
                     <input type="text" placeholder="Posted Date" className="border border-gray-400 rounded p-2 text-sm flex-1" />
                     <input type="text" placeholder="Latest First" className="border border-gray-400 rounded p-2 text-sm flex-1" />
-                    <button className="bg-[#3385bb] text-white px-4 py-2 rounded text-sm flex-1">Sort RFPs</button>
+                    <button className="bg-[#3385bb] text-white px-4 py-2 rounded text-sm flex-1">Sort Tenders</button>
                   </div>
 
                   {/* Tenders List */}
                   <div className="space-y-4 p-2">
                     {tenders.map((tender) => (
-                    <div key={tender.id} className="border-b pb-4">
+                    <div key={tender.id} className="border-b pb-4" onClick={() => navigate(`/tender/${tender.id}`)}>
                       <h3 className="text-black font-medium mb-2 text-sm">{tender.title}</h3>
                       <div className="grid grid-cols-1 gap-1 text-sm">
                       <div className="flex items-center gap-2">

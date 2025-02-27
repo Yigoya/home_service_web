@@ -32,6 +32,7 @@ import ScrollTop from './Shared/Components/ScrollTop';
 import TenderPage from './Tender/TenderPage';
 import TenderCategories from './Tender/TenderCategories';
 import SubscriptionPackage from './Tender/SubscriptionPackage';
+import TenderDetailPage from './Tender/TenderDetailPage';
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -71,6 +72,7 @@ function App() {
                   <Route path="/pre-signup" element={<PreSignup />} />
                   <Route path='/checkout' element = {<Checkout />} />
                   <Route path="/tender-categories" element={<TenderCategories/>} />
+                  <Route path="/tender/:id" element={<TenderDetailPage/>} />
                   <Route path="*" element={<div>404 Not Found</div>} />
                 </Route>
               )}

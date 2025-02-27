@@ -61,47 +61,42 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
 
 
   return (
-    <div className="mx-auto py-10 px-16 bg-gray-100">
-    
+    <div className="mx-auto py-6 px-16 bg-gray-100">
       <form onSubmit={handleSubmit} className="space-y-6">
-        
-        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Keyword</label>
+        <div className="flex flex-wrap space-y-4 md:space-y-0">
+          <div className="w-full md:w-1/6 px-2">
             <input
               type="text"
               name="keyword"
               value={formData.keyword}
               onChange={handleInputChange}
-              placeholder="e.g., construction"
+              placeholder="by keyword e.g., construction"
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Status</label>
+          <div className="w-full md:w-1/6 px-2">
             <select
               name="status"
               value={formData.status}
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-            <option value="" disabled selected>
-               - Select a status -
+              <option value="" disabled selected>
+                - Select a status -
               </option>
               <option value="OPEN">Open</option>
               <option value="CLOSED">Closed</option>
             </select>
           </div>
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Location</label>
+          <div className="w-full md:w-1/6 px-2">
             <select
               name="location"
               value={formData.location}
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-            <option value="" disabled selected>
-               - Select a location -
+              <option value="" disabled selected>
+                - Select a location -
               </option>
               {locations.map((option) => (
                 <option key={option.name} value={option.value}>
@@ -110,16 +105,14 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               ))}
             </select>
           </div>
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Category</label>
+          <div className="w-full md:w-1/6 px-2">
             <select
               name="category"
-              // value={formData.category}
               onChange={handleCategoryChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-            <option value="" disabled selected>
-               - Select a category -
+              <option value="" disabled selected>
+                - Select a category -
               </option>
               {categorys.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -128,8 +121,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               ))}
             </select>
           </div>
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Date Posted</label>
+          <div className="w-full md:w-1/6 px-2">
             <input
               type="date"
               name="datePosted"
@@ -138,8 +130,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className="flex-1 min-w-[150px]">
-            <label className="block text-sm font-medium text-gray-700">Closing Date</label>
+          <div className="w-full md:w-1/6 px-2">
             <input
               type="date"
               name="closingDate"
@@ -156,14 +147,14 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
           <button
             type="button"
             onClick={handleClear}
-            className="px-4 py-3 mt-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
+            className="px-8 py-3 mt-2 bg-[#e7671f] text-white rounded hover:bg-orange-600 transition-colors"
             disabled={loading}
           >
             Clear Search
           </button>
           <button
             type="submit"
-            className="px-4 py-3 mt-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300"
+            className="px-8 py-3 mt-2 bg-[#3385bb] text-white rounded hover:bg-blue-600 transition-colors disabled:bg-blue-300"
             disabled={loading}
           >
             {loading ? "Searching..." : "Search Now"}
