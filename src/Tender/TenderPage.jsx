@@ -124,7 +124,7 @@ export default function TenderPage() {
                 <a
                   key={item}
                   href="#"
-                  className="text-sm font-medium text-[#3385bb] hover:text-[#2a6c99]"
+                  className="text-sm font-bold text-[#3385bb] hover:text-[#2a6c99]"
                 >
                   {item}
                 </a>
@@ -135,8 +135,8 @@ export default function TenderPage() {
       </div>
     </nav>  
       <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories}/>
-      <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div className="container mx-auto  px-2">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Left Sidebar */}
           <div className="md:col-span-2">
             <div className="space-y-4">

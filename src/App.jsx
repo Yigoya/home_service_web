@@ -74,10 +74,10 @@ function App() {
                   <Route path="/tender-categories" element={<TenderCategories/>} />
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
                   <Route path="*" element={<div>404 Not Found</div>} />
+                  <Route path='/subscription' element={<SubscriptionPackage/>} />
                 </Route>
               )}
                   <Route path="/tender" element={<TenderPage/>} />
-                  <Route path='/subscription' element={<SubscriptionPackage/>} />
 
             </Routes>
             <Footer />

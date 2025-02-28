@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [formData, setFormData] = useState({
     keyword: "",
-    status: "OPEN",
+    status: "",
     location: "",
     serviceId: null,
     datePosted: "",
@@ -15,6 +15,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
   console.log(categorys)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const datePostedRef = useRef(null);
+  const closingDateRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +46,17 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
     
   };
 
+  const handleFocus = (ref) => {
+    ref.current.type = "date";
+    ref.current.focus();
+  };
+
+  const handleBlur = (ref, name) => {
+    if (!formData[name]) {
+      ref.current.type = "text";
+    }
+  };
+
   const handleClear = () => {
     setFormData({
       keyword: "",
@@ -70,8 +83,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               name="keyword"
               value={formData.keyword}
               onChange={handleInputChange}
-              placeholder="by keyword e.g., construction"
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Keyword searching"
+              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
           <div className="w-full md:w-1/6 px-2">
@@ -81,8 +94,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled selected>
-                - Select a status -
+              <option value="" disabled>
+                <b>Tender Status</b>
               </option>
               <option value="OPEN">Open</option>
               <option value="CLOSED">Closed</option>
@@ -95,8 +108,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled selected>
-                - Select a location -
+              <option value="" disabled>
+                <b>Tender by Region </b>
               </option>
               {locations.map((option) => (
                 <option key={option.name} value={option.value}>
@@ -111,8 +124,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleCategoryChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled selected>
-                - Select a category -
+              <option value="" disabled>
+                <b>Tender by Category </b>
               </option>
               {categorys.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -122,21 +135,29 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
             </select>
           </div>
           <div className="w-full md:w-1/6 px-2">
-            <input
-              type="date"
+          <input
+              ref={datePostedRef}
+              type="text"
               name="datePosted"
               value={formData.datePosted}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onFocus={() => handleFocus(datePostedRef)}
+              onBlur={() => handleBlur(datePostedRef, "datePosted")}
+              placeholder="Date Posted"
+              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
           <div className="w-full md:w-1/6 px-2">
-            <input
-              type="date"
+          <input
+              ref={closingDateRef}
+              type="text"
               name="closingDate"
               value={formData.closingDate}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onFocus={() => handleFocus(closingDateRef)}
+              onBlur={() => handleBlur(closingDateRef, "closingDate")}
+              placeholder="Closing Date"
+              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
         </div>

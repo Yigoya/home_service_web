@@ -98,23 +98,23 @@ export default function PricingTable() {
 
   // Filter plans based on duration
   const displayPlans = isMonthly
-    ? plans.filter((plan) => plan.id.includes("monthly") || plan.id === "free")
+    ? plans.filter((plan) => plan.id.includes("monthly") || plan.id === "free" || plan.id === "yearly") // Monthly plans
     : [plans[0], plans[plans.length - 1]] // Free and Yearly plans
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-24">
       {/* Header */}
       <div className="bg-[#1B2837] text-white p-4 text-center">
         <h2 className="text-xl font-medium">Subscribe now to get access to world's largest tender database.</h2>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className=" mx-48 px-4 py-8">
         {/* Subheading */}
-        <div className="text-center mb-4">
+        {/* <div className="text-center mb-4">
           <h3 className="text-lg text-gray-700">We offer monthly and annual subscriptions</h3>
-        </div>
+        </div> */}
 
-        {/* Package Toggle */}
+        {/* Package Toggle
         <div className="flex justify-center gap-2 mb-8">
           <button
             className={`px-4 py-2 rounded-md ${isMonthly ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
@@ -130,7 +130,7 @@ export default function PricingTable() {
           >
             Yearly Packages
           </button>
-        </div>
+        </div> */}
 
         {/* Mobile View */}
         <div className="md:hidden space-y-6">
@@ -207,7 +207,7 @@ export default function PricingTable() {
                     {plan.name}
                     <div className="text-sm mt-1">₹{plan.price.toFixed(2)}</div>
                     <div className="text-xs">({plan.duration})</div>
-                    <button
+                    {/* <button
                       disabled={plan.id === "free"}
                       className={`mt-2 px-4 py-1 w-full rounded ${
                         plan.id === "free"
@@ -217,11 +217,40 @@ export default function PricingTable() {
                       onClick={() => plan.id === "free" ? null : setSelectedPlan(plan)}
                     >
                       { plan.id === "free" ? "Subscribed" : "Subscribe"}
-                    </button>
+                    </button> */}
                   </th>
                 ))}
               </tr>
             </thead>
+            <tr>
+                  <td className="border p-4"></td>
+                  {displayPlans.map((plan) => (
+                    <td
+                    key={plan.id}
+                    className={`border p-4 text-center ${
+                      plan.id === "free"
+                      ? "bg-[#EBF5FB] bg-opacity-50"
+                      : plan.id === "monthly_1"
+                        ? "bg-[#008000] bg-opacity-10"
+                        : plan.id === "monthly_3"
+                        ? "bg-black bg-opacity-5"
+                        : "bg-[#337AB7] bg-opacity-10"
+                    }`}
+                    >
+                    <button
+                      disabled={plan.id === "free"}
+                      className={`mt-2 px-4 py-1 w-full rounded ${
+                      plan.id === "free"
+                        ? "bg-white border border-gray-300 hover:bg-gray-50 text-gray-600"
+                        : "bg-white text-black hover:bg-gray-50"
+                      }`}
+                      onClick={() => plan.id === "free" ? null : setSelectedPlan(plan)}
+                    >
+                      { plan.id === "free" ? "Subscribed" : "Subscribe"}
+                    </button>
+                    </td>
+                  ))}
+                  </tr>
             {/* Table Body */}
             <tbody>
               {allFeatures.map((feature, index) => (
@@ -250,7 +279,37 @@ export default function PricingTable() {
                     </td>
                   ))}
                 </tr>
+                  
               ))}
+              <tr>
+                  <td className="border p-4"></td>
+                  {displayPlans.map((plan) => (
+                    <td
+                    key={plan.id}
+                    className={`border p-4 text-center ${
+                      plan.id === "free"
+                      ? "bg-[#EBF5FB] bg-opacity-50"
+                      : plan.id === "monthly_1"
+                        ? "bg-[#008000] bg-opacity-10"
+                        : plan.id === "monthly_3"
+                        ? "bg-black bg-opacity-5"
+                        : "bg-[#337AB7] bg-opacity-10"
+                    }`}
+                    >
+                    <button
+                      disabled={plan.id === "free"}
+                      className={`mt-2 px-4 py-1 w-full rounded ${
+                      plan.id === "free"
+                        ? "bg-white border border-gray-300 hover:bg-gray-50 text-gray-600"
+                        : "bg-white text-black hover:bg-gray-50"
+                      }`}
+                      onClick={() => plan.id === "free" ? null : setSelectedPlan(plan)}
+                    >
+                      { plan.id === "free" ? "Subscribed" : "Subscribe"}
+                    </button>
+                    </td>
+                  ))}
+                  </tr>
             </tbody>
           </table>
         </div>
