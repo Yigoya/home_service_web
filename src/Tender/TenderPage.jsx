@@ -160,7 +160,7 @@ export default function TenderPage() {
           <div className="grid grid-cols-11 bg-[#3385bb] text-white">
             <div className="col-span-2 p-3">Location</div>
             <div className="col-span-3 p-3 border-r border-white">Category</div>
-            <div className="col-span-6 p-3">{selectedCategory.name}</div>
+            <div className="col-span-6 p-3">{selectedCategory != null ? selectedCategory.name : ""}</div>
           </div>
 
            {/* Content Grid */}
