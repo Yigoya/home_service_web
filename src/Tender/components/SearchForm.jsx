@@ -84,7 +84,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               value={formData.keyword}
               onChange={handleInputChange}
               placeholder="Keyword searching"
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
+              className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
           <div className="w-full md:w-1/6 px-2">
@@ -124,10 +124,13 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleCategoryChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled>
+              {/* <option value="" disabled>
                 <b>Tender by Category </b>
-              </option>
-              {categorys.map((option) => (
+              </option> */}
+              {[{
+                id: null,
+                name: "Tender by Category"
+              },...categorys].map((option) => (
                 <option key={option.id} value={option.id}>
                   {option.name}
                 </option>
@@ -144,7 +147,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onFocus={() => handleFocus(datePostedRef)}
               onBlur={() => handleBlur(datePostedRef, "datePosted")}
               placeholder="Date Posted"
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
+              className="w-full px-4 py-3 pt-4 mt-2  bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
           <div className="w-full md:w-1/6 px-2">
@@ -157,7 +160,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onFocus={() => handleFocus(closingDateRef)}
               onBlur={() => handleBlur(closingDateRef, "closingDate")}
               placeholder="Closing Date"
-              className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
+              className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
         </div>

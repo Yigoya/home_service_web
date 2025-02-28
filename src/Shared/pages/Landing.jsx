@@ -209,7 +209,7 @@ console.log(servicesArray, "servicesArray");
             <div className="mt-3">
                  <ServiceTypes
                     types={[selectedService.services]}
-                    onSelect={handleServiceSelect} // Pass the onSelect prop
+                    onSelect={handleServiceSelect}
                   />
             </div>
             <div>

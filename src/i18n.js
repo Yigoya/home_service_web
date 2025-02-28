@@ -54,7 +54,7 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "All home Services in One, On Demand!",
+      "every_service": "All Services in One, On Demand!",
       // "every_service1": "On Demand!",
       "search_services": "What do you need help with?",
       "our-servises": "Our Services",  
@@ -240,7 +240,7 @@ const resources = {
         "kirkos": "ቂርቆስ",
         "lideta": "ልደታ"
       },
-      "every_service": "ሁሉም የቤት አገልግሎቶች በአንድ ፣ በፍላጎት",
+      "every_service": "ሁሉም አገልግሎቶች በአንድ ፣ በፍላጎት",
       // "every_service1": "ቦታ እና ሰዓት",
       "search_services": "አገልግሎት ይምረጡ",
       "our-servises": "የምንሰጣቸው አገልግሎቶች",
@@ -423,7 +423,7 @@ const resources = {
         "kirkos": "Kirkos",
         "lideta": "Lideta"
       },
-      "every_service": "Tajaajila manaa hunda Tokko keessatti",
+      "every_service": "Ajaajila Hunda bakka tokkotti",
       // "every_service1": "Keessatti, Gaaffii Irratti!",
       "search_services": "Maal irratti gargaarsi si barbaachisa?",
       "our-servises": "Tajaajila Keenya",  

@@ -119,7 +119,7 @@ export default function TenderPage() {
       <nav className="bg-white border-b border-gray-200">
       <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
         
-              {['Tender Issuing Agencies', 'Tender Categories', 'Tender Locations', 'Monthly/Annually Tender Subscription', 'Expired (Sample) Tenders (Free)', 'RSS / Atom Feeds', 'Tender FAQs'].map((item, index) => (
+              {['Tender Issuing Agencies', 'Tender Categories', 'Tender Locations', 'Monthly/Annually Tender Subscription', 'Free Tenders', 'Tender FAQs'].map((item, index) => (
                 <div key={index} className="flex flex-row items-center justify-center px-2 border border-gray-200 w-full">
                 <a
                   key={item}
@@ -144,7 +144,6 @@ export default function TenderPage() {
                 Announce or Publish your Tender on TenderMart
               </button>
               <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Member Login</button>
-              <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Member Login (Captcha)</button>
               <button onClick={()=> navigateToSignUp()} className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Register</button>
               <div className="border p-4 rounded">
                 <h3 className="font-bold text-[#3498db] mb-2">REGISTER AS</h3>
@@ -161,7 +160,7 @@ export default function TenderPage() {
           <div className="grid grid-cols-11 bg-[#3385bb] text-white">
             <div className="col-span-2 p-3">Location</div>
             <div className="col-span-3 p-3 border-r border-white">Category</div>
-            <div className="col-span-6 p-3">Mobile Application Development</div>
+            <div className="col-span-6 p-3">{selectedCategory.name}</div>
           </div>
 
            {/* Content Grid */}

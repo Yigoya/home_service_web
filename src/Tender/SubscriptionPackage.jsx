@@ -80,13 +80,12 @@ const plans = [
 
 // Combined unique features from all plans
 const allFeatures = [
-  "Summaries of Notices",
   "Advanced Search",
   "Personalized Dashboard",
   "Unlimited Keywords**",
   "Unlimited Profile Modifications",
-  "Soft Copies, Tender Documents, Corrigendum (if available)",
-  "Daily Email Alerts - Tender Notices, RFPs, RFQs, Pre-qualifications",
+  "Soft Copies, Tender Documents",
+  "Daily Email Alerts",
   "Daily Email Alerts - Contract Awards",
   "Weekly Excel Reports",
   "Monthly Analysis Reports",
@@ -190,7 +189,7 @@ export default function PricingTable() {
             {/* Header Row */}
             <thead>
               <tr>
-                <th className="border p-4 bg-gray-50 w-1/4">Details</th>
+                <th className="border p-4 bg-gray-50 w-1/3">Details</th>
                 {displayPlans.map((plan) => (
                   <th
                     key={plan.id}
@@ -205,8 +204,8 @@ export default function PricingTable() {
                     }`}
                   >
                     {plan.name}
-                    <div className="text-sm mt-1">₹{plan.price.toFixed(2)}</div>
-                    <div className="text-xs">({plan.duration})</div>
+                    <div className="text-sm mt-1">{plan.price.toFixed(2)} Birr</div>
+                    {/* <div className="text-xs">({plan.duration})</div> */}
                     {/* <button
                       disabled={plan.id === "free"}
                       className={`mt-2 px-4 py-1 w-full rounded ${
@@ -274,7 +273,7 @@ export default function PricingTable() {
                       (plan.id === "monthly_3" && index < 10) ||
                       (plan.id === "monthly_6" && index < 10) ||
                       plan.id === "yearly" ? (
-                        <Check className="h-5 w-5 text-green-600 mx-auto" />
+                        <Check className="h-7 w-7 text-green-600 mx-auto" />
                       ) : null}
                     </td>
                   ))}
