@@ -135,7 +135,7 @@ export default function TenderPage() {
       </div>
     </nav>  
       <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories}/>
-      <div className="container mx-auto  px-2">
+      <div className="px-2">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Left Sidebar */}
           <div className="md:col-span-2">
