@@ -42,74 +42,78 @@ const ServiceTypes = ({ types }) => {
           const isLongText = spaces >= 4; // Text with 4+ spaces
 
           return (
-            <Link
-              to={`/technician-list/${type.serviceId}`}
-              key={index}
-              onClick={() => setSelectedId(type.serviceId)}
-              onMouseEnter={() => setHoveredId(type.serviceId)}
-              onMouseLeave={() => setHoveredId(null)}
-              className={`
-                group
-                inline-flex items-center justify-center
-                ${isLongText ? "min-w-[140px] py-1 text-xs sm:text-sm" : "min-w-[160px] py-2 text-sm sm:text-base"}
-                px-4 sm:px-6
-                ml-3 mb-2
-                rounded-full 
-                ${isAmharic ? "font-normal" : "font-bold"}
-                transition-all duration-300 ease-out
-                focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
-                active:scale-95
-                shadow-sm
-                flex-col gap-1.5 text-center
-                ${isAmharic ? "2xl:text-xl xl:text-lg" : "text-md"}
-                ${
-                  isSelected
-                    ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
-                    : isHovered
-                    ? "border-emerald-700  shadow-md"
-                    : "border-gray-500 text-gray-900 bg-white hover:border-emerald-700 hover:text-emerald-700  hover:shadow-md"
-                }
-              `}
-              style={{ borderWidth: '1px' }}
-            >
-              {formatName(type.name).map((line, i) => (
-                <span
-                  key={i}
-                  className={`
-                    transition-all duration-300
-                    ${isHovered ? "-translate-y-0.5" : ""}
-                  `}
-                  style={{ transitionDelay: `${i * 50}ms` }}
-                >
-                  {line}
-                  
-                </span>
-                
-              ))}
-            </Link>
+                                                                                                <Link
+                                                  to={`/technician-list/${type.serviceId}`}
+                                                  key={index}
+                                                  onClick={() => setSelectedId(type.serviceId)}
+                                                  onMouseEnter={() => setHoveredId(type.serviceId)}
+                                                  onMouseLeave={() => setHoveredId(null)}
+                                                  className={`
+                                                    group
+                                                    inline-flex items-center justify-center
+                                                    ${isLongText ? "min-w-[140px] py-1 text-xs sm:text-xs" : "min-w-[160px] py-2 text-xs sm:text-sm"}
+                                                    px-4 sm:px-6
+                                                    ml-3 mb-2
+                                                    rounded-full 
+                                                    ${isAmharic ? "font-normal" : "font-semibold"}  // Changed from font-bold to font-semibold
+                                                    transition-all duration-300 ease-out
+                                                    focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
+                                                    active:scale-95
+                                                    shadow-sm
+                                                    flex-col gap-1.5 text-center
+                                                    ${isAmharic ? "2xl:text-lg xl:text-md" : "text-xs sm:text-sm"}
+                                                    ${
+                                                      isSelected
+                                                        ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
+                                                        : isHovered
+                                                        ? "border-emerald-700 border-2 shadow-md"
+                                                        : "border-gray-500 text-gray-900 bg-white hover:border-emerald-700 hover:text-emerald-700 hover:border-2 hover:shadow-md"
+                                                    }
+                                                  `}
+                                                  style={{ borderWidth: '1px' }}
+                                                >
+                                                  {formatName(type.name).map((line, i) => (
+                                                    <span
+                                                      key={i}
+                                                      className={`
+                                                        transition-all duration-300
+                                                        ${isHovered ? "-translate-y-0.5" : ""}
+                                                      `}
+                                                      style={{ transitionDelay: `${i * 50}ms` }}
+                                                    >
+                                                      {line}
+                                                    </span>
+                                                  ))}
+                                                </Link>
             
           );
         })}
         {typees.length > initialDisplayCount && (
         <div className="flex justify-center ">
-          <button
+                    <button
             onClick={() => setShowAll(!showAll)}
             className={`
-              px-6 py-2 
-              rounded-full border-2
-              font-bold
+              inline-flex items-center justify-center
+
+              px-4 sm:px-6
+              ml-3 mb-2
+              rounded-full 
+              ${isAmharic ? "font-normal" : "font-semibold"}
               transition-all duration-300 ease-out
+              focus:outline-none focus:ring-1 focus:ring-emerald-700 focus:ring-offset-2
               active:scale-95
               shadow-sm
-              
+              flex-col gap-1.5 text-center
+              ${isAmharic ? "2xl:text-lg xl:text-md" : "text-xs sm:text-sm"}
               ${
                 showAll
                   ? "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
                   : "border-emerald-700 text-white bg-emerald-700 shadow-lg shadow-emerald-700/20"
               }
             `}
+            style={{ borderWidth: '1px' }}
           >
-            {showAll ? t('see_less'): t('see_more')}
+            {showAll ? t('see_less') : t('see_more')}
           </button>
         </div>
       )}

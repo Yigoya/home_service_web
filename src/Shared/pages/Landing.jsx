@@ -120,7 +120,6 @@ console.log(servicesArray, "servicesArray");
       <section className="w-full bg-white text-black">
         <div className="flex ">
     {/* <img className="lg:mt-24 lg:block hidden" src={bl || "/placeholder.svg"} alt="" /> */}
-
       <div className="flex flex-col w-full items-center lg:mt-8 justify-center text-center lg:pt-16 px-4 mb-4 pt-36">
           <h1 className=" lg:pt-28 pb-8 max-md:text-3xl text-gray-600  lg:text-4xl lg:mt-3 xl:text-4xl 2xl:text-6xl font-extrabold leading-tight mb-8 text-center">
             <span>{t('every_service')}</span> 
@@ -129,7 +128,7 @@ console.log(servicesArray, "servicesArray");
           </h1>
           <div className="w-full max-w-3xl mx-auto px-4 pb-8">
   <div className="relative">
-    <div className="flex items-center bg-gray-200 rounded-full shadow-md ">
+    <div className="flex items-center justify-center bg-gray-200 rounded-full shadow-md ">
       <input
         type="text"
         placeholder={t("search_services")}
@@ -174,6 +173,7 @@ console.log(servicesArray, "servicesArray");
     className="w-8 h-8 mx-4 object-cover"
     alt={service.name}
   />
+  
   {service.name}
 </Link>
 
@@ -186,9 +186,6 @@ console.log(servicesArray, "servicesArray");
   </div>
   </div>
   </div>
-    <div className="hidden lg:block lg:mt-28 lg:w-72 absolute right-0">
-          <img src={tr || "/placeholder.svg"} alt="Top-right decoration "  />
-        </div>
     </div>
             {/* <div className="flex mt-2 justify-center ">
              <p className="mt-1">{t('become_tech')}?</p> 
@@ -199,6 +196,7 @@ console.log(servicesArray, "servicesArray");
         {/* Service Section */}
         <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
       <div className="w-full">
+      
         {selectedService && (
           <>
             <ServiceSelector
