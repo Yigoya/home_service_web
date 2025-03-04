@@ -6,6 +6,7 @@ import { tenderListApi } from './api';
 import { API_URL } from '../Shared/api';
 import CustomerLayout from "../AuthLayout/CustomerLayout";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 export default function TenderPage() {
   const [tenders, setTenders] = useState([]);
@@ -13,7 +14,7 @@ export default function TenderPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -115,127 +116,163 @@ export default function TenderPage() {
 
   return (
     <div className="min-h-screen bg-white mt-20">
-      <CustomerLayout isTender={true}/>
+      <CustomerLayout isTender={true} />
       <nav className="bg-white border-b border-gray-200">
-      <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
-        
-              {['Tender Issuing Agencies', 'Tender Categories', 'Tender Locations', 'Monthly/Annually Tender Subscription', 'Free Tenders', 'Tender FAQs'].map((item, index) => (
-                <div key={index} className="flex flex-row items-center justify-center px-2 border border-gray-200 w-full">
-                <a
-                  key={item}
-                  href="#"
-                  className="text-sm font-bold text-[#3385bb] hover:text-[#2a6c99]"
-                >
-                  {item}
-                </a>
-                
-                </div>
-              ))}
-        
-      </div>
-    </nav>  
-      <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories}/>
+        <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
+          {[
+            'tender_issuing_agencies',
+            'tender_categories',
+            'tender_locations',
+            'monthly_annually_tender_subscription',
+            'free_tenders',
+            'tender_faqs',
+          ].map((key, index) => (
+            <div key={index} className="flex flex-row items-center justify-center px-2 border border-gray-200 w-full">
+              <a href="#" className="text-sm font-bold text-[#3385bb] hover:text-[#2a6c99]">
+                {t(key)}
+              </a>
+            </div>
+          ))}
+        </div>
+      </nav>
+      <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories} />
       <div className="px-2">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Left Sidebar */}
           <div className="md:col-span-2">
             <div className="space-y-4">
-              <button onClick={()=> navigateToSubscription()} className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
-                Announce or Publish your Tender on TenderMart
+              <button
+                onClick={() => navigateToSubscription()}
+                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+              >
+                {t('announce_or_publish_tender')}
               </button>
-              <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Member Login</button>
-              <button onClick={()=> navigateToSignUp()} className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">Register</button>
+              <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
+                {t('member_login')}
+              </button>
+              <button
+                onClick={() => navigateToSignUp()}
+                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+              >
+                {t('register')}
+              </button>
               <div className="border p-4 rounded">
-                <h3 className="font-bold text-[#3498db] mb-2">REGISTER AS</h3>
-                <p className="font-bold">AGENCY ( BUYER ) &</p>
-                <p className="text-[#3498db] font-bold text-xl">PUBLISH</p>
-                <p>YOUR Tender WITH US</p>
+                <h3 className="font-bold text-[#3498db] mb-2">{t('register_as')}</h3>
+                <p className="font-bold">{t('agency_buyer_and')}</p>
+                <p className="text-[#3498db] font-bold text-xl">{t('publish')}</p>
+                <p>{t('your_tender_with_us')}</p>
               </div>
             </div>
           </div>
 
           {/* Main Content */}
           <div className="md:col-span-8 border border-gray-100">
-                {/* Header */}
-          <div className="grid grid-cols-11 bg-[#3385bb] text-white">
-            <div className="col-span-2 p-3">Location</div>
-            <div className="col-span-3 p-3 border-r border-white">Category</div>
-            <div className="col-span-6 p-3">{selectedCategory != null ? selectedCategory.name : ""}</div>
-          </div>
+            {/* Header */}
+            <div className="grid grid-cols-11 bg-[#3385bb] text-white">
+              <div className="col-span-2 p-3">{t('location')}</div>
+              <div className="col-span-3 p-3 border-r border-white">{t('category')}</div>
+              <div className="col-span-6 p-3">{selectedCategory != null ? selectedCategory.name : ''}</div>
+            </div>
 
-           {/* Content Grid */}
-                <div className="grid grid-cols-11">
-                  {/* Location Column */}
-                  <div className="col-span-2 border-r border-gray-100">
-                  {locations.map((location, index) => (
-                    <div
+            {/* Content Grid */}
+            <div className="grid grid-cols-11">
+              {/* Location Column */}
+              <div className="col-span-2 border-r border-gray-100">
+                {locations.map((location, index) => (
+                  <div
                     key={location.name}
                     onClick={() => fetchTendersByLocation(location.name)}
-                    className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${index !== locations.length - 1 ? "border-b border-gray-100" : ""}`}
-                    >
+                    className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
+                      index !== locations.length - 1 ? 'border-b border-gray-100' : ''
+                    }`}
+                  >
                     <span>{location.name}</span>
                     {location.hasDropdown && <ChevronDown className="w-4 h-4 text-[#3498db]" />}
-                    </div>
-                  ))}
                   </div>
+                ))}
+              </div>
 
-                {/* Category Column */}
-                  <div className="col-span-3 border-r border-gray-100">
-                    <div className="p-2">
-                      <input type="text" placeholder="Search By Category" className="w-full p-2 border rounded border-gray-300" />
-                    </div>
-                    {categories.map((category) => (
-                      <div onClick={() => fetchTendersByCategory(category.id)} key={category.id} className={`p-3 hover:bg-gray-100 cursor-pointer text-sm font-medium ${category === selectedCategory ? "bg-gray-200 " : "text-[#3385bb]"}`}>
-                        {category.name}
-                      </div>
-                    ))}
+              {/* Category Column */}
+              <div className="col-span-3 border-r border-gray-100">
+                <div className="p-2">
+                  <input
+                    type="text"
+                    placeholder={t('search_by_category')}
+                    className="w-full p-2 border rounded border-gray-300"
+                  />
+                </div>
+                {categories.map((category) => (
+                  <div
+                    onClick={() => fetchTendersByCategory(category.id)}
+                    key={category.id}
+                    className={`p-3 hover:bg-gray-100 cursor-pointer text-sm font-medium ${
+                      category === selectedCategory ? 'bg-gray-200 ' : 'text-[#3385bb]'
+                    }`}
+                  >
+                    {category.name}
                   </div>
+                ))}
+              </div>
 
-                  {/* Tenders Column */}
-                  <div className="col-span-6">
+              {/* Tenders Column */}
+              <div className="col-span-6">
                 {/* Filters */}
-                  <div className="p-2 flex items-center gap-8 border-b bg-gray-200">
-                    <input type="text" placeholder="Posted Date" className="border border-gray-400 rounded p-2 text-sm flex-1" />
-                    <input type="text" placeholder="Latest First" className="border border-gray-400 rounded p-2 text-sm flex-1" />
-                    <button className="bg-[#3385bb] text-white px-4 py-2 rounded text-sm flex-1">Sort Tenders</button>
-                  </div>
+                <div className="p-2 flex items-center gap-8 border-b bg-gray-200">
+                  <input
+                    type="text"
+                    placeholder={t('posted_date')}
+                    className="border border-gray-400 rounded p-2 text-sm flex-1"
+                  />
+                  <input
+                    type="text"
+                    placeholder={t('latest_first')}
+                    className="border border-gray-400 rounded p-2 text-sm flex-1"
+                  />
+                  <button className="bg-[#3385bb] text-white px-4 py-2 rounded text-sm flex-1">
+                    {t('sort_tenders')}
+                  </button>
+                </div>
 
-                  {/* Tenders List */}
-                  <div className="space-y-4 p-2">
-                    {tenders.map((tender) => (
-                    <div key={tender.id} className="border-b pb-4 cursor-pointer" onClick={() => navigate(`/tender/${tender.id}`)}>
+                {/* Tenders List */}
+                <div className="space-y-4 p-2">
+                  {tenders.map((tender) => (
+                    <div
+                      key={tender.id}
+                      className="border-b pb-4 cursor-pointer"
+                      onClick={() => navigate(`/tender/${tender.id}`)}
+                    >
                       <h3 className="text-black font-medium mb-2 text-sm">{tender.title}</h3>
                       <div className="grid grid-cols-1 gap-1 text-sm">
-                      <div className="flex items-center gap-2">
-                        <span className="text-green-600">Posted Date:</span>
-                        <Calendar className="w-4 h-4 text-green-600" />
-                        <span className="text-green-600">{formatDate(tender.datePosted)}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[#3385bb]">Expiry Date:</span>
-                        <Calendar className="w-4 h-4 text-[#3498db]" />
-                        <span className="text-[#3385bb]">{formatDate(tender.closingDate)}</span>
-                      </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-green-600">{t('posted_date')}:</span>
+                          <Calendar className="w-4 h-4 text-green-600" />
+                          <span className="text-green-600">{formatDate(tender.datePosted)}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#3385bb]">{t('expiry_date')}:</span>
+                          <Calendar className="w-4 h-4 text-[#3498db]" />
+                          <span className="text-[#3385bb]">{formatDate(tender.closingDate)}</span>
+                        </div>
                       </div>
                     </div>
-                    ))}
-                  </div>
-                  </div>
+                  ))}
                 </div>
-                </div>
+              </div>
+            </div>
+          </div>
 
-                {/* Right Sidebar */}
+          {/* Right Sidebar */}
           <div className="md:col-span-2 space-y-4">
             <div className="border rounded p-4 text-center">
-              <h3 className="font-bold mb-2">HAVING A QUERY ABOUT OUR SERVICE?</h3>
-              <p className="text-[#3498db] text-sm">
-                YOU CAN CLICK HERE AND SEND US AN E-MAIL. WE WILL GET BACK TO YOU WITHIN 24 HOURS VIA E-MAIL
-              </p>
+              <h3 className="font-bold mb-2">{t('having_query')}</h3>
+              <p className="text-[#3498db] text-sm">{t('send_email_query')}</p>
             </div>
 
             <div className="border rounded p-4 text-center">
-              <h3 className="font-bold mb-2">SUBSCRIBE NOW!</h3>
-              <button className="bg-orange-500 text-white w-full py-2 rounded">SUBSCRIBE FOR E-MAIL</button>
+              <h3 className="font-bold mb-2">{t('subscribe_now')}</h3>
+              <button className="bg-orange-500 text-white w-full py-2 rounded">
+                {t('subscribe_for_email')}
+              </button>
             </div>
 
             <div className="border rounded p-4">
@@ -247,8 +284,8 @@ export default function TenderPage() {
             </div>
 
             <div className="border rounded p-4">
-              <h3 className="text-[#3498db] font-bold mb-2">CUSTOMER SERVICE</h3>
-              <p className="font-bold">FEEDBACK</p>
+              <h3 className="text-[#3498db] font-bold mb-2">{t('customer_service')}</h3>
+              <p className="font-bold">{t('feedback')}</p>
             </div>
           </div>
         </div>

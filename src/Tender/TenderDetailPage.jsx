@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { API_URL } from "../Shared/api" 
 import { useParams } from "react-router-dom"
+import { Sidebar } from "lucide-react"
+import SignupForm from "./components/SignupForm"
 
 
 function TenderDetailPage() {
@@ -58,7 +60,10 @@ function TenderDetailPage() {
   if (!tender) return null
 
   return (
-    <div className="container mx-auto max-w-4xl py-4 px-4 mt-32">
+    <div className="flex mx-auto items-start justify-start mt-32 px-72">
+
+
+    <div className="container py-4 px-4">
       {/* Main Tender Information */}
       <div className="border rounded mb-4">
         <div className="border-b p-3 bg-gray-50">
@@ -128,7 +133,7 @@ function TenderDetailPage() {
           </div>
         </div>
       </div>
-
+     
       {/* Notice Details and Documents
       <div className="border rounded-md">
         <div className="border-b p-3 bg-gray-50">
@@ -163,6 +168,8 @@ function TenderDetailPage() {
       <div className="text-xs text-center mt-2 text-gray-500">
         Hover over blurred content to reveal sensitive information
       </div> */}
+    </div>
+    <SignupForm />
     </div>
   )
 }

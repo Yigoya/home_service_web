@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [error, setError] = useState(null);
   const datePostedRef = useRef(null);
   const closingDateRef = useRef(null);
+  const { t } = useTranslation();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,7 +85,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               name="keyword"
               value={formData.keyword}
               onChange={handleInputChange}
-              placeholder="Keyword searching"
+              placeholder={t('keyword_searching')}
               className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
@@ -95,10 +97,10 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="" disabled>
-                <b>Tender Status</b>
+                <b>{t('tender_status')}</b>
               </option>
-              <option value="OPEN">Open</option>
-              <option value="CLOSED">Closed</option>
+              <option value="OPEN">{t('open')}</option>
+              <option value="CLOSED">{t('closed')}</option>
             </select>
           </div>
           <div className="w-full md:w-1/6 px-2">
@@ -109,7 +111,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="" disabled>
-                <b>Tender by Region </b>
+                <b>{t('tender_by_region')}</b>
               </option>
               {locations.map((option) => (
                 <option key={option.name} value={option.value}>
@@ -124,13 +126,10 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleCategoryChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {/* <option value="" disabled>
-                <b>Tender by Category </b>
-              </option> */}
-              {[{
-                id: null,
-                name: "Tender by Category"
-              },...categorys].map((option) => (
+              {[
+                { id: null, name: t('tender_by_category') },
+                ...categorys,
+              ].map((option) => (
                 <option key={option.id} value={option.id}>
                   {option.name}
                 </option>
@@ -138,28 +137,28 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
             </select>
           </div>
           <div className="w-full md:w-1/6 px-2">
-          <input
+            <input
               ref={datePostedRef}
               type="text"
               name="datePosted"
               value={formData.datePosted}
               onChange={handleInputChange}
               onFocus={() => handleFocus(datePostedRef)}
-              onBlur={() => handleBlur(datePostedRef, "datePosted")}
-              placeholder="Date Posted"
-              className="w-full px-4 py-3 pt-4 mt-2  bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
+              onBlur={() => handleBlur(datePostedRef, 'datePosted')}
+              placeholder={t('date_posted')}
+              className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
           <div className="w-full md:w-1/6 px-2">
-          <input
+            <input
               ref={closingDateRef}
               type="text"
               name="closingDate"
               value={formData.closingDate}
               onChange={handleInputChange}
               onFocus={() => handleFocus(closingDateRef)}
-              onBlur={() => handleBlur(closingDateRef, "closingDate")}
-              placeholder="Closing Date"
+              onBlur={() => handleBlur(closingDateRef, 'closingDate')}
+              placeholder={t('closing_date')}
               className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
@@ -174,14 +173,14 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
             className="px-8 py-3 mt-2 bg-[#e7671f] text-white rounded hover:bg-orange-600 transition-colors"
             disabled={loading}
           >
-            Clear Search
+            {t('clear_search')}
           </button>
           <button
             type="submit"
             className="px-8 py-3 mt-2 bg-[#3385bb] text-white rounded hover:bg-blue-600 transition-colors disabled:bg-blue-300"
             disabled={loading}
           >
-            {loading ? "Searching..." : "Search Now"}
+            {loading ? t('searching') : t('search_now')}
           </button>
         </div>
       </form>
