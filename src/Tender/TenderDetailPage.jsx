@@ -14,6 +14,8 @@ function TenderDetailPage() {
   const [error, setError] = useState(null)
   const { id } = useParams()
 
+  const user = localStorage.getItem('user')
+
   useEffect(() => {
     const fetchTenderData = async () => {
       try {
@@ -65,7 +67,8 @@ function TenderDetailPage() {
 
     <div className="container py-4 px-4">
       {/* Main Tender Information */}
-      <div className="border rounded mb-4">
+
+    <div className="border rounded mb-4">
         <div className="border-b p-3 bg-gray-50">
           <h2 className="font-medium">{tender.title}</h2>
         </div>
@@ -108,7 +111,7 @@ function TenderDetailPage() {
         </div>
 
                 <div className="p-3 relative">
-          <div className="blur-sm transition-all duration-300">
+          <div className={`${!user ? "blur-sm" : ""} transition-all duration-300`}>
             <p>
               <span className="font-medium">Contact: </span>
               {tender.contactInfo}
@@ -128,9 +131,9 @@ function TenderDetailPage() {
             </p>
           </div>
         
-          <div className="flex justify-center mt-3 absolute inset-0 items-center">
+        {!user &&(  <div className="flex justify-center mt-3 absolute inset-0 items-center">
             <button className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded">Login</button>
-          </div>
+          </div>)}
         </div>
       </div>
      

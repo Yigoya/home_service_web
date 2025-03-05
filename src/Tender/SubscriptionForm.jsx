@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function SubscriptionForm({ plan, onClose }) {
   const { t } = useTranslation();
@@ -31,11 +32,11 @@ export default function SubscriptionForm({ plan, onClose }) {
       },
     }));
   };
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    // Handle form submission here
+    navigate("/login?next=/tender");
   };
 
   return (

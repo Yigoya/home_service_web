@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 import { loginApi, socialLoginApi } from '../api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { message } from 'antd';
@@ -26,7 +26,9 @@ const Login = () => {
   });
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate()
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const nextRoute = searchParams.get('next');
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -108,12 +110,11 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('customer', JSON.stringify(response.data.customer));
         localStorage.setItem('technician', JSON.stringify(response.data.technician));
-        const next = localStorage.getItem('next')
         localStorage.removeItem('next')
         message.success('Login successful!');
         login();
         
-        navigate(next ? next : '/')
+        navigate(nextRoute ? nextRoute : '/')
         refreshPage();
       }
     } catch (err) {

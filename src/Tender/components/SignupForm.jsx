@@ -61,8 +61,12 @@ export default function SignupForm() {
     setIsSubmitting(false)
   }
 
+  const handleNavigateToSignup = () => {
+    window.location.href = "/customer-signup?next=/subscription"
+  }
+
   return (
-    <div className="w-full max-w-md mb-auto mt-4 border border-b p-3 bg-white">
+    <div onClick={()=> handleNavigateToSignup()} className="w-full max-w-md mb-auto mt-4 border border-b p-3 bg-white cursor-pointer">
       <div className="text-center border-b  bg-gray-50">
         <h2 className="text-lg font-medium text-gray-700">Create Account</h2>
       </div>

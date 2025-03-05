@@ -7,6 +7,7 @@ import { API_URL } from '../Shared/api';
 import CustomerLayout from "../AuthLayout/CustomerLayout";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 export default function TenderPage() {
   const [tenders, setTenders] = useState([]);
@@ -18,7 +19,9 @@ export default function TenderPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoriesResponse = await axios.get(`${API_URL}/home`);
+        console.log(i18n.language)
+        let language = i18n.language === "en" ? "ENGLISH" : (i18n.language === "am" ? "AMHARIC" : "OROMO");
+        const categoriesResponse = await axios.get(`${API_URL}/home?lang=${language}`);
         const tenderSevrices = categoriesResponse.data["services"].filter(service => service.categoryId == 3);
         const firstCategoryId = tenderSevrices[0]?.id;
         const tendersResponse = await axios.get(`${tenderListApi}/${firstCategoryId}`);
@@ -32,7 +35,7 @@ export default function TenderPage() {
     };
 
     fetchData();
-  }, []);
+  }, [i18n.language]);
 
   const fetchTendersByCategory = async (categoryId) => {
     setLoading(true);
@@ -91,22 +94,22 @@ export default function TenderPage() {
   };
 
   const locations = [
-    { name: 'All Location', hasDropdown: false, value: '' },
-    { name: 'Afar', hasDropdown: false, value: 'afar' },
-    { name: 'Amhara', hasDropdown: false, value: 'amhara' },
-    { name: 'Benishangul-Gumuz', hasDropdown: false, value: 'benishangul-gumuz' },
-    { name: 'Central Ethiopia', hasDropdown: false, value: 'central-ethiopia' },
-    { name: 'Gambella', hasDropdown: false, value: 'gambella' },
-    { name: 'Harari', hasDropdown: false, value: 'harari' },
-    { name: 'Oromia', hasDropdown: false, value: 'oromia' },
-    { name: 'Sidama', hasDropdown: false, value: 'sidama' },
-    { name: 'Somali', hasDropdown: false, value: 'somali' },
-    { name: 'South Ethiopia', hasDropdown: false, value: 'south-ethiopia' },
-    { name: 'South West Ethiopia', hasDropdown: false, value: 'south-west-ethiopia' },
-    { name: 'Tigray', hasDropdown: false, value: 'tigray' },
-    { name: 'Addis Ababa', hasDropdown: false, value: 'addis-ababa' },
-    { name: 'Dire Dawa', hasDropdown: false, value: 'dire-dawa' },
-    { name: 'Southern Nations, Nationalities, and Peoples\'', hasDropdown: false, value: 'snnpr' },
+    { name: "all_location", hasDropdown: false, value: "" },
+    { name: "afar", hasDropdown: false, value: "afar" },
+    { name: "amhara", hasDropdown: false, value: "amhara" },
+    { name: "benishangul_gumuz", hasDropdown: false, value: "benishangul-gumuz" },
+    { name: "central_ethiopia", hasDropdown: false, value: "central-ethiopia" },
+    { name: "gambella", hasDropdown: false, value: "gambella" },
+    { name: "harari", hasDropdown: false, value: "harari" },
+    { name: "oromia", hasDropdown: false, value: "oromia" },
+    { name: "sidama", hasDropdown: false, value: "sidama" },
+    { name: "somali", hasDropdown: false, value: "somali" },
+    { name: "south_ethiopia", hasDropdown: false, value: "south-ethiopia" },
+    { name: "south_west_ethiopia", hasDropdown: false, value: "south-west-ethiopia" },
+    { name: "tigray", hasDropdown: false, value: "tigray" },
+    { name: "addis_ababa", hasDropdown: false, value: "addis-ababa" },
+    { name: "dire_dawa", hasDropdown: false, value: "dire-dawa" },
+    { name: "snnpr", hasDropdown: false, value: "snnpr" },
   ];
 
   const formatDate = (dateString) => {
@@ -116,7 +119,7 @@ export default function TenderPage() {
 
   return (
     <div className="min-h-screen bg-white mt-20">
-      <CustomerLayout isTender={true} />
+      <CustomerLayout isTender={true} nextRoute={"/tender"} />
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
           {[
@@ -181,12 +184,12 @@ export default function TenderPage() {
                 {locations.map((location, index) => (
                   <div
                     key={location.name}
-                    onClick={() => fetchTendersByLocation(location.name)}
+                    onClick={() => fetchTendersByLocation(location.value)} // Use value instead of name for consistency
                     className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
-                      index !== locations.length - 1 ? 'border-b border-gray-100' : ''
+                      index !== locations.length - 1 ? "border-b border-gray-100" : ""
                     }`}
                   >
-                    <span>{location.name}</span>
+                    <span>{t(location.name)}</span>
                     {location.hasDropdown && <ChevronDown className="w-4 h-4 text-[#3498db]" />}
                   </div>
                 ))}

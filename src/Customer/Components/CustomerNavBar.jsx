@@ -1,6 +1,6 @@
 
 
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { FaUserCircle, FaBell, FaBars, FaTimes } from "react-icons/fa"
@@ -8,7 +8,7 @@ import logo1 from "../../assets/logo.png"
 import { Globe } from "lucide-react"
 import { LocationContext } from "../../Shared/Context/LocationContext"
 
-export default function CustomerNavBar({ isTender }) {
+export default function CustomerNavBar({ isTender, nextRoute }) {
   const { i18n, t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const Customer = JSON.parse(localStorage.getItem("customer") || "{}")
@@ -16,21 +16,37 @@ export default function CustomerNavBar({ isTender }) {
   const profileLink = `/customer-profile/${Customer?.id || ""}`
   const notificationLink = `/notification/${user?.id || ""}`
   const { userAddress } = useContext(LocationContext)
+  const [scrolled, setScrolled] = useState(false);
+  
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "am" : "en"
     i18n.changeLanguage(newLang)
   }
 
+  useEffect(() => {
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 20);
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Add this state to control the visibility of the notification symbol
   const [hasNotification, setHasNotification] = useState(true)
 
   return (
-    <nav className="text-black bg-white  fixed top-0 left-0 right-0 z-50 py-2">
-      <div className={`${!isTender && "max-w-7xl"} mx-4 px-4 sm:px-6  lg:px-8`}>
-        <div className="flex h-16 justify-between ">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${scrolled
+          ? 'bg-white/80 backdrop-blur-md shadow-l'
+          : 'bg-white shadow-m'}`}
+    >
+      <div className={`${!isTender && "max-w-7xl"} mx- px-4 sm:px-6 lg:px-8 mx-auto`}>
+        <div className="flex justify-between items-c h-20">
           {/* Logo Section */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
+          <div className="flex items-center gap-4">
+            <Link to={nextRoute || "/"} className="flex items-center">
               <img src={logo1 || "/placeholder.svg"} alt="Logo" className="h-12" />
             </Link>
           </div>

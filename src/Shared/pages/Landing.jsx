@@ -194,35 +194,38 @@ console.log(servicesArray, "servicesArray");
           </Link>
             </div> */}
         {/* Service Section */}
-        <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
-      <div className="w-full">
-      
-        {selectedService && (
-          <>
-            <ServiceSelector
-              services={services.sort((a, b) => a.categoryId - b.categoryId)}
-              selectedService={selectedService}
-              onSelect={handleService}
-            />
-            <div className="mt-3">
-                 <ServiceTypes
-                    types={[selectedService.services]}
-                    onSelect={handleServiceSelect}
-                  />
-            </div>
-            <div>
-              <ServiceDescription
-                title={selectedService.categoryName}
-                description={selectedService.description}
+          <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
+              <div className="w-full">
+              
+          {selectedService && (
+            <>
+              <ServiceSelector
+                services={services.sort((a, b) => {
+            const order = [3, 4, 1, 2];
+            return order.indexOf(a.categoryId) - order.indexOf(b.categoryId);
+                })}
+                selectedService={selectedService}
+                onSelect={handleService}
               />
+              <div className="mt-3">
+             <ServiceTypes
+                types={[selectedService.services]}
+                onSelect={handleServiceSelect}
+              />
+              </div>
+              <div>
+                <ServiceDescription
+            title={selectedService.categoryName}
+            description={selectedService.description}
+                />
+              </div>
+            </>
+          )}
+              </div>
             </div>
-          </>
-        )}
-      </div>
-    </div>
-      </section>
+              </section>
 
-      {/* Why We Section */}
+              {/* Why We Section */}
       <section className="py-12 bg-white">
         <div className="container lg:mx-auto  lg:px-32">
           <WhyWe />

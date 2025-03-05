@@ -8,7 +8,7 @@ import { LanguageContext } from '../Context/LanguageContext';
 
 
 
-const NavBar = ({ isTender }) => {
+const NavBar = ({ isTender, nextRoute }) => {
   const { i18n, t } = useTranslation();
   const isAmharic = i18n.language === "am";
   const { userAddress } = useContext(LocationContext); // Use the context
@@ -48,10 +48,11 @@ const NavBar = ({ isTender }) => {
     i18n.changeLanguage(language);
     let lang = language === "en" ? "ENGLISH" : language === "am" ? "AMHARIC" : "OROMO";
     setLanguage(lang);
+    
     setIsOpen(false); // Close the mobile menu after selecting a language
   };
   console.log(language)
-
+  console.log(nextRoute)
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
@@ -65,7 +66,7 @@ const NavBar = ({ isTender }) => {
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link
-              to="/"
+              to={nextRoute || "/"}
               className="flex-shrink-0 transform hover:scale-105 transition-transform duration-200"
             >
               <img
