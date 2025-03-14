@@ -103,11 +103,11 @@ export default function CompanyNavbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/companies" className="flex items-center gap-2">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                M
+                H
               </div>
-              <span className="font-bold text-xl text-gray-800">Marketplace</span>
+              <span className="font-bold text-xl text-gray-800">HuluMoya</span>
             </Link>
           </div>
 

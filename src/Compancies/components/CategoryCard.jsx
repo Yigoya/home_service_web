@@ -1,6 +1,7 @@
 import { API_URL_FILE } from "../../Shared/api"
 
 function CategoryCard({ name, icon, isPopular = false, description = "Explore our services" }) {
+  console.log(`${API_URL_FILE}/${icon}`)
   return (
     <div className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-1 h-full">
       <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-4 flex flex-col items-center border border-gray-200 hover:border-blue-100 h-full">
@@ -12,7 +13,7 @@ function CategoryCard({ name, icon, isPopular = false, description = "Explore ou
           }`}
         >
           <img 
-            src={`${API_URL_FILE}/${icon}`} 
+            src={`${API_URL_FILE}${icon}`}
             alt={name} 
             className="w-10 h-10 transition-transform duration-300 group-hover:scale-110" 
           />

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import { businessApi } from "../services/api"
+import { API_URL_FILE } from "../../Shared/api"
 
 // Mock categories - TODO: Replace with API call
 const categories = {
@@ -462,7 +463,7 @@ const BusinessCard = ({ business, categories, onEnquiry }) => {
       <div className="relative">
         <img
           src={
-            business.images[0] ||
+            business.images[0] ? `${API_URL_FILE}${business.images[0]}` :
             "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
           }
           alt={business.name}

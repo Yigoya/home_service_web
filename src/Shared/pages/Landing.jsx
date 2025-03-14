@@ -199,7 +199,7 @@ const servicesArray = services.flatMap(service => {
               
           
               <ServiceSelector
-                services={services.sort((a, b) => {
+                services={[...services].sort((a, b) => {
             const order = [3, 4, 1, 2];
             return order.indexOf(a.categoryId) - order.indexOf(b.categoryId);
                 }

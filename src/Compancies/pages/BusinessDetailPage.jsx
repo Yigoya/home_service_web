@@ -866,7 +866,7 @@ export default function BusinessDetailPage() {
             </button>
             <button
               className="text-sm bg-green-500 text-white px-3 py-1 rounded-full hidden md:flex items-center hover:bg-green-600 transition-colors"
-              onClick={() => window.open(`http://localhost:5173/partnership-request/${id}`, '_blank')}
+              onClick={() => window.open(`https://business-dashboard-pi.vercel.app/partnership-request/${id}`, '_blank')}
             >
               <Users className="w-4 h-4 mr-2" />
               Become a Partner
