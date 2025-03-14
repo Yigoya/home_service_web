@@ -33,6 +33,14 @@ import TenderPage from './Tender/TenderPage';
 import TenderCategories from './Tender/TenderCategories';
 import SubscriptionPackage from './Tender/SubscriptionPackage';
 import TenderDetailPage from './Tender/TenderDetailPage';
+import HomePage from './Compancies/pages/HomePage';
+
+import CategoriesPage from "./Compancies/pages/CategoriesPage"
+import BusinessDetailPage from "./Compancies/pages/BusinessDetailPage"
+import CompanyLayout from './AuthLayout/CompanyLayout';
+import SubcategoriesPage from './Compancies/pages/SubcategoriesPage';
+import CompanyListingPage from './Compancies/pages/CompanyListingPage';
+import BusinessListingPage from './Compancies/pages/CompanyListingPage';
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -78,6 +86,14 @@ function App() {
                 </Route>
               )}
                   <Route path="/tender" element={<TenderPage/>} />
+                  <Route element={<CompanyLayout />}>
+                    <Route path="/companies" element={<HomePage />} />
+                    <Route path="/categories" element={<CategoriesPage />} />
+                    <Route path="/subcategories" element={<SubcategoriesPage />} />
+                    <Route path="/business/:id" element={<BusinessListingPage />} />
+                    <Route path="/business-details/:id" element={<BusinessDetailPage />} />
+                  </Route>
+                  
 
             </Routes>
             <Footer />

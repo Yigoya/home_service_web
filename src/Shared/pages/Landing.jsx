@@ -14,29 +14,28 @@ import { API_URL } from "../api"
 import LoadingPage from "../Components/LoadingPage"
 import { useSelectedService } from "../Context/SelectedServiceContext" // Import the context hook
 import { LanguageContext } from "../Context/LanguageContext"
+import useFetchData from "../../hooks/useFetchData"
 
 
 const Landing = () => {
   const { t,i18n} = useTranslation();
   const isAmharic = i18n.language === "am";
-  const [loading , setLoading] = useState(false);
+  // const [loading , setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { setSelectedService: setSelectedServiceContext } = useSelectedService(); // Use the context
   const {language} = useContext(LanguageContext);
-
+  const { services, loading, error } = useFetchData();
+  // setSelectedService(services[0]); // Update the context
   // Fetch services from the backend
   const fetchServices = async () => {
-    console.log(language, "language");
     try {
       setLoading(true);
       const response = await axios.get(`${API_URL}/admin/services?lang=${language}`);
       if (response.data) {
         setServices(response.data);
         setLoading(false);
-        console.log(response.data);
         setSelectedService(response.data[0]);
         //  setSelectedServiceContext(response.data[0]);
       }
@@ -52,11 +51,10 @@ const servicesArray = services.flatMap(service => {
     icon: subService.icon,
   }));
 }); // Flattening the nested arrays into a single array
-console.log(servicesArray, "servicesArray");
 
-  useEffect(() => {
-    fetchServices();
-  }, [language]);
+  // useEffect(() => {
+  //   fetchServices();
+  // }, [language]);
 
   // Handle search submission
 
@@ -105,11 +103,13 @@ console.log(servicesArray, "servicesArray");
     if (service.categoryId === 3) {
       window.location.href = "/tender";
       return;
+    } else if (service.categoryId === 4) {
+      window.location.href = "/companies";
+      return;
     }
     setSelectedService(service);
   }
 
-  console.log(services, "services"); ;
   if (loading) {
     return <LoadingPage />;
   }
@@ -197,30 +197,30 @@ console.log(servicesArray, "servicesArray");
           <div className="w-full  2xl:max-w-[1450px] max-w-7xl  mx-auto   2xl:px-12 xl:px-10">
               <div className="w-full">
               
-          {selectedService && (
-            <>
+          
               <ServiceSelector
                 services={services.sort((a, b) => {
             const order = [3, 4, 1, 2];
             return order.indexOf(a.categoryId) - order.indexOf(b.categoryId);
-                })}
-                selectedService={selectedService}
+                }
+                )}
+                // services={services}
+                selectedService={services[0]}
                 onSelect={handleService}
               />
               <div className="mt-3">
-             <ServiceTypes
+             {/* <ServiceTypes
                 types={[selectedService.services]}
                 onSelect={handleServiceSelect}
-              />
+              /> */}
               </div>
-              <div>
+              {/* <div>
                 <ServiceDescription
             title={selectedService.categoryName}
             description={selectedService.description}
                 />
-              </div>
-            </>
-          )}
+              </div> */}
+          
               </div>
             </div>
               </section>

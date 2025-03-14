@@ -9,7 +9,7 @@ const ServiceSelector = ({ services, onSelect }) => {
   const isAmharic = i18n.language === "am"
   const [selectedServiceId, setSelectedServiceId] = useState(null)
   const [hoveredId, setHoveredId] = useState(null)
-
+  console.log(services)
   const renderImage = (icon, isSelected, isHovered) => {
     return (
       <div className="w-full flex justify-center items-center">
