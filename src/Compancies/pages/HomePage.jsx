@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { Search, MapPin, Star, TrendingUp } from "react-feather"
 import CategoryCard from "../components/CategoryCard"
 import { businessApi, locationApi } from "../services/api"
@@ -12,6 +13,7 @@ import { setSubcategory } from "../../store/dataSlice"
 import MarketplaceHeader from "../components/MarketPlaceHeader"
 
 function HomePage() {
+  const { t } = useTranslation()
   const [featuredBusinesses, setFeaturedBusinesses] = useState([])
   const [locations, setLocations] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
@@ -78,7 +80,7 @@ function HomePage() {
                   name={category.name}
                   icon={category.icon}
                   
-                  description={category.description || `Explore ${category.name} services`}
+                  description={category.description || `${t('our-servises')} ${category.name}`}
                 />
               </div>
             ))}
@@ -232,7 +234,7 @@ function HomePage() {
 
         {/* Why Choose Us */}
         <div className="bg-white rounded-lg shadow-md p-8 mb-12">
-          <h2 className="text-2xl font-bold mb-8 text-center">Why Choose JustCall?</h2>
+          <h2 className="text-2xl font-bold mb-8 text-center">{t('why')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -245,8 +247,8 @@ function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-bold text-lg mb-2">Verified Listings</h3>
-              <p className="text-gray-600">All businesses are thoroughly verified for authenticity</p>
+              <h3 className="font-bold text-lg mb-2">{t('trust')}</h3>
+              <p className="text-gray-600">{t('trust')}</p>
             </div>
 
             <div className="text-center">
@@ -255,8 +257,8 @@ function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-lg mb-2">Quick Response</h3>
-              <p className="text-gray-600">Get quick responses from businesses for your inquiries</p>
+              <h3 className="font-bold text-lg mb-2">{t('time_sche')}</h3>
+              <p className="text-gray-600">{t('time_sche')}</p>
             </div>
 
             <div className="text-center">
@@ -270,8 +272,8 @@ function HomePage() {
                   />
                 </svg>
               </div>
-              <h3 className="font-bold text-lg mb-2">User Reviews</h3>
-              <p className="text-gray-600">Make informed decisions with genuine user reviews</p>
+              <h3 className="font-bold text-lg mb-2">{t('one_year')}</h3>
+              <p className="text-gray-600">{t('one_year')}</p>
             </div>
           </div>
         </div>

@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useRef } from "react"
 import { MapPin, Clock, Building, Navigation, X } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 export default function LocationSelector({ selectedLocation, onLocationChange }) {
+  const { t } = useTranslation()
   // State for location
-  const [location, setLocation] = useState(selectedLocation || "Select location")
+  const [location, setLocation] = useState(selectedLocation || t('select_location', 'Select location'))
   const [showLocationSearch, setShowLocationSearch] = useState(false)
   const [locationQuery, setLocationQuery] = useState("")
   const [locationResults, setLocationResults] = useState([])
@@ -130,7 +132,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
       <button
         className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
         onClick={() => {
-          setLocation("Select location")
+          setLocation(t('select_location', 'Select location'))
           onLocationChange(null)
           setShowLocationSearch(false)
         }}
@@ -145,7 +147,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
               <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search location..."
+                placeholder={t('search_location', 'Search location...')}
                 className="w-full border border-gray-300 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-400 transition-colors"
                 value={locationQuery}
                 onChange={(e) => setLocationQuery(e.target.value)}
@@ -159,7 +161,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
               <>
                 <div className="px-3 py-2">
                   <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Recent Locations
+                    {t('recent_locations', 'Recent Locations')}
                   </h3>
                   {recentLocations.map((loc, index) => (
                     <div
@@ -174,7 +176,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
                 </div>
 
                 <div className="mt-2 px-3 py-2">
-                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Popular Cities</h3>
+                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('popular_cities', 'Popular Cities')}</h3>
                   {popularLocations.map((loc, index) => (
                     <div
                       key={`popular-${index}`}
@@ -203,7 +205,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
 
             {locationQuery !== "" && locationResults.length === 0 && (
               <div className="px-3 py-4 text-center text-gray-500 text-sm">
-                No locations found. Try a different search.
+                {t('no_locations_found', 'No locations found. Try a different search.')}
               </div>
             )}
           </div>
@@ -213,13 +215,13 @@ export default function LocationSelector({ selectedLocation, onLocationChange })
               className="flex items-center justify-center gap-2 w-full text-blue-500 text-sm font-medium py-1.5 hover:bg-blue-50 rounded-lg transition-colors"
               onClick={() => {
                 navigator.geolocation.getCurrentPosition((position) => {
-                  setLocation("Current Location")
+                  setLocation(t('current_location', 'Current Location'))
                   setShowLocationSearch(false)
                 })
               }}
             >
               <Navigation size={16} />
-              Use current location
+              {t('use_current_location', 'Use current location')}
             </button>
           </div>
         </div>

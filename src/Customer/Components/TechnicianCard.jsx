@@ -1,8 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { MapPin, Star, Briefcase, CheckCircle, Clock } from 'lucide-react';
 import { API_URL_FILE } from '../../Shared/api';
 
 const TechnicianCard = ({ technician }) => {
+  const { t } = useTranslation();
+  
+  // Translate availability status
+  const getTranslatedAvailability = (status) => {
+    if (status === 'Available') return t('available', 'Available');
+    if (status === 'Unavailable') return t('unavailable', 'Unavailable');
+    if (status === 'Busy') return t('busy', 'Busy');
+    return status;
+  };
+  
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Profile Image */}
@@ -19,7 +30,7 @@ const TechnicianCard = ({ technician }) => {
               : 'bg-red-100 text-red-800'
           }`}>
             <Clock className="w-4 h-4 mr-1" />
-            {technician.availability}
+            {getTranslatedAvailability(technician.availability)}
           </span>
         </div>
       </div>
@@ -29,7 +40,10 @@ const TechnicianCard = ({ technician }) => {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">{technician.name}</h2>
           {technician.verified && (
-            <CheckCircle className="w-5 h-5 text-blue-500" />
+            <div className="flex items-center">
+              <CheckCircle className="w-5 h-5 text-blue-500" />
+              <span className="ml-1 text-xs text-blue-500">{t('verified', 'Verified')}</span>
+            </div>
           )}
         </div>
 
@@ -37,7 +51,7 @@ const TechnicianCard = ({ technician }) => {
           <MapPin className="w-4 h-4 mr-2" />
           <span>{`${technician.city}, ${technician.subcity}`}</span>
           {technician.wereda && (
-            <span className="ml-1 text-gray-400">{` (Wereda ${technician.wereda})`}</span>
+            <span className="ml-1 text-gray-400">{` (${t('woreda')} ${technician.wereda})`}</span>
           )}
         </div>
 
@@ -62,13 +76,13 @@ const TechnicianCard = ({ technician }) => {
           <div className="flex items-center">
             <Star className="w-5 h-5 text-yellow-400" />
             <span className="ml-2 text-gray-600">
-              {technician.rating || 'New'}
+              {technician.rating || t('noreviw')}
             </span>
           </div>
           <button 
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            View Profile
+            {t('view')}
           </button>
         </div>
       </div>

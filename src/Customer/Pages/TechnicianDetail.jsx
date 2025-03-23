@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { MapPin, Phone, Mail, Star, Calendar, Briefcase, Loader2, Clock } from 'lucide-react';
 import axios from 'axios';
 import { API_URL, API_URL_FILE } from '../../Shared/api';
 
 const TechnicianDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [technician, setTechnician] = useState(null);
@@ -20,7 +22,7 @@ const TechnicianDetail = () => {
       const { data } = await axios.get(`${API_URL}/technicians/${id}`);
       setTechnician(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch technician details');
+      setError(err.response?.data?.message || t('failed_to_fetch', 'Failed to fetch technician details'));
     } finally {
       setLoading(false);
     }
@@ -31,14 +33,31 @@ const TechnicianDetail = () => {
   };
 
   const formatTime = (time) => {
-    if (!time) return 'Closed';
+    if (!time) return t('closed');
     return time.slice(0, 5); // Convert "09:00:00" to "09:00"
+  };
+  
+  // Get translated day name
+  const getDayTranslation = (day) => {
+    const dayTranslations = {
+      'monday': t('monday'),
+      'tuesday': t('tuesday'),
+      'wednesday': t('wednesday'),
+      'thursday': t('thursday'),
+      'friday': t('friday'),
+      'saturday': t('saturday'),
+      'sunday': t('sunday')
+    };
+    return dayTranslations[day] || day;
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-600 mx-auto" />
+          <p className="mt-2 text-gray-600">{t('loading', 'Loading...')}</p>
+        </div>
       </div>
     );
   }
@@ -47,12 +66,12 @@ const TechnicianDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 text-lg mb-2">Error: {error || 'Technician not found'}</p>
+          <p className="text-red-600 text-lg mb-2">{t('error')}: {error || t('technician_not_found', 'Technician not found')}</p>
           <button 
             onClick={() => navigate('/')}
             className="text-blue-600 hover:text-blue-800 underline"
           >
-            Return to Home
+            {t('back')}
           </button>
         </div>
       </div>
@@ -77,7 +96,7 @@ const TechnicianDetail = () => {
             <div className="flex items-center mt-2 space-x-4">
               <div className="flex items-center">
                 <Star className="w-5 h-5 text-yellow-400" />
-                <span className="ml-1">{technician.rating} ({technician.bookings} bookings)</span>
+                <span className="ml-1">{technician.rating} ({technician.bookings} {t('booking')})</span>
               </div>
               <div className="flex items-center">
                 <MapPin className="w-5 h-5" />
@@ -102,7 +121,7 @@ const TechnicianDetail = () => {
               onClick={handleBooking}
               className="bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition-colors"
             >
-              Book Appointment
+              {t('book')}
             </button>
           </div>
         </div>
@@ -113,13 +132,13 @@ const TechnicianDetail = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* About */}
             <section>
-              <h2 className="text-2xl font-semibold mb-4">About</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('info')}</h2>
               <p className="text-gray-600">{technician.bio}</p>
             </section>
 
             {/* Services */}
             <section>
-              <h2 className="text-2xl font-semibold mb-4">Services</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('serv')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {technician.services.map((service) => (
                   <div key={service.id} className="bg-gray-50 p-4 rounded-lg">
@@ -139,41 +158,47 @@ const TechnicianDetail = () => {
 
             {/* Reviews */}
             <section>
-              <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
-              {technician.review.map((review) => (
-                <div key={review.id} className="bg-gray-50 p-4 rounded-lg mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-blue-600 rounded-full overflow-hidden">
-                        {review.customer.profileImage ? (
-                          <img
-                            src={`/${review.customer.profileImage}`}
-                            alt={review.customer.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-white">
-                            {review.customer.name.charAt(0)}
-                          </div>
-                        )}
-                      </div>
-                      <div className="ml-3">
-                        <h4 className="font-semibold">{review.customer.name}</h4>
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                              fill={i < review.rating ? 'currentColor' : 'none'}
+              <h2 className="text-2xl font-semibold mb-4">{t('review')}</h2>
+              {technician.review && technician.review.length > 0 ? (
+                technician.review.map((review) => (
+                  <div key={review.id} className="bg-gray-50 p-4 rounded-lg mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-blue-600 rounded-full overflow-hidden">
+                          {review.customer.profileImage ? (
+                            <img
+                              src={`/${review.customer.profileImage}`}
+                              alt={review.customer.name}
+                              className="w-full h-full object-cover"
                             />
-                          ))}
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-white">
+                              {review.customer.name.charAt(0)}
+                            </div>
+                          )}
+                        </div>
+                        <div className="ml-3">
+                          <h4 className="font-semibold">{review.customer.name}</h4>
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                fill={i < review.rating ? 'currentColor' : 'none'}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
+                    {review.review && <p className="text-gray-600">{review.review}</p>}
                   </div>
-                  {review.review && <p className="text-gray-600">{review.review}</p>}
+                ))
+              ) : (
+                <div className="bg-gray-50 p-4 rounded-lg text-center">
+                  <p className="text-gray-500">{t('noreviw')}</p>
                 </div>
-              ))}
+              )}
             </section>
           </div>
 
@@ -183,7 +208,7 @@ const TechnicianDetail = () => {
               <div className="bg-gray-50 p-6 rounded-lg sticky top-6">
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
                   <Calendar className="w-6 h-6 mr-2" />
-                  Working Hours
+                  {t('business')}
                 </h2>
                 <div className="space-y-3">
                   {daysOfWeek.map((day) => {
@@ -192,14 +217,14 @@ const TechnicianDetail = () => {
 
                     return (
                       <div key={day} className="flex items-center justify-between">
-                        <span className="capitalize">{day}</span>
+                        <span className="capitalize">{getDayTranslation(day)}</span>
                         <div className="flex items-center">
                           <Clock className="w-4 h-4 mr-2 text-gray-400" />
                           <span className="text-gray-600">
                             {startTime && endTime ? (
                               `${formatTime(startTime)} - ${formatTime(endTime)}`
                             ) : (
-                              'Closed'
+                              t('closed')
                             )}
                           </span>
                         </div>
