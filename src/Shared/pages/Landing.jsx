@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { FiSearch } from "react-icons/fi"
 import tr from '../../assets/tr.png'
@@ -15,6 +15,8 @@ import LoadingPage from "../Components/LoadingPage"
 import { useSelectedService } from "../Context/SelectedServiceContext" // Import the context hook
 import { LanguageContext } from "../Context/LanguageContext"
 import useFetchData from "../../hooks/useFetchData"
+import { setSubcategory } from "../../store/dataSlice"
+import { useDispatch } from "react-redux"
 
 
 const Landing = () => {
@@ -99,12 +101,23 @@ const servicesArray = services.flatMap(service => {
     setSelectedService(service);
     setSelectedServiceContext(service); // Update the context
   };
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleService = (service) => {
-    if (service.categoryId === 3) {
-      window.location.href = "/tender";
+    if (service.categoryId === 1) {
+      navigate("/tender");
+      return;
+    } else if (service.categoryId === 2) {
+      navigate("/companies");
+      return;
+    } else if (service.categoryId === 3) {
+      dispatch(setSubcategory(service)); 
+      navigate("/service-categories");
       return;
     } else if (service.categoryId === 4) {
-      window.location.href = "/companies";
+      dispatch(setSubcategory(service)); 
+      navigate("/service-categories");
       return;
     }
     setSelectedService(service);
@@ -199,12 +212,12 @@ const servicesArray = services.flatMap(service => {
               
           
               <ServiceSelector
-                services={[...services].sort((a, b) => {
-            const order = [3, 4, 1, 2];
-            return order.indexOf(a.categoryId) - order.indexOf(b.categoryId);
-                }
-                )}
-                // services={services}
+                // services={[...services].sort((a, b) => {
+            // const order = [3, 4, 1, 2];
+            // return order.indexOf(a.categoryId) - order.indexOf(b.categoryId);
+              //   }
+              //  )}
+                services={services}
                 selectedService={services[0]}
                 onSelect={handleService}
               />

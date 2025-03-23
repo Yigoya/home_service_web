@@ -3,17 +3,15 @@ import { useTranslation } from "react-i18next";
 
 const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [formData, setFormData] = useState({
-    keyword: "",
-    status: "",
-    location: "",
+    keyword: null,
+    status: "OPEN",
+    location: null,
     serviceId: null,
-    datePosted: "",
-    closingDate: "",
+    datePosted: null,
+    closingDate: null,
     page: 0,
     size: 10,
   });
-  console.log(locations)
-  console.log(categorys)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const datePostedRef = useRef(null);
@@ -41,9 +39,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    console.log(formData.category)
 
-    await searchTenders(formData,)
+    await searchTenders(formData)
     setLoading(false);
     
   };
@@ -61,12 +58,12 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
 
   const handleClear = () => {
     setFormData({
-      keyword: "",
-      status: "",
-      location: "",
+      keyword: null,
+      status: "OPEN",
+      location: null,
       serviceId: null,
-      datePosted: "",
-      closingDate: "",
+      datePosted: null,
+      closingDate: null,
       page: 0,
       size: 10,
     });
@@ -76,7 +73,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
 
 
   return (
-    <div className="mx-auto py-6 px-16 bg-gray-100">
+    <div className="mx-auto py-6 px-16 ">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex flex-wrap space-y-4 md:space-y-0">
           <div className="w-full md:w-1/6 px-2">
@@ -115,7 +112,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               </option>
               {locations.map((option) => (
                 <option key={option.name} value={option.value}>
-                  {option.name}
+                  {t(option.name)}
                 </option>
               ))}
             </select>
@@ -127,10 +124,10 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {[
-                { id: null, name: t('tender_by_category') },
-                ...categorys,
+                { serviceId: null, name: t('tender_by_category') },
+                ...categorys
               ].map((option) => (
-                <option key={option.id} value={option.id}>
+                <option key={option.serviceId} value={option.serviceId}>
                   {option.name}
                 </option>
               ))}

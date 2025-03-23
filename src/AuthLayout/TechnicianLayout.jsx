@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../Shared/Components/NavBar';
+import Navbar from '../Shared/Components/Navbar.jsx';
 import { AuthContext } from '../Shared/Context/AuthContext';
 import { FilterProvider } from '../Shared/Context/FilterContext';
 import TechnicianNavBar from '../Technician/Components/TechnicianNavbar';
@@ -14,7 +14,7 @@ const TechnicianLayout = () => {
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <TechnicianNavBar /> : <NavBar />}
+        {isLoggedIn ? <TechnicianNavBar /> : <Navbar />}
         <Outlet />
         
       </div>

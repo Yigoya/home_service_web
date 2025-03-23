@@ -43,6 +43,18 @@ const cn = (...classes) => {
   return classes.filter(Boolean).join(" ")
 }
 
+// Add CSS for hide-scrollbar
+const styles = `
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari and Opera */
+  }
+`
+
 // Simple toast implementation
 const Toast = ({ title, message, onClose }) => {
   return (
@@ -91,6 +103,10 @@ export default function BusinessDetailPage() {
   });
   const [isOrdering, setIsOrdering] = useState(false);
   const specialInstructionsRef = useRef(null);
+  // Add new state for hero slider
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSliderAutoPlaying, setIsSliderAutoPlaying] = useState(true);
+  const sliderIntervalRef = useRef(null);
 
   const handleSpecialInstructionsChange = useCallback((e) => {
     const value = e.target.value;
@@ -391,6 +407,7 @@ export default function BusinessDetailPage() {
   // Scroll event listener
   useEffect(() => {
     const handleScroll = () => {
+      // For the sticky navigation enhancement
       setIsScrolled(window.scrollY > 100)
     }
     window.addEventListener("scroll", handleScroll)
@@ -443,6 +460,75 @@ export default function BusinessDetailPage() {
   const findImageIndex = (targetImage) => {
     return allImages.findIndex(img => img === targetImage)
   }
+
+  // Add new functions for the image slider
+  const goToNextSlide = useCallback(() => {
+    if (!business?.images?.length) return;
+    setCurrentSlide(prev => (prev === business.images.length - 1 ? 0 : prev + 1));
+  }, [business]);
+
+  const goToPrevSlide = useCallback(() => {
+    if (!business?.images?.length) return;
+    setCurrentSlide(prev => (prev === 0 ? business.images.length - 1 : prev - 1));
+  }, [business]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Add a useEffect for auto-play functionality
+  useEffect(() => {
+    if (isSliderAutoPlaying && business?.images?.length > 1) {
+      sliderIntervalRef.current = setInterval(() => {
+        goToNextSlide();
+      }, 5000); // Change slide every 5 seconds
+    }
+
+    return () => {
+      if (sliderIntervalRef.current) {
+        clearInterval(sliderIntervalRef.current);
+      }
+    };
+  }, [isSliderAutoPlaying, goToNextSlide, business]);
+
+  // Pause autoplay on hover
+  const pauseAutoPlay = () => setIsSliderAutoPlaying(false);
+  const resumeAutoPlay = () => setIsSliderAutoPlaying(true);
+
+  // Add similar effect for the hero slider for swipe functionality
+  useEffect(() => {
+    const heroElement = document.getElementById('hero-slider');
+    if (!heroElement) return;
+
+    let startX;
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+      pauseAutoPlay();
+    };
+
+    const handleTouchEnd = (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          goToNextSlide();
+        } else {
+          goToPrevSlide();
+        }
+      }
+      
+      resumeAutoPlay();
+    };
+
+    heroElement.addEventListener("touchstart", handleTouchStart);
+    heroElement.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      heroElement.removeEventListener("touchstart", handleTouchStart);
+      heroElement.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [goToNextSlide, goToPrevSlide]);
 
   if (loading) {
     return (
@@ -777,9 +863,12 @@ export default function BusinessDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white max-w-7xl mx-auto w-full">
+      {/* Add style tag */}
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
+      
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between p-4 border-b sticky top-0 bg-white/95 backdrop-blur-sm z-30">
+      <div className="lg:hidden flex items-center justify-between p-4 border-b sticky top-0 bg-white/95 backdrop-blur-sm z-40">
         <h1 className="text-xl font-bold">{business.name}</h1>
         <div className="flex items-center gap-2">
           <button className="rounded-full border p-2" onClick={() => setIsFavorite(!isFavorite)}>
@@ -791,48 +880,145 @@ export default function BusinessDetailPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <div className="relative h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden">
-        <img
-          src={`${API_URL_FILE}${activeImage || business.images[0]}` || "/placeholder.svg"}
-          alt={business.name}
-          className="w-full h-full object-cover transition-opacity duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
-          <div className="max-w-7xl mx-auto w-full">
-            <div className="flex items-center gap-2 mb-2">
-              <Badge className="bg-blue-500">{business.isVerified ? "Verified" : "Unverified"}</Badge>
-              {business.isFeatured && (
-                <Badge variant="outline" className="border-yellow-500 text-yellow-500">
-                  Featured
-                </Badge>
-              )}
-              <Badge
-                variant={isOpen() ? "success" : "destructive"}
-                className={isOpen() ? "bg-green-500" : "bg-red-500"}
+      {/* Hero Section with Multi-Image Gallery */}
+      <div className="relative h-[300px] md:h-[400px] lg:h-[350px] w-full overflow-hidden">
+        {business.images && business.images.length > 0 ? (
+          <>
+            {/* Grid Gallery Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-3 h-full">
+              {/* Feature Image (First Image) - Takes up more space */}
+              <div 
+                className="relative col-span-1 md:col-span-2 h-full cursor-pointer"
+                onClick={() => openGallery(findImageIndex(business.images[0]))}
               >
-                {isOpen() ? "Open Now" : "Closed"}
-              </Badge>
+                <img
+                  src={`${API_URL_FILE}${business.images[0]}` || "/placeholder.svg"}
+                  alt={`${business.name} - Feature Image`}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <Maximize className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              
+              {/* Side Gallery - Smaller Images */}
+              <div className="relative hidden md:grid grid-rows-2 h-full">
+                {/* Show the second image if available */}
+                {business.images.length > 1 && (
+                  <div 
+                    className="relative h-full cursor-pointer"
+                    onClick={() => openGallery(findImageIndex(business.images[1]))}
+                  >
+                    <img
+                      src={`${API_URL_FILE}${business.images[1]}` || "/placeholder.svg"}
+                      alt={`${business.name} - Image 2`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <Maximize className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                )}
+                
+                {/* Show the third image if available, otherwise show "View All" button */}
+                {business.images.length > 2 && (
+                  <div 
+                    className="relative h-full cursor-pointer"
+                    onClick={() => openGallery(findImageIndex(business.images[2]))}
+                  >
+                    <img
+                      src={`${API_URL_FILE}${business.images[2]}` || "/placeholder.svg"}
+                      alt={`${business.name} - Image 3`}
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* If there are more than 3 images, show a count overlay */}
+                    {business.images.length > 3 && (
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <Maximize className="w-6 h-6 mx-auto mb-1" />
+                          <p className="font-medium">+{business.images.length - 3} more</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Standard hover effect if not showing count overlay */}
+                    {business.images.length <= 3 && (
+                      <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Maximize className="w-5 h-5 text-white" />
+                      </div>
+                    )}
+                  </div>
+                ) }
+              </div>
+              
+              {/* Mobile View - Only show first image with indicator that there are more */}
+              {business.images.length > 1 && (
+                <div className="absolute bottom-4 right-4 md:hidden z-20">
+                  <button 
+                    className="bg-black/70 text-white text-xs px-3 py-1 rounded-full flex items-center"
+                    onClick={() => openGallery(0)}
+                  >
+                    <Image className="w-3 h-3 mr-1" />
+                    +{business.images.length - 1} photos
+                  </button>
+                </div>
+              )}
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{business.name}</h1>
-            <div className="flex items-center gap-2 text-white">
-              <StarRating value={calculateAverageRating()} />
-              <span className="text-sm">
-                {calculateAverageRating()} ({reviews.length} reviews)
-              </span>
+            
+            {/* Information Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10 z-10 pointer-events-none">
+              <div className="max-w-7xl mx-auto w-full">
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-blue-500 pointer-events-auto">{business.isVerified ? "Verified" : "Unverified"}</Badge>
+                  {business.isFeatured && (
+                    <Badge variant="outline" className="border-yellow-500 text-yellow-500 pointer-events-auto">
+                      Featured
+                    </Badge>
+                  )}
+                  <Badge
+                    variant={isOpen() ? "success" : "destructive"}
+                    className={`${isOpen() ? "bg-green-500" : "bg-red-500"} pointer-events-auto`}
+                  >
+                    {isOpen() ? "Open Now" : "Closed"}
+                  </Badge>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{business.name}</h1>
+                <div className="flex items-center gap-2 text-white">
+                  <StarRating value={calculateAverageRating()} />
+                  <span className="text-sm">
+                    {calculateAverageRating()} ({reviews.length} reviews)
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <button
-          className="absolute top-4 right-4 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white p-2"
-          onClick={() => openGallery(business.images.indexOf(activeImage))}
-        >
-          <Maximize className="h-5 w-5" />
-        </button>
+            
+            {/* Full-screen button */}
+            <button
+              className="absolute top-4 right-4 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white p-2 z-20"
+              onClick={() => openGallery(0)}
+            >
+              <Maximize className="h-5 w-5" />
+            </button>
+          </>
+        ) : (
+          <>
+            <img
+              src="/placeholder.svg"
+              alt={business.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10">
+              <div className="max-w-7xl mx-auto w-full">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{business.name}</h1>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Quick Contact Bar */}
-      <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b lg:top-0">
+      {/* Quick Contact Bar - Desktop only */}
+      <div className="hidden lg:block relative z-20 bg-white/95 backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between overflow-x-auto">
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1 min-w-max">
@@ -882,225 +1068,169 @@ export default function BusinessDetailPage() {
         </div>
       </div>
 
+      {/* Tab Navigation Bar - Desktop */}
+      <div className="hidden lg:block sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b shadow-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex overflow-x-auto hide-scrollbar">
+            <a
+              href="#overview"
+              className={cn(
+                "block text-lg font-medium hover:text-blue-500 transition-colors py-4 px-6",
+                activeTab === "overview" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("overview");
+                document.getElementById("overview").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Overview
+            </a>
+            <a
+              href="#services"
+              className={cn(
+                "block text-lg font-medium hover:text-blue-500 transition-colors py-4 px-6",
+                activeTab === "services" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("services");
+                document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Services
+            </a>
+            <a
+              href="#gallery"
+              className={cn(
+                "block text-lg font-medium hover:text-blue-500 transition-colors py-4 px-6",
+                activeTab === "gallery" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("gallery");
+                document.getElementById("gallery").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Gallery
+            </a>
+            <a
+              href="#reviews"
+              className={cn(
+                "block text-lg font-medium hover:text-blue-500 transition-colors py-4 px-6",
+                activeTab === "reviews" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("reviews");
+                document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Reviews
+            </a>
+            <a
+              href="#contact"
+              className={cn(
+                "block text-lg font-medium hover:text-blue-500 transition-colors py-4 px-6",
+                activeTab === "contact" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("contact");
+                document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab Navigation Bar - Mobile */}
+      <div className="lg:hidden sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b shadow-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex overflow-x-auto hide-scrollbar">
+            <a
+              href="#overview"
+              className={cn(
+                "block text-base font-medium hover:text-blue-500 transition-colors py-3 px-4",
+                activeTab === "overview" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("overview");
+                document.getElementById("overview").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Overview
+            </a>
+            <a
+              href="#services"
+              className={cn(
+                "block text-base font-medium hover:text-blue-500 transition-colors py-3 px-4",
+                activeTab === "services" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("services");
+                document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Services
+            </a>
+            <a
+              href="#gallery"
+              className={cn(
+                "block text-base font-medium hover:text-blue-500 transition-colors py-3 px-4",
+                activeTab === "gallery" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("gallery");
+                document.getElementById("gallery").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Gallery
+            </a>
+            <a
+              href="#reviews"
+              className={cn(
+                "block text-base font-medium hover:text-blue-500 transition-colors py-3 px-4",
+                activeTab === "reviews" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("reviews");
+                document.getElementById("reviews").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Reviews
+            </a>
+            <a
+              href="#contact"
+              className={cn(
+                "block text-base font-medium hover:text-blue-500 transition-colors py-3 px-4",
+                activeTab === "contact" && "text-blue-500 border-b-2 border-blue-500"
+              )}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("contact");
+                document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Navigation (Desktop) */}
-          <div className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <Card className="overflow-hidden border-0 shadow-md">
-                <CardContent className="p-6">
-                  <nav className="space-y-4">
-                    <a
-                      href="#overview"
-                      className={cn(
-                        "block text-lg font-medium hover:text-blue-500 transition-colors relative pl-4",
-                        activeTab === "overview" && "text-blue-500",
-                      )}
-                      onClick={() => setActiveTab("overview")}
-                    >
-                      {activeTab === "overview" && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-full" />
-                      )}
-                      Overview
-                    </a>
-                    <a
-                      href="#services"
-                      className={cn(
-                        "block text-lg font-medium hover:text-blue-500 transition-colors relative pl-4",
-                        activeTab === "services" && "text-blue-500",
-                      )}
-                      onClick={() => setActiveTab("services")}
-                    >
-                      {activeTab === "services" && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-full" />
-                      )}
-                      Services
-                    </a>
-                    <a
-                      href="#gallery"
-                      className={cn(
-                        "block text-lg font-medium hover:text-blue-500 transition-colors relative pl-4",
-                        activeTab === "gallery" && "text-blue-500",
-                      )}
-                      onClick={() => setActiveTab("gallery")}
-                    >
-                      {activeTab === "gallery" && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-full" />
-                      )}
-                      Gallery
-                    </a>
-                    <a
-                      href="#reviews"
-                      className={cn(
-                        "block text-lg font-medium hover:text-blue-500 transition-colors relative pl-4",
-                        activeTab === "reviews" && "text-blue-500",
-                      )}
-                      onClick={() => setActiveTab("reviews")}
-                    >
-                      {activeTab === "reviews" && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-full" />
-                      )}
-                      Reviews
-                    </a>
-                    <a
-                      href="#contact"
-                      className={cn(
-                        "block text-lg font-medium hover:text-blue-500 transition-colors relative pl-4",
-                        activeTab === "contact" && "text-blue-500",
-                      )}
-                      onClick={() => setActiveTab("contact")}
-                    >
-                      {activeTab === "contact" && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-full" />
-                      )}
-                      Contact
-                    </a>
-                  </nav>
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden border-0 shadow-md">
-                <CardHeader className="bg-gray-50 pb-3">
-                  <CardTitle className="flex items-center gap-2">
-                    <Info className="w-5 h-5 text-blue-500" />
-                    Contact Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4 p-6">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                    <div>
-                      <p>{business.location.street}</p>
-                      <p>
-                        {business.location.name}, {business.location.city}
-                      </p>
-                      <p>{business.location.country}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-blue-500" />
-                    <a
-                      href={`tel:${business.phoneNumber}`}
-                      className="hover:underline hover:text-blue-500 transition-colors"
-                    >
-                      {business.phoneNumber}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-blue-500" />
-                    <a
-                      href={`mailto:${business.email}`}
-                      className="hover:underline hover:text-blue-500 transition-colors"
-                    >
-                      {business.email}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Globe className="w-5 h-5 text-blue-500" />
-                    <a
-                      href={business.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline hover:text-blue-500 transition-colors"
-                    >
-                      {business.website.replace("https://", "")}
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden border-0 shadow-md">
-                <CardHeader className="bg-gray-50 pb-3">
-                  <CardTitle className="flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-blue-500" />
-                    Opening Hours
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="space-y-2">
-                    {formatOpeningHours().map((item, index) => {
-                      const today = new Date().getDay()
-                      const isToday = (today === 0 && index === 6) || today - 1 === index
-
-                      return (
-                        <div
-                          key={index}
-                          className={cn(
-                            "flex justify-between py-1",
-                            isToday && "font-medium bg-gray-50 -mx-2 px-2 rounded-md",
-                          )}
-                        >
-                          <span className={cn(isToday && "text-blue-500")}>{item.day}</span>
-                          <span>
-                            {item.open} - {item.close}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden border-0 shadow-md">
-                <CardHeader className="bg-gray-50 pb-3">
-                  <CardTitle className="flex items-center gap-2">
-                    <Share2 className="w-5 h-5 text-blue-500" />
-                    Social Media
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="flex gap-4">
-                    {business.socialMedia.facebook && (
-                      <a
-                        href={`https://${business.socialMedia.facebook}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 p-2 rounded-full hover:bg-blue-100 hover:text-blue-500 transition-colors"
-                      >
-                        <Facebook className="w-5 h-5" />
-                      </a>
-                    )}
-                    {business.socialMedia.twitter && (
-                      <a
-                        href={`https://${business.socialMedia.twitter}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 p-2 rounded-full hover:bg-blue-100 hover:text-blue-500 transition-colors"
-                      >
-                        <Twitter className="w-5 h-5" />
-                      </a>
-                    )}
-                    {business.socialMedia.instagram && (
-                      <a
-                        href={`https://${business.socialMedia.instagram}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 p-2 rounded-full hover:bg-blue-100 hover:text-blue-500 transition-colors"
-                      >
-                        <Instagram className="w-5 h-5" />
-                      </a>
-                    )}
-                    {business.socialMedia.linkedin && (
-                      <a
-                        href={`https://${business.socialMedia.linkedin}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-100 p-2 rounded-full hover:bg-blue-100 hover:text-blue-500 transition-colors"
-                      >
-                        <Linkedin className="w-5 h-5" />
-                      </a>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 gap-8">
           {/* Main Content Column */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="space-y-10">
             {/* Overview Section */}
-            <section id="overview" className="scroll-mt-16">
+            <section id="overview" className="scroll-mt-48 lg:scroll-mt-48">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <CardTitle className="text-2xl flex items-center gap-2">
@@ -1110,31 +1240,12 @@ export default function BusinessDetailPage() {
                 </CardHeader>
                 <CardContent className="p-6">
                   <p className="text-gray-600 leading-relaxed">{business.description}</p>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                    <div className="bg-gray-50 p-4 rounded-lg text-center">
-                      <Calendar className="w-6 h-6 mx-auto mb-2 text-blue-500" />
-                      <p className="text-sm font-medium">Since 2018</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg text-center">
-                      <Users className="w-6 h-6 mx-auto mb-2 text-blue-500" />
-                      <p className="text-sm font-medium">15+ Staff</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg text-center">
-                      <Coffee className="w-6 h-6 mx-auto mb-2 text-blue-500" />
-                      <p className="text-sm font-medium">Premium Beans</p>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg text-center">
-                      <DollarSign className="w-6 h-6 mx-auto mb-2 text-blue-500" />
-                      <p className="text-sm font-medium">Fair Prices</p>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             </section>
 
             {/* Services Section */}
-            <section id="services" className="scroll-mt-16">
+            <section id="services" className="scroll-mt-16 lg:scroll-mt-48">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <CardTitle className="text-2xl flex items-center gap-2">
@@ -1144,7 +1255,7 @@ export default function BusinessDetailPage() {
                   <CardDescription>Explore our offerings</CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {services.map((service, index) => (
                       
                       <Card key={index} className="overflow-hidden border-0 shadow-md group">
@@ -1203,7 +1314,7 @@ export default function BusinessDetailPage() {
             </section>
 
             {/* Gallery Section */}
-            <section id="gallery" className="scroll-mt-16">
+            <section id="gallery" className="scroll-mt-16 lg:scroll-mt-48">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <CardTitle className="text-2xl flex items-center gap-2">
@@ -1244,7 +1355,7 @@ export default function BusinessDetailPage() {
             </section>
 
             {/* Reviews Section */}
-            <section id="reviews" className="scroll-mt-16">
+            <section id="reviews" className="scroll-mt-16 lg:scroll-mt-48">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -1264,7 +1375,7 @@ export default function BusinessDetailPage() {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="p-6 space-y-6">
+                <CardContent className="p-6 space-y-6 grid grid-cols-1 lg:grid-cols-2 gap-6 ">
                   {reviews.map((review, index) => (
                     <div key={index} className="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
                       <div className="flex justify-between items-start mb-4">
@@ -1376,7 +1487,7 @@ export default function BusinessDetailPage() {
             </section>
 
             {/* Contact Section */}
-            <section id="contact" className="scroll-mt-16">
+            <section id="contact" className="scroll-mt-16 lg:scroll-mt-20">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <CardTitle className="text-2xl flex items-center gap-2">
@@ -1437,7 +1548,7 @@ export default function BusinessDetailPage() {
                       type="submit"
                       className="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 hover:scale-105"
                     >
-                      <Send className="w-4 h-4 mr-2" />
+                      <Send className="w-4 h-4 mr-2 inline-block" />
                       Send Message
                     </Button>
                   </form>
@@ -1445,8 +1556,8 @@ export default function BusinessDetailPage() {
               </Card>
             </section>
 
-            {/* Mobile Contact Info (only visible on mobile) */}
-            <section className="lg:hidden space-y-6">
+            {/* Contact Info Grid */}
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="overflow-hidden border-0 shadow-md">
                 <CardHeader className="bg-gray-50 pb-3">
                   <CardTitle className="flex items-center gap-2">
@@ -1454,7 +1565,7 @@ export default function BusinessDetailPage() {
                     Contact Information
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6 space-y-4">
+                <CardContent className="space-y-4 p-6">
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
                     <div>
@@ -1733,8 +1844,6 @@ export default function BusinessDetailPage() {
                   ref={specialInstructionsRef}
                   id="specialInstructions"
                   className="w-full rounded-md border border-gray-300 p-2 min-h-[80px]"
-                  
-                 
                   placeholder="Any special requests or notes for your order..."
                 />
               </div>

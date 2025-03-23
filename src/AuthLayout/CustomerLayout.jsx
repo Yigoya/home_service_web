@@ -1,19 +1,30 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../Shared/Components/NavBar';
+import NavBar from '../Shared/Components/Navbar';
 import CustomerNavBar from '../Customer/Components/CustomerNavBar';
-import { AuthContext } from '../Shared/Context/AuthContext';
+import { AuthContext } from '../Shared/Context/AuthContext'; 
 import { FilterProvider } from '../Shared/Context/FilterContext';
 
 
 const CustomerLayout = ({ isTender, nextRoute }) => {
   const { isLoggedIn } = useContext(AuthContext);
+  const getCurrentPath = () => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      return path;
+    }
+    return '';
+  };
+
+  const currentPath = getCurrentPath();
+
+  const isTenderPage = currentPath.includes('/tender');
 
   return (
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <CustomerNavBar isTender={isTender} nextRoute={nextRoute}/> : <NavBar isTender={isTender} nextRoute={nextRoute}/>}
+        {isLoggedIn ? <CustomerNavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute}/> : <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute}/>}
         <Outlet />
       </div>
     </div>

@@ -5,9 +5,9 @@ import { fetchData } from '../store/dataSlice';
 const useFetchData = () => {
   const dispatch = useDispatch();
   const { tenders, companies, services, loading, error } = useSelector((state) => state.data);
-
+  console.log(tenders, companies, services, loading, error)
   useEffect(() => {
-    if (!services.length && !loading && !error) {
+    if (services.length == 0 && !loading && !error) {
       dispatch(fetchData()); // Fetch only if no data, not loading, and no error
     }
     // dispatch(fetchData()); // Fetch only if no data, not loading, and no error

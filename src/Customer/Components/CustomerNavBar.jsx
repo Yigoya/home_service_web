@@ -18,6 +18,7 @@ export default function CustomerNavBar({ isTender, nextRoute }) {
   const { userAddress } = useContext(LocationContext)
   const [scrolled, setScrolled] = useState(false);
   
+  
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "am" : "en"
     i18n.changeLanguage(newLang)

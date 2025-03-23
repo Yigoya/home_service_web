@@ -2,10 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './Shared/pages/Landing';
 import SignUp from './Customer/Pages/SignUp';
 import Login from './Shared/pages/Login';
-import TechnicianList from './Customer/Pages/TechnicianList';
 import ContactUs from './Customer/Pages/ContactUs';
 import Registration from './Technician/Pages/Registration';
-import TechnicianDetail from './Customer/Pages/TechnicianDetail';
 import BookTechnician from './Customer/Pages/BookTechnician';
 import VerificationPage from './Customer/Pages/VerificationPage';
 import TechVerificationPage from './Technician/Pages/TechVerificationPage';
@@ -33,7 +31,9 @@ import TenderPage from './Tender/TenderPage';
 import TenderCategories from './Tender/TenderCategories';
 import SubscriptionPackage from './Tender/SubscriptionPackage';
 import TenderDetailPage from './Tender/TenderDetailPage';
+import PublishTender from './Tender/PublishTender';
 import HomePage from './Compancies/pages/HomePage';
+import NotFound from './Shared/pages/NotFound';
 
 import CategoriesPage from "./Compancies/pages/CategoriesPage"
 import BusinessDetailPage from "./Compancies/pages/BusinessDetailPage"
@@ -41,6 +41,11 @@ import CompanyLayout from './AuthLayout/CompanyLayout';
 import SubcategoriesPage from './Compancies/pages/SubcategoriesPage';
 import CompanyListingPage from './Compancies/pages/CompanyListingPage';
 import BusinessListingPage from './Compancies/pages/CompanyListingPage';
+import ServiceCategoriesPage from './Shared/pages/ServiceCategoriesPage';
+import BookingForm from './Customer/Pages/BookingForm';
+import TechnicianList from './Customer/Pages/TechnicianList';
+import TechnicianDetail from './Customer/Pages/TechnicianDetail';
+import LandingPage from './Shared/pages/LandingPage';
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -62,7 +67,7 @@ function App() {
                 </Route>
               ) : (
                 <Route element={<CustomerLayout />}>
-                  <Route path="/" element={<Landing />} />
+                  <Route path="/" element={<LandingPage />} />
                   <Route path="/customer-signup" element={<SignUp />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/services" element={<Services />} />
@@ -71,7 +76,7 @@ function App() {
                   <Route path="/contact-us" element={<ContactUs />} />
                   <Route path="/technician-registration" element={<Registration />} />
                   <Route path="/technician-details/:id/:Id" element={<TechnicianDetail />} />
-                  <Route path="/book-technician/:id/:serviceId" element={<BookTechnician />} />
+                  <Route path="/book-technician/:technicianId/:serviceId" element={<BookingForm />} />
                   <Route path="/verify-email" element={<VerificationPage />} />
                   <Route path="/tech-verification-waiting" element={<TechVerificationPage />} />
                   <Route path="/customer-profile/:id" element={<Profile />} />
@@ -79,18 +84,21 @@ function App() {
                   <Route path="/forgot-password" element={<ForgotPassword />} />
                   <Route path="/pre-signup" element={<PreSignup />} />
                   <Route path='/checkout' element = {<Checkout />} />
+                  <Route path="/service-categories" element={<ServiceCategoriesPage />} />
                   <Route path="/tender-categories" element={<TenderCategories/>} />
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
-                  <Route path="*" element={<div>404 Not Found</div>} />
+                  <Route path="*" element={<NotFound />} />
                   <Route path='/subscription' element={<SubscriptionPackage/>} />
                 </Route>
               )}
                   <Route path="/tender" element={<TenderPage/>} />
+                  <Route path="/tenders" element={<PublishTender/>} />
                   <Route element={<CompanyLayout />}>
                     <Route path="/companies" element={<HomePage />} />
                     <Route path="/categories" element={<CategoriesPage />} />
                     <Route path="/subcategories" element={<SubcategoriesPage />} />
                     <Route path="/business/:id" element={<BusinessListingPage />} />
+                    <Route path="/search" element={<BusinessListingPage />} />
                     <Route path="/business-details/:id" element={<BusinessDetailPage />} />
                   </Route>
                   

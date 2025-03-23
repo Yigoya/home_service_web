@@ -1,184 +1,215 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { MapPin, Phone, Mail, Star, Calendar, Briefcase, Loader2, Clock } from 'lucide-react';
 import axios from 'axios';
-import { FaStar, FaClock, FaMapMarkerAlt, FaBriefcase, FaUsers, FaCalendar } from 'react-icons/fa';
-import {  SingleTech, techDetailApi } from '../Api/Api';
-import { API_URL } from '../../Shared/api';
-import { logo1 } from '../../Shared/Components/Images';
-import LoadingPage from '../../Shared/Components/LoadingPage';
-import { useTranslation } from 'react-i18next';
+import { API_URL, API_URL_FILE } from '../../Shared/api';
 
 const TechnicianDetail = () => {
-  const {t} = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [technician, setTechnician] = useState({});
-  const { id, Id } = useParams();
-  console.log(Id)
-  const techBooking = `/book-technician/${id}/${Id}`;
-
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [technician, setTechnician] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTechnician = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${SingleTech}/${id}`);
-        console.log(response.data)
-        setTechnician(response.data);
-        setLoading(false);
-        console.log(response.data)
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    fetchTechnician();
-  } , []);
-  console.log(technician)
-  console.log(`${SingleTech}/${id}`)
+    fetchTechnicianDetails();
+  }, [id]);
 
-  const formatTime = (time) => {
-    if (!time) return "closed";
-    const [hour, minute] = time.split(':');
-    const period = parseInt(hour) >= 12 ? 'PM' : 'AM';
-    const formattedHour = parseInt(hour) % 12 || 12;
-    return `${formattedHour}:${minute} ${period}`;
+  const fetchTechnicianDetails = async () => {
+    try {
+      const { data } = await axios.get(`${API_URL}/technicians/${id}`);
+      setTechnician(data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to fetch technician details');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const daysOfWeek = [
-    t('sunday'), t('monday'), t('tuesday'), t('wednesday'), t('thursday'),t('friday'), t('saturday')
-  ];
+  const handleBooking = () => {
+    navigate(`/book-technician/${technician.id}/1`);
+  };
+
+  const formatTime = (time) => {
+    if (!time) return 'Closed';
+    return time.slice(0, 5); // Convert "09:00:00" to "09:00"
+  };
 
   if (loading) {
-    return <div><LoadingPage /></div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+      </div>
+    );
   }
 
-  return (
-    <div className="bg-gray-100 mt-14 lg:px-14 min-h-screen">
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-          <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/3 lg:w-1/4">
-              <img
-                className="h-64 w-full object-cover md:h-full"
-                src={`${API_URL}/uploads/${technician.profileImage}` || "data:image/jpeg;base64,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"}
-                alt={technician.name || "Technician"}
-              />
-              
-            </div>
-            
-            <div className="p-6 md:w-2/3 lg:w-3/4">
-            <div className='lg:flex justify-between '>
-              <div>
-              <div className="uppercase max-md:hidden tracking-wide text-sm text-emerald-500 font-semibold">
-                {t('protech')}
-              </div>
-              <h1 className="mt-2 text-2xl md:text-xl lg:text-2xl leading-8 font-extrabold tracking-tight text-gray-900">
-                {technician.name || "N/A"}
-              </h1>
-              </div>
-            <div>
-                <Link
-                  to={techBooking}
-                  className="inline-flex max-md:hidden rounded-2xl items-center px-16 py-1 border border-transparent text-base font-medium shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
-                >
-                  {t('book')}
-                </Link>
-              </div>
-            </div>
-            
-              <div className="mt-2 flex flex-wrap items-center text-gray-500">
-                <div className="flex items-center mr-4 mb-2">
-                  <FaStar className="text-yellow-400 mr-1" />
-                  <span>{technician.rating ? technician.rating.toFixed(1) : 0.0} {t('rating')}</span>
-                </div>
-                <div className="flex items-center mr-4 mb-2">
-                  <FaBriefcase className="mr-1" />
-                  <span>{technician.services ? technician.services.length : 0} {t('service')}</span>
-                </div>
-                <div className="flex items-center mb-2">
-                  <FaUsers className="mr-1" />
-                  <span>{technician.bookings || 0}{t('booking')}</span>
-                </div>
-                <div>
-                <Link
-                  to={techBooking}
-                  className="inline-flex md:hidden items-center px-16 py-1 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
-                >
-                  {t('book')}
-                </Link>
-              </div>
-              </div>
-              <p className="mt-4 text-sm text-gray-500">{technician.bio || "No bio available."}</p>
-              <h3 className="font-bold leading-6  text-gray-900 mt-2">{t('service')}</h3>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {technician.services && technician.services.length > 0 ? (
-                  technician.services.map((service) => (
-                    <span key={service.id} className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
-                      {service.name}
-                    </span>
-                  ))
-                ) : (
-                  <p className="text-gray-500">No services available.</p>
-                )}
-              </div>
+  if (error || !technician) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 text-lg mb-2">Error: {error || 'Technician not found'}</p>
+          <button 
+            onClick={() => navigate('/')}
+            className="text-blue-600 hover:text-blue-800 underline"
+          >
+            Return to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
+  const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
+      <div className="bg-white shadow-lg overflow-hidden">
+        {/* Profile Header */}
+        <div className="relative h-64 sm:h-80">
+          <img
+            src={technician.profileImage ? `${API_URL_FILE}${technician.profileImage}` : "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920"}
+            alt={technician.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <h1 className="text-3xl font-bold">{technician.name}</h1>
+            <div className="flex items-center mt-2 space-x-4">
+              <div className="flex items-center">
+                <Star className="w-5 h-5 text-yellow-400" />
+                <span className="ml-1">{technician.rating} ({technician.bookings} bookings)</span>
+              </div>
+              <div className="flex items-center">
+                <MapPin className="w-5 h-5" />
+                <span className="ml-1">{technician.city}, {technician.subcity}</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">{t('business')}</h3>
-              <div className="mt-4">
-                <dl className="space-y-2">
+        {/* Contact Information */}
+        <div className="p-6 border-b">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex items-center">
+              <Phone className="w-5 h-5 text-gray-500" />
+              <span className="ml-2">{technician.phoneNumber}</span>
+            </div>
+            <div className="flex items-center">
+              <Mail className="w-5 h-5 text-gray-500" />
+              <span className="ml-2">{technician.email}</span>
+            </div>
+            <button
+              onClick={handleBooking}
+              className="bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition-colors"
+            >
+              Book Appointment
+            </button>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* About */}
+            <section>
+              <h2 className="text-2xl font-semibold mb-4">About</h2>
+              <p className="text-gray-600">{technician.bio}</p>
+            </section>
+
+            {/* Services */}
+            <section>
+              <h2 className="text-2xl font-semibold mb-4">Services</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {technician.services.map((service) => (
+                  <div key={service.id} className="bg-gray-50 p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      {service.icon ? (
+                        <img src={`${API_URL_FILE}${service.icon}`} alt={service.name} className="w-8 h-8 mr-2" />
+                      ) : (
+                        <Briefcase className="w-5 h-5 text-blue-600" />
+                      )}
+                      <h3 className="font-semibold">{service.name}</h3>
+                    </div>
+                    <p className="text-gray-600 text-sm">{service.description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Reviews */}
+            <section>
+              <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
+              {technician.review.map((review) => (
+                <div key={review.id} className="bg-gray-50 p-4 rounded-lg mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-blue-600 rounded-full overflow-hidden">
+                        {review.customer.profileImage ? (
+                          <img
+                            src={`/${review.customer.profileImage}`}
+                            alt={review.customer.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-white">
+                            {review.customer.name.charAt(0)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="ml-3">
+                        <h4 className="font-semibold">{review.customer.name}</h4>
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                              fill={i < review.rating ? 'currentColor' : 'none'}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {review.review && <p className="text-gray-600">{review.review}</p>}
+                </div>
+              ))}
+            </section>
+          </div>
+
+          {/* Right Column - Schedule */}
+          {technician.schedule && (
+            <div>
+              <div className="bg-gray-50 p-6 rounded-lg sticky top-6">
+                <h2 className="text-2xl font-semibold mb-4 flex items-center">
+                  <Calendar className="w-6 h-6 mr-2" />
+                  Working Hours
+                </h2>
+                <div className="space-y-3">
                   {daysOfWeek.map((day) => {
-                    const lowercaseDay = day.toLowerCase();
-                    const schedule = technician.schedule && technician.schedule[lowercaseDay];
+                    const startTime = technician.schedule[`${day}Start`];
+                    const endTime = technician.schedule[`${day}End`];
+
                     return (
-                      <div key={day} className="flex justify-between">
-                        <dt className="text-sm font-medium text-gray-500">{day}</dt>
-                        <dd className="text-sm text-gray-900">
-                          {schedule ? `${formatTime(schedule.start)} - ${formatTime(schedule.end)}` : t('closed')}
-                        </dd>
+                      <div key={day} className="flex items-center justify-between">
+                        <span className="capitalize">{day}</span>
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-2 text-gray-400" />
+                          <span className="text-gray-600">
+                            {startTime && endTime ? (
+                              `${formatTime(startTime)} - ${formatTime(endTime)}`
+                            ) : (
+                              'Closed'
+                            )}
+                          </span>
+                        </div>
                       </div>
                     );
                   })}
-                </dl>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">{t('testmony')}</h3>
-            <div className="mt-6 space-y-6">
-              {technician.review && technician.review.length > 0 ? (
-                technician.review.map((review) => (
-                  <div key={review.id} className="flex flex-col sm:flex-row sm:space-x-4">
-                    <div className="flex-shrink-0 mb-4 sm:mb-0">
-                      <img className="h-12 w-12 rounded-full" src={`${API_URL}/uploads/default-avatar.png`} alt="" />
-                    </div>
-                    <div className="flex-grow">
-                      <h4 className="text-sm font-bold">{review.customer.name}</h4>
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <FaStar
-                            key={i}
-                            className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                            aria-hidden="true"
-                          />
-                        ))}
-                      </div>
-                      <p className="mt-1 text-sm text-gray-700">{review.review}</p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-500">{t('noreviw')}</p>
-              )}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
@@ -186,4 +217,3 @@ const TechnicianDetail = () => {
 };
 
 export default TechnicianDetail;
-

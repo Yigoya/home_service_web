@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import LoadingPage from "../../Shared/Components/LoadingPage";
-import CategorySection from "../components/CategorySection";
+import LoadingPage from "../Components/LoadingPage";
+import CategorySection from "../Components/CategorySection";
 import { useNavigate } from "react-router-dom";
 import { setSubcategory } from "../../store/dataSlice";
 import { ChevronRight, Star, Tag } from "react-feather";
-import PromotionalBanner from "../components/PromotionalBanner";
-import LocationSelector from "../components/LocationSelector";
-import SearchBar from "../components/SearchBar";
+import PromotionalBanner from "../Components/PromotionalBanner";
+import LocationSelector from "../Components/LocationSelector";
+import SearchBar from "../Components/SearchBar";
 const subcategories = [
   { id: 1, name: "Beauty Parlours", icon: "👩‍🦰" },
   { id: 2, name: "Beauty Services", icon: "💇‍♀️" },
@@ -17,18 +17,18 @@ const subcategories = [
   { id: 6, name: "Spas", icon: "💆‍♀️" },
 ]
 
-function SubcategoriesPage() {
+function ServiceCategoriesPage() {
   const { subcategory, loading } = useSelector((state) => state.data);
   console.log(subcategory, "subcategory");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleNavigation = (category) => {
+  const handleNavigation = (category) => { 
     if (category.services.length > 0) {
       dispatch(setSubcategory(category)); 
     } else {
-      navigate(`/business/${category.serviceId}`);
+      navigate(`/technician-list/${category.serviceId}`);
     }
   };
 
@@ -54,9 +54,9 @@ function SubcategoriesPage() {
       
         {/* Category Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{subcategory.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName}</h1>
           <p className="text-gray-600">
-            Explore {subcategory.services.length} subcategories in {subcategory.name}
+            Explore {subcategory.services.length} subcategories in {subcategory.name ??  subcategory.categoryName}
           </p>
         </div>
 
@@ -95,4 +95,4 @@ function SubcategoriesPage() {
   );
 }
 
-export default SubcategoriesPage
+export default ServiceCategoriesPage

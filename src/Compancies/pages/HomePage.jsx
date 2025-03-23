@@ -71,50 +71,19 @@ function HomePage() {
 
       <div className="max-w-7xl mx-auto py-3">
         {/* Popular Categories */}
-        <div className="mb-12 bg-white rounded-2xl shadow-sm p-6 md:p-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="space-y-2">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Popular Categories</h2>
-              <p className="text-gray-600">Explore our most popular service categories</p>
-            </div>
-            <Link 
-              to="/categories" 
-              className="hidden md:flex items-center text-blue-600 hover:text-blue-800 transition-colors font-medium"
-            >
-              View All
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 auto-rows-fr">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6 auto-rows-fr my-12">
             {companies.slice(0, 10).map((category) => (
               <div onClick={() => handleCategoryClick(category)} key={category.id} className="h-full">
                 <CategoryCard
                   name={category.name}
                   icon={category.icon}
-                  isPopular={category.name === "Popular Categories"}
+                  
                   description={category.description || `Explore ${category.name} services`}
                 />
               </div>
             ))}
           </div>
-
-          <div className="mt-8 text-center md:hidden">
-            <Link
-              to="/categories"
-              className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors w-full sm:w-auto"
-            >
-              View More Categories
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-
-        {/* Featured Businesses */}
+        {/* Featured Businesses
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">Featured Businesses</h2>
@@ -181,9 +150,9 @@ function HomePage() {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
-        {/* Trending Services */}
+        {/* Trending Services
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
@@ -259,7 +228,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Why Choose Us */}
         <div className="bg-white rounded-lg shadow-md p-8 mb-12">

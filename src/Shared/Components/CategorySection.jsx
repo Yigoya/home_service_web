@@ -10,7 +10,7 @@ function CategorySection({ name, icon, subcategories, category, className = "" }
         </div>
         <div>
           <h2 className="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{name}</h2>
-          <p className="text-sm text-gray-500">{subcategories.length == 0 ? "Explore Companies" : `View all ${subcategories.length} services`}</p>
+          <p className="text-sm text-gray-500">{subcategories.length == 0 ? "Explore Techinicians" : `View all ${subcategories.length} services`}</p>
         </div>
       </div>
       

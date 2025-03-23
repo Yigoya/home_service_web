@@ -1,129 +1,130 @@
-import React from 'react'
-import { FaXTwitter, FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa6'
-import { SiApple, SiGoogleplay } from 'react-icons/si'
-import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-const Footer = () => {
-  const { t } = useTranslation()
+import React from 'react';
+import { 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin, 
+  Mail, 
+  Phone, 
+  MapPin,
+  Download,
+  Apple,
+  Play
+} from 'lucide-react';
 
+export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-emerald-950 to-emerald-900 py-8 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Logo and Description */}
-          <div className="space-y-2">
-            <h2 className="font-bold text-3xl font-mono bg-gradient-to-r from-emerald-400 to-emerald-400 bg-clip-text text-transparent">
-              huluMoya
-            </h2>
-            <p className="text-gray-300 text-xs max-w-xs">
-              {t('connecting')}
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-4">BusinessPro</h3>
+            <p className="text-gray-400 mb-4">
+              Your trusted partner for professional excellence in business solutions, tender services, and more.
             </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('quick_link')}</h3>
-            <ul className="space-y-1 text-gray-300 text-sm">
+            <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
+            <ul className="space-y-2">
               <li>
-                <Link to= "/contact-us" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('contact')}</span>
-                </Link>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">About Us</a>
               </li>
               <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('terms')}</span>
-                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">Services</a>
               </li>
               <li>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 flex items-center">
-                  <span className="hover:translate-x-1 transition-transform duration-200">{t('privacy')}</span>
-                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">Projects</a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">Testimonials</a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">Career</a>
               </li>
             </ul>
           </div>
 
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div>
-            <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('contact')}</h3>
-            <ul className="space-y-1 text-gray-300 text-sm">
-              <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">{t('email')}:</span>
-                <a href="mailto:info@example.com" className="hover:text-emerald-400 transition-colors duration-200">
-                  HuluMoya@gmail.com
-                </a>
+            <h4 className="text-lg font-semibold text-white mb-4">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 mr-2 text-blue-400" />
+                <span>123 Business Avenue, Suite 100, New York, NY 10001</span>
               </li>
-              <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">{t('phone')}:</span>
-                <a href="tel:+12345678900" className="hover:text-emerald-400 transition-colors duration-200">
-                  +1 234 567 8900
-                </a>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 mr-2 text-blue-400" />
+                <span>+1 (555) 123-4567</span>
               </li>
-              <li className="flex items-center space-x-2">
-                <span className="text-emerald-400">{t('location')}:</span>
-                <span>Addis Ababa, Ethiopia</span>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 mr-2 text-blue-400" />
+                <span>contact@businesspro.com</span>
               </li>
             </ul>
           </div>
 
-          {/* Download Apps and Social Media */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('download')}</h3>
-              <div className="flex gap-2">
-                <a
-                  href="#"
-                  className="flex items-center border border-gray-700 rounded-lg px-2 py-1 hover:border-emerald-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group flex-1"
-                >
-                  <SiGoogleplay className="w-6 h-6 mr-2 text-gray-300 group-hover:text-emerald-400 transition-colors duration-200" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-400">{t('get')}</span>
-                    <span className="text-xs font-semibold">{t('from_google')}</span>
-                  </div>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center border border-gray-700 rounded-lg px-2 py-1 hover:border-emerald-400 transition-colors duration-200 bg-black/40 backdrop-blur-sm group flex-1"
-                >
-                  <SiApple className="w-6 h-6 mr-2 text-gray-300 group-hover:text-emerald-400 transition-colors duration-200" />
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-400">{t('get')}</span>
-                    <span className="text-xs font-semibold">{t('from_apple')}</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* Social Media Icons */}
-            <div>
-              <h3 className="text-sm font-semibold text-emerald-400 mb-2">{t('follow')}</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaFacebookF className="w-5 h-5" />
-                </a>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaInstagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaYoutube className="w-5 h-5" />
-                </a>
-                <a href="#" className="hover:text-emerald-400 transition-colors duration-200 transform hover:scale-110">
-                  <FaXTwitter className="w-5 h-5" />
-                </a>
-              </div>
+          {/* Mobile App */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Get Our App</h4>
+            <p className="text-gray-400 mb-4">
+              Download our mobile app for easier access to our services on the go.
+            </p>
+            <div className="space-y-3">
+              <button className="flex items-center space-x-2 bg-white text-gray-900 px-4 py-2 rounded-lg w-full hover:bg-gray-100 transition-colors duration-200">
+                <Apple className="h-5 w-5" />
+                <div className="text-left">
+                  <div className="text-xs">Download on the</div>
+                  <div className="text-sm font-semibold">App Store</div>
+                </div>
+              </button>
+              <button className="flex items-center space-x-2 bg-white text-gray-900 px-4 py-2 rounded-lg w-full hover:bg-gray-100 transition-colors duration-200">
+                <Play className="h-5 w-5" />
+                <div className="text-left">
+                  <div className="text-xs">Get it on</div>
+                  <div className="text-sm font-semibold">Google Play</div>
+                </div>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Copyright Section */}
-        <div className="pt-4 border-t border-gray-800">
-          <p className="text-center text-xs text-gray-400">
-           {t('right')}
-          </p>
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 BusinessPro. All rights reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                Terms of Service
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
-export default Footer
-

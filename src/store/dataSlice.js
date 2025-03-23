@@ -15,6 +15,7 @@ export const fetchData = createAsyncThunk('data/fetchData', async (_, { getState
     const data = response.data;
     const tenders = data[0].services
     const companies = data[1].services
+    
     const services = data
     return { tenders, companies, services };
   } catch (error) {

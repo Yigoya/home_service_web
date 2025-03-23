@@ -28,6 +28,15 @@ export default function CompanyNavbar() {
   const searchRef = useRef(null)
   const userMenuRef = useRef(null)
 
+  const isCompanyPage = () => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      console.log(path);
+      return path === '/companies';
+    }
+    return false;
+  };
+
   // Trending searches
   const trendingSearches = [
     { query: "Best Restaurants Near Me", icon: <TrendingUp size={16} /> },
@@ -102,43 +111,20 @@ export default function CompanyNavbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
-          <div className="flex items-center">
-            <Link to="/companies" className="flex items-center gap-2">
+          <div className="flex items-center cursor-pointer">
+            <div onClick={() => {
+              if (isCompanyPage()) {
+                window.location.href = "/";
+              } else {
+                window.location.href = "/companies";
+              }
+            }} className="flex items-center gap-2">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                 H
               </div>
               <span className="font-bold text-xl text-gray-800">HuluMoya</span>
-            </Link>
+            </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/categories"
-              className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors"
-            >
-              Categories
-            </Link>
-            <Link 
-              to="/trending" 
-              className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors"
-            >
-              Trending
-            </Link>
-            <Link 
-              to="/deals" 
-              className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors"
-            >
-              Deals
-            </Link>
-            <Link 
-              to="/business" 
-              className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors"
-            >
-              For Business
-            </Link>
-          </div>
-
           {/* Search and User Actions */}
           <div className="flex items-center gap-2">
             {/* Search */}
@@ -254,10 +240,7 @@ export default function CompanyNavbar() {
               )}
             </div>
 
-            {/* Wishlist */}
-            <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors hidden md:flex">
-              <Heart size={20} />
-            </button>
+            
 
             {/* Notifications */}
             <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors hidden md:flex relative">
@@ -320,13 +303,14 @@ export default function CompanyNavbar() {
             </button>
           </div>
         </div>
+        
       </div>
 
       {/* Mobile menu */}
       {showMobileMenu && (
         <div className="md:hidden bg-white border-t border-gray-200 py-2">
           <div className="px-4 space-y-1">
-            <Link
+            {/* <Link
               to="/login"
               className="flex items-center justify-center mt-2 mb-4 px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
             >
@@ -356,7 +340,7 @@ export default function CompanyNavbar() {
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
             >
               For Business
-            </Link>
+            </Link> */}
             <Link
               to="/wishlist"
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
