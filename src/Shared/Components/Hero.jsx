@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, CheckCircle, Clock, Users, Shield } from 'lucide-react';
 
 const services = [
@@ -48,8 +49,57 @@ const features = [
 ];
 
 export default function Hero() {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
+  // Use translated service information
+  const translatedServices = [
+    {
+      title: t('tender_services', 'Tender Services'),
+      icon: Building2,
+      description: t('tender_description', 'Professional bid management and tender submission services'),
+    },
+    {
+      title: t('business_solutions', 'Business Solutions'),
+      icon: Briefcase,
+      description: t('business_description', 'Comprehensive business consulting and strategy services'),
+    },
+    {
+      title: t('maintenance', 'Maintenance'),
+      icon: Tool,
+      description: t('maintenance_description', '24/7 maintenance and support services'),
+    },
+    {
+      title: t('professional_services', 'Professional Services'),
+      icon: Wrench,
+      description: t('professional_description', 'Expert professional services across industries'),
+    },
+  ];
+
+  // Use translated feature information
+  const translatedFeatures = [
+    {
+      icon: CheckCircle,
+      title: t('quality_assured', 'Quality Assured'),
+      description: t('quality_description', 'Our services meet the highest industry standards with ISO 9001:2015 certification.'),
+    },
+    {
+      icon: Clock,
+      title: t('support_247', '24/7 Support'),
+      description: t('support_description', 'Round-the-clock customer support with guaranteed response times.'),
+    },
+    {
+      icon: Users,
+      title: t('expert_team', 'Expert Team'),
+      description: t('team_description', 'Highly qualified professionals with decades of combined experience.'),
+    },
+    {
+      icon: Shield,
+      title: t('secure_process', 'Secure Process'),
+      description: t('secure_description', 'Enterprise-grade security protocols protecting your business data.'),
+    },
+  ];
 
   return (
     <div className="pt-16">
@@ -59,7 +109,7 @@ export default function Hero() {
           <img
             className="w-full h-[700px] object-cover"
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80"
-            alt="Modern Office Building"
+            alt={t('office_building_alt', 'Modern Office Building')}
           />
           <div className="absolute h-[700px] inset-0 bg-gray-900/75"></div>
         </div>
@@ -68,13 +118,12 @@ export default function Hero() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
-              Building Tomorrow's
-              <span className="block text-blue-500 mt-2">Business Solutions</span>
+              {t('welcome1', "Building Tomorrow's")}
+              <span className="block text-blue-500 mt-2">{t('welcome2', 'Business Solutions')}</span>
             </h1>
             
             <p className="mt-8 text-lg text-gray-300 leading-relaxed">
-              Empowering businesses with innovative solutions and strategic expertise. 
-              Partner with us to transform your business operations and achieve sustainable growth.
+              {t('header', 'Empowering businesses with innovative solutions and strategic expertise. Partner with us to transform your business operations and achieve sustainable growth.')}
             </p>
 
             {/* Enhanced Search Section */}
@@ -85,7 +134,7 @@ export default function Hero() {
                   <Search className="absolute left-4 h-5 w-5 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search our services..."
+                    placeholder={t('search_placeholder', 'Search our services...')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -93,22 +142,22 @@ export default function Hero() {
                     className="w-full pl-12 pr-32 py-4 bg-white rounded-2xl shadow-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                   <button className="absolute right-2 bg-blue-600 text-white px-6 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                    <span className="hidden sm:inline">Search</span>
+                    <span className="hidden sm:inline">{t('search_now', 'Search')}</span>
                     <ArrowRight className="h-5 w-5" />
                   </button>
                 </div>
               </div>
-              
+
               {/* Popular Searches */}
               <div className="mt-6 flex justify-center gap-6 text-sm">
-                <span className="text-gray-400">Popular:</span>
+                <span className="text-gray-400">{t('popular_searches', 'Popular')}:</span>
                 <button className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
                   <ArrowRight className="h-4 w-4" />
-                  Consulting
+                  {t('consulting', 'Consulting')}
                 </button>
                 <button className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
                   <ArrowRight className="h-4 w-4" />
-                  Enterprise Solutions
+                  {t('enterprise_solutions', 'Enterprise Solutions')}
                 </button>
               </div>
             </div>
@@ -120,7 +169,7 @@ export default function Hero() {
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service) => (
+            {translatedServices.map((service) => (
               <div
                 key={service.title}
                 className="group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1"
@@ -132,10 +181,10 @@ export default function Hero() {
                   <ArrowRight className="h-5 w-5 text-blue-500 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-300" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                  {service.title}
+                  {t(service.title, service.title)}
                 </h3>
                 <p className="mt-2 text-gray-600 text-sm leading-relaxed">
-                  {service.description}
+                  {t(service.description, service.description)}
                 </p>
               </div>
             ))}
@@ -148,15 +197,15 @@ export default function Hero() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-              Why Choose Us
+              {t('why', 'Why Choose Us')}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              We deliver excellence through our comprehensive range of services
+              {t('excellence_description', 'We deliver excellence through our comprehensive range of services')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature) => (
+            {translatedFeatures.map((feature) => (
               <div
                 key={feature.title}
                 className="relative bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
@@ -171,10 +220,10 @@ export default function Hero() {
                 </div>
                 <div className="mt-6">
                   <h3 className="text-xl font-semibold text-gray-900 text-center mb-4">
-                    {feature.title}
+                    {t(feature.title, feature.title)}
                   </h3>
                   <p className="text-gray-600 text-center">
-                    {feature.description}
+                    {t(feature.description, feature.description)}
                   </p>
                 </div>
               </div>

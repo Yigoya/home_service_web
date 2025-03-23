@@ -241,6 +241,10 @@ const resources = {
       "error_publishing_tender": "Error publishing tender. Please try again.",
       "error_fetching_categories": "Error fetching categories. Please refresh the page.",
       "cancel": "Cancel",
+      "consulting": "Consulting",
+      "enterprise_solutions": "Enterprise Solutions",
+      "office_building_alt": "Modern Office Building",
+      "excellence_description": "We deliver excellence through our comprehensive range of services",
     }
   },
   // ... existing code for other languages ...
