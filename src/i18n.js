@@ -91,7 +91,7 @@ const resources = {
       "dispute":"Dispute",
       "title":"Title",
       "enter_title":"Enter Dispute Title",
-      "welcome1":"Welcome to Company Name",
+      "welcome1":"Welcome to HuluMuya",
       "welcome2":"Quality Service, on demand",
       "header":"Experienced, hand-picked Proffessionals to serve you at your doorstep",
       "which":"Which Service Do You Need?",
