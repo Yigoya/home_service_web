@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {
   Search,
   User,
@@ -27,6 +27,7 @@ export default function CompanyNavbar() {
 
   const searchRef = useRef(null)
   const userMenuRef = useRef(null)
+  const navigate = useNavigate();
 
   const isCompanyPage = () => {
     if (typeof window !== 'undefined') {
@@ -114,9 +115,9 @@ export default function CompanyNavbar() {
           <div className="flex items-center cursor-pointer">
             <div onClick={() => {
               if (isCompanyPage()) {
-                window.location.href = "/";
+                navigate("/");
               } else {
-                window.location.href = "/companies";
+                navigate("/companies");
               }
             }} className="flex items-center gap-2">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">

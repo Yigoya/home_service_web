@@ -27,15 +27,21 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-              BusinessPro
-            </h1>
+            {/* Logo */}
+            <div className="flex items-center space-x-2 justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                  H
+                </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              HuluMoya
+              </span>
+            </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex ml-10 space-x-8">
-              <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('serv')}</a>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('info')}</a>
-              <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('contact')}</a>
+              {/* <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('serv')}</a>
+              <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('info')}</a> */}
+              <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 font-medium transition-colors duration-200">{t('contact')}</a>
             </div>
           </div>
 
@@ -45,7 +51,7 @@ export default function Navbar() {
             <div className="relative">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
               >
                 <Globe className="h-4 w-4 mr-1" />
                 <span>{getLanguageDisplay(i18n.language)}</span>
@@ -75,19 +81,19 @@ export default function Navbar() {
               )}
             </div>
             
-            <button className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+            <button className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1">
               <Download className="h-4 w-4 mr-1" />
-              {t('download')}
+              {t('get_app')}
             </button>
-            <button className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
-              <Bell className="h-4 w-4" />
+            <button className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1">
+              <Bell className="h-5 w-5" />
               {t('notification')}
             </button>
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+            <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1">
               <LogIn className="h-4 w-4" />
               <span>{t('login')}</span>
             </button>
-            <button className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200">
+            <button className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 gap-1">
               <UserPlus className="h-4 w-4" />
               <span>{t('regis')}</span>
             </button>

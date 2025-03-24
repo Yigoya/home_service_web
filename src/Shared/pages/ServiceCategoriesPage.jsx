@@ -37,7 +37,7 @@ function ServiceCategoriesPage() {
   // }
 
   if(!subcategory) {
-    window.location.href =  "/companies"
+    navigate("/");
     return
   }
 

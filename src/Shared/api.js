@@ -1,6 +1,6 @@
-export const API_URL = "http://localhost:5000" 
+// export const API_URL = "http://localhost:5000" 
 
-// export const API_URL = "https://hulumoya2.zapto.org" 
+export const API_URL = "https://my-spring-app-latest-htt1.onrender.com" 
 export const API_URL_FILE = `${API_URL}/uploads/`
 export const loginApi = `${API_URL}/auth/login`
 export const socialLoginApi = `${API_URL}/auth/social-login`

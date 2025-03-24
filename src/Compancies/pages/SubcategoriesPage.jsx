@@ -37,7 +37,7 @@ function SubcategoriesPage() {
   // }
 
   if(!subcategory) {
-    window.location.href =  "/companies"
+     navigate("/companies");
     return
   }
 

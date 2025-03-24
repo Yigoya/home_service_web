@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, CheckCircle, Clock, Users, Shield } from 'lucide-react';
+import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, CheckCircle, Clock, Users, Shield, Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import useFetchData from '../../hooks/useFetchData';
+import { useDispatch } from 'react-redux';
+import { setSubcategory } from '../../store/dataSlice';
 
 const services = [
   {
     title: 'Tender Services',
     icon: Building2,
     description: 'Professional bid management and tender submission services',
+    route: '/tender',
   },
   {
     title: 'Business Solutions',
     icon: Briefcase,
     description: 'Comprehensive business consulting and strategy services',
+    route: '/companies',
   },
   {
     title: 'Maintenance',
     icon: Tool,
     description: '24/7 maintenance and support services',
+    route: '/service-categories',
   },
   {
     title: 'Professional Services',
     icon: Wrench,
     description: 'Expert professional services across industries',
+    route: '/service-categories',
   },
 ];
 
@@ -52,6 +60,9 @@ export default function Hero() {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { services, loading, error } = useFetchData();
 
   // Use translated service information
   const translatedServices = [
@@ -59,21 +70,33 @@ export default function Hero() {
       title: t('tender_services', 'Tender Services'),
       icon: Building2,
       description: t('tender_description', 'Professional bid management and tender submission services'),
+      onClick: () => navigate('/tender'),
     },
     {
       title: t('business_solutions', 'Business Solutions'),
       icon: Briefcase,
       description: t('business_description', 'Comprehensive business consulting and strategy services'),
+      onClick: () => navigate('/companies'),
     },
     {
       title: t('maintenance', 'Maintenance'),
       icon: Tool,
       description: t('maintenance_description', '24/7 maintenance and support services'),
+      onClick: () => {
+        dispatch(setSubcategory(services[3])); 
+        navigate("/service-categories");
+        return;
+      }
     },
     {
       title: t('professional_services', 'Professional Services'),
       icon: Wrench,
       description: t('professional_description', 'Expert professional services across industries'),
+      onClick: () => {
+        dispatch(setSubcategory(services[2])); 
+        navigate("/service-categories");
+        return;
+      }
     },
   ];
 
@@ -131,10 +154,10 @@ export default function Hero() {
               <div className={`relative max-w-xl mx-auto transform transition-all duration-300 ${isFocused ? 'scale-105' : ''}`}>
                 <div className="absolute inset-0 bg-blue-500 rounded-xl opacity-10 blur-lg transition-opacity duration-300"></div>
                 <div className="relative flex items-center">
-                  <Search className="absolute left-4 h-5 w-5 text-gray-400" />
+                  {!loading ? <Search className="absolute left-4 h-5 w-5 text-gray-400" /> : <Loader className="absolute left-4 h-5 w-5 text-gray-400" />}  
                   <input
                     type="text"
-                    placeholder={t('search_placeholder', 'Search our services...')}
+                    placeholder={!loading ? t('search_placeholder', 'Search our services...') : 'Wait loading data ...'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -172,6 +195,7 @@ export default function Hero() {
             {translatedServices.map((service) => (
               <div
                 key={service.title}
+                onClick={!loading && !error && service.onClick}
                 className="group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between mb-4">
