@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { Search, Menu, X, User, LogIn, UserPlus, Bell, Download, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
     setIsLangMenuOpen(false);
+    window.location.reload();
   };
 
   // Get language display name based on code
@@ -89,11 +93,15 @@ export default function Navbar() {
               <Bell className="h-5 w-5" />
               {t('notification')}
             </button>
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1">
+            <button 
+              onClick={() => navigate('/login')}  
+            className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1">
               <LogIn className="h-4 w-4" />
               <span>{t('login')}</span>
             </button>
-            <button className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 gap-1">
+            <button  
+            onClick={() => navigate('/customer-signup')}
+            className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 gap-1">
               <UserPlus className="h-4 w-4" />
               <span>{t('regis')}</span>
             </button>

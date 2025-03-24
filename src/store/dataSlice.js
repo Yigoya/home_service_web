@@ -5,7 +5,8 @@ import i18n from '../i18n';
 
 // Async thunk to fetch data
 export const fetchData = createAsyncThunk('data/fetchData', async (_, { getState }) => {
-  const language = i18n.language === "am" ? "AMHARIC" : "ENGLISH";
+  console.log(i18n.language, "i18n.language");
+  const language = i18n.language === "am" ? "AMHARIC" : i18n.language === "om" ? "OROMO" : "ENGLISH";
   console.log("fetchData");
   const { data } = getState();
   if (data.services.length > 0) return data.items; // Skip fetch if data already exists
