@@ -42,11 +42,11 @@ export default function Navbar() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex ml-10 space-x-8">
-              {/* <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('serv')}</a>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('info')}</a> */}
+            {/* <div className="hidden md:flex ml-10 space-x-8">
+              <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('serv')}</a>
+              <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">{t('info')}</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 font-medium transition-colors duration-200">{t('contact')}</a>
-            </div>
+            </div> */}
           </div>
 
           {/* Desktop Right Navigation */}

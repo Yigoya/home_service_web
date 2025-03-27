@@ -172,7 +172,7 @@ export default function Hero() {
               </div>
 
               {/* Popular Searches */}
-              <div className="mt-6 flex justify-center gap-6 text-sm">
+              {/* <div className="mt-6 flex justify-center gap-6 text-sm">
                 <span className="text-gray-400">{t('popular_searches', 'Popular')}:</span>
                 <button className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
                   <ArrowRight className="h-4 w-4" />
@@ -182,7 +182,7 @@ export default function Hero() {
                   <ArrowRight className="h-4 w-4" />
                   {t('enterprise_solutions', 'Enterprise Solutions')}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function Hero() {
               <div
                 key={service.title}
                 onClick={!loading && !error && service.onClick}
-                className="group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1"
+                className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1 ${loading ? '': 'cursor-pointer'}`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="inline-flex p-3 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
