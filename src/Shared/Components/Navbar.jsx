@@ -33,10 +33,10 @@ export default function Navbar({ isTender, nextRoute }) {
           <div className="flex items-center">
             {/* Logo */}
             <Link to={nextRoute || "/"} className="flex items-center space-x-2 justify-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+              <div className={`w-10 h-10 bg-gradient-to-r ${isTender ? "bg-[#3385bb]": "from-blue-500 to-indigo-600" } rounded-lg flex items-center justify-center text-white font-bold text-xl`}>
                   H
                 </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <span className={`text-2xl font-bold bg-gradient-to-r ${isTender ? "bg-[#3385bb]":"from-blue-600 to-blue-400"} bg-clip-text text-transparent`}>
               HuluMoya
               </span>
             </Link>
@@ -101,7 +101,7 @@ export default function Navbar({ isTender, nextRoute }) {
             </button>
             <button  
             onClick={() => navigate('/customer-signup')}
-            className="flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 gap-1">
+            className={`flex items-center space-x-1 ${isTender ? "bg-[#3385bb]" : "bg-blue-600"} text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 gap-1`}>
               <UserPlus className="h-4 w-4" />
               <span>{t('regis')}</span>
             </button>

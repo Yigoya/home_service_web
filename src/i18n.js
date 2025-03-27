@@ -249,6 +249,7 @@ const resources = {
       "announce_or_publish_tender": "Announce or Publish Tender",
       "member_login": "Member Login",
       "register": "Register",
+      "subscription_packages": "Subscription Packages",
     }
   },
   am: {
@@ -466,6 +467,9 @@ const resources = {
       "announce_or_publish_tender": "ጨረታ አስተዋውቅ/አስተላልፍ",
       "member_login": "አባል ግባ",
       "register": "ይመዝገቡ",
+      "subscribe": "ይመዝገቡ",
+      "subscribe_for_email": "ኢሜይል ይመዝገቡ",
+      "subscription_packages": "የመመዝገቢያ መተግበሪያዎች",
     }
   },
   om: {
@@ -666,6 +670,8 @@ const resources = {
       "tender_not_found": "Tajaajila Galchi",
       "tender_not_updated": "Tajaajila Galchi",
       "tender_not_deleted": "Tajaajila Galchi",
+      "subscribe": "Imeelii Fayyadami",
+      "subscription_packages": "Pakijii Fayyadama",
       "afar": "Afar",
       "amhara": "Amhara",
       "benishangul_gumuz": "Benishangul-Gumuz",
@@ -681,6 +687,7 @@ const resources = {
       "addis_ababa": "Addis Ababa",
       "dire_dawa": "Dire Dawa",
       "snnpr": "Southern Nations, Nationalities, and Peoples'",
+      
      
     }
   }

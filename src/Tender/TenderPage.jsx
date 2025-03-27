@@ -138,6 +138,7 @@ export default function TenderPage() {
 
   return (
     <div className="min-h-screen bg-white mt-20">
+    <CustomerLayout isTender={true} color="bg-[#3385bb]"/>
       {/* <nav className="bg-white border-b border-gray-200">
         <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
           {[
@@ -168,14 +169,22 @@ export default function TenderPage() {
               >
                 {t('announce_or_publish_tender')}
               </button>
-              <button className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
+              <button
+                onClick={() => navigateToSignUp()}
+               className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
                 {t('member_login')}
               </button>
               <button
-                onClick={() => navigateToSignUp()}
+                onClick={() =>  navigate("/login")}
                 className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
               >
                 {t('register')}
+              </button>
+              <button
+                onClick={() =>  navigate("/subscription")}
+                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+              >
+                {t('subscription_packages')}
               </button>
               {/* <div className="border p-4 rounded">
                 <h3 className="font-bold text-[#3498db] mb-2">{t('register_as')}</h3>
@@ -232,8 +241,8 @@ export default function TenderPage() {
                                 {formatDate(selectedTender.closingDate)}
                               </p>
                               <p>
-                                <span className="font-medium">GT reference number - </span>
-                                {selectedTender.id}
+                                <span className="font-medium">Published by - </span>
+                                Hulumoya.com
                               </p>
                               <p>
                                 <span className="font-medium">Product classification - </span>
@@ -272,7 +281,9 @@ export default function TenderPage() {
                           
                             {!user && (
                               <div className="flex justify-center mt-3 absolute inset-0 items-center">
-                                <button className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded">
+                                <button
+                                  onClick={() => navigate("/login")}
+                                  className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded">
                                   {t('login')}
                                 </button>
                               </div>

@@ -13,14 +13,14 @@ const CompanyLayout = () => {
   return (
     <FilterProvider>
 
-      <div>
-       <CompanyNavbar />
+      <div className='bg-gray-300'>
        {/* <Breadcrumbs /> */}
-       <main className="flex-grow">
+       <div className="flex-grow bg-white max-w-7xl mx-auto">
+       <CompanyNavbar />
 
       
         <Outlet />
-        </main>
+        </div>
         {/* <CompanyFooter />  */}
       </div>
 

@@ -169,7 +169,7 @@ export default function MarketplaceHeader() {
       </div>
 
       {/* Main Content Row */}
-      <div className="max-w-7xl mx-auto px-4 mt-6">
+      <div className="max-w-7xl mx-auto px-6 mt-6">
         <div className="flex gap-4">
           {/* Main Banner */}
           <div
