@@ -138,7 +138,6 @@ export default function TenderPage() {
 
   return (
     <div className="min-h-screen bg-white mt-20">
-      <CustomerLayout isTender={true} nextRoute={"/tender"} />
       {/* <nav className="bg-white border-b border-gray-200">
         <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
           {[

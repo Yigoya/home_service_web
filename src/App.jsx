@@ -89,10 +89,11 @@ function App() {
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
                   <Route path="*" element={<NotFound />} />
                   <Route path='/subscription' element={<SubscriptionPackage/>} />
-                </Route>
-              )}
                   <Route path="/tender" element={<TenderPage/>} />
                   <Route path="/tenders" element={<PublishTender/>} />
+                </Route>
+              )}
+                  
                   <Route element={<CompanyLayout />}>
                     <Route path="/companies" element={<HomePage />} />
                     <Route path="/categories" element={<CategoriesPage />} />

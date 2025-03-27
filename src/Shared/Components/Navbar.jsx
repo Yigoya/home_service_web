@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Search, Menu, X, User, LogIn, UserPlus, Bell, Download, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ isTender, nextRoute }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
@@ -27,19 +27,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-lg fixed w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white/95 backdrop-blur-md shadow-lg fixed top-0 w-full z-50">
+      <div className={`${!isTender && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             {/* Logo */}
-            <div className="flex items-center space-x-2 justify-center">
+            <Link to={nextRoute || "/"} className="flex items-center space-x-2 justify-center">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
                   H
                 </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
               HuluMoya
               </span>
-            </div>
+            </Link>
             
             {/* Desktop Navigation */}
             {/* <div className="hidden md:flex ml-10 space-x-8">
