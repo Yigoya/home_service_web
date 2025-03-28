@@ -203,8 +203,8 @@ export default function Hero() {
                 className={`group bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all duration-300 transform hover:-translate-y-1 ${loading ? '': 'cursor-pointer'}`}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="inline-flex p-3 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
-                    <img src={service.icon} className="h-6 w-6" />
+                  <div className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
+                    <img src={service.icon} className="h-8 w-8" />
                     {/* <service.icon className="h-6 w-6" /> */}
                   </div>
                   <ArrowRight className="h-5 w-5 text-blue-500 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-300" />
