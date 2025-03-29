@@ -13,7 +13,7 @@ export const fetchData = createAsyncThunk('data/fetchData', async (_, { getState
   try {
     const response = await axios.get(`${API_URL}/admin/services?lang=${language}`);
     console.log(response.data, "response.data");
-    const data = response.data;
+    const data = response.data.sort((a, b) => a.categoryId - b.categoryId);
     const tenders = data[0].services
     const companies = data[1].services
     
