@@ -137,7 +137,9 @@ export default function TenderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white mt-20">
+    <div className="min-h-screen bg-white mt-20"
+
+    >
     <CustomerLayout isTender={true} color="bg-[#3385bb]"/>
       {/* <nav className="bg-white border-b border-gray-200">
         <div className="max-w-full mx-auto s flex justify-between items-stretch h-16 border-collapse border-gray-200">
@@ -158,34 +160,38 @@ export default function TenderPage() {
         </div>
       </nav> */}
       <SearchForm searchTenders={searchTenders} locations={locations} categorys={categories} />
-      <div className="px-2">
+      <div className="px-2 mt-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Left Sidebar */}
           <div className="md:col-span-2">
             <div className="space-y-4">
-              <button
-                onClick={() => navigateToSubscription()}
-                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
-              >
-                {t('announce_or_publish_tender')}
-              </button>
-              <button
-                onClick={() => navigateToSignUp()}
-               className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
-                {t('member_login')}
-              </button>
-              <button
-                onClick={() =>  navigate("/login")}
-                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
-              >
-                {t('register')}
-              </button>
-              <button
-                onClick={() =>  navigate("/subscription")}
-                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
-              >
-                {t('subscription_packages')}
-              </button>
+              <div className="border border-gray-300 rounded-lg p-4">
+                <button
+                  onClick={() => navigateToSubscription()}
+                  className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+                >
+                  {t('announce_or_publish_tender')}
+                </button>
+              </div>
+              <div className="border border-gray-300 rounded-lg p-4 space-y-4">
+                <button
+                  onClick={() => navigateToSignUp()}
+                className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
+                  {t('member_login')}
+                </button>
+                <button
+                  onClick={() =>  navigate("/customer-signup")}
+                  className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+                >
+                  {t('register')}
+                </button>
+                <button
+                  onClick={() =>  navigate("/subscription")}
+                  className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
+                >
+                  {t('subscription_packages')}
+                </button>
+              </div>
               {/* <div className="border p-4 rounded">
                 <h3 className="font-bold text-[#3498db] mb-2">{t('register_as')}</h3>
                 <p className="font-bold">{t('agency_buyer_and')}</p>
@@ -296,10 +302,10 @@ export default function TenderPage() {
           ) : (
             <div className="md:col-span-8 border border-gray-100">
               {/* Header */}
-              <div className="grid grid-cols-11 bg-[#3385bb] text-white">
-                <div className="col-span-2 p-3">{t('location')}</div>
-              <div className="col-span-3 p-3 border-r border-white">{t('category')}</div>
-              <div className="col-span-6 p-3">{selectedCategory != null ? selectedCategory.name : ''}</div>
+              <div className="grid grid-cols-11 bg-[#3385bb] text-white font-medium text-lg">
+                <div className="col-span-2 p-2 pl-3">{t('location')}</div>
+              <div className="col-span-3 p-2 border-r border-white">{t('category')}</div>
+              <div className="col-span-6 p-2">{selectedCategory != null ? selectedCategory.name : ''}</div>
             </div>
 
             {/* Content Grid */}
@@ -310,9 +316,11 @@ export default function TenderPage() {
                   <div
                     key={location.name}
                     onClick={() => fetchTendersByLocation(location.value)} // Use value instead of name for consistency
-                    className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between ${
+                    className={`px-3 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between font-medium text-gray-800 ${
                       index !== locations.length - 1 ? "border-b border-gray-100" : ""
                     }`}
+
+                    
                   >
                     <span>{t(location.name)}</span>
                     {location.hasDropdown && <ChevronDown className="w-4 h-4 text-[#3498db]" />}
@@ -368,9 +376,9 @@ export default function TenderPage() {
                             <h3 className="text-black font-medium mb-2 text-sm">{tender.title}</h3>
                             <div className="grid grid-cols-1 gap-1 text-sm">
                               <div className="flex items-center gap-2">
-                                <span className="text-green-600">{t('posted_date')}:</span>
-                                <Calendar className="w-4 h-4 text-green-600" />
-                                <span className="text-green-600">{formatDate(tender.datePosted)}</span>
+                                <span className="text-[#5a9636]">{t('posted_date')}:</span>
+                                <Calendar className="w-4 h-4 text-[#5a9636]" />
+                                <span className="text-[#5a9636]">{formatDate(tender.datePosted)}</span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <span className="text-[#3385bb]">{t('expiry_date')}:</span>

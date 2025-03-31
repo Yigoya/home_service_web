@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import tenderBanner from "../../assets/tenderbanner.jpg";
+
 
 const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [formData, setFormData] = useState({
@@ -73,8 +75,16 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
 
 
   return (
-    <div className="mx-auto py-6 px-16 ">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="mx-auto py-6 px-16 bg-slate-500"
+                style={{
+              backgroundImage: `url(${tenderBanner})`,
+              backgroundRepeat: "no-repeat",
+              backgroundAttachment: "fixed",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+    >
+      <form onSubmit={handleSubmit} className="space-y-12 my-8 bg-gray-200 bg-opacity-30  p-6 rounded-lg shadow-md ">
         <div className="flex flex-wrap space-y-4 md:space-y-0">
           <div className="w-full md:w-1/6 px-2">
             <input

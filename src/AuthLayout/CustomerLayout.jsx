@@ -17,6 +17,7 @@ const CustomerLayout = ({ isTender, nextRoute, color }) => {
   };
 
   const currentPath = getCurrentPath();
+  const isServiceCategoryPage = currentPath.includes('/service-categories');
 
   const isTenderPage = currentPath.includes('/tender');
 

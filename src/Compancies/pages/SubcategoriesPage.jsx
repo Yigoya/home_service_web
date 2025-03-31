@@ -46,9 +46,9 @@ function SubcategoriesPage() {
       <div className="flex gap-3 mb-3">
           <LocationSelector />
           <SearchBar />
-        </div>
+      </div>
       <PromotionalBanner /> 
-      {/* Search Bar */}
+      
       
       {/* Main Content */}
       

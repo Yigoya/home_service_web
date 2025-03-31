@@ -7,7 +7,7 @@ function PromotionalBanner({
   subtitle = "Limited time deals for beauty services",
   discount = "Up to 30% off",
   validUntil = "Dec 31, 2024",
-  height = "180px",
+  height = "160px",
   className = ""
 }) {
   return (

@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { Search, Menu, X, User, LogIn, UserPlus, Bell, Download, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMainSubcategory, setSubcategory } from '../../store/dataSlice';
 
 export default function Navbar({ isTender, nextRoute }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { subcategory, mainsubcategory, isOnMainSubcategory , loading } = useSelector((state) => state.data);
   
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -26,20 +30,40 @@ export default function Navbar({ isTender, nextRoute }) {
     return languages[code] || code.toUpperCase();
   };
 
+  const isInMainSubcategory = () => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      return path.includes('/service-categories') && isOnMainSubcategory;
+    }
+    return false;
+  };
+
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg fixed top-0 w-full z-50">
       <div className={`${!isTender && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             {/* Logo */}
-            <Link to={nextRoute || "/"} className="flex items-center space-x-2 justify-center">
+            <button onClick={()=>{
+              console.log(isInMainSubcategory(), "isInMainSubcategory");
+              console.log(mainsubcategory, "mainsubcategory");
+              if (isTender) {
+                navigate('/');
+              }
+              else if(!isInMainSubcategory()) {
+                dispatch(setMainSubcategory(mainsubcategory));
+                navigate('/service-categories');
+              } else {
+                navigate('/');
+              }
+            }} className="flex items-center space-x-2 justify-center">
               <div className={`w-10 h-10 bg-gradient-to-r ${isTender ? "bg-[#3385bb]": "from-blue-500 to-indigo-600" } rounded-lg flex items-center justify-center text-white font-bold text-xl`}>
                   H
                 </div>
               <span className={`text-2xl font-bold bg-gradient-to-r ${isTender ? "bg-[#3385bb]":"from-blue-600 to-blue-400"} bg-clip-text text-transparent`}>
               HuluMoya
               </span>
-            </Link>
+            </button>
             
             {/* Desktop Navigation */}
             {/* <div className="hidden md:flex ml-10 space-x-8">

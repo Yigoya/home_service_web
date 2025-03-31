@@ -4,7 +4,7 @@ import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, Chec
 import { useNavigate } from 'react-router-dom';
 import useFetchData from '../../hooks/useFetchData';
 import { useDispatch } from 'react-redux';
-import { setSubcategory } from '../../store/dataSlice';
+import { setMainSubcategory } from '../../store/dataSlice';
 import Tender from '../../assets/tender.png';
 import Business from '../../assets/justcall.png';
 import Maintenance from '../../assets/maintenance.png';
@@ -87,7 +87,7 @@ export default function Hero() {
       icon: Maintenance,
       description: t('maintenance_description', '24/7 maintenance and support services'),
       onClick: () => {
-        dispatch(setSubcategory(services[3])); 
+        dispatch(setMainSubcategory(services[3])); 
         navigate("/service-categories");
         return;
       }
@@ -97,7 +97,7 @@ export default function Hero() {
       icon: Professional,
       description: t('professional_description', 'Expert professional services across industries'),
       onClick: () => {
-        dispatch(setSubcategory(services[2])); 
+        dispatch(setMainSubcategory(services[2])); 
         navigate("/service-categories");
         return;
       }
@@ -204,7 +204,7 @@ export default function Hero() {
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
-                    <img src={service.icon} className="h-8 w-8" />
+                    <img src={service.icon} className="h-10 w-10" />
                     {/* <service.icon className="h-6 w-6" /> */}
                   </div>
                   <ArrowRight className="h-5 w-5 text-blue-500 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-300" />

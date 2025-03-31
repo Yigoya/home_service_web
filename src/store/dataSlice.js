@@ -33,12 +33,20 @@ const dataSlice = createSlice({
     companies: [],
     services: [],
     subcategory: null,
+    mainsubcategory: null,
+    isOnMainSubcategory: false,
     loading: false,
     error: null,
   },
   reducers: {
     setSubcategory: (state, action) => {
       state.subcategory = action.payload;
+      state.isOnMainSubcategory = false;
+    },
+    setMainSubcategory: (state, action) => {
+      state.mainsubcategory = action.payload;
+      state.subcategory = action.payload;
+      state.isOnMainSubcategory = true;
     },
   },
   extraReducers: (builder) => {
@@ -62,4 +70,4 @@ const dataSlice = createSlice({
 });
 
 export default dataSlice.reducer;
-export const { setSubcategory } = dataSlice.actions;
+export const { setSubcategory, setMainSubcategory } = dataSlice.actions;

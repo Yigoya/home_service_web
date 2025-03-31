@@ -250,6 +250,9 @@ const resources = {
       "member_login": "Member Login",
       "register": "Register",
       "subscription_packages": "Subscription Packages",
+      "category": "Category",
+      "posted_date": "Posted Date",
+      "expiry_date": "Expiry Date",
     }
   },
   am: {
@@ -470,6 +473,8 @@ const resources = {
       "subscribe": "ይመዝገቡ",
       "subscribe_for_email": "ኢሜይል ይመዝገቡ",
       "subscription_packages": "የመመዝገቢያ መተግበሪያዎች",
+      "expiry_date": "የተጠናቀቀ ቀን",
+      "posted_date": "የተለጠፈ ቀን",
     }
   },
   om: {
@@ -672,6 +677,8 @@ const resources = {
       "tender_not_deleted": "Tajaajila Galchi",
       "subscribe": "Imeelii Fayyadami",
       "subscription_packages": "Pakijii Fayyadama",
+      "posted_date": "Guyyaa Ergame",
+      "expiry_date": "Guyyaa Xumurame",
       "afar": "Afar",
       "amhara": "Amhara",
       "benishangul_gumuz": "Benishangul-Gumuz",
