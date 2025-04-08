@@ -71,7 +71,7 @@ function HomePage() {
       {/* Hero Section */}
       <MarketplaceHeader />
 
-      <div className="max-w-7xl mx-auto py-3 px-6">
+      <div className="max-w-7xl mx-auto py-3 px-6 bg-white">
         {/* Popular Categories */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6 auto-rows-fr my-12">
             {companies.map((category) => (

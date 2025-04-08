@@ -14,7 +14,7 @@ const TechnicianLayout = () => {
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <TechnicianNavBar /> : <Navbar />}
+        {<Navbar />}
         <Outlet />
         
       </div>

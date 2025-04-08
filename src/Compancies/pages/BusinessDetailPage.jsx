@@ -35,8 +35,10 @@ import {
   MessageSquare,
 } from "lucide-react"
 import { businessApi, reviewApi, orderApi } from "../services/api"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { API_URL_FILE } from "../../Shared/api.js"
+import { useSelector } from "react-redux"
+import OrderModal from "../components/orderModal.jsx"
 
 // Simple utility function to conditionally join classNames
 const cn = (...classes) => {
@@ -94,8 +96,9 @@ export default function BusinessDetailPage() {
   const [allImages, setAllImages] = useState([])
   const [imageTypes, setImageTypes] = useState({}) // Store image type (business, review, service) and metadata
   const galleryRef = useRef(null)
+  const navigate = useNavigate()
+  const { user } = useSelector((state) => state.auth);
   const [orderForm, setOrderForm] = useState({
-    serviceLocationId: "",
     paymentMethodId: "",
     scheduledDate: "",
     specialInstructions: "",
@@ -245,66 +248,71 @@ export default function BusinessDetailPage() {
     e.target.reset()
   }
 
-  const handleOrder = async () => {
-    if (!orderItem) return;
+  const handleOrder = async (orderData) => {
+    console.log(orderData)
+    // if (!orderItem) return;
     
-    // Validate required fields
-    if (!orderForm.serviceLocationId) {
-      setToast({
-        title: "Validation Error",
-        message: "Please select a service location",
-      });
-      return;
-    }
+    // // Validate required fields
+    // if (!orderForm.name) {
+    //   setToast({
+    //     title: "Validation Error",
+    //     message: "Please select a location name",
+    //   });
+    //   return;
+    // }
 
-    if (!orderForm.paymentMethodId) {
-      setToast({
-        title: "Validation Error",
-        message: "Please select a payment method",
-      });
-      return;
-    }
+    // if (!orderForm.paymentMethodId) {
+    //   setToast({
+    //     title: "Validation Error",
+    //     message: "Please select a payment method",
+    //   });
+    //   return;
+    // }
 
-    if (!orderForm.scheduledDate) {
-      setToast({
-        title: "Validation Error",
-        message: "Please select a scheduled date and time",
-      });
-      return;
-    }
+    // if (!orderForm.scheduledDate) {
+    //   setToast({
+    //     title: "Validation Error",
+    //     message: "Please select a scheduled date and time",
+    //   });
+    //   return;
+    // }
 
     // Validate scheduled date is not in the past
-    const selectedDate = new Date(orderForm.scheduledDate);
-    const now = new Date();
-    if (selectedDate < now) {
-      setToast({
-        title: "Validation Error",
-        message: "Please select a future date and time",
-      });
-      return;
-    }
+    // const selectedDate = new Date(orderForm.scheduledDate);
+    // const now = new Date();
+    // if (selectedDate < now) {
+    //   setToast({
+    //     title: "Validation Error",
+    //     message: "Please select a future date and time",
+    //   });
+    //   return;
+    // }
 
     try {
       setIsOrdering(true);
-      const orderData = {
-        businessId: parseInt(id),
-        items: [{
-          serviceId: orderItem.id,
-          quantity: quantity,
-          selectedOptions: orderForm.selectedOptions,
-          notes: orderForm.specialInstructions
-        }],
-        serviceLocationId: parseInt(orderForm.serviceLocationId),
-        paymentMethodId: parseInt(orderForm.paymentMethodId),
-        scheduledDate: orderForm.scheduledDate,
-        specialInstructions: specialInstructionsRef.current.value
-      };
+      // const orderData = {
+      //   customerId: user.roleId, 
+      //   businessId: parseInt(id),
+      //   items: [{
+      //     serviceId: orderItem.id,
+      //     quantity: quantity,
+      //     selectedOptions: orderForm.selectedOptions,
+      //     notes: orderForm.specialInstructions
+      //   }],
+      //   serviceLocationId: parseInt(orderForm.serviceLocationId),
+      //   paymentMethodId: parseInt(orderForm.paymentMethodId),
+      //   scheduledDate: orderForm.scheduledDate,
+      //   specialInstructions: specialInstructionsRef.current.value
+      // };
+
+      orderData.customerId = user.roleId
+      orderData.businessId = parseInt(id)
 
       const response = await orderApi.create(orderData);
 
       setToast({
         title: "Order Placed Successfully",
-        message: `Your order #${response.data.orderId} has been placed successfully! We'll contact you shortly to confirm.`,
+        message: `Your order has been placed successfully! We'll contact you shortly to confirm.`,
       });
       
       // Reset form and close modal
@@ -318,6 +326,7 @@ export default function BusinessDetailPage() {
         selectedOptions: {}
       });
     } catch (err) {
+      console.log(err)
       setToast({
         title: "Order Failed",
         message: err.response?.data?.message || "Failed to place order. Please try again.",
@@ -1269,7 +1278,17 @@ export default function BusinessDetailPage() {
                             <span className="text-white font-bold">${service.price.toFixed(2)}</span>
                             <button
                               className="bg-white/90 text-black hover:bg-white px-3 py-1 rounded text-sm"
-                              onClick={() => setOrderItem(service)}
+                              onClick={() => {
+                                console.log("user", user)
+                                if (!user) {
+                                 
+                                  navigate("/login")
+                                  return
+                                }
+                                
+                                setOrderItem(service)
+
+                                }}
                             >
                               Order Now
                             </button>
@@ -1299,7 +1318,12 @@ export default function BusinessDetailPage() {
                           <Button
                             size="sm"
                             disabled={!service.available}
-                            onClick={() => setOrderItem(service)}
+                            onClick={() => {
+                              if (!user) {
+                                 navigate("/login")
+                                 return
+                               }
+                              setOrderItem(service)}}
                             className="bg-blue-500 hover:bg-blue-600 text-white"
                           >
                             <Calendar className="w-4 h-4 mr-2" />
@@ -1712,8 +1736,17 @@ export default function BusinessDetailPage() {
 
       {/* Gallery Modal */}
       <GalleryModal isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />
-
+      
       {/* Order Modal */}
+
+      <OrderModal
+        isOpen={!!orderItem}
+        onClose={() => setOrderItem(null)}
+        orderItem={orderItem}
+        API_URL_FILE={API_URL_FILE}
+        onSubmitOrder={handleOrder}
+      />
+      {/* 
       <Modal
         isOpen={!!orderItem}
         onClose={() => setOrderItem(null)}
@@ -1732,7 +1765,7 @@ export default function BusinessDetailPage() {
               </div>
               <p className="text-sm text-gray-500">{orderItem.description}</p>
 
-              {/* Service Options */}
+              
               {orderItem.options &&
                 orderItem.options.map((option, index) => (
                   <div key={index} className="space-y-2">
@@ -1765,7 +1798,7 @@ export default function BusinessDetailPage() {
                   </div>
                 ))}
 
-              {/* Quantity */}
+              
               <div className="flex items-center justify-between">
                 <div className="flex items-center border rounded-md">
                   <button className="px-3 py-2" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
@@ -1782,7 +1815,7 @@ export default function BusinessDetailPage() {
                 </div>
               </div>
 
-              {/* Service Location */}
+              
               <div>
                 <label htmlFor="serviceLocation" className="block text-sm font-medium mb-2">
                   Service Location
@@ -1801,7 +1834,6 @@ export default function BusinessDetailPage() {
                 </select>
               </div>
 
-              {/* Payment Method */}
               <div>
                 <label htmlFor="paymentMethod" className="block text-sm font-medium mb-2">
                   Payment Method
@@ -1819,8 +1851,6 @@ export default function BusinessDetailPage() {
                   <option value="3">Mobile Money</option>
                 </select>
               </div>
-
-              {/* Scheduled Date */}
               <div>
                 <label htmlFor="scheduledDate" className="block text-sm font-medium mb-2">
                   Scheduled Date & Time
@@ -1835,7 +1865,6 @@ export default function BusinessDetailPage() {
                 />
               </div>
 
-              {/* Special Instructions */}
               <div>
                 <label htmlFor="specialInstructions" className="block text-sm font-medium mb-2">
                   Special Instructions
@@ -1849,7 +1878,6 @@ export default function BusinessDetailPage() {
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="mt-6 flex justify-end gap-2">
               <button 
                 className="px-4 py-2 border rounded-md hover:bg-gray-50" 
@@ -1875,7 +1903,7 @@ export default function BusinessDetailPage() {
             </div>
           </>
         )}
-      </Modal>
+      </Modal>  */ }
 
       {/* Enquiry Modal */}
       <Modal

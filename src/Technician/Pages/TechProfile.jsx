@@ -7,7 +7,7 @@ import { TechnicianIdentity, TechnicianJobsApi } from '../Api/Api';
 import TechnicianNavBar from '../Components/TechnicianNavbar';
 import { useTranslation } from 'react-i18next';
 
-const TechnicianProfile = () => {
+const TechnicianProfileOld = () => {
   const { t } = useTranslation();
   const technician = JSON.parse(localStorage.getItem("technician"));
   const id = technician?.id;
@@ -136,4 +136,4 @@ const TechnicianProfile = () => {
   );
 };
 
-export default TechnicianProfile;
+export default TechnicianProfileOld;

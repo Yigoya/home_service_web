@@ -25,7 +25,8 @@ const CustomerLayout = ({ isTender, nextRoute, color }) => {
     <FilterProvider>
     <div>
       <div>
-        {isLoggedIn ? <CustomerNavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute}/> : <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color}/>}
+        {/* {isLoggedIn ? <CustomerNavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute}/> : <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color}/>} */}
+          <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color}/>
         <Outlet />
       </div>
     </div>

@@ -36,7 +36,7 @@ function SubcategoriesPage() {
   //   return <LoadingPage />;
   // }
 
-  if(!subcategory) {
+  if(subcategory == null) {
      navigate("/companies");
     return
   }

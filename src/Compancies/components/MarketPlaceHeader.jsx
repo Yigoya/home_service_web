@@ -145,9 +145,9 @@ export default function MarketplaceHeader() {
   }
 
   return (
-    <div className="w-full font-sans">
+    <div className="max-w-7xl mx-auto bg-white font-sans mt-16">
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 py-3">
+      <div className="px-4 py-3 ">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold">
             Search across 
@@ -169,7 +169,7 @@ export default function MarketplaceHeader() {
       </div>
 
       {/* Main Content Row */}
-      <div className="max-w-7xl mx-auto px-6 mt-6">
+      <div className="px-6 mt-6">
         <div className="flex gap-4">
           {/* Main Banner */}
           <div

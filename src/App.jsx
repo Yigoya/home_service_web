@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Landing from './Shared/pages/Landing';
 import SignUp from './Customer/Pages/SignUp';
 import Login from './Shared/pages/Login';
@@ -46,6 +46,15 @@ import BookingForm from './Customer/Pages/BookingForm';
 import TechnicianList from './Customer/Pages/TechnicianList';
 import TechnicianDetail from './Customer/Pages/TechnicianDetail';
 import LandingPage from './Shared/pages/LandingPage';
+import TechnicianProfile from './Technician/Pages/Profile';
+import PrivateRoute from './Shared/Components/PrivateRoute';
+import CustomerDashboard from './Customer/Pages/Dashboard';
+import TechnicianDashboard from './Technician/Pages/Dashboard';
+import SignupSelector from './Shared/pages/signup-selector';
+import CustomerSignup from './Customer/Pages/CustomerSignup';
+import TechnicianSignup from './Technician/Pages/TechnicianSignup';
+import { Toaster } from 'react-hot-toast';
+import SubscriptionPlans from './Shared/pages/SubscriptionPlans';
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -68,7 +77,12 @@ function App() {
               ) : (
                 <Route element={<CustomerLayout />}>
                   <Route path="/" element={<LandingPage />} />
-                  <Route path="/customer-signup" element={<SignUp />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<SignupSelector />} />
+                  <Route path="/signup/customer" element={<CustomerSignup />} />
+                  <Route path="/signup/technician" element={<TechnicianSignup />} />
+                  {/* Add other routes as needed */}
+                 
                   <Route path="/login" element={<Login />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/technician-list/:id" element={<TechnicianList />} />
@@ -87,10 +101,28 @@ function App() {
                   <Route path="/service-categories" element={<ServiceCategoriesPage />} />
                   <Route path="/tender-categories" element={<TenderCategories/>} />
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
-                  <Route path="*" element={<NotFound />} />
-                  <Route path='/subscription' element={<SubscriptionPackage/>} />
+
+                  <Route
+                    path="/technician/profile/:id"
+                    element={<PrivateRoute element={<TechnicianProfile />} />}
+                    />
+                  <Route
+                    path="/technician/dashboard"
+                    element={<PrivateRoute element={<TechnicianDashboard />} />}
+                  />
+                  <Route
+                    path="/customer/dashboard"
+                    element={<PrivateRoute element={<CustomerDashboard />} />}
+                  />
+                  <Route
+                    path="/subscription"
+                    element={<PrivateRoute element={<SubscriptionPlans />} />}
+                  />
+                  {/* <Route path='/subscription' element={<SubscriptionPackage/>} /> */}
+                  <Route path="*" element={<Navigate to="/login" replace />} />
                 </Route>
               )}
+              
                   <Route path="/tender" element={<TenderPage/>} />
                   <Route path="/tenders" element={<PublishTender/>} />
                   
@@ -105,6 +137,7 @@ function App() {
                   
 
             </Routes>
+            <Toaster position="top-right" />
             <Footer />
           </Router>
         </AuthProvider>

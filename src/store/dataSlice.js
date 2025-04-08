@@ -34,7 +34,7 @@ const dataSlice = createSlice({
     services: [],
     subcategory: null,
     mainsubcategory: null,
-    isOnMainSubcategory: false,
+    isOnMainSubcategory: true,
     loading: false,
     error: null,
   },
