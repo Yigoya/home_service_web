@@ -1,5 +1,5 @@
-export const API_URL = "http://localhost:5000" 
-// export const API_URL = "https://hulumoya.zapto.org" 
+// export const API_URL = "http://localhost:5000" 
+export const API_URL = "https://hulumoya.zapto.org" 
 export const API_URL_FILE = `${API_URL}/uploads/`
 export const loginApi = `${API_URL}/auth/login`
 export const socialLoginApi = `${API_URL}/auth/social-login`
