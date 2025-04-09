@@ -61,7 +61,7 @@ export default function SignupSelector() {
             "Manage team members and permissions",
             "Access business-specific features",
           ],
-          linkTo: "/signup/company",
+          linkTo: "https://business-dashboard-pi.vercel.app/auth/register",
           linkText: "Register Your Business",
           gradientFrom: "from-green-700",
           gradientTo: "to-green-600",

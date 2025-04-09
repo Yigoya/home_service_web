@@ -7,6 +7,7 @@ import { LogIn, Mail, Lock, Building2, Briefcase } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../../lib/axios';
 import { setCredentials } from '../../store/slices/authSlice';
+import { useLocation } from 'react-router-dom';
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -16,6 +17,10 @@ const validationSchema = Yup.object({
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const returnUrl = queryParams.get('return-url');
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -48,6 +53,10 @@ export default function Login() {
       if (response.data.user.role === 'TECHNICIAN') {
         navigate('/technician/dashboard');
       } else {
+        if (returnUrl) {
+          navigate(returnUrl)
+          return
+        }
         navigate('/');
       }
     } catch (error) {

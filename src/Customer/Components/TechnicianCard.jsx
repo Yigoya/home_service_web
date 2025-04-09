@@ -59,7 +59,7 @@ const TechnicianCard = ({ technician }) => {
           {technician.services.map((service) => (
             <div key={service.id} className="flex items-center text-gray-600">
               {service.icon ? (
-                <img src={`/${service.icon}`} alt={service.name} className="w-4 h-4 mr-2" />
+                <img src={`${API_URL_FILE}${service.icon}`} alt={service.name} className="w-4 h-4 mr-2" />
               ) : (
                 <Briefcase className="w-4 h-4 mr-2" />
               )}

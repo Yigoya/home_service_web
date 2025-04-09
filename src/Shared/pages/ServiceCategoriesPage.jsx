@@ -8,6 +8,7 @@ import { ChevronRight, Star, Tag } from "react-feather";
 import PromotionalBanner from "../Components/PromotionalBanner";
 import LocationSelector from "../Components/LocationSelector";
 import SearchBar from "../Components/SearchBar";
+import { useEffect } from "react";
 const subcategories = [
   { id: 1, name: "Beauty Parlours", icon: "👩‍🦰" },
   { id: 2, name: "Beauty Services", icon: "💇‍♀️" },
@@ -36,7 +37,13 @@ function ServiceCategoriesPage() {
   //   return <LoadingPage />;
   // }
 
-  if(!subcategory) {
+  useEffect(() => {
+    if (subcategory == null) {
+      navigate("/");
+    }
+  }, [subcategory, navigate]);
+
+  if(subcategory == null) {
     navigate("/");
     return
   }

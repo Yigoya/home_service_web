@@ -355,7 +355,7 @@ export default function Navbar({ isTender }) {
                     else if (isInCompanyPage() || getPath().includes('/companies')) {
                       navigate('/signup?type=company');
                     }
-                    else if (isInSubcategory() || isOnMainSubcategory) {
+                    else if (isInSubcategory() || getPath().includes('/service-categories')) {
                       dispatch(setMainSubcategory(mainsubcategory));
                       navigate('/signup?type=technician');
                     }

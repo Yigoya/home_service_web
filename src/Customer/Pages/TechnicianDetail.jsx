@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MapPin, Phone, Mail, Star, Calendar, Briefcase, Loader2, Clock } from 'lucide-react';
 import axios from 'axios';
 import { API_URL, API_URL_FILE } from '../../Shared/api';
+import { useSelector } from 'react-redux';
 
 const TechnicianDetail = () => {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ const TechnicianDetail = () => {
   const [technician, setTechnician] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     fetchTechnicianDetails();
   }, [id]);
@@ -29,6 +30,10 @@ const TechnicianDetail = () => {
   };
 
   const handleBooking = () => {
+    if (!user) {
+      navigate(`/login?return-url=/book-technician/${technician.id}/1`);
+      return;
+    }
     navigate(`/book-technician/${technician.id}/1`);
   };
 
