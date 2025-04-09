@@ -8,6 +8,7 @@ import { logout } from '../../store/slices/authSlice';
 import { setNotifications, markAsRead, markAllAsRead } from '../../store/slices/notificationSlice';
 import { useTranslation } from 'react-i18next';
 import { setMainSubcategory } from '../../store/dataSlice';
+import { API_URL_FILE } from '../api';
 
 export default function Navbar({ isTender }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +54,13 @@ export default function Navbar({ isTender }) {
       return (path.includes('/subcategories') || path.includes('/business') || path.includes('/business-details'));
     }
     return false;
+  };
+
+  const getPath = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '';
   };
 
   useEffect(() => {
@@ -240,7 +248,7 @@ export default function Navbar({ isTender }) {
                   >
                     {user.profileImage ? (
                       <img
-                        src={user.profileImage}
+                        src={`${API_URL_FILE}${user.profileImage}`}
                         alt={user.name}
                         className="h-8 w-8 rounded-full object-cover"
                       />
@@ -339,13 +347,28 @@ export default function Navbar({ isTender }) {
                   <LogIn className="h-4 w-4" />
                   <span>Login</span>
                 </Link>
-                <Link
-                  to="/signup"
+                <button
+                  onClick={() => {
+                    if (isTender) {
+                      navigate('/signup?type=tender');
+                    }
+                    else if (isInCompanyPage() || getPath().includes('/companies')) {
+                      navigate('/signup?type=company');
+                    }
+                    else if (isInSubcategory() || isOnMainSubcategory) {
+                      dispatch(setMainSubcategory(mainsubcategory));
+                      navigate('/signup?type=technician');
+                    }
+                    else {
+                      navigate('/signup');
+                    }
+                  }}
+
                   className="flex items-center space-x-1 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:from-blue-700 hover:to-blue-600 transition-all duration-200 transform hover:scale-105"
                 >
                   <UserPlus className="h-4 w-4" />
                   <span>Register</span>
-                </Link>
+                </button>
               </>
             )}
           </div>
@@ -390,7 +413,7 @@ export default function Navbar({ isTender }) {
                   <div className="flex items-center space-x-3">
                     {user.profileImage ? (
                       <img
-                        src={user.profileImage}
+                        src={`${API_URL_FILE}${user.profileImage}`}
                         alt={user.name}
                         className="h-10 w-10 rounded-full object-cover"
                       />

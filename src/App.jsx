@@ -55,8 +55,9 @@ import CustomerSignup from './Customer/Pages/CustomerSignup';
 import TechnicianSignup from './Technician/Pages/TechnicianSignup';
 import { Toaster } from 'react-hot-toast';
 import SubscriptionPlans from './Shared/pages/SubscriptionPlans';
+import { useSelector } from 'react-redux';
 function App() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <LanguageProvider>
@@ -69,14 +70,9 @@ function App() {
                <ServiceDescriptionBar />
             <Routes>
               <Route path="/tech-upload-payment" element={<UploadPaymentImage />} />
-              {user && user.role === "TECHNICIAN" ? (
-                <Route element={<TechnicianLayout />}>
-                  <Route path="/" element={<TechProfile />} />
-                  <Route path="notification/:id" element={<Notification />} />
-                </Route>
-              ) : (
+             
                 <Route element={<CustomerLayout />}>
-                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/" element={user && user.role === "TECHNICIAN" ? <Navigate to="/technician/dashboard" replace />  : <LandingPage />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<SignupSelector />} />
                   <Route path="/signup/customer" element={<CustomerSignup />} />
@@ -121,7 +117,7 @@ function App() {
                   {/* <Route path='/subscription' element={<SubscriptionPackage/>} /> */}
                   <Route path="*" element={<Navigate to="/login" replace />} />
                 </Route>
-              )}
+            
               
                   <Route path="/tender" element={<TenderPage/>} />
                   <Route path="/tenders" element={<PublishTender/>} />

@@ -31,13 +31,13 @@ export default function CustomerSignup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50" >
       <div className="flex min-h-screen">
-        {/* Left side - Features */}
-        <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 p-12">
-          <div className="max-w-lg">
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 p-12 relative" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80")' }}>
+        <div className="absolute inset-0 bg-gray-900/75 opacity-40"></div> 
+          <div className="max-w-lg bg-gradient-to-br from-blue-600 to-blue-800 bg-opacity-50 p-12 rounded-2xl shadow-lg relative z-10">
             <h2 className="text-4xl font-bold text-white mb-8">
-              Join BusinessPro Today
+              Join HuluMoya Today
             </h2>
             <div className="space-y-6">
               <div className="flex items-start space-x-4">

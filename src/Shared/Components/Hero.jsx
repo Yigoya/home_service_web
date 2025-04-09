@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, CheckCircle, Clock, Users, Shield, Loader } from 'lucide-react';
+import { Building2, PenTool as Tool, Briefcase, Wrench, Search, ArrowRight, CheckCircle, Clock, Users, Shield, Loader, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import useFetchData from '../../hooks/useFetchData';
 import { useDispatch } from 'react-redux';
 import { setMainSubcategory } from '../../store/dataSlice';
 import Tender from '../../assets/tender.png';
 import Business from '../../assets/justcall.png';
 import Maintenance from '../../assets/maintenance.png';
 import Professional from '../../assets/professional.png';
+import useFetchData from "../../hooks/useFetchData"
 
 const services = [
   {
@@ -64,9 +64,117 @@ export default function Hero() {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { services, loading, error } = useFetchData();
+  const { services, loading, error } =  useFetchData();
+
+  // Flatten the nested services structure for search
+  const flattenedServices = useMemo(() => {
+    const results = [];
+    
+    const flatten = (item, type, path = []) => {
+      if (!item) return;
+      
+      results.push({
+        id: type === 'category' ? item.categoryId : item.serviceId,
+        name: type === 'category' ? item.categoryName : item.name,
+        categoryId: item.categoryId,
+        type,
+        path: [...path, item.name || item.categoryName],
+        icon: item.icon
+      });
+
+      // Recursively process nested services
+      if (item.services && Array.isArray(item.services)) {
+        item.services.forEach(service => {
+          flatten(service, 'service', [...path, item.name || item.categoryName]);
+        });
+      }
+    };
+
+    if (services && Array.isArray(services)) {
+      services.forEach(category => flatten(category, 'category'));
+    }
+
+    return results;
+  }, [services]);
+
+  // Filter services based on search query
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    
+    const query = searchQuery.toLowerCase();
+    return flattenedServices.filter(item => 
+      item.name.toLowerCase().includes(query) ||
+      item.path.some(p => p.toLowerCase().includes(query))
+    ).slice(0, 6); // Limit to 6 results
+  }, [searchQuery, flattenedServices]);
+
+  // Handle search result selection
+  const handleResultClick = (result) => {
+    console.log(result)
+    if (result.type === 'category') { 
+      if (result.categoryId === 1) {
+        dispatch(setMainSubcategory(services[0])); 
+        navigate('/tender');
+        return;
+      }
+      if (result.categoryId === 2) {
+        dispatch(setMainSubcategory(services[1]));
+        navigate('/companies');
+        return;
+      }
+      if (result.categoryId === 3) {
+        dispatch(setMainSubcategory(services[2]));
+        navigate("/service-categories");
+        return; 
+      }
+      if (result.categoryId === 4) {
+        dispatch(setMainSubcategory(services[3]));
+        navigate("/service-categories");
+        return;
+      }
+      navigate(`/categories/${result.id}`);
+    } else {
+      if (result.categoryId === 1) {
+        dispatch(setMainSubcategory(services[0])); 
+        navigate('/tender');
+        return;
+      }
+      if (result.categoryId === 2) {
+        dispatch(setMainSubcategory(services[1]));
+        navigate(`/business/${result.id}`);
+        return;
+      }
+      if (result.categoryId === 3) {
+        dispatch(setMainSubcategory(services[2]));
+        navigate(`/technician-list/${result.id}`);
+        return; 
+      }
+      if (result.categoryId === 4) {
+        dispatch(setMainSubcategory(services[3]));
+        navigate(`/technician-list/${result.id}`);
+        return;
+      }
+      // navigate(`/services/${result.id}`);
+    }
+    setShowResults(false);
+    setSearchQuery('');
+  };
+
+  // Close search results when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const searchContainer = document.getElementById('search-container');
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Use translated service information
   const translatedServices = [
@@ -121,7 +229,7 @@ export default function Hero() {
       title: t('expert_team', 'Expert Team'),
       description: t('team_description', 'Highly qualified professionals with decades of combined experience.'),
     },
-    {
+    { 
       icon: Shield,
       title: t('secure_process', 'Secure Process'),
       description: t('secure_description', 'Enterprise-grade security protocols protecting your business data.'),
@@ -154,39 +262,82 @@ export default function Hero() {
             </p>
 
             {/* Enhanced Search Section */}
-            <div className="mt-10">
+            <div className="mt-10" id="search-container">
               <div className={`relative max-w-xl mx-auto transform transition-all duration-300 ${isFocused ? 'scale-105' : ''}`}>
                 <div className="absolute inset-0 bg-blue-500 rounded-xl opacity-10 blur-lg transition-opacity duration-300"></div>
-                <div className="relative flex items-center">
-                  {!loading ? <Search className="absolute left-4 h-5 w-5 text-gray-400" /> : <Loader className="absolute left-4 h-5 w-5 text-gray-400" />}  
-                  <input
-                    type="text"
-                    placeholder={!loading ? t('search_placeholder', 'Search our services...') : 'Wait loading data ...'}
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => setIsFocused(false)}
-                    className="w-full pl-12 pr-32 py-4 bg-white rounded-2xl shadow-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                  />
-                  <button className="absolute right-2 bg-blue-600 text-white px-6 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                    <span className="hidden sm:inline">{t('search_now', 'Search')}</span>
-                    <ArrowRight className="h-5 w-5" />
-                  </button>
+                <div className="relative">
+                  <div className="flex items-center">
+                    {!loading ? (
+                      <Search className="absolute left-4 h-5 w-5 text-gray-400" />
+                    ) : (
+                      <Loader className="absolute left-4 h-5 w-5 text-gray-400 animate-spin" />
+                    )}
+                    <input
+                      type="text"
+                      placeholder={!loading ? t('search_placeholder', 'Search our services...') : t('loading_placeholder', 'Loading data...')}
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setShowResults(true);
+                      }}
+                      onFocus={() => {
+                        setIsFocused(true);
+                        setShowResults(true);
+                      }}
+                      disabled={loading}
+                      className="w-full pl-12 pr-32 py-4 bg-white rounded-2xl shadow-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => {
+                          setSearchQuery('');
+                          setShowResults(false);
+                        }}
+                        className="absolute right-20 p-2 text-gray-400 hover:text-gray-600"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    )}
+                    <button 
+                      className="absolute right-2 bg-blue-600 text-white px-6 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                      onClick={() => setShowResults(true)}
+                    >
+                      <span className="hidden sm:inline">{t('search_now', 'Search')}</span>
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
+                  </div>
+
+                  {/* Search Results Dropdown */}
+                  {showResults && searchResults.length > 0 && (
+                    <div className="absolute mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-[100]">
+                      {searchResults.map((result, index) => (
+                        <button
+                          key={`${result.type}-${result.id}`}
+                          onClick={() => handleResultClick(result)}
+                          className={`w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-gray-50 transition-colors ${
+                            index !== searchResults.length - 1 ? 'border-b border-gray-100' : ''
+                          }`}
+                        >
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">{result.name}</p>
+                            <p className="text-sm text-gray-500">
+                              {result.path.slice(0, -1).join(' > ')}
+                            </p>
+                          </div>
+                          <ArrowRight className="h-5 w-5 text-gray-400" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* No Results Message */}
+                  {showResults && searchQuery && searchResults.length === 0 && (
+                    <div className="absolute mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 p-4 text-center text-gray-500">
+                      {t('no_results', 'No services found matching your search')}
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Popular Searches */}
-              {/* <div className="mt-6 flex justify-center gap-6 text-sm">
-                <span className="text-gray-400">{t('popular_searches', 'Popular')}:</span>
-                <button className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
-                  <ArrowRight className="h-4 w-4" />
-                  {t('consulting', 'Consulting')}
-                </button>
-                <button className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
-                  <ArrowRight className="h-4 w-4" />
-                  {t('enterprise_solutions', 'Enterprise Solutions')}
-                </button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -196,7 +347,7 @@ export default function Hero() {
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {translatedServices.map((service) => (
+            {!(showResults && searchResults.length > 0) && translatedServices.map((service) => (
               <div
                 key={service.title}
                 onClick={!loading && !error && service.onClick}
@@ -204,23 +355,30 @@ export default function Hero() {
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors duration-300">
-                    <img src={service.icon} className="h-10 w-10" />
-                    {/* <service.icon className="h-6 w-6" /> */}
+                    <img src={service.icon} className="h-10 w-10" alt={service.title} />
                   </div>
                   <ArrowRight className="h-5 w-5 text-blue-500 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-300" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                  {t(service.title, service.title)}
+                  {service.title}
                 </h3>
                 <p className="mt-2 text-gray-600 text-sm leading-relaxed">
-                  {t(service.description, service.description)}
+                  {service.description}
                 </p>
               </div>
-            ))}
+            )) 
+            }
           </div>
         </div>
       </div>
-
+      {(showResults && searchResults.length > 0) && (
+        <div className="bg-white border-t border-gray-200 mt-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h2 className="text-2xl font-bold text-gray-900">{t('explore_more', 'Explore More Services')}</h2>
+            <p className="mt-2 text-gray-600">{t('explore_description', 'Discover our full range of services tailored to meet your business needs.')}</p>
+          </div>
+        </div>
+      )}
       {/* Why Choose Us Section */}
       <div className="bg-gray-50 py-24 mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -232,7 +390,7 @@ export default function Hero() {
               {t('excellence_description', 'We deliver excellence through our comprehensive range of services')}
             </p>
           </div>
-
+          
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {translatedFeatures.map((feature) => (
               <div
@@ -249,10 +407,10 @@ export default function Hero() {
                 </div>
                 <div className="mt-6">
                   <h3 className="text-xl font-semibold text-gray-900 text-center mb-4">
-                    {t(feature.title, feature.title)}
+                    {feature.title}
                   </h3>
                   <p className="text-gray-600 text-center">
-                    {t(feature.description, feature.description)}
+                    {feature.description}
                   </p>
                 </div>
               </div>

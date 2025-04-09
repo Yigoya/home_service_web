@@ -11,7 +11,7 @@ export default function TechnicianDashboard() {
   const [loading, setLoading] = useState(true);
   const { user } = useSelector((state) => state.auth);
   const [selectedStatus, setSelectedStatus] = useState('ALL');
-
+  console.log("Dashboard")
   useEffect(() => {
     fetchBookings();
   }, []);

@@ -182,43 +182,44 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Right side - Features */}
-        <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 p-12">
-          <div className="max-w-lg">
-            <h2 className="text-4xl font-bold text-white mb-8">
-              Transform Your Business with BusinessPro
-            </h2>
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="p-3 bg-blue-500 rounded-lg">
-                    <Building2 className="h-6 w-6 text-white" />
+                              {/* Right side - Features */}
+                <div className="hidden lg:flex flex-1 items-center justify-center bg-cover bg-center relative" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80")' }}>
+                  <div className="absolute inset-0 bg-gray-900/75 opacity-20"></div> {/* Blue overlay */}
+                  <div className="max-w-lg bg-gradient-to-br from-blue-600 to-blue-800 bg-opacity-50 p-12 rounded-lg shadow-lg relative z-10">
+                    <h2 className="text-4xl font-bold text-white mb-8">
+                      Transform Your Business with BusinessPro
+                    </h2>
+                    <div className="space-y-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="p-3 bg-blue-500 rounded-lg">
+                            <Building2 className="h-6 w-6 text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-white">Professional Services</h3>
+                          <p className="mt-2 text-blue-100">
+                            Access a network of verified professionals for all your business needs
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="p-3 bg-blue-500 rounded-lg">
+                            <Briefcase className="h-6 w-6 text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-white">Business Solutions</h3>
+                          <p className="mt-2 text-blue-100">
+                            Streamline your operations with our comprehensive business solutions
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white">Professional Services</h3>
-                  <p className="mt-2 text-blue-100">
-                    Access a network of verified professionals for all your business needs
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="p-3 bg-blue-500 rounded-lg">
-                    <Briefcase className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white">Business Solutions</h3>
-                  <p className="mt-2 text-blue-100">
-                    Streamline your operations with our comprehensive business solutions
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+  </div>
   );
 }
