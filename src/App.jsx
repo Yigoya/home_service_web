@@ -110,9 +110,13 @@ function App() {
                     path="/customer/dashboard"
                     element={<PrivateRoute element={<CustomerDashboard />} />}
                   />
-                  <Route
+                  {/* <Route
                     path="/subscription"
                     element={<PrivateRoute element={<SubscriptionPlans />} />}
+                  /> */}
+                  <Route
+                    path="/subscription"
+                    element={<SubscriptionPlans />} 
                   />
                   {/* <Route path='/subscription' element={<SubscriptionPackage/>} /> */}
                   <Route path="*" element={<Navigate to="/login" replace />} />

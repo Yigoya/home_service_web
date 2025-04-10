@@ -5,7 +5,7 @@ import tenderBanner from "../../assets/tenderbanner.jpg";
 
 const SearchForm = ({ searchTenders, locations, categorys }) => {
   const [formData, setFormData] = useState({
-    keyword: null,
+    keyword: "",
     status: "OPEN",
     location: null,
     serviceId: null,
@@ -41,7 +41,8 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+    formData.closingDate = closingDateRef.current.value;
+    formData.datePosted = datePostedRef.current.value;
     await searchTenders(formData)
     setLoading(false);
     
@@ -69,10 +70,15 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
       page: 0,
       size: 10,
     });
+    datePostedRef.current.type = "text";
+    closingDateRef.current.type = "text";
+    datePostedRef.current.value = "";
+    closingDateRef.current.value = "";
+    setLoading(false);
     setError(null);
   };
 
-
+  console.log(formData);
 
   return (
     <div className="mx-auto py-6 px-16 bg-slate-500"
@@ -90,7 +96,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
             <input
               type="text"
               name="keyword"
-              value={formData.keyword}
+              value={formData.keyword ? formData.keyword : ""}
               onChange={handleInputChange}
               placeholder={t('keyword_searching')}
               className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
@@ -103,38 +109,38 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled>
-                <b>{t('tender_status')}</b>
-              </option>
-              <option value="OPEN">{t('open')}</option>
-              <option value="CLOSED">{t('closed')}</option>
+              {[{ name:`- ${t('tender_status')} -`, value: null }, { name: t('open'), value: 'OPEN' }, { name: t('closed'), value: 'CLOSED' }].map((option) => (
+                <option key={option.name} value={option.value}>
+                  {option.name}
+                </option>
+              ))}
+              
             </select>
           </div>
           <div className="w-full md:w-1/6 px-2">
             <select
               name="location"
-              value={formData.location}
+              value={formData.location ? formData.location : ""}
               onChange={handleInputChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="" disabled>
-                <b>{t('tender_by_region')}</b>
-              </option>
-              {locations.map((option) => (
+              {[{ name:`- ${t('tender_by_region')} -`, value: null }, ...locations].map((option) => (
                 <option key={option.name} value={option.value}>
                   {t(option.name)}
                 </option>
               ))}
+              
             </select>
           </div>
           <div className="w-full md:w-1/6 px-2">
             <select
               name="category"
+              value={formData.serviceId ? null : ""}
               onChange={handleCategoryChange}
               className="w-full px-4 py-3 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {[
-                { serviceId: null, name: t('tender_by_category') },
+                { serviceId: null, name: `- ${t('tender_by_category')} -` },
                 ...categorys
               ].map((option) => (
                 <option key={option.serviceId} value={option.serviceId}>
@@ -152,7 +158,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleInputChange}
               onFocus={() => handleFocus(datePostedRef)}
               onBlur={() => handleBlur(datePostedRef, 'datePosted')}
-              placeholder={t('date_posted')}
+              placeholder={`- ${t('date_posted')} -`}
               className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>
@@ -165,7 +171,7 @@ const SearchForm = ({ searchTenders, locations, categorys }) => {
               onChange={handleInputChange}
               onFocus={() => handleFocus(closingDateRef)}
               onBlur={() => handleBlur(closingDateRef, 'closingDate')}
-              placeholder={t('closing_date')}
+              placeholder={`- ${t('closing_date')} -`}
               className="w-full px-4 py-3 pt-4 mt-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-900"
             />
           </div>

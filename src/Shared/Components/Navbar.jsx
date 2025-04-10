@@ -8,6 +8,7 @@ import { logout } from '../../store/slices/authSlice';
 import { setNotifications, markAsRead, markAllAsRead } from '../../store/slices/notificationSlice';
 import { useTranslation } from 'react-i18next';
 import { setMainSubcategory } from '../../store/dataSlice';
+import { subcriptionLogout } from '../../store/slices/subscriptionSlice';
 import { API_URL_FILE } from '../api';
 
 export default function Navbar({ isTender }) {
@@ -98,11 +99,12 @@ export default function Navbar({ isTender }) {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(subcriptionLogout());
     navigate('/login');
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-lg fixed top-0 w-full z-50">
+    <nav className={`${isTender ? "bg-[#2b78ac]" : "bg-white/95"} backdrop-blur-md shadow-lg fixed top-0 w-full z-50 ${isTender ? "text-gray-50" : "text-gray-700"}`}>
       <div className={`${!isTender && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -129,15 +131,15 @@ export default function Navbar({ isTender }) {
                   <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">H</span>
                 </div>
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <h1 className={`text-2xl font-bold bg-gradient-to-r ${isTender ? "text-gray-50" :"from-blue-600 to-blue-400"} bg-clip-text text-transparent`}>
                 HuluMoya
               </h1>
             </button>
             
             {/* <div className="hidden md:flex ml-10 space-x-8">
-              <a href="#services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Services</a>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
-              <a href="#contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+              <a href="#services" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Services</a>
+              <a href="#about" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
+              <a href="#contact" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
             </div> */}
           </div>
 
@@ -148,29 +150,37 @@ export default function Navbar({ isTender }) {
             <div className="relative">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
+                className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
               >
                 <Globe className="h-4 w-4 mr-1" />
                 <span>{getLanguageDisplay(i18n.language)}</span>
               </button>
+
+              {isTender && ( <Link 
+              to="/tender" 
+              className="flex items-center px-4 py-2 text-sm "
+              >
+                <Home className="h-4 w-4 mr-1" />
+                <span >Home</span>
+            </Link>)}
               
               {isLangMenuOpen && (
                 <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-10">
                   <button 
                     onClick={() => changeLanguage('en')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     English
                   </button>
                   <button 
                     onClick={() => changeLanguage('am')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     አማርኛ
                   </button>
                   <button 
                     onClick={() => changeLanguage('om')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     Afaan Oromoo
                   </button>
@@ -183,7 +193,7 @@ export default function Navbar({ isTender }) {
                       setIsNotificationOpen(!isNotificationOpen);
                       setIsProfileOpen(false);
                     }}
-                    className="relative text-gray-700 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                    className="relative  hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
                   >
                     <Bell className="h-6 w-6" />
                     {unreadCount > 0 && (
@@ -244,7 +254,7 @@ export default function Navbar({ isTender }) {
                       setIsProfileOpen(!isProfileOpen);
                       setIsNotificationOpen(false);
                     }}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-blue-600"
+                    className="flex items-center space-x-2  hover:text-blue-600"
                   >
                     {user.profileImage ? (
                       <img
@@ -266,14 +276,14 @@ export default function Navbar({ isTender }) {
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                       <Link
                         to="/customer/dashboard"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
                       >
                         <Home className="h-4 w-4 mr-2" />
                         Dashboard
                       </Link>
                       <Link
                         to="/subscription"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
                       >
                         <Crown className="h-4 w-4 mr-2" />
                         Subscription
@@ -285,7 +295,7 @@ export default function Navbar({ isTender }) {
                       </Link>
                       <Link
                         to="/settings"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
                       >
                         <Settings className="h-4 w-4 mr-2" />
                         Settings
@@ -304,10 +314,18 @@ export default function Navbar({ isTender }) {
             ) : (
               <>
                 {/* Language Selector */}
+            {isTender && ( <Link 
+              to="/tender" 
+              className="flex items-center px-4 py-2 text-sm "
+              >
+                <Home className="h-4 w-4 mr-1" />
+                <span >Home</span>
+            </Link>)}
             <div className="relative">
+            
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
+                className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
               >
                 <Globe className="h-4 w-4 mr-1" />
                 <span>{getLanguageDisplay(i18n.language)}</span>
@@ -317,32 +335,40 @@ export default function Navbar({ isTender }) {
                 <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-10">
                   <button 
                     onClick={() => changeLanguage('en')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     English
                   </button>
                   <button 
                     onClick={() => changeLanguage('am')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     አማርኛ
                   </button>
                   <button 
                     onClick={() => changeLanguage('om')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
                   >
                     Afaan Oromoo
                   </button>
                 </div>
               )}
             </div>
-                <button className="flex items-center text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+                <button className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
                   <Download className="h-4 w-4 mr-1" />
                   Get App
                 </button>
-                <Link
+
+                {isTender ? (
+                  <>
+                  <a href="#about" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
+                  <a href="#contact" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+                  </>
+                ) : (
+                  <>
+                  <Link
                   to="/login"
-                  className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className="flex items-center space-x-1  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   <LogIn className="h-4 w-4" />
                   <span>Login</span>
@@ -369,6 +395,9 @@ export default function Navbar({ isTender }) {
                   <UserPlus className="h-4 w-4" />
                   <span>Register</span>
                 </button>
+                  </>
+                )
+                  }
               </>
             )}
           </div>
@@ -380,7 +409,7 @@ export default function Navbar({ isTender }) {
                   setIsNotificationOpen(!isNotificationOpen);
                   setIsMenuOpen(false);
                 }}
-                className="relative p-2 mr-2 text-gray-700 hover:text-blue-600"
+                className="relative p-2 mr-2  hover:text-blue-600"
               >
                 <Bell className="h-6 w-6" />
                 {unreadCount > 0 && (
@@ -432,13 +461,13 @@ export default function Navbar({ isTender }) {
                 </div>
                 <Link
                   to="/customer/dashboard"
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                  className="block px-3 py-2 text-base font-medium  hover:text-blue-600"
                 >
                   Dashboard
                 </Link>
                 <Link
                         to="/subscription"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
                       >
                         <Crown className="h-4 w-4 mr-2" />
                         Subscription
@@ -450,7 +479,7 @@ export default function Navbar({ isTender }) {
                       </Link>
                 <Link
                   to="/settings"
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                  className="block px-3 py-2 text-base font-medium  hover:text-blue-600"
                 >
                   Settings
                 </Link>
@@ -463,24 +492,24 @@ export default function Navbar({ isTender }) {
               </>
             ) : (
               <>
-                <a href="#services" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">Services</a>
-                <a href="#about" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">About</a>
-                <a href="#contact" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="#services" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">Services</a>
+                <a href="#about" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">About</a>
+                <a href="#contact" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">Contact</a>
                 <hr className="my-2" />
-                <button className="flex w-full items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600">
+                <button className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600">
                   <Download className="h-5 w-5 mr-2" />
                   Get Mobile App
                 </button>
                 <Link
                   to="/login"
-                  className="flex w-full items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                  className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600"
                 >
                   <LogIn className="h-5 w-5 mr-2" />
                   Login
                 </Link>
                 <Link
                   to="/signup/customer"
-                  className="flex w-full items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                  className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600"
                 >
                   <UserPlus className="h-5 w-5 mr-2" />
                   Register

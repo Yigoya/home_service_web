@@ -223,6 +223,7 @@ const resources = {
       "Organization, notice and document details": "Organization, notice and document details",
       "back_to_tenders": "Back to Tenders",
       "no_tenders_found": "No tenders found",
+      "free_tenders": "Free Tenders",
       
       // Publish Tender Page Translations
       "publish_tender": "Publish Tender",
@@ -475,6 +476,7 @@ const resources = {
       "subscription_packages": "የመመዝገቢያ መተግበሪያዎች",
       "expiry_date": "የተጠናቀቀ ቀን",
       "posted_date": "የተለጠፈ ቀን",
+      "free_tenders": "ነፃ ጨረታዎች",
     }
   },
   om: {
@@ -679,6 +681,11 @@ const resources = {
       "subscription_packages": "Pakijii Fayyadama",
       "posted_date": "Guyyaa Ergame",
       "expiry_date": "Guyyaa Xumurame",
+      "free_tenders": "Free Tenders",
+
+
+
+
       "afar": "Afar",
       "amhara": "Amhara",
       "benishangul_gumuz": "Benishangul-Gumuz",

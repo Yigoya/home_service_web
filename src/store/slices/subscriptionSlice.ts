@@ -44,8 +44,12 @@ const subscriptionSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+    subcriptionLogout: (state) => {
+      state.currentPlan = null;
+      localStorage.removeItem('currentPlan');
+    },
   },
 });
 
-export const { setCurrentPlan, setAvailablePlans, setLoading, setError } = subscriptionSlice.actions;
+export const { setCurrentPlan, setAvailablePlans, setLoading, setError, subcriptionLogout } = subscriptionSlice.actions;
 export default subscriptionSlice.reducer;
