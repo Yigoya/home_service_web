@@ -22,6 +22,12 @@ export default function Navbar({ isTender }) {
   const { subcategory, mainsubcategory, isOnMainSubcategory , loading } = useSelector((state) => state.data);
   const { user } = useSelector((state) => state.auth);
   const { notifications, unreadCount } = useSelector((state) => state.notification);
+  const queryParams = new URLSearchParams(window.location.search);
+  const isTenderQuery = queryParams.get('isTender');
+  const isFromTender = isTenderQuery === 'true' || isTender
+
+  console.log(isFromTender)
+
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -97,6 +103,8 @@ export default function Navbar({ isTender }) {
     }
   };
 
+  console.log(isFromTender, isTender, isTender || isFromTender)
+
   const handleLogout = () => {
     dispatch(logout());
     dispatch(subcriptionLogout());
@@ -137,35 +145,39 @@ export default function Navbar({ isTender }) {
             </button>
             
             {/* <div className="hidden md:flex ml-10 space-x-8">
-              <a href="#services" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Services</a>
-              <a href="#about" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
-              <a href="#contact" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+              <a href="#services" className="  px-3 py-2 text-sm font-medium transition-colors duration-200">Services</a>
+              <a href="#about" className="  px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
+              <a href="#contact" className="  px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
             </div> */}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
+
               <>
+              {
+                isFromTender && ( <Link 
+                  to="/tender" 
+                  className="flex items-center px-4 py-2 text-sm "
+                  >
+                    <Home className="h-4 w-4 mr-1" />
+                    <span>Home</span>
+                </Link>)
+            }
                 {/* Language Selector */}
             <div className="relative">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
+                className="flex items-center   px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
               >
                 <Globe className="h-4 w-4 mr-1" />
                 <span>{getLanguageDisplay(i18n.language)}</span>
               </button>
 
-              {isTender && ( <Link 
-              to="/tender" 
-              className="flex items-center px-4 py-2 text-sm "
-              >
-                <Home className="h-4 w-4 mr-1" />
-                <span >Home</span>
-            </Link>)}
+              
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-10">
+                <div className={`absolute right-0 mt-2 w-36 ${isTender ? "bg-[#2b78ac]" : "bg-white"} rounded-md shadow-lg py-1 z-10`}>
                   <button 
                     onClick={() => changeLanguage('en')}
                     className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
@@ -193,7 +205,7 @@ export default function Navbar({ isTender }) {
                       setIsNotificationOpen(!isNotificationOpen);
                       setIsProfileOpen(false);
                     }}
-                    className="relative  hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                    className="relative   p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
                   >
                     <Bell className="h-6 w-6" />
                     {unreadCount > 0 && (
@@ -254,7 +266,7 @@ export default function Navbar({ isTender }) {
                       setIsProfileOpen(!isProfileOpen);
                       setIsNotificationOpen(false);
                     }}
-                    className="flex items-center space-x-2  hover:text-blue-600"
+                    className="flex items-center space-x-2  "
                   >
                     {user.profileImage ? (
                       <img
@@ -273,7 +285,7 @@ export default function Navbar({ isTender }) {
                   </button>
 
                   {isProfileOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
+                    <div className={`absolute right-0 mt-2 w-48 ${isTender ? "bg-[#2b78ac]" : "bg-white"} rounded-lg shadow-xl py-2 z-50`}>
                       <Link
                         to="/customer/dashboard"
                         className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
@@ -314,9 +326,9 @@ export default function Navbar({ isTender }) {
             ) : (
               <>
                 {/* Language Selector */}
-            {isTender && ( <Link 
+            {isFromTender && ( <Link 
               to="/tender" 
-              className="flex items-center px-4 py-2 text-sm "
+              className="flex items-center px-4 py-2 text-sm"
               >
                 <Home className="h-4 w-4 mr-1" />
                 <span >Home</span>
@@ -325,7 +337,7 @@ export default function Navbar({ isTender }) {
             
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
+                className="flex items-center   px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
               >
                 <Globe className="h-4 w-4 mr-1" />
                 <span>{getLanguageDisplay(i18n.language)}</span>
@@ -354,21 +366,21 @@ export default function Navbar({ isTender }) {
                 </div>
               )}
             </div>
-                <button className="flex items-center  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">
+                <button className="flex items-center   px-3 py-2 text-sm font-medium transition-colors duration-200">
                   <Download className="h-4 w-4 mr-1" />
                   Get App
                 </button>
 
                 {isTender ? (
                   <>
-                  <a href="#about" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
-                  <a href="#contact" className=" hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+                  <a href="#about" className="  px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
+                  <a href="#contact" className="  px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
                   </>
                 ) : (
                   <>
                   <Link
                   to="/login"
-                  className="flex items-center space-x-1  hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className="flex items-center space-x-1   px-3 py-2 text-sm font-medium transition-colors duration-200"
                 >
                   <LogIn className="h-4 w-4" />
                   <span>Login</span>
@@ -409,7 +421,7 @@ export default function Navbar({ isTender }) {
                   setIsNotificationOpen(!isNotificationOpen);
                   setIsMenuOpen(false);
                 }}
-                className="relative p-2 mr-2  hover:text-blue-600"
+                className="relative p-2 mr-2  "
               >
                 <Bell className="h-6 w-6" />
                 {unreadCount > 0 && (
@@ -461,7 +473,7 @@ export default function Navbar({ isTender }) {
                 </div>
                 <Link
                   to="/customer/dashboard"
-                  className="block px-3 py-2 text-base font-medium  hover:text-blue-600"
+                  className="block px-3 py-2 text-base font-medium  "
                 >
                   Dashboard
                 </Link>
@@ -479,7 +491,7 @@ export default function Navbar({ isTender }) {
                       </Link>
                 <Link
                   to="/settings"
-                  className="block px-3 py-2 text-base font-medium  hover:text-blue-600"
+                  className="block px-3 py-2 text-base font-medium  "
                 >
                   Settings
                 </Link>
@@ -492,24 +504,24 @@ export default function Navbar({ isTender }) {
               </>
             ) : (
               <>
-                <a href="#services" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">Services</a>
-                <a href="#about" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">About</a>
-                <a href="#contact" className="block px-3 py-2 text-base font-medium  hover:text-blue-600">Contact</a>
+                <a href="#services" className="block px-3 py-2 text-base font-medium  ">Services</a>
+                <a href="#about" className="block px-3 py-2 text-base font-medium  ">About</a>
+                <a href="#contact" className="block px-3 py-2 text-base font-medium  ">Contact</a>
                 <hr className="my-2" />
-                <button className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600">
+                <button className="flex w-full items-center px-3 py-2 text-base font-medium  ">
                   <Download className="h-5 w-5 mr-2" />
                   Get Mobile App
                 </button>
                 <Link
                   to="/login"
-                  className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600"
+                  className="flex w-full items-center px-3 py-2 text-base font-medium  "
                 >
                   <LogIn className="h-5 w-5 mr-2" />
                   Login
                 </Link>
                 <Link
                   to="/signup/customer"
-                  className="flex w-full items-center px-3 py-2 text-base font-medium  hover:text-blue-600"
+                  className="flex w-full items-center px-3 py-2 text-base font-medium  "
                 >
                   <UserPlus className="h-5 w-5 mr-2" />
                   Register

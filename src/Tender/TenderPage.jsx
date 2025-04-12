@@ -138,11 +138,11 @@ export default function TenderPage() {
   const navigate = useNavigate();
 
   const navigateToSubscription = () => {
-    navigate("/tenders");
+    navigate("/tenders?isTender=true");
   };
 
   const navigateToSignUp = () => {
-    navigate("/customer-signup?next=/subscription");
+    navigate("/customer-signup?next=/subscription?isTender=true");
   };
 
   const locations = [
@@ -200,18 +200,18 @@ export default function TenderPage() {
               
               <div className="border border-gray-300 rounded-lg p-4 space-y-4 bg-gray-50">
                 <button
-                  onClick={() => navigateToSignUp()}
+                  onClick={() => navigate("/login?isTender=true&return-url=/tender")}
                 className="w-full bg-[#3385bb] text-white p-4 text-sm rounded">
                   {t('member_login')}
                 </button>
                 <button
-                  onClick={() =>  navigate("/signup/customer")}
+                  onClick={() =>  navigate("/signup/customer?isTender=true")}
                   className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
                 >
                   {t('register')}
                 </button>
                 <button
-                  onClick={() =>  navigate("/subscription?showPlans=true")}
+                  onClick={() =>  navigate("/subscription?showPlans=true&isTender=true")}
                   className="w-full bg-[#3385bb] text-white p-4 text-sm rounded"
                 >
                   {t('subscription_packages')}
@@ -342,7 +342,7 @@ export default function TenderPage() {
                             {!user && (
                               <div className="flex justify-center mt-3 absolute inset-0 items-center">
                                 <button
-                                  onClick={() => navigate("/login")}
+                                  onClick={() => navigate("/login?isTender=true")}
                                   className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded">
                                   {t('login')}
                                 </button>

@@ -144,12 +144,12 @@ export default function PublishTender() {
       
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="flex items-center mb-6">
-          <button 
+          {/* <button 
             onClick={() => navigate('/tender')} 
             className="flex items-center text-[#3385bb] hover:text-[#2a6c99] mr-4"
           >
             <ArrowLeft className="w-4 h-4 mr-1" /> {t('back_to_tenders')}
-          </button>
+          </button> */}
           <h1 className="text-2xl font-bold text-gray-800">{t('publish_tender')}</h1>
         </div>
 
