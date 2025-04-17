@@ -8,6 +8,7 @@ import Tender from '../../assets/tender.png';
 import Business from '../../assets/justcall.png';
 import Maintenance from '../../assets/maintenance.png';
 import Professional from '../../assets/professional.png';
+import B2B from '../../assets/b2b.png';
 import useFetchData from "../../hooks/useFetchData"
 
 const services = [
@@ -185,7 +186,7 @@ export default function Hero() {
       onClick: () => navigate('/tender'),
     },
     {
-      title: t('business_solutions', 'Business Solutions'),
+      title: t('business_solutions', 'All Mart'),
       icon: Business,
       description: t('business_description', 'Comprehensive business consulting and strategy services'),
       onClick: () => navigate('/companies'),
@@ -209,6 +210,16 @@ export default function Hero() {
         navigate("/service-categories");
         return;
       }
+    },
+    {
+      title: t('b2b_marketplace', 'B2B Marketplace'),
+      icon: B2B,
+      description: t('b2b_description', 'Connect with trusted businesses and suppliers in our marketplace'),
+      onClick: () => {
+        dispatch(setMainSubcategory(services[1].services[0])); 
+        navigate('/subcategories');
+        return;
+      },
     },
   ];
 
@@ -346,7 +357,7 @@ export default function Hero() {
       {/* Enhanced Services Section */}
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {!(showResults && searchResults.length > 0) && translatedServices.map((service) => (
               <div
                 key={service.title}
