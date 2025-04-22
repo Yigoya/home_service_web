@@ -56,6 +56,9 @@ import TechnicianSignup from './Technician/Pages/TechnicianSignup';
 import { Toaster } from 'react-hot-toast';
 import SubscriptionPlans from './Shared/pages/SubscriptionPlans';
 import { useSelector } from 'react-redux';
+import B2BPage from './B2B/pages/B2BPage';
+import ProductsPage from './B2B/pages/products-page';
+import ProductDetailPage from './B2B/pages/product-detail-page';
 function App() {
   const { user } = useSelector((state) => state.auth);
 
@@ -97,6 +100,11 @@ function App() {
                   <Route path="/service-categories" element={<ServiceCategoriesPage />} />
                   <Route path="/tender-categories" element={<TenderCategories/>} />
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
+
+                  <Route path="/b2bpage" element={<B2BPage />} />
+
+                  <Route path='/products' element={<ProductsPage />} />
+                  <Route path='/products/:productId' element={<ProductDetailPage />} />
 
                   <Route
                     path="/technician/profile/:id"

@@ -1,0 +1,48 @@
+/* Add these styles to your CSS file */
+.text-primary-600 {
+  color: #2563eb;
+}
+
+.bg-primary-600 {
+  background-color: #2563eb;
+}
+
+.bg-primary-700 {
+  background-color: #1d4ed8;
+}
+
+@media (max-width: 1023px) {
+  .lg\:hidden {
+    display: block;
+  }
+
+  .lg\:block {
+    display: none;
+  }
+
+  .lg\:w-1\/4 {
+    width: 100%;
+  }
+
+  .lg\:flex-row {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+
+  .lg\:w-1\/4 {
+    width: 25%;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+}
