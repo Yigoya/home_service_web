@@ -23,6 +23,7 @@ function B2BPage() {
   const [viewMode, setViewMode] = useState("grid") // grid or list
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [isLoadingFeatured, setIsLoadingFeatured] = useState(false)
+  const [showAllCategories, setShowAllCategories] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -120,12 +121,8 @@ function B2BPage() {
   }
 
   const handleServiceClick = (service) => {
-    if (service.services && service.services.length > 0) {
-      dispatch(setSubcategory(service))
-    } else {
-      // Navigate to products page instead of technician list
-      navigate(`/products?serviceId=${service.serviceId}`)
-    }
+    // Always navigate to products page when a service is clicked
+    navigate(`/products?serviceId=${service.serviceId}`)
   }
 
   const handleProductClick = (productId) => {
@@ -192,7 +189,7 @@ function B2BPage() {
               <h2 className="font-semibold text-gray-800">Categories</h2>
             </div>
             <ul className="divide-y divide-gray-100">
-              {subcategory.services.map((category) => (
+              {(showAllCategories ? subcategory.services : subcategory.services.slice(0, 10)).map((category) => (
                 <li key={category.serviceId}>
                   <button
                     onClick={() => handleCategoryClick(category)}
@@ -218,6 +215,21 @@ function B2BPage() {
                 </li>
               ))}
             </ul>
+            {subcategory.services.length > 10 && (
+              <div className="p-4 border-t border-gray-100">
+                <button
+                  onClick={() => setShowAllCategories(!showAllCategories)}
+                  className="w-full text-center py-2 text-blue-600 hover:text-blue-800 flex items-center justify-center font-medium"
+                >
+                  {showAllCategories ? "Show Less" : "See All Categories"}
+                  {showAllCategories ? (
+                    <X size={16} className="ml-1" />
+                  ) : (
+                    <ChevronRight size={16} className="ml-1" />
+                  )}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Main Content Area */}
@@ -246,6 +258,7 @@ function B2BPage() {
                   {selectedCategory.services && selectedCategory.services.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {selectedCategory.services.map((service) => (
+                        <div onClick={() => handleServiceClick(service)}>
                         <CategorySection
                           key={service.id}
                           name={service.name}
@@ -254,6 +267,7 @@ function B2BPage() {
                           onClick={() => handleServiceClick(service)}
                           className="cursor-pointer"
                         />
+                        </div>
                       ))}
                     </div>
                   ) : (
@@ -482,160 +496,6 @@ function B2BPage() {
             )}
           </div>
         </div>
-
-        {/* All Products Section */}
-        {/* <div className="mt-12">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">All Products</h2>
-                <p className="text-gray-600 mt-1">Browse our selection of products across all categories</p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("grid")}
-                  className={`p-2 rounded-md ${
-                    viewMode === "grid" ? "bg-gray-100 text-blue-600" : "text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  <Grid className="h-5 w-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("list")}
-                  className={`p-2 rounded-md ${
-                    viewMode === "list" ? "bg-gray-100 text-blue-600" : "text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  <List className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-
-            {isLoadingProducts ? (
-              <div className="flex justify-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              </div>
-            ) : (
-              <div>
-                {serviceIdsWithProducts.length > 0 ? (
-                  serviceIdsWithProducts.map((serviceId) => {
-                    // Find the service name by matching serviceId
-                    const serviceCategory = subcategory.services.find(
-                      (cat) => cat.serviceId?.toString() === serviceId || cat.id?.toString() === serviceId,
-                    )
-
-                    // Skip if no products or no matching category
-                    if (!maxProducts[serviceId] || maxProducts[serviceId].length === 0 || !serviceCategory) {
-                      return null
-                    }
-
-                    return (
-                      <div key={serviceId} className="mb-10">
-                        <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-xl font-semibold text-gray-900 flex items-center">
-                            <div className="w-8 h-8 rounded-md bg-blue-50 flex items-center justify-center mr-2">
-                              <img
-                                src={`${API_URL}/files/${serviceCategory.icon}`}
-                                alt={serviceCategory.name}
-                                className="w-5 h-5"
-                              />
-                            </div>
-                            {serviceCategory.name}
-                          </h3>
-                          <button
-                            onClick={() => navigateToProducts(serviceId)}
-                            className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium"
-                          >
-                            View all
-                            <ChevronRight size={16} className="ml-1" />
-                          </button>
-                        </div>
-
-                        {viewMode === "grid" ? (
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {maxProducts[serviceId].map((product) => (
-                              <div
-                                key={product.id}
-                                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
-                                onClick={() => handleProductClick(product.id)}
-                              >
-                                <div className="h-40 overflow-hidden bg-gray-100">
-                                  <img
-                                    src={product.images[0] || "/placeholder-product.jpg"}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                                  />
-                                </div>
-                                <div className="p-4">
-                                  <h3 className="font-medium text-gray-900 line-clamp-1">{product.name}</h3>
-                                  <p className="text-gray-600 text-sm line-clamp-2 mt-1">{product.description}</p>
-                                  <div className="mt-3 flex justify-between items-center">
-                                    <div className="font-semibold text-blue-600">
-                                      ${product.price} {product.currency}
-                                    </div>
-                                    <div className="text-xs text-gray-500">Min order: {product.minOrderQuantity}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="space-y-4">
-                            {maxProducts[serviceId].map((product) => (
-                              <div
-                                key={product.id}
-                                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer flex"
-                                onClick={() => handleProductClick(product.id)}
-                              >
-                                <div className="w-48 h-48 overflow-hidden bg-gray-100">
-                                  <img
-                                    src={product.images[0] || "/placeholder-product.jpg"}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <div className="p-4 flex-1">
-                                  <h3 className="font-medium text-gray-900">{product.name}</h3>
-                                  <p className="text-gray-600 text-sm mt-1">{product.description}</p>
-                                  <div className="mt-2 flex justify-between items-center">
-                                    <div className="font-semibold text-blue-600">
-                                      ${product.price} {product.currency}
-                                    </div>
-                                    <div className="text-xs text-gray-500">
-                                      Stock: {product.stockQuantity} | Min order: {product.minOrderQuantity}
-                                    </div>
-                                  </div>
-                                  <div className="mt-2 text-sm text-gray-500">
-                                    <span className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-semibold mr-2">
-                                      {product.category}
-                                    </span>
-                                    <span className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs font-semibold">
-                                      SKU: {product.sku}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })
-                ) : (
-                  <div className="text-center py-8 bg-gray-50 rounded-lg">
-                    <div className="text-gray-400 mb-4">
-                      <ShoppingBag className="w-16 h-16 mx-auto" />
-                    </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-                    <p className="text-gray-500">There are currently no products available.</p>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div> */}
       </div>
     </div>
   )

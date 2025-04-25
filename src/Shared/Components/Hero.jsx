@@ -216,7 +216,7 @@ export default function Hero() {
       icon: B2B,
       description: t('b2b_description', 'Connect with trusted businesses and suppliers in our marketplace'),
       onClick: () => {
-        dispatch(setMainSubcategory(services[4])); 
+        dispatch(setMainSubcategory(services[5])); 
         navigate('/b2bpage');
         return;
       },
