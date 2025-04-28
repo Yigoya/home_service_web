@@ -14,6 +14,7 @@ function ServiceCategoriesPage() {
   const { subcategory, loading } = useSelector((state) => state.data)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [tabAnimation, setTabAnimation] = useState(false)
+  const [showAllSubcategories, setShowAllSubcategories] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -69,61 +70,56 @@ function ServiceCategoriesPage() {
       {subcategory.services && subcategory.services.length > 0 ? (
         <div className="mb-8">
           {/* Chip-style wrapping tabs */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {subcategory.services.map((category) => (
-              <button
-                key={category.serviceId}
-                onClick={() => handleCategorySelect(category)}
-                className={`
-                  group relative overflow-hidden rounded-full transition-all duration-300 
-                  ${
-                    selectedCategory && selectedCategory.serviceId === category.serviceId
-                      ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                      : "bg-white border border-gray-200 text-gray-700 hover:border-blue-700 hover:shadow-sm"
-                  }
-                `}
-              >
-                <div className="relative z-10 px-4 py-2 flex items-center gap-2">
-                  {category.icon && (
-                    <div
-                      className={`
-                      w-6 h-6 rounded-full flex items-center justify-center
-                      ${selectedCategory && selectedCategory.serviceId === category.serviceId ? "bg-white/20" : "bg-blue-50"}
-                    `}
-                    >
-                      <img src={`${API_URL_FILE}${category.icon}`} alt={category.name} className="w-4 h-4" />
-                    </div>
-                  )}
-                  <span className="font-medium">{category.name}</span>
-
-                  {/* Show count if available */}
-                  {category.services && category.services.length > 0 && (
-                    <span
-                      className={`
-                      text-xs rounded-full px-2 py-0.5
-                      ${
-                        selectedCategory && selectedCategory.serviceId === category.serviceId
-                          ? "bg-white/20 text-white"
-                          : "bg-gray-100 text-gray-600"
-                      }
-                    `}
-                    >
-                      {category.services.length}
-                    </span>
-                  )}
-                </div>
-
-                {/* Animated background effect on hover */}
-                <div
+          <div className="flex flex-col gap-4 mb-6 relative">
+            <div className="flex items-center gap-4 w-full overflow-x-auto scrollbar-hide pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {subcategory.services.slice(0, showAllSubcategories ? subcategory.services.length : 6).map((category) => (
+                <button
+                  key={category.serviceId}
+                  onClick={() => handleCategorySelect(category)}
                   className={`
-                  absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 
-                  transition-opacity duration-300 group-hover:opacity-10
-                  ${selectedCategory && selectedCategory.serviceId === category.serviceId ? "opacity-100" : ""}
-                `}
-                ></div>
-              </button>
-            ))}
+                    group bg-white p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
+                    min-w-[200px] max-w-[450px]
+                  `}
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    {category.icon && (
+                      <div className="w-12 h-12 rounded-lg bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-300">
+                        <img 
+                          src={`${API_URL_FILE}${category.icon}`} 
+                          alt={category.name} 
+                          className="w-8 h-8 transform group-hover:scale-110 transition-transform duration-300" 
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h2 className={`text-lg font-semibold ${selectedCategory && selectedCategory.serviceId === category.serviceId ? 'text-blue-600' : 'text-gray-800'} transition-colors duration-300`}>
+                        {category.name}
+                      </h2>
+                    </div>
+                  </div>
+                </button>
+              ))}
+              
+              {subcategory.services.length > 6 && !showAllSubcategories && (
+                <div className="flex-shrink-0 bg-white/50 rounded-xl p-5 shadow-sm min-w-[100px] flex items-center justify-center">
+                  <div className="flex flex-col items-center text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                    </svg>
+                    <span className="text-xs mt-1">Swipe</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Gradient fade effect to indicate more content */}
+            {!showAllSubcategories && subcategory.services.length > 4 && (
+              <div className="absolute right-0 top-10 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+            )}
           </div>
+          
+          {/* Divider line */}
+          <div className="h-px bg-gray-200 w-full my-8"></div>
 
           {/* Selected Category Content with Animation */}
           {selectedCategory && (
@@ -133,7 +129,7 @@ function ServiceCategoriesPage() {
               ${tabAnimation ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"}
             `}
             >
-              <div className="flex items-center mb-4">
+              {/* <div className="flex items-center mb-4">
                 <div className="flex items-center gap-3">
                   {selectedCategory.icon && (
                     <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
@@ -150,22 +146,23 @@ function ServiceCategoriesPage() {
                 {selectedCategory.services && selectedCategory.services.length > 0 && (
                   <span className="ml-2 text-sm text-gray-500">({selectedCategory.services.length} services)</span>
                 )}
-              </div>
+              </div> */}
 
               {/* Services Grid */}
               {selectedCategory.services && selectedCategory.services.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {selectedCategory.services.map((service) => (
                     <div
                       key={service.id}
                       onClick={() => handleServiceClick(service)}
-                      className="cursor-pointer transform transition-transform hover:-translate-y-1 hover:shadow-md"
+                      className="cursor-pointer transform transition-transform hover:-translate-y-1"
                     >
                       <CategorySection
                         name={service.name}
                         icon={service.icon}
                         subcategories={service.services || []}
                         className="h-full"
+                        isSelected={false} // Default to not selected
                       />
                     </div>
                   ))}
@@ -173,26 +170,15 @@ function ServiceCategoriesPage() {
               ) : (
                 <div
                   onClick={() => navigate(`/technician-list/${selectedCategory.serviceId}`)}
-                  className="bg-white rounded-xl p-5 border border-gray-200 hover:border-blue-100 hover:shadow-md transition-all cursor-pointer"
+                  className="cursor-pointer transform transition-transform hover:-translate-y-1"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
-                        {selectedCategory.icon && (
-                          <img
-                            src={`${API_URL_FILE}${selectedCategory.icon}`}
-                            alt={selectedCategory.name}
-                            className="w-8 h-8"
-                          />
-                        )}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-medium text-gray-800">View Technicians</h3>
-                        <p className="text-sm text-gray-500">Find available technicians for {selectedCategory.name}</p>
-                      </div>
-                    </div>
-                    <ChevronRight className="text-gray-400" />
-                  </div>
+                  <CategorySection
+                    name={selectedCategory.name}
+                    icon={selectedCategory.icon}
+                    subcategories={[]}
+                    className="h-full"
+                    isSelected={true} // This category is selected
+                  />
                 </div>
               )}
             </div>

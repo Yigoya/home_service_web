@@ -25,6 +25,7 @@ function B2BPage() {
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [isLoadingFeatured, setIsLoadingFeatured] = useState(false)
   const [showAllCategories, setShowAllCategories] = useState(false)
+  const [showAllSubcategories, setShowAllSubcategories] = useState(false) // New state for subcategories
   const [searchTerm, setSearchTerm] = useState("")
   const [products, setProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
@@ -272,7 +273,7 @@ function B2BPage() {
         {/* Main Content with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar - Categories List */}
-          <div className={`${isSidebarOpen ? "block" : "hidden"} lg:block lg:w-1/4 bg-white rounded-lg shadow-sm`}>
+          <div className={`${isSidebarOpen ? "block" : "hidden"} lg:block lg:w-[300px] bg-white rounded-lg shadow-sm`}>
             <div className="p-4 border-b border-gray-100">
               <h2 className="font-semibold text-gray-800">Categories</h2>
             </div>
@@ -321,69 +322,84 @@ function B2BPage() {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex-1">
+          <div className="flex-1 lg:w-4/5">
             {/* Subcategory Chip-style Tabs */}
             {selectedCategory && selectedCategory.services && selectedCategory.services.length > 0 && (
               <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <div className="flex flex-wrap gap-2">
-                  {selectedCategory.services.map((subcat) => (
-                    <button
-                      key={subcat.serviceId || subcat.serviceId}
-                      onClick={() => handleSubcategoryClick(subcat)}
-                      className={`
-                        group relative overflow-hidden rounded-full transition-all duration-300 
-                        ${
-                          selectedSubcategory &&
-                          (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId)
-                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                            : "bg-white border border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow-sm"
-                        }
-                      `}
-                    >
-                      <div className="relative z-10 px-4 py-2 flex items-center gap-2">
-                        {subcat.icon && (
-                          <div
-                            className={`
-                            w-6 h-6 rounded-full flex items-center justify-center
-                            ${selectedSubcategory && (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId) ? "bg-white/20" : "bg-blue-50"}
-                          `}
-                          >
-                            <img src={`${API_URL_FILE}${subcat.icon}`} alt={subcat.name} className="w-4 h-4" />
-                          </div>
-                        )}
-                        <span className="font-medium">{subcat.name}</span>
-
-                        {/* Show count if available */}
-                        {subcat.services && subcat.services.length > 0 && (
-                          <span
-                            className={`
-                            text-xs rounded-full px-2 py-0.5
-                            ${
-                              selectedSubcategory &&
-                              (
-                                selectedSubcategory.serviceId === subcat.serviceId ||
-                                  selectedSubcategory.serviceId === subcat.serviceId
-                              )
-                                ? "bg-white/20 text-white"
-                                : "bg-gray-100 text-gray-600"
-                            }
-                          `}
-                          >
-                            {subcat.services.length}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Animated background effect on hover */}
-                      <div
+                <div className="flex flex-col">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    {(showAllSubcategories ? selectedCategory.services : selectedCategory.services.slice(0, 15)).map((subcat) => (
+                      <button
+                        key={subcat.serviceId || subcat.serviceId}
+                        onClick={() => handleSubcategoryClick(subcat)}
                         className={`
-                        absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 
-                        transition-opacity duration-300 group-hover:opacity-10
-                        ${selectedSubcategory && (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId) ? "opacity-100" : ""}
-                      `}
-                      ></div>
-                    </button>
-                  ))}
+                          group relative overflow-hidden rounded-full transition-all duration-300 
+                          ${
+                            selectedSubcategory &&
+                            (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId)
+                              ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
+                              : "bg-white border border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow-sm"
+                          }
+                        `}
+                      >
+                        <div className="relative z-10 px-4 py-2 flex items-center gap-2">
+                          {/* {subcat.icon && (
+                            <div
+                              className={`
+                              w-6 h-6 rounded-full flex items-center justify-center
+                              ${selectedSubcategory && (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId) ? "bg-white/20" : "bg-blue-50"}
+                            `}
+                            >
+                              <img src={`${API_URL_FILE}${subcat.icon}`} alt={subcat.name} className="w-4 h-4" />
+                            </div>
+                          )} */}
+                          <span className="font-medium">{subcat.name}</span>
+
+                          {/* Show count if available */}
+                          {subcat.services && subcat.services.length > 0 && (
+                            <span
+                              className={`
+                              text-xs rounded-full px-2 py-0.5
+                              ${
+                                selectedSubcategory &&
+                                (
+                                  selectedSubcategory.serviceId === subcat.serviceId ||
+                                    selectedSubcategory.serviceId === subcat.serviceId
+                                )
+                                  ? "bg-white/20 text-white"
+                                  : "bg-gray-100 text-gray-600"
+                              }
+                            `}
+                            >
+                              {subcat.services.length}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Animated background effect on hover */}
+                        <div
+                          className={`
+                          absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 
+                          transition-opacity duration-300 group-hover:opacity-10
+                          ${selectedSubcategory && (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId) ? "opacity-100" : ""}
+                        `}
+                        ></div>
+                      </button>
+                    ))}
+                    
+                    {/* See More / See Less button - now inline with subcategories */}
+                    {selectedCategory.services.length > 12 && (
+                      <button
+                        onClick={() => setShowAllSubcategories(!showAllSubcategories)}
+                        className="text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center px-4 py-2 rounded-full border border-blue-200 hover:border-blue-300 transition-all duration-200 hover:shadow-sm"
+                      >
+                        {showAllSubcategories ? "Show Less" : "See More"}
+                        {showAllSubcategories ? 
+                          <ChevronLeft size={16} className="ml-1" /> : 
+                          <ChevronRight size={16} className="ml-1" />}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
@@ -475,7 +491,7 @@ function B2BPage() {
                             <div
                               key={product.serviceId}
                               className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
-                              onClick={() => handleProductClick(product.serviceId)}
+                              onClick={() => handleProductClick(product.id)}
                             >
                               <div className="h-48 overflow-hidden bg-gray-100">
                                 <img
@@ -746,7 +762,7 @@ function B2BPage() {
                                     <img
                                       src={product.images[0] || "/placeholder-product.jpg"}
                                       alt={product.name}
-                                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                                      className="w-full h-full object-cover"
                                     />
                                   </div>
                                   <div className="p-4">
