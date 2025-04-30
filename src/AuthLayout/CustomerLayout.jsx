@@ -6,7 +6,7 @@ import { AuthContext } from '../Shared/Context/AuthContext';
 import { FilterProvider } from '../Shared/Context/FilterContext';
 
 
-const CustomerLayout = ({ isTender, nextRoute, color }) => {
+const CustomerLayout = ({ isTender, nextRoute, color, isB2BPage }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const getCurrentPath = () => {
     if (typeof window !== 'undefined') {
@@ -26,7 +26,7 @@ const CustomerLayout = ({ isTender, nextRoute, color }) => {
     <div>
       <div>
         {/* {isLoggedIn ? <CustomerNavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute}/> : <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color}/>} */}
-          <NavBar isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color}/>
+          <NavBar isB2BPage={isB2BPage} isTender={isTender} nextRoute={isTenderPage ?  "/" : nextRoute} color={color} />
         <Outlet />
       </div>
     </div>

@@ -14,7 +14,6 @@ function ServiceCategoriesPage() {
   const { subcategory, loading } = useSelector((state) => state.data)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [tabAnimation, setTabAnimation] = useState(false)
-  const [showAllSubcategories, setShowAllSubcategories] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -51,15 +50,15 @@ function ServiceCategoriesPage() {
   }
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto sm:px-6 py-4">
+    <div className="min-h-screen max-w-7xl mx-auto sm:px-6 py-4 mt-16">
       <div className="flex gap-3 mb-3">
         <LocationSelector />
         <SearchBar />
       </div>
-      <PromotionalBanner />
+      {/* <PromotionalBanner /> */}
 
       {/* Main Content */}
-      <div className="mb-6">
+      <div className="mb-6 mt-10">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName}</h1>
         <p className="text-gray-600">
           Explore {subcategory.services.length} subcategories in {subcategory.name ?? subcategory.categoryName}
@@ -71,13 +70,23 @@ function ServiceCategoriesPage() {
         <div className="mb-8">
           {/* Chip-style wrapping tabs */}
           <div className="flex flex-col gap-4 mb-6 relative">
+            {/* Horizontal scrolling indicator */}
+            <div className="flex items-center justify-between px-2 mb-2">
+              <p className="text-sm text-gray-500 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                Swipe to see more categories
+              </p>
+            </div>
+            
             <div className="flex items-center gap-4 w-full overflow-x-auto scrollbar-hide pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              {subcategory.services.slice(0, showAllSubcategories ? subcategory.services.length : 6).map((category) => (
+              {subcategory.services.map((category) => (
                 <button
                   key={category.serviceId}
                   onClick={() => handleCategorySelect(category)}
                   className={`
-                    group bg-white p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
+                    group bg-white rounded-xl p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
                     min-w-[200px] max-w-[450px]
                   `}
                 >
@@ -100,21 +109,23 @@ function ServiceCategoriesPage() {
                 </button>
               ))}
               
-              {subcategory.services.length > 6 && !showAllSubcategories && (
-                <div className="flex-shrink-0 bg-white/50 rounded-xl p-5 shadow-sm min-w-[100px] flex items-center justify-center">
-                  <div className="flex flex-col items-center text-gray-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                    </svg>
-                    <span className="text-xs mt-1">Swipe</span>
-                  </div>
+              {/* Swipe indicator at the end */}
+              {subcategory.services.length > 4 && (
+                <div className="flex-shrink-0 bg-white/10 rounded-xl p-5 min-w-[40px] flex items-center justify-center">
+                  
                 </div>
               )}
             </div>
             
             {/* Gradient fade effect to indicate more content */}
-            {!showAllSubcategories && subcategory.services.length > 4 && (
-              <div className="absolute right-0 top-10 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+            {subcategory.services.length > 4 && (
+              <div className="absolute right-0 top-10 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none flex items-center justify-end">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+                
+               
+              </div>
             )}
           </div>
           

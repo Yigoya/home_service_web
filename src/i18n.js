@@ -414,7 +414,7 @@ const resources = {
       "get": "አግኝ ከ",
       "tender_services": "የጨረታ አገልግሎቶች",
       "tender_description": "የሙያዊ ጨረታ ማስተዳደር እና ማቅረቢያ አገልግሎቶች",
-      "business_solutions": "የንግድ መፍትሄዎች",
+      "business_solutions": "ብቻ ይደውሉ",
       "business_description": "ሁሉን አቀፍ የንግድ ማማከርና የስልት አገልግሎቶች",
       "maintenance": "ጥገና",
       "maintenance_description": "24/7 የጥገና እና የድጋፍ አገልግሎቶች",
@@ -477,6 +477,7 @@ const resources = {
       "expiry_date": "የተጠናቀቀ ቀን",
       "posted_date": "የተለጠፈ ቀን",
       "free_tenders": "ነፃ ጨረታዎች",
+      "b2b_marketplace": "ግብይት"
     }
   },
   om: {

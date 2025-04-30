@@ -101,7 +101,7 @@ function App() {
                   <Route path="/tender-categories" element={<TenderCategories/>} />
                   <Route path="/tender/:id" element={<TenderDetailPage/>} />
 
-                  <Route path="/b2bpage" element={<B2BPage />} />
+                  
 
                   <Route path='/products' element={<ProductsPage />} />
                   <Route path='/products/:productId' element={<ProductDetailPage />} />
@@ -130,7 +130,7 @@ function App() {
                   <Route path="*" element={<Navigate to="/login" replace />} />
                 </Route>
             
-              
+                <Route path="/b2bpage" element={<B2BPage />} />
                   <Route path="/tender" element={<TenderPage/>} />
                   <Route path="/tenders" element={<PublishTender/>} />
                   

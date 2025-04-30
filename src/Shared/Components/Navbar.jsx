@@ -11,7 +11,7 @@ import { setMainSubcategory } from '../../store/dataSlice';
 import { subcriptionLogout } from '../../store/slices/subscriptionSlice';
 import { API_URL_FILE } from '../api';
 
-export default function Navbar({ isTender }) {
+export default function Navbar({ isTender, isB2BPage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -113,7 +113,7 @@ export default function Navbar({ isTender }) {
 
   return (
     <nav className={`${isTender ? "bg-[#2b78ac]" : "bg-white/95"} backdrop-blur-md shadow-lg fixed top-0 w-full z-50 ${isTender ? "text-gray-50" : "text-gray-700"}`}>
-      <div className={`${!isTender && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
+      <div className={`${(!isTender && !isB2BPage) && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <button onClick={()=>{

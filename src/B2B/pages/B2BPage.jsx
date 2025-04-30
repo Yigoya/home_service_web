@@ -11,6 +11,7 @@ import PromotionalBanner from "../../Shared/Components/PromotionalBanner"
 import LocationSelector from "../../Shared/Components/LocationSelector"
 import SearchBar from "../../Shared/Components/SearchBar"
 import CategorySection from "../../Shared/Components/CategorySection"
+import CustomerLayout from "../../AuthLayout/CustomerLayout"
 
 function B2BPage() {
   // Redux state
@@ -158,7 +159,7 @@ function B2BPage() {
           serviceId,
           name: searchTerm || undefined,
           page: currentPage,
-          size: 10,
+          size: 12,
         },
       })
       setProducts(response.data.content)
@@ -246,11 +247,9 @@ function B2BPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 mt-16">
+      <CustomerLayout isB2BPage={true} />
       <div className="sm:px-6 py-4">
-        <div className="flex gap-3 mb-3">
-          <LocationSelector />
-          <SearchBar />
-        </div>
+        
         
 
         {/* Page Header */}
@@ -275,7 +274,7 @@ function B2BPage() {
         {/* Main Content with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar - Categories List */}
-          <div className={`${isSidebarOpen ? "block" : "hidden"} lg:block lg:w-[300px] bg-white rounded-lg shadow-sm`}>
+          <div className={`${isSidebarOpen ? "block" : "hidden"} lg:block lg:w-[330px] bg-white rounded-lg shadow-sm`}>
             <div className="p-4 border-b border-gray-100">
               <h2 className="font-semibold text-gray-800">Categories</h2>
             </div>
@@ -325,6 +324,10 @@ function B2BPage() {
 
           {/* Main Content Area */}
           <div className="flex-1 lg:w-4/5">
+          <div className="flex gap-3 mb-3 z-index-100">
+          <LocationSelector />
+          <SearchBar />
+        </div>
           <PromotionalBanner />
             {/* Subcategory Chip-style Tabs */}
             {selectedCategory && selectedCategory.services && selectedCategory.services.length > 0 && (
@@ -340,8 +343,8 @@ function B2BPage() {
                           ${
                             selectedSubcategory &&
                             (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId)
-                              ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                              : "bg-white border border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow-sm"
+                              ? "bg-blue-500 text-white shadow-md"
+                              : "bg-gray-200 border border-gray-200 text-gray-700 hover:border-blue-300 hover:shadow-sm"
                           }
                         `}
                       >
@@ -382,7 +385,7 @@ function B2BPage() {
                         {/* Animated background effect on hover */}
                         <div
                           className={`
-                          absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 
+                          absolute inset-0 bg-blue-500 to-indigo-600 opacity-0 
                           transition-opacity duration-300 group-hover:opacity-10
                           ${selectedSubcategory && (selectedSubcategory.serviceId === subcat.serviceId || selectedSubcategory.serviceId === subcat.serviceId) ? "opacity-100" : ""}
                         `}
@@ -486,7 +489,7 @@ function B2BPage() {
                     <div>
                       <div
                         className={
-                          viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" : "space-y-4"
+                          viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6" : "space-y-4"
                         }
                       >
                         {products.map((product) =>
