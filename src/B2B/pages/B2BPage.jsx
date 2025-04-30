@@ -9,6 +9,7 @@ import { API_URL, API_URL_FILE } from "../../Shared/api"
 import LoadingPage from "../../Shared/Components/LoadingPage"
 import PromotionalBanner from "../../Shared/Components/PromotionalBanner"
 import LocationSelector from "../../Shared/Components/LocationSelector"
+import SearchBar from "../../Shared/Components/SearchBar"
 import CategorySection from "../../Shared/Components/CategorySection"
 
 function B2BPage() {
@@ -244,12 +245,13 @@ function B2BPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 mt-16">
       <div className="sm:px-6 py-4">
         <div className="flex gap-3 mb-3">
           <LocationSelector />
+          <SearchBar />
         </div>
-        <PromotionalBanner />
+        
 
         {/* Page Header */}
         {/* <div className="mb-6 mt-6">
@@ -323,6 +325,7 @@ function B2BPage() {
 
           {/* Main Content Area */}
           <div className="flex-1 lg:w-4/5">
+          <PromotionalBanner />
             {/* Subcategory Chip-style Tabs */}
             {selectedCategory && selectedCategory.services && selectedCategory.services.length > 0 && (
               <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
