@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { ChevronRight } from "react-feather"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import CategorySection from "../Components/CategorySection"
 import PromotionalBanner from "../Components/PromotionalBanner"
 import LocationSelector from "../Components/LocationSelector"
@@ -28,6 +28,11 @@ function ServiceCategoriesPage() {
     if (subcategory.services && subcategory.services.length > 0 && !selectedCategory) {
       setSelectedCategory(subcategory.services[0])
     }
+
+    // Initial check for scroll buttons visibility
+    if (scrollContainerRef.current) {
+      updateScrollButtonVisibility()
+    }
   }, [subcategory, navigate, selectedCategory])
 
   const handleCategorySelect = (category) => {
@@ -44,6 +49,41 @@ function ServiceCategoriesPage() {
     navigate(`/technician-list/${service.serviceId}`)
   }
 
+  // Reference to the scrollable container
+  const scrollContainerRef = useRef(null)
+
+  // State to track scroll position
+  const [showLeftButton, setShowLeftButton] = useState(false)
+  const [showRightButton, setShowRightButton] = useState(true)
+
+  // Function to check scroll position and update button visibility
+  const updateScrollButtonVisibility = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      
+      // Check if we're at the beginning of the scroll
+      setShowLeftButton(container.scrollLeft > 10) // Small threshold to account for precision issues
+      
+      // Check if we're at the end of the scroll
+      const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10
+      setShowRightButton(!isAtEnd)
+    }
+  }
+
+  // Function to scroll the categories container
+  const scrollCategories = (direction) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      const scrollAmount = 3 * 220 // Approximate width of 3 category items (200px + gap)
+      
+      if (direction === 'left') {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+      } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+      }
+    }
+  }
+
   if (subcategory == null) {
     navigate("/")
     return null
@@ -55,11 +95,8 @@ function ServiceCategoriesPage() {
       {/* <PromotionalBanner /> */}
 
       {/* Main Content */}
-      <div className="mb-6 mt-10">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName}</h1>
-        <p className="text-gray-600">
-          Explore {subcategory.services.length} subcategories in {subcategory.name ?? subcategory.categoryName}
-        </p>
+      <div className="mb-8 mt-10 flex items-center justify-between">
+        <h1 className="text-6xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName} on demand</h1>
       </div>
       <div className="flex gap-3 mt-6">
         <LocationSelector />
@@ -74,125 +111,143 @@ function ServiceCategoriesPage() {
             {/* Horizontal scrolling indicator */}
             <div className="flex items-center justify-between px-2 mb-2">
               <p className="text-sm text-gray-500 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /> */}
                 </svg>
                 
               </p>
             </div>
             
-            <div className="flex items-center gap-4 w-full overflow-x-auto scrollbar-hide pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              {subcategory.services.map((category) => (
-                <button
-                  key={category.serviceId}
-                  onClick={() => handleCategorySelect(category)}
-                  className={`
-                    group bg-white rounded-xl p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
-                    min-w-[200px] max-w-[450px]
-                  `}
+            <div className="relative w-full">
+              {/* Left scroll button - only show when not at the beginning */}
+              {showLeftButton && (
+                <button 
+                  onClick={() => scrollCategories('left')}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition-colors duration-300"
+                  aria-label="Scroll left"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    {category.icon && (
-                      <div className="w-12 h-12 rounded-lg bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-300">
-                        <img 
-                          src={`${API_URL_FILE}${category.icon}`} 
-                          alt={category.name} 
-                          className="w-8 h-8 transform group-hover:scale-110 transition-transform duration-300" 
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <h2 className={`text-lg font-semibold ${selectedCategory && selectedCategory.serviceId === category.serviceId ? 'text-blue-600' : 'text-gray-800'} transition-colors duration-300`}>
-                        {category.name}
-                      </h2>
-                    </div>
-                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
                 </button>
-              ))}
+              )}
               
-              {/* Swipe indicator at the end */}
-              {subcategory.services.length > 4 && (
-                <div className="flex-shrink-0 bg-white/10 rounded-xl p-5 min-w-[40px] flex items-center justify-center">
-                  
-                </div>
+              {/* Scrollable container */}
+              <div 
+                ref={scrollContainerRef}
+                className="flex items-center gap-4 w-full overflow-x-auto scrollbar-hide pb-4 px-10" 
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                onScroll={updateScrollButtonVisibility}
+              >
+                {subcategory.services.map((category) => (
+                  <button
+                    key={category.serviceId}
+                    onClick={() => handleCategorySelect(category)}
+                    className={`
+                      group bg-white rounded-xl p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
+                      min-w-[200px] max-w-[450px]
+                    `}
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      {category.icon && (
+                        <div className="w-12 h-12 rounded-lg bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-300">
+                          <img 
+                            src={`${API_URL_FILE}${category.icon}`} 
+                            alt={category.name} 
+                            className="w-8 h-8 transform group-hover:scale-110 transition-transform duration-300" 
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <h2 className={`text-lg font-semibold ${selectedCategory && selectedCategory.serviceId === category.serviceId ? 'text-blue-600' : 'text-gray-800'} transition-colors duration-300`}>
+                          {category.name}
+                        </h2>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              
+              {/* Right scroll button - only show when not at the end */}
+              {showRightButton && (
+                <button 
+                  onClick={() => scrollCategories('right')}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition-colors duration-300"
+                  aria-label="Scroll right"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               )}
             </div>
             
-            {/* Gradient fade effect to indicate more content */}
-            {subcategory.services.length > 4 && (
-              <div className="absolute right-0 top-10 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none flex items-center justify-end">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                </svg>
+            {/* Divider line */}
+            <div className="h-px bg-gray-200 w-full my-8"></div>
+
+            {/* Selected Category Content with Animation */}
+            {selectedCategory && (
+              <div
+                className={`
+                transition-all duration-300 
+                ${tabAnimation ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"}
+              `}
+              >
+                {/* <div className="flex items-center mb-4">
+                  <div className="flex items-center gap-3">
+                    {selectedCategory.icon && (
+                      <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <img
+                          src={`${API_URL_FILE}${selectedCategory.icon}`}
+                          alt={selectedCategory.name}
+                          className="w-6 h-6"
+                        />
+                      </div>
+                    )}
+                    <h2 className="text-xl font-semibold text-gray-800">{selectedCategory.name}</h2>
+                  </div>
+
+                  {selectedCategory.services && selectedCategory.services.length > 0 && (
+                    <span className="ml-2 text-sm text-gray-500">({selectedCategory.services.length} services)</span>
+                  )}
+                </div> */}
+
+                {/* Services Grid */}
+                {selectedCategory.services && selectedCategory.services.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {selectedCategory.services.map((service) => (
+                      <div
+                        key={service.id}
+                        onClick={() => handleServiceClick(service)}
+                        className="cursor-pointer transform transition-transform hover:-translate-y-1"
+                      >
+                        <CategorySection
+                          name={service.name}
+                          icon={service.icon}
+                          subcategories={service.services || []}
+                          className="h-full"
+                          isSelected={false} // Default to not selected
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => navigate(`/technician-list/${selectedCategory.serviceId}`)}
+                    className="cursor-pointer transform transition-transform hover:-translate-y-1"
+                  >
+                    <CategorySection
+                      name={selectedCategory.name}
+                      icon={selectedCategory.icon}
+                      subcategories={[]}
+                      className="h-full"
+                      isSelected={true} // This category is selected
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
-          
-          {/* Divider line */}
-          <div className="h-px bg-gray-200 w-full my-8"></div>
-
-          {/* Selected Category Content with Animation */}
-          {selectedCategory && (
-            <div
-              className={`
-              transition-all duration-300 
-              ${tabAnimation ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"}
-            `}
-            >
-              {/* <div className="flex items-center mb-4">
-                <div className="flex items-center gap-3">
-                  {selectedCategory.icon && (
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
-                      <img
-                        src={`${API_URL_FILE}${selectedCategory.icon}`}
-                        alt={selectedCategory.name}
-                        className="w-6 h-6"
-                      />
-                    </div>
-                  )}
-                  <h2 className="text-xl font-semibold text-gray-800">{selectedCategory.name}</h2>
-                </div>
-
-                {selectedCategory.services && selectedCategory.services.length > 0 && (
-                  <span className="ml-2 text-sm text-gray-500">({selectedCategory.services.length} services)</span>
-                )}
-              </div> */}
-
-              {/* Services Grid */}
-              {selectedCategory.services && selectedCategory.services.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {selectedCategory.services.map((service) => (
-                    <div
-                      key={service.id}
-                      onClick={() => handleServiceClick(service)}
-                      className="cursor-pointer transform transition-transform hover:-translate-y-1"
-                    >
-                      <CategorySection
-                        name={service.name}
-                        icon={service.icon}
-                        subcategories={service.services || []}
-                        className="h-full"
-                        isSelected={false} // Default to not selected
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div
-                  onClick={() => navigate(`/technician-list/${selectedCategory.serviceId}`)}
-                  className="cursor-pointer transform transition-transform hover:-translate-y-1"
-                >
-                  <CategorySection
-                    name={selectedCategory.name}
-                    icon={selectedCategory.icon}
-                    subcategories={[]}
-                    className="h-full"
-                    isSelected={true} // This category is selected
-                  />
-                </div>
-              )}
-            </div>
-          )}
         </div>
       ) : (
         <div className="text-center py-12">
