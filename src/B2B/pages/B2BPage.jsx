@@ -12,6 +12,7 @@ import LocationSelector from "../../Shared/Components/LocationSelector"
 import SearchBar from "../../Shared/Components/SearchBar"
 import CategorySection from "../../Shared/Components/CategorySection"
 import CustomerLayout from "../../AuthLayout/CustomerLayout"
+import broker from "../../assets/broker.png"
 
 function B2BPage() {
   // Redux state
@@ -292,7 +293,7 @@ function B2BPage() {
                   >
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded-md bg-blue-50 flex items-center justify-center mr-3">
-                        <img src={`${API_URL_FILE}${category.icon}`} alt={category.name} className="w-5 h-5" />
+                        <img src={category.icon ? `${API_URL_FILE}${category.icon}` : broker} alt={category.name} className="w-5 h-5" />
                       </div>
                       <span>{category.name}</span>
                     </div>

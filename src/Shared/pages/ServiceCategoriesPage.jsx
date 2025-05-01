@@ -51,10 +51,7 @@ function ServiceCategoriesPage() {
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto sm:px-6 py-4 mt-16">
-      <div className="flex gap-3 mb-3">
-        <LocationSelector />
-        <SearchBar />
-      </div>
+     
       {/* <PromotionalBanner /> */}
 
       {/* Main Content */}
@@ -63,6 +60,10 @@ function ServiceCategoriesPage() {
         <p className="text-gray-600">
           Explore {subcategory.services.length} subcategories in {subcategory.name ?? subcategory.categoryName}
         </p>
+      </div>
+      <div className="flex gap-3 mt-6">
+        <LocationSelector />
+        <SearchBar />
       </div>
 
       {/* Creative Tab Navigation */}
@@ -74,9 +75,9 @@ function ServiceCategoriesPage() {
             <div className="flex items-center justify-between px-2 mb-2">
               <p className="text-sm text-gray-500 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /> */}
                 </svg>
-                Swipe to see more categories
+                
               </p>
             </div>
             
@@ -123,8 +124,6 @@ function ServiceCategoriesPage() {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
-                
-               
               </div>
             )}
           </div>
