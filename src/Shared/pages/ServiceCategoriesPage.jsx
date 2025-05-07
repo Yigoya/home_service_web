@@ -107,16 +107,16 @@ function ServiceCategoriesPage() {
       {subcategory.services && subcategory.services.length > 0 ? (
         <div className="mb-8">
           {/* Chip-style wrapping tabs */}
-          <div className="flex flex-col gap-4 mb-6 relative">
+          <div className="flex flex-col gap-4 relative">
             {/* Horizontal scrolling indicator */}
-            <div className="flex items-center justify-between px-2 mb-2">
+            {/* <div className="flex items-center justify-between px-2 ">
               <p className="text-sm text-gray-500 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /> */}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
                 
               </p>
-            </div>
+            </div> */}
             
             <div className="relative w-full">
               {/* Left scroll button - only show when not at the beginning */}
@@ -135,7 +135,7 @@ function ServiceCategoriesPage() {
               {/* Scrollable container */}
               <div 
                 ref={scrollContainerRef}
-                className="flex items-center justify-between w-full overflow-x-auto scrollbar-hide pb-6" 
+                className="flex items-center justify-between w-full overflow-x-auto scrollbar-hide pt-8" 
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 onScroll={updateScrollButtonVisibility}
               >
@@ -176,7 +176,7 @@ function ServiceCategoriesPage() {
             </div>
             
             {/* Divider line */}
-            <div className="h-px bg-gray-200 w-full my-8"></div>
+            <div className="h-px bg-gray-200 w-full mb-8"></div>
 
             {/* Selected Category Content with Animation */}
             {selectedCategory && (
