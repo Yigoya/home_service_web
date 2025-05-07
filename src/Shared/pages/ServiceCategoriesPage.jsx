@@ -74,7 +74,7 @@ function ServiceCategoriesPage() {
   const scrollCategories = (direction) => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current
-      const scrollAmount = 3 * 220 // Approximate width of 3 category items (200px + gap)
+      const scrollAmount = 4 * 120 // Approximate width of 4 category items (100px + gap)
       
       if (direction === 'left') {
         container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
@@ -96,7 +96,7 @@ function ServiceCategoriesPage() {
 
       {/* Main Content */}
       <div className="mb-8 mt-10 flex items-center justify-between">
-        <h1 className="text-6xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName} on demand</h1>
+        <h1 className="text-6xl font-bold text-gray-900 mb-2">{subcategory.name ?? subcategory.categoryName}, on demand</h1>
       </div>
       <div className="flex gap-3 mt-6">
         <LocationSelector />
@@ -135,7 +135,7 @@ function ServiceCategoriesPage() {
               {/* Scrollable container */}
               <div 
                 ref={scrollContainerRef}
-                className="flex items-center gap-4 w-full overflow-x-auto scrollbar-hide pb-4 px-10" 
+                className="flex items-center justify-between w-full overflow-x-auto scrollbar-hide pb-6" 
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 onScroll={updateScrollButtonVisibility}
               >
@@ -143,27 +143,20 @@ function ServiceCategoriesPage() {
                   <button
                     key={category.serviceId}
                     onClick={() => handleCategorySelect(category)}
-                    className={`
-                      group bg-white rounded-xl p-5 transition-all duration-300 shadow-sm h-full flex-shrink-0 flex flex-col justify-between
-                      min-w-[200px] max-w-[450px]
-                    `}
+                    className="group bg-white rounded-lg p-4 transition-all duration-300 flex-1 mx-3 flex flex-col items-center justify-center min-w-[100px]"
                   >
-                    <div className="flex items-center gap-3 mb-2">
-                      {category.icon && (
-                        <div className="w-12 h-12 rounded-lg bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-300">
-                          <img 
-                            src={`${API_URL_FILE}${category.icon}`} 
-                            alt={category.name} 
-                            className="w-8 h-8 transform group-hover:scale-110 transition-transform duration-300" 
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h2 className={`text-lg font-semibold ${selectedCategory && selectedCategory.serviceId === category.serviceId ? 'text-blue-600' : 'text-gray-800'} transition-colors duration-300`}>
-                          {category.name}
-                        </h2>
+                    {category.icon && (
+                      <div className="w-16 h-16 mb-3 flex items-center justify-center">
+                        <img 
+                          src={`${API_URL_FILE}${category.icon}`} 
+                          alt={category.name} 
+                          className="w-12 h-12 transform group-hover:scale-110 transition-transform duration-300" 
+                        />
                       </div>
-                    </div>
+                    )}
+                    <h2 className={`text-sm font-medium text-center uppercase ${selectedCategory && selectedCategory.serviceId === category.serviceId ? 'text-blue-600' : 'text-gray-800'} transition-colors duration-300`}>
+                      {category.name}
+                    </h2>
                   </button>
                 ))}
               </div>

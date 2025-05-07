@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Search, Menu, X, User, LogIn, UserPlus, Bell, Download, Home, Settings, LogOut, Crown, Globe } from 'lucide-react';
@@ -28,6 +28,10 @@ export default function Navbar({ isTender, isB2BPage }) {
 
   console.log(isFromTender)
 
+  // Add refs for dropdowns
+  const langMenuRef = useRef(null);
+  const notificationRef = useRef(null);
+  const profileRef = useRef(null);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -111,6 +115,28 @@ export default function Navbar({ isTender, isB2BPage }) {
     navigate('/login');
   };
 
+  // Click outside handler for dropdowns
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // Language menu
+      if (isLangMenuOpen && langMenuRef.current && !langMenuRef.current.contains(event.target)) {
+        setIsLangMenuOpen(false);
+      }
+      // Notification menu
+      if (isNotificationOpen && notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setIsNotificationOpen(false);
+      }
+      // Profile menu
+      if (isProfileOpen && profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLangMenuOpen, isNotificationOpen, isProfileOpen]);
+
   return (
     <nav className={`${isTender ? "bg-[#2b78ac]" : "bg-white/95"} backdrop-blur-md shadow-lg fixed top-0 w-full z-50 ${isTender ? "text-gray-50" : "text-gray-700"}`}>
       <div className={`${(!isTender && !isB2BPage) && "max-w-7xl"} mx-auto px-4 sm:px-6 lg:px-8`}>
@@ -165,7 +191,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                 </Link>)
             }
                 {/* Language Selector */}
-            <div className="relative">
+            <div className="relative" ref={langMenuRef}>
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
@@ -199,7 +225,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                 </div>
               )}
             </div>
-                <div className="relative">
+                <div className="relative" ref={notificationRef}>
                   <button
                     onClick={() => {
                       setIsNotificationOpen(!isNotificationOpen);
@@ -260,7 +286,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                   )}
                 </div>
 
-                <div className="relative">
+                <div className="relative" ref={profileRef}>
                   <button
                     onClick={() => {
                       setIsProfileOpen(!isProfileOpen);
@@ -333,8 +359,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                 <Home className="h-4 w-4 mr-1" />
                 <span >Home</span>
             </Link>)}
-            <div className="relative">
-            
+            <div className="relative" ref={langMenuRef}>
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center   px-3 py-2 text-sm font-medium transition-colors duration-200 gap-1"
