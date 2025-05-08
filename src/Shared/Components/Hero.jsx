@@ -180,19 +180,19 @@ export default function Hero() {
   // Use translated service information
   const translatedServices = [
     {
-      title: t('tender_services', 'Tender Services'),
+      title: t('tender_services', 'Hulu Tender'),
       icon: Tender,
       description: t('tender_description', 'Professional bid management and tender submission services'),
       onClick: () => navigate('/tender'),
     },
     {
-      title: t('business_solutions', 'Just Call'),
+      title: t('business_solutions', 'Hulu Call'),
       icon: Business,
       description: t('business_description', 'Comprehensive business consulting and strategy services'),
       onClick: () => navigate('/companies'),
     },
     {
-      title: t('maintenance', 'Maintenance'),
+      title: t('maintenance', 'Hulu Maintenance'),
       icon: Maintenance,
       description: t('maintenance_description', '24/7 maintenance and support services'),
       onClick: () => {
@@ -202,7 +202,7 @@ export default function Hero() {
       }
     },
     {
-      title: t('professional_services', 'Professional Services'),
+      title: t('professional_services', 'Hulu Professional'),
       icon: Professional,
       description: t('professional_description', 'Expert professional services across industries'),
       onClick: () => {
@@ -212,7 +212,7 @@ export default function Hero() {
       }
     },
     {
-      title: t('b2b_marketplace', 'B2B Marketplace'),
+      title: t('b2b_marketplace', 'Hulu Market'),
       icon: B2B,
       description: t('b2b_description', 'Connect with trusted businesses and suppliers in our marketplace'),
       onClick: () => {
