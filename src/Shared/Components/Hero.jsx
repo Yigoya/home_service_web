@@ -186,7 +186,7 @@ export default function Hero() {
       onClick: () => navigate('/tender'),
     },
     {
-      title: t('business_solutions', 'Hulu Call'),
+      title: t('business_solutions', 'Hulu Dial'),
       icon: Business,
       description: t('business_description', 'Comprehensive business consulting and strategy services'),
       onClick: () => navigate('/companies'),
