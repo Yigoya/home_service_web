@@ -73,7 +73,7 @@ function HomePage() {
 
       <div className="max-w-7xl mx-auto py-3 px-6 bg-white">
         {/* Popular Categories */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6 auto-rows-fr my-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-10 gap-4 md:gap-6 auto-rows-fr my-12">
             {companies.map((category) => (
               <div onClick={() => handleCategoryClick(category)} key={category.id} className="h-full">
                 <CategoryCard
