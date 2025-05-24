@@ -206,19 +206,19 @@ export default function Navbar({ isTender, isB2BPage }) {
                 <div className={`absolute right-0 mt-2 w-36 ${isTender ? "bg-[#2b78ac]" : "bg-white"} rounded-md shadow-lg py-1 z-10`}>
                   <button 
                     onClick={() => changeLanguage('en')}
-                    className="block w-full text-left px-4 py-2 text-sm"
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-500"
                   >
                     English
                   </button>
                   <button 
                     onClick={() => changeLanguage('am')}
-                    className="block w-full text-left px-4 py-2 text-sm"
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-500"
                   >
                     አማርኛ
                   </button>
                   <button 
                     onClick={() => changeLanguage('om')}
-                    className="block w-full text-left px-4 py-2 text-sm"
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-500"
                   >
                     Afaan Oromoo
                   </button>
@@ -231,7 +231,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                       setIsNotificationOpen(!isNotificationOpen);
                       setIsProfileOpen(false);
                     }}
-                    className="relative   p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                    className="relative   p-2 rounded-full hover:bg-gray-400 transition-colors duration-200"
                   >
                     <Bell className="h-6 w-6" />
                     {unreadCount > 0 && (
@@ -314,14 +314,14 @@ export default function Navbar({ isTender, isB2BPage }) {
                     <div className={`absolute right-0 mt-2 w-48 ${isTender ? "bg-[#2b78ac]" : "bg-white"} rounded-lg shadow-xl py-2 z-50`}>
                       <Link
                         to="/customer/dashboard"
-                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-500"
                       >
                         <Home className="h-4 w-4 mr-2" />
                         Dashboard
                       </Link>
                       <Link
                         to="/subscription"
-                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-500"
                       >
                         <Crown className="h-4 w-4 mr-2" />
                         Subscription
@@ -333,7 +333,7 @@ export default function Navbar({ isTender, isB2BPage }) {
                       </Link>
                       <Link
                         to="/settings"
-                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-100"
+                        className="flex items-center px-4 py-2 text-sm  hover:bg-gray-500"
                       >
                         <Settings className="h-4 w-4 mr-2" />
                         Settings
