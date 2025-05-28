@@ -372,19 +372,19 @@ export default function Navbar({ isTender, isB2BPage }) {
                 <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-10">
                   <button 
                     onClick={() => changeLanguage('en')}
-                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-500"
                   >
                     English
                   </button>
                   <button 
                     onClick={() => changeLanguage('am')}
-                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-500"
                   >
                     አማርኛ
                   </button>
                   <button 
                     onClick={() => changeLanguage('om')}
-                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-500"
                   >
                     Afaan Oromoo
                   </button>
