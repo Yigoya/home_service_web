@@ -369,7 +369,7 @@ export default function Navbar({ isTender, isB2BPage }) {
               </button>
               
               {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-10">
+                <div className={`absolute right-0 mt-2 w-36 ${isTender ? "bg-[#2b78ac]" : "bg-white"} rounded-md shadow-lg py-1 z-10`}>
                   <button 
                     onClick={() => changeLanguage('en')}
                     className="block w-full text-left px-4 py-2 text-sm  hover:bg-gray-500"
