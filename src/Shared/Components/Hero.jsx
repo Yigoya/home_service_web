@@ -9,6 +9,7 @@ import Business from '../../assets/justcall.png';
 import Maintenance from '../../assets/maintenance.png';
 import Professional from '../../assets/professional.png';
 import B2B from '../../assets/b2b.png';
+import JOB from '../../assets/job.png';
 import useFetchData from "../../hooks/useFetchData"
 
 const services = [
@@ -36,6 +37,7 @@ const services = [
     description: 'Expert professional services across industries',
     route: '/service-categories',
   },
+
 ];
 
 const features = [
@@ -221,6 +223,16 @@ export default function Hero() {
         return;
       },
     },
+    {
+      title: t('hulu_job', 'Hulu Job'),
+      icon: JOB,
+      description: t('hulu_job_description', 'Connect with trusted companies and job seekers in our job market'),
+      onClick: () => {
+        dispatch(setMainSubcategory(services[5])); 
+        window.location.href = 'https://hulu-job-portal.vercel.app/';
+        return;
+      },
+    },
   ];
 
   // Use translated feature information
@@ -357,7 +369,7 @@ export default function Hero() {
       {/* Enhanced Services Section */}
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
             {!(showResults && searchResults.length > 0) && translatedServices.map((service) => (
               <div
                 key={service.title}
